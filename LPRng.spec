@@ -23,6 +23,7 @@ Patch3:		%{name}-ngettext.patch
 Patch4:		%{name}-missing-nls.patch
 Patch5:		%{name}-pl.po.patch
 Patch6:		%{name}-types.patch
+Patch7:		%{name}-gcc33.patch
 URL:		http://www.astart.com/lprng/LPRng.html
 BuildRequires:	autoconf
 BuildRequires:	automake
@@ -162,6 +163,7 @@ Support та аутентикац╕ю PGP. LPRng прийнято за стандарт в MIT для
 %patch4 -p1
 %patch5 -p1
 %patch6 -p1
+%patch7 -p1
 
 %build
 rm -f missing
