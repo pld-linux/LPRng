@@ -1,0 +1,14 @@
+--- LPRng-3.8.0/src/common/utilities.c.orig	Tue Oct 16 22:32:46 2001
++++ LPRng-3.8.0/src/common/utilities.c	Tue Nov  6 17:02:54 2001
+@@ -525,7 +525,10 @@
+ 	if( getrlimit(RLIMIT_NPROC, &pcount) == -1 ){
+ 		FATAL(LOG_ERR) "Get_max_servers: getrlimit failed" );
+ 	}
+-	n = pcount.rlim_cur;
++	if( pcount.rlim_cur == RLIM_INFINITY )
++	  n = INT_MAX;
++	else
++	  n = pcount.rlim_cur;
+ 	DEBUG1("Get_max_servers: getrlimit returns %d", n );
+ #else
+ # if defined(HAVE_SYSCONF) && defined(_SC_CHILD_MAX)

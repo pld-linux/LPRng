@@ -1,0 +1,207 @@
+--- LPRng-3.7.4/src/common/sendauth.c.shutdown	Sun Feb 25 21:55:50 2001
++++ LPRng-3.7.4/src/common/sendauth.c	Sun Feb 25 21:56:40 2001
+@@ -157,7 +157,7 @@
+ 				tempfile);
+ 		}
+ 		/* we turn off IO from the socket */
+-		shutdown(*sock,1);
++/*		shutdown(*sock,1);*/
+ 		if( (s = safestrchr(buffer,'\n')) ) *s = 0;
+ 		SNPRINTF( error, errlen)
+ 			"error '%s' sending '%s' to %s@%s\n",
+@@ -345,7 +345,7 @@
+ 	DEBUG2("Pgp_send: sent file" );
+ 	close(tempfd); tempfd = -1;
+ 	/* we close the writing side */
+-	shutdown( *sock, 1 );
++/*	shutdown( *sock, 1 );*/
+ 	if( (tempfd = Checkwrite(pgpfile,&statb,O_WRONLY|O_TRUNC,1,0)) < 0){
+ 		SNPRINTF(error,errlen)
+ 			"Pgp_send: open '%s' for write failed - %s", pgpfile, Errormsg(errno));
+--- LPRng-3.8.0/src/common/lpstat.c~	Tue Oct 23 15:17:35 2001
++++ LPRng-3.8.0/src/common/lpstat.c	Tue Oct 23 15:23:46 2001
+@@ -243,7 +243,6 @@
+ 	fd = Send_request( 'Q', Displayformat,
+ 		0, Connect_timeout_DYN, Send_query_rw_timeout_DYN, 1 );
+ 	if( fd >= 0 ){
+-		/* shutdown( fd, 1 ); */
+ 		Read_status_info( RemoteHost_DYN, fd,
+ 			1, Send_query_rw_timeout_DYN, display_format,
+ 			Status_line_count );
+--- LPRng-3.7.4/src/common/lpc.c.shutdown	Sun Feb 25 21:59:14 2001
++++ LPRng-3.7.4/src/common/lpc.c	Sun Feb 25 21:59:33 2001
+@@ -364,7 +364,7 @@
+ 		fd = Send_request( 'C', REQ_CONTROL, l.list, Connect_timeout_DYN,
+ 			Send_query_rw_timeout_DYN, 1 );
+ 		if( fd > 0 ){
+-			shutdown( fd, 1 );
++/*			shutdown( fd, 1 );*/
+ 			while( (n = read(fd, msg, sizeof(msg))) > 0 ){
+ 				if( (write(1,msg,n)) < 0 ) cleanup(0);
+ 			}
+--- LPRng-3.7.4/src/common/lpr.c.shutdown	Sun Feb 25 21:59:46 2001
++++ LPRng-3.7.4/src/common/lpr.c	Sun Feb 25 22:00:00 2001
+@@ -222,7 +222,7 @@
+ 		DEBUG1("lpr: after shutdown fd %d, status_fd %d", fd, status_fd );
+ 		if( status_fd > 0 ){
+ 			/* we shut down this connection as well */
+-			shutdown(status_fd,1);
++/*			shutdown(status_fd,1);*/
+ 			/* we wait for eof on status_fd */
+ 			buffer[0] = 0;
+ 			Get_status_from_OF(&prjob,"LP",pid,
+--- LPRng-3.8.0/src/common/lpq.c~	Tue Oct 23 15:17:35 2001
++++ LPRng-3.8.0/src/common/lpq.c	Tue Oct 23 15:24:52 2001
+@@ -239,7 +239,6 @@
+ 		&argv[Optind], Connect_timeout_DYN,
+ 		Send_query_rw_timeout_DYN, 1 );
+ 	if( fd >= 0 ){
+-		/* shutdown( fd, 1 ); */
+ 		if( Read_status_info( RemoteHost_DYN, fd,
+ 			1, Send_query_rw_timeout_DYN, Displayformat,
+ 			Status_line_count ) ){
+--- LPRng-3.8.0/src/common/linelist.c~	Tue Oct 23 15:17:36 2001
++++ LPRng-3.8.0/src/common/linelist.c	Tue Oct 23 15:21:04 2001
+@@ -3642,7 +3642,7 @@
+ 	if( fd < 0 || fstat( fd, &statb ) == -1 ){
+ 		fd = -1;
+ 	} else if( Backwards_compatible_DYN || !Half_close_DYN
+-		|| !(S_ISSOCK(statb.st_mode)) || shutdown( fd, 1 ) == -1 ){
++		|| !S_ISSOCK(statb.st_mode)){
+ 		close(fd);
+ 		fd = -1;
+ 	}
+--- LPRng-3.7.4/src/common/lprm.c.shutdown	Sun Feb 25 22:02:05 2001
++++ LPRng-3.7.4/src/common/lprm.c	Sun Feb 25 22:02:16 2001
+@@ -244,7 +244,7 @@
+ 	fd = Send_request( 'M', REQ_REMOVE,
+ 		argv, Connect_timeout_DYN, Send_query_rw_timeout_DYN, 1 );
+ 	if( fd > 0 ){
+-		shutdown( fd, 1 );
++/*		shutdown( fd, 1 );*/
+ 		while( (n = read(fd, msg, sizeof(msg)) ) > 0 ){
+ 			if( write(1,msg,n) < 0 ) cleanup(0);
+ 		}
+--- LPRng-3.8.12/src/common/krb5_auth.c.orig	Mon May  6 18:03:44 2002
++++ LPRng-3.8.12/src/common/krb5_auth.c	Wed Jul 10 00:47:06 2002
+@@ -709,14 +709,14 @@
+ 	close(fd);
+ 	fd = -1;
+ 	DEBUG1( "client_krb5_auth: file copy finished %s", file );
+-	if( shutdown(sock, 1) == -1 ){
++/*	if( shutdown(sock, 1) == -1 ){
+ 		SNPRINTF( err, errlen) "%s client_krb5_auth failed - "
+ 			"shutdown failed '%s'",
+ 			Is_server?"on server":"on client",
+ 			Errormsg(errno) );
+ 		retval = 1;
+ 		goto done;
+-	}
++	}*/
+ 	fd = Checkwrite( file, &statb, O_WRONLY|O_TRUNC, 1, 0 );
+ 	if( fd < 0 ){
+ 		SNPRINTF( err, errlen)
+@@ -1159,7 +1159,7 @@
+ 	if( status ){
+ 		SETSTATUS(job) "Printer %s@%s does not support krb4 authentication",
+ 			RemotePrinter_DYN, host);
+-		shutdown(*sock,1);
++/*		shutdown(*sock,1);*/
+ 		return JFAIL;
+ 	}
+ 	memset(&ticket,0,sizeof(ticket));
+@@ -1171,7 +1171,7 @@
+ 	if( status != KSUCCESS ){
+ 		SNPRINTF(errmsg, errlen) "krb4 authentication failed to %s@%s - %s",
+ 			RemotePrinter_DYN, host, krb4_err_str(status));
+-		shutdown(*sock,1);
++/*		shutdown(*sock,1);*/
+ 		return JFAIL;
+ 	}
+ 	buffer[0] = 0;
+@@ -1184,7 +1184,7 @@
+ 	if(status){
+ 		SNPRINTF(errmsg, errlen) "cannot read status from %s@%s - %s",
+ 			RemotePrinter_DYN, host, krb4_err_str(status));
+-		shutdown(*sock,1);
++/*		shutdown(*sock,1);*/
+ 		return JFAIL;
+ 	} else {
+ 		SETSTATUS(job)"krb4 authentication succeeded to %s@%s",
+--- LPRng-3.8.0/src/common/lpd_status.c~	Tue Oct 23 15:17:36 2001
++++ LPRng-3.8.0/src/common/lpd_status.c	Tue Oct 23 15:22:46 2001
+@@ -1216,7 +1216,6 @@
+ 					Send_query_rw_timeout_DYN, *sock );
+ 				if( fd >= 0 ){
+ 					char *tempfile;
+-					/* shutdown( fd, 1 ); */
+ 					tempfd = Make_temp_fd( &tempfile );
+ 					while( (nx = read(fd,msg,sizeof(msg))) > 0 ){
+ 						if( Write_fd_len(tempfd,msg,nx) < 0 ) cleanup(0);
+@@ -1387,7 +1386,6 @@
+ 		fd = Send_request( 'Q', displayformat, tokens->list, Connect_timeout_DYN,
+ 			Send_query_rw_timeout_DYN, *sock );
+ 		if( fd >= 0 ){
+-			/* shutdown( fd, 1 ); */
+ 			tempfd = Make_temp_fd( 0 );
+ 			while( (n = read(fd,msg,sizeof(msg))) > 0 ){
+ 				if( Write_fd_len(tempfd,msg,n) < 0 ) cleanup(0);
+--- LPRng-3.7.4/src/common/lpd_remove.c.shutdown	Sun Feb 25 22:04:27 2001
++++ LPRng-3.7.4/src/common/lpd_remove.c	Sun Feb 25 22:04:49 2001
+@@ -352,7 +352,7 @@
+ 			fd = Send_request( 'M', REQ_REMOVE, tokens->list, Connect_timeout_DYN,
+ 				Send_query_rw_timeout_DYN, *sock );
+ 			if( fd >= 0 ){
+-				shutdown( fd, 1 );
++/*				shutdown( fd, 1 );*/
+ 				while( (c = read(fd,msg,sizeof(msg))) > 0 ){
+ 					Write_fd_len(*sock,msg,c);
+ 				}
+@@ -414,7 +414,7 @@
+ 	fd = Send_request( 'M', REQ_REMOVE, tokens->list, Connect_timeout_DYN,
+ 		Send_query_rw_timeout_DYN, *sock );
+ 	if( fd >= 0 ){
+-		shutdown( fd, 1 );
++/*		shutdown( fd, 1 );*/
+ 		while( (n = read(fd,msg,sizeof(msg))) > 0 ){
+ 			Write_fd_len(*sock,msg,n);
+ 		}
+--- LPRng-3.7.4/src/common/user_auth.stub.shutdown	Sun Feb 25 22:05:08 2001
++++ LPRng-3.7.4/src/common/user_auth.stub	Sun Feb 25 22:05:47 2001
+@@ -350,7 +350,7 @@
+ 	}
+ 	close(tempfd); tempfd = -1;
+ 	/* we close the writing side */
+-	shutdown( *sock, 1 );
++/*	shutdown( *sock, 1 );*/
+ 
+ 	DEBUG1("Test_send: sent file" );
+ 
+@@ -724,7 +724,7 @@
+ 
+   error:
+ 	if( errmsg[0] && *sock ){
+-		shutdown(*sock,1);
++/*		shutdown(*sock,1);*/
+ 		len = 0;
+ 		buffer[0] = 0;
+ 		DEBUG1("md5_connect: error '%s'", errmsg );
+@@ -1193,7 +1193,7 @@
+ 	}
+ 	close(tempfd); tempfd = -1;
+ 	/* we close the writing side */
+-	shutdown( *sock, 1 );
++/*	shutdown( *sock, 1 );*/
+ 
+ 	DEBUG1("md5_send: sent file" );
+ 
+--- LPRng-3.8.0/src/common/accounting.c~	Tue Oct 23 15:17:36 2001
++++ LPRng-3.8.0/src/common/accounting.c	Tue Oct 23 15:18:45 2001
+@@ -143,7 +143,6 @@
+ 				Errorcode= JFAIL;
+ 				LOGERR_DIE(LOG_INFO)"Do_accounting: write to '%s' failed", command);
+ 			}
+-			shutdown(tempfd,1);
+ 		} else {
+ 			tempfd = Checkwrite( Accounting_file_DYN, &statb, 0, Create_files_DYN, 0 );
+ 			DEBUG2("Setup_accounting: fd %d", tempfd );

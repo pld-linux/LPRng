@@ -1,0 +1,11 @@
+diff -Nru LPRng-3.6.13/configure.in LPRng-3.6.13.new/configure.in
+--- LPRng-3.6.13/configure.in	Mon Feb 21 21:27:27 2000
++++ LPRng-3.6.13.new/configure.in	Tue Feb 29 16:02:30 2000
+@@ -1255,7 +1255,6 @@
+ 
+ dnl ----------------- Option for enabling GNU gettext --------------------
+ AM_GNU_GETTEXT
+-test "$USE_NLS" = yes && LIBS="$LIBS -lintl"
+ 
+ dnl ----------------- GCC Compilation ----------------------------------
+ AC_OUTPUT(

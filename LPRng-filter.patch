@@ -1,0 +1,30 @@
+--- LPRng-3.6.21/src/common/checkpc.c	Fri Jul 14 14:16:44 2000
++++ LPRng-3.6.21/src/common/checkpc.c	Fri Jul 14 14:30:13 2000
+@@ -314,6 +314,7 @@
+ 		return;
+ 	}
+ 	while( (d = readdir(dir)) ){
++		int skip_check = 0;
+ 		cf_name = d->d_name;
+ 		if( safestrcmp( cf_name, "." ) == 0
+ 			|| safestrcmp( cf_name, ".." ) == 0 ) continue;
+@@ -341,7 +342,18 @@
+ 				continue;
+ 			}
+ 		}
+-		Check_file( cf_name, Fix, 0, 0 );
++
++		/* this happens to work because we have a filter named "filter",
++		   but there *has* to be a better way to actually do this */
++		for( names = filter_names; *names; ++names ){
++			if( strcmp( cf_name, *names ) == 0 ){
++				skip_check = 1;
++			}
++		}
++
++		if( !skip_check ){
++			Check_file( cf_name, Fix, 0, 0 );
++		}
+ 	}
+ 	closedir(dir);
+ 
