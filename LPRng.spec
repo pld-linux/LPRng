@@ -27,7 +27,7 @@ BuildRequires:	autoconf
 BuildRequires:	automake
 BuildRequires:	gettext-devel
 BuildRequires:	libtool
-BuildRequires:	openssl-devel
+BuildRequires:	openssl-devel >= 0.9.7d
 PreReq:		rc-scripts >= 0.2.0
 Requires(post):	/sbin/ldconfig
 Requires(post,preun):	/sbin/chkconfig
