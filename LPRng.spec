@@ -3,7 +3,7 @@ Summary(pl):	System drukowania nowej generacji
 Summary(zh_CN):	LPRng--´òÓ¡³ÌÐò
 Name:		LPRng
 Version:	3.8.1
-Release:	2
+Release:	3
 License:	GPL
 Group:		Applications/System
 Source0:	ftp://ftp.astart.com/pub/LPRng/LPRng/%{name}-%{version}.tgz
@@ -22,6 +22,7 @@ BuildRequires:	automake
 BuildRequires:	gettext-devel
 BuildRequires:	libtool
 BuildRequires:	ncurses-devel >= 5.0
+BuildRequires:	procps
 Prereq:		/sbin/ldconfig
 Prereq:		/sbin/chkconfig
 Prereq:		rc-scripts >= 0.2.0
@@ -99,10 +100,6 @@ gettextize --copy --force
 libtoolize --copy --force
 aclocal
 autoconf
-cd gdbm-1.8.0
-	aclocal
-	autoconf
-cd ..
 %configure \
 	--disable-setuid \
 	--with-userid=lp \
@@ -125,7 +122,7 @@ install %{SOURCE1} $RPM_BUILD_ROOT/etc/rc.d/init.d/lpd
 install %{SOURCE2} $RPM_BUILD_ROOT%{_sysconfdir}/lpd.conf
 echo "default_printer = lp" >>$RPM_BUILD_ROOT%{_sysconfdir}/lpd.conf
 install %{SOURCE3} $RPM_BUILD_ROOT%{_sysconfdir}/printcap
-install lpd.perms $RPM_BUILD_ROOT%{_sysconfdir}/
+install lpd.perms $RPM_BUILD_ROOT%{_sysconfdir}
 # default spool
 
 rm -fr TESTSUPPORT/{Makefile*,LPD}
