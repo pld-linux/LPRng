@@ -1,0 +1,11 @@
+--- LPRng-3.7.4/src/common/vars.c.sopwith	Fri Mar 16 18:11:06 2001
++++ LPRng-3.7.4/src/common/vars.c	Fri Mar 16 18:11:15 2001
+@@ -186,7 +186,7 @@
+    /* printers that we should query for status information */
+ { "destinations", 0, STRING_K, &Destinations_DYN,0,0},
+    /* allow LPR to make direct socket connection to printer */
+-{ "direct", 0, STRING_K, &Direct_DYN,0,0},
++{ "direct", 0, FLAG_K, &Direct_DYN,0,0},
+    /* drop root permissions after binding to listening port */
+ { "drop_root", 0, FLAG_K, &Drop_root_DYN,0,0},
+    /* exit linger timeout to wait for socket to close */
