@@ -1,8 +1,8 @@
 Summary:	A next-generation printing system for UNIX
 Summary(pl):	System drukowania nowej generacji
 Name:		LPRng
-Version:	3.6.18
-Release:	4
+Version:	3.6.21
+Release:	1
 License:	GPL
 Group:		Utilities/System
 Group(pl):	Narzêdzia/System
@@ -10,6 +10,7 @@ Source0:	ftp://ftp.astart.com/pub/LPRng/LPRng/%{name}-%{version}.tgz
 Source1:	LPRng.init
 Source2:	LPRng.conf
 Patch0:		LPRng-autoconf.patch
+Patch1:		LPRng-filter.patch
 BuildRequires:	ncurses-devel >= 5.0
 Requires:	/sbin/chkconfig
 Requires:	rc-scripts >= 0.2.0
@@ -54,6 +55,7 @@ niezawodno¶æ i bezpieczeñstwo.
 %prep
 %setup  -q
 %patch0 -p1
+%patch1 -p1
 
 %build
 gettextize --copy --force
@@ -81,8 +83,8 @@ install -d  $RPM_BUILD_ROOT{/etc/rc.d/init.d,%{_var}/spool/lpd}
 
 install %{SOURCE1} $RPM_BUILD_ROOT/etc/rc.d/init.d/lpd
 # yes, overwrite distribution lpd.conf
-install %{SOURCE2} $RPM_BUILD_ROOT/etc/lpd.conf
-install printcap   $RPM_BUILD_ROOT/etc/
+install %{SOURCE2} $RPM_BUILD_ROOT%{_sysconfdir}/lpd.conf
+install printcap $RPM_BUILD_ROOT%{_sysconfdir}/
 
 rm -fr TESTSUPPORT/{Makefile*,LPD}
 mv -f lpd.conf TESTSUPPORT/lpd.conf.distrib
