@@ -1,0 +1,24 @@
+--- LPRng-3.7.4/src/common/utilities.c.setgroups	Thu Jun  7 13:21:44 2001
++++ LPRng-3.7.4/src/common/utilities.c	Thu Jun  7 13:26:48 2001
+@@ -16,6 +16,10 @@
+ #include "getopt.h"
+ #include "errorcodes.h"
+ 
++/* for setgroups */
++#define _BSD_SOURCE
++#include <grp.h>
++
+ /**** ENDINCLUDE ****/
+ 
+ /*
+@@ -1287,6 +1291,10 @@
+ 	if( UID_root ){
+ 		euid = geteuid();
+ 		To_root();	/* set RUID/EUID to root */
++
++		/* drop supplemental groups - crutcher@redhat.com */
++		setgroups(0, NULL);
++
+ 		status = setgid( DaemonGID );
+ 		err = errno;
+ 		if( To_uid( euid ) ){
