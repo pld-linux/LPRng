@@ -373,3 +373,23 @@ diff -Nru LPRng-3.7.2/src/Makefile.in LPRng-3.7.2.new/src/Makefile.in
  	cd ${DESTDIR}${bindir}; rm -f lp cancel; ln -s lpr lp; ln -s lprm cancel;
  
  uninstall:
+diff -Nru LPRng-3.7.4/Makefile.in LPRng-3.7.4.new/Makefile.in
+--- LPRng-3.7.4/Makefile.in	Thu Dec 28 14:05:42 2000
++++ LPRng-3.7.4.new/Makefile.in	Fri Apr 27 21:56:02 2001
+@@ -44,7 +44,6 @@
+ LOCKFILE=\"@LOCKFILE@\"
+ PSHOWALL="@PSHOWALL@"
+ FILTER_DIR=@FILTER_DIR@
+-LOCALEDIR=@LOCALEDIR@
+ INIT=@INIT@
+ USE_NLS=@USE_NLS@
+ 
+@@ -108,7 +107,7 @@
+ ###############################################################################
+ $(ALLDIRS): FRC
+ 	if [ "$@" != po -o "$(USE_NLS)" != "no" ] ; then \
+-		cd $@; $(MAKE) localedir=${DESTDIR}${LOCALEDIR} \
++		cd $@; $(MAKE) \
+ 			DESTDIR=$(DESTDIR) $(MAKETARGET) ; \
+ 	fi
+ 
