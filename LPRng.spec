@@ -28,8 +28,9 @@ Prereq:		/sbin/ldconfig
 Prereq:		/sbin/chkconfig
 Prereq:		rc-scripts >= 0.2.0
 Provides:	lpr
-BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 Obsoletes:	lpr
+Obsoletes:	cups
+BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
 The LPRng software is an enhanced, extended, and portable
