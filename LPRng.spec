@@ -1,20 +1,26 @@
 Summary:	A next-generation printing system for UNIX
+Summary(pl):	System drukowania nowej generacji
 Name:		LPRng
 Version:	3.5.3
-Release:	1
+Release:	2
 Copyright:	GPL
 Group:		Utilities/System
+Group(pl):	Narzêdzia/System
 Source0:	ftp://ftp.astart.com/pub/LPRng/LPRng/%{name}-%{version}.tgz
 Source1:	ftp://ftp.astart.com/pub/LPRng/LPRng/%{name}_DOC-%{version}.tgz
 Source2:	lpd.init
 Requires:	/sbin/chkconfig
-BuildRoot:	/tmp/%{name}-%{version}-root
 Provides:	lpr
 Obsoletes:	lpr
+BuildRoot:	/tmp/%{name}-%{version}-root
 
 %description
 LPRng is the "next generation" printing system for UNIX, featuring
 enhanced reliability and security.
+
+%description -l pl
+LPRng jest systemem drukowania nowej generacji zwiêkszaj±cym niezawodno¶æ i
+bezpieczeñstwo.
 
 %prep
 %setup -q
@@ -44,15 +50,20 @@ install lpd.conf lpd.perms $RPM_BUILD_ROOT/etc
 # /etc/printcap is in the setup package
 # touch $RPM_BUILD_ROOT/etc/printcap
 
+gzip -9nf $RPM_BUILD_ROOT/usr/man/man*/*
+gzip -9nf ABOUT-NLS.LPRng ANNOUNCE Artistic.license CHANGES CONTRIBUTORS
+gzip -9nf Commercial.license HOWTO INSTALL LICENSE README* TESTSUPPORT
+
 %clean
 rm -rf $RPM_BUILD_ROOT
 
 %pre
 if test -r /etc/rc.d/init.d/lpd
-then /etc/rc.d/init.d/lpd stop
+	then /etc/rc.d/init.d/lpd stop
 fi
+
 if test -r /etc/rc.d/init.d/lpd.init
-then /etc/rc.d/init.d/lpd.init stop
+	then /etc/rc.d/init.d/lpd.init stop
 fi
 
 %post
@@ -79,6 +90,12 @@ fi
 %attr(644,root, man) /usr/man/man[158]/*
 
 %changelog
+* Tue Feb  9 1999 Micha³ Kuratczyk <kurkens@polbox.com>
+  [3.5.3-2]
+- added pl translations
+- added Group(pl)
+- added gzipping man pages and documentation
+
 * Tue Dec  1 1998 Tomasz K³oczko <kloczek@rudy.mif.pg.gda.pl>
   [3.5.3-1]
 - added -q %setup parameter,
