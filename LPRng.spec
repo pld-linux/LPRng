@@ -12,6 +12,7 @@ Source2:	%{name}.conf
 Patch0:		%{name}-filter.patch
 Patch1:		%{name}-ac_fixes.patch
 Patch2:		%{name}-inet_ntop.patch
+Patch3:		%{name}-direct.patch
 BuildRequires:	autoconf
 BuildRequires:	automake
 BuildRequires:	gettext-devel
@@ -61,6 +62,7 @@ niezawodno¶æ i bezpieczeñstwo.
 %patch0 -p1
 %patch1 -p1
 %patch2 -p1
+%patch3 -p1
 
 %build
 gettextize --copy --force
