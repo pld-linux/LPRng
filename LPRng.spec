@@ -72,7 +72,7 @@ make
 rm -rf $RPM_BUILD_ROOT
 install -d  $RPM_BUILD_ROOT/etc/rc.d/init.d
 
-make install \
+%{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT \
 	LPD_CONF_PATH=$RPM_BUILD_ROOT%{_sysconfdir}/lpd.conf \
 	LPD_PERMS_PATH=$RPM_BUILD_ROOT%{_sysconfdir}/lpd.perms
