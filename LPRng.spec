@@ -1,7 +1,7 @@
 Summary:	A next-generation printing system for UNIX
 Summary(pl):	System drukowania nowej generacji
 Name:		LPRng
-Version:	3.6.26
+Version:	3.7.1
 Release:	1
 License:	GPL
 Group:		Utilities/System
@@ -9,9 +9,8 @@ Group(pl):	Narzêdzia/System
 Source0:	ftp://ftp.astart.com/pub/LPRng/LPRng/%{name}-%{version}.tgz
 Source1:	%{name}.init
 Source2:	%{name}.conf
-Patch0:		%{name}-autoconf.patch
-Patch1:		%{name}-filter.patch
-Patch2:		%{name}-ac_fixes.patch
+Patch0:		%{name}-filter.patch
+Patch1:		%{name}-ac_fixes.patch
 BuildRequires:	gettext-devel
 BuildRequires:	ncurses-devel >= 5.0
 Requires:	/sbin/chkconfig
@@ -58,14 +57,12 @@ niezawodno¶æ i bezpieczeñstwo.
 %setup  -q
 %patch0 -p1
 %patch1 -p1
-%patch2 -p1
 
 %build
 gettextize --copy --force
 aclocal
 autoconf
 %configure \
-	--enable-nls \
 	--disable-setuid \
 	--with-userid=lp \
 	--with-groupid=lp \
