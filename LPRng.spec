@@ -2,7 +2,7 @@ Summary:	A next-generation printing system for UNIX
 Summary(pl):	System drukowania nowej generacji
 Name:		LPRng
 Version:	3.7.4
-Release:	24
+Release:	25
 License:	GPL
 Group:		Utilities/System
 Group(pl):	Narzêdzia/System
@@ -16,6 +16,7 @@ Patch3:		%{name}-direct.patch
 Patch4:		%{name}-manpage.patch
 Patch5:		%{name}-shutdown.patch
 Patch6: 	%{name}-lockfile.patch
+Patch7:		%{name}-setgroups.patch
 BuildRequires:	autoconf
 BuildRequires:	gettext-devel
 BuildRequires:	ncurses-devel >= 5.0
@@ -68,6 +69,7 @@ niezawodno¶æ i bezpieczeñstwo.
 %patch4 -p1
 %patch5 -p1
 %patch6 -p1
+%patch7 -p1
 
 %build
 rm -f missing
