@@ -145,3 +145,14 @@
  src/common/sendjob.c
  src/common/sendmail.c
  src/common/sendreq.c
+--- LPRng-3.8.22/src/common/lpd_status.c.orig	2003-11-13 21:32:25.000000000 +0100
++++ LPRng-3.8.22/src/common/lpd_status.c	2003-11-13 21:41:55.840610760 +0100
+@@ -467,7 +467,7 @@
+ 	end_of_name = 0;
+ 	if( displayformat != REQ_DSHORT ){
+ 		SNPRINTF( header, sizeof(header)) "%s: ",
+-			Server_queue_name_DYN?"Server Printer":"Printer" );
++			Server_queue_name_DYN?_("Server Printer"):_("Printer") );
+ 	}
+ 	len = safestrlen(header);
+ 	SNPRINTF( header+len, sizeof(header)-len) "%s@%s",

@@ -5,12 +5,12 @@ Summary(ru):	Спулер печати LPRng
 Summary(uk):	Спулер друку LPRng
 Summary(zh_CN):	LPRng--╢Рс║ЁлпР
 Name:		LPRng
-Version:	3.8.21
-Release:	2
-License:	GPL
+Version:	3.8.22
+Release:	1
+License:	GPL or Artistic
 Group:		Applications/System
 Source0:	ftp://ftp.lprng.com/pub/LPRng/LPRng/%{name}-%{version}.tgz
-# Source0-md5:	396d0a49a4533ad973176efa9bf054b1
+# Source0-md5:	ac7742d87433ea6908517ddb3b8a648a
 Source1:	%{name}.init
 Source2:	%{name}.conf
 Source3:	%{name}.printcap
@@ -18,18 +18,18 @@ Source4:	http://www.mif.pg.gda.pl/homepages/ankry/man-PLD/%{name}-pl-man-pages.t
 # Source4-md5:	4771b1c3598677a8201a9e203235dff3
 Patch0:		%{name}-ac_fixes.patch
 Patch1:		%{name}-lpd-perms.patch
-Patch2:		%{name}-no_dupl_DESDIR.patch
-Patch3:		%{name}-ngettext.patch
-Patch4:		%{name}-missing-nls.patch
-Patch5:		%{name}-pl.po.patch
-Patch6:		%{name}-types.patch
-Patch7:		%{name}-gcc33.patch
+#Patch2:		%{name}-no_dupl_DESDIR.patch
+Patch2:		%{name}-ngettext.patch
+Patch3:		%{name}-missing-nls.patch
+Patch4:		%{name}-pl.po.patch
+Patch5:		%{name}-types.patch
+#Patch6:		%{name}-gcc33.patch
 URL:		http://www.astart.com/lprng/LPRng.html
 BuildRequires:	autoconf
 BuildRequires:	automake
 BuildRequires:	gettext-devel
 BuildRequires:	libtool
-BuildRequires:	ncurses-devel >= 5.0
+BuildRequires:	openssl-devel
 PreReq:		rc-scripts >= 0.2.0
 Requires(post):	/sbin/ldconfig
 Requires(post,preun):	/sbin/chkconfig
@@ -162,23 +162,26 @@ Support та аутентикац╕ю PGP. LPRng прийнято за стандарт в MIT для
 %patch3 -p1
 %patch4 -p1
 %patch5 -p1
-%patch6 -p1
-%patch7 -p1
 
 %build
-rm -f missing
 %{__gettextize}
 %{__libtoolize}
 %{__aclocal}
 %{__autoconf}
-cp -f /usr/share/automake/{config.,missing}* .
-PSHOWALL="-ax"; export PSHOWALL
+cp -f /usr/share/automake/{config.*,missing} .
+#PSHOWALL="-ax"; export PSHOWALL
+# now it wants to use /etc/lpd/lpd.{conf,perms} - stick to old values?
 %configure \
+	OPENSSL=/usr/bin/openssl \
+	PSHOWALL="-ax" \
 	--disable-setuid \
+	--enable-shared \
 	--with-userid=lp \
 	--with-groupid=lp \
 	--with-filterdir=%{_libdir}/lpfilters \
 	--with-lockfile=%{_var}/spool/lpd/lpd \
+	--with-lpd_conf_path=%{_sysconfdir}/lpd.conf \
+	--with-lpd_perms_path=%{_sysconfdir}/lpd.perms \
 	--with-done_jobs=0
 
 %{__make}
@@ -186,7 +189,8 @@ PSHOWALL="-ax"; export PSHOWALL
 
 %install
 rm -rf $RPM_BUILD_ROOT
-install -d  $RPM_BUILD_ROOT{/etc/rc.d/init.d,%{_var}/spool/lpd/lp}
+install -d $RPM_BUILD_ROOT{/etc/rc.d/init.d,%{_var}/spool/lpd/lp} \
+	$RPM_BUILD_ROOT%{_sysconfdir}/lpd/ssl.{ca,crl,server}
 
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT \
@@ -203,6 +207,8 @@ install lpd.perms $RPM_BUILD_ROOT%{_sysconfdir}
 # default spool
 
 bzip2 -dc %{SOURCE4} | tar xf - -C $RPM_BUILD_ROOT%{_mandir}
+
+mv -f PrintingCookbook/{HTML,PrintingCookbook}
 
 %find_lang %{name}
 
@@ -230,10 +236,16 @@ fi
 
 %files -f %{name}.lang
 %defattr(644,root,root,755)
-%doc CHANGES README HOWTO/LPRng-HOWTO.html
+%doc CHANGES CONTRIBUTORS COPYRIGHT README README.SSL* TODO
+%doc DOCS/LPRng-Reference-Multipart PrintingCookbook/PrintingCookbook
 %config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/lpd.conf
 %config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/lpd.perms
 %config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/printcap
+%dir %{_sysconfdir}/lpd
+# what perms?
+%attr(750,root,lp) %dir %{_sysconfdir}/lpd/ssl.ca
+%attr(750,root,lp) %dir %{_sysconfdir}/lpd/ssl.crl
+%attr(750,root,lp) %dir %{_sysconfdir}/lpd/ssl.server
 %attr(754,root,root) /etc/rc.d/init.d/lpd
 %attr(755,root,root) %{_bindir}/*
 %attr(755,root,root) %{_sbindir}/*

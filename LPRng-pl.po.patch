@@ -9,19 +9,20 @@
  
  if test -z "$LOCALEDIR" ; then
      LOCALEDIR='${prefix}/share/locale'
---- LPRng-3.8.20/po/pl.po.orig	Thu Jan  1 01:00:00 1970
-+++ LPRng-3.8.20/po/pl.po	Tue Feb 25 20:09:15 2003
-@@ -0,0 +1,2255 @@
+--- LPRng-3.8.22/po/pl.po.orig	2003-11-13 21:42:08.581673824 +0100
++++ LPRng-3.8.22/po/pl.po	2003-11-13 21:51:29.539395288 +0100
+@@ -0,0 +1,2268 @@
 +# Polish translations for LPRng
-+# Jakub Bogusz <qboosh@pld.org.pl>, 2002.
++# Jakub Bogusz <qboosh@pld-linux.org>, 2002-2003.
 +#
 +#: src/common/lpc.c:276 src/common/lpc.c:437 src/common/lpq.c:529
 +msgid ""
 +msgstr ""
-+"Project-Id-Version: LPRng 3.8.19\n"
-+"POT-Creation-Date: 2003-02-25 20:08+0100\n"
-+"PO-Revision-Date: 2002-12-27 19:37+0100\n"
-+"Last-Translator: Jakub Bogusz <qboosh@pld.org.pl>\n"
++"Project-Id-Version: LPRng 3.8.22\n"
++"Report-Msgid-Bugs-To: \n"
++"POT-Creation-Date: 2003-11-13 21:42+0100\n"
++"PO-Revision-Date: 2003-11-13 21:50+0100\n"
++"Last-Translator: Jakub Bogusz <qboosh@pld-linux.org>\n"
 +"Language-Team: Polish <pl@li.org>\n"
 +"MIME-Version: 1.0\n"
 +"Content-Type: text/plain; charset=ISO-8859-2\n"
@@ -29,7 +30,7 @@
 +"Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
 +"|| n%100>=20) ? 1 : 2);\n"
 +
-+#: src/common/accounting.c:137
++#: src/common/accounting.c:134
 +#, c-format
 +msgid "connection to accounting server '%s' failed '%s'"
 +msgstr "po³±czenie z serwerem rozliczeñ '%s' nie powiod³o siê: '%s'"
@@ -766,226 +767,226 @@
 +msgid "debugging override off"
 +msgstr "wymuszenie ¶ledzenia wy³±czone"
 +
-+#: src/common/lpd_jobs.c:425
++#: src/common/lpd_jobs.c:426
 +#, c-format
 +msgid "Do_queue_jobs: cannot open lockfile '%s'"
 +msgstr "Do_queue_jobs: nie mo¿na otworzyæ pliku blokuj±cego '%s'"
 +
-+#: src/common/lpd_jobs.c:733 src/common/lpd_jobs.c:2246
++#: src/common/lpd_jobs.c:734 src/common/lpd_jobs.c:2246
 +#, c-format
 +msgid "cannot update hold file for '%s'"
 +msgstr "nie mo¿na uaktualniæ pliku wstrzymania dla '%s'"
 +
-+#: src/common/lpd_jobs.c:736
++#: src/common/lpd_jobs.c:737
 +#, c-format
 +msgid "Do_queue_jobs: cannot update hold file for '%s'"
 +msgstr "Do_queue_jobs: nie mo¿na uaktualniæ pliku wstrzymania dla '%s'"
 +
-+#: src/common/lpd_jobs.c:740
++#: src/common/lpd_jobs.c:741
 +#, c-format
 +msgid "removing job '%s' - no permissions"
 +msgstr "usuwanie zadania '%s' - brak uprawnieñ"
 +
-+#: src/common/lpd_jobs.c:999
++#: src/common/lpd_jobs.c:1000
 +#, c-format
 +msgid "Do_queue_jobs: LOGIC ERROR - no identifer '%s'"
 +msgstr "Do_queue_jobs: B£¡D LOGIKI - brak identyfikatora '%s'"
 +
-+#: src/common/lpd_jobs.c:1023
++#: src/common/lpd_jobs.c:1024
 +#, c-format
 +msgid "cannot update hold file '%s'"
 +msgstr "nie mo¿na uaktualniæ pliku wstrzymania '%s'"
 +
-+#: src/common/lpd_jobs.c:1025
++#: src/common/lpd_jobs.c:1026
 +#, c-format
 +msgid "Do_queue_jobs: cannot update hold file '%s'"
 +msgstr "Do_queue_jobs: nie mo¿na uaktualniæ pliku wstrzymania '%s'"
 +
-+#: src/common/lpd_jobs.c:1154
++#: src/common/lpd_jobs.c:1155
 +msgid "sleeping, waiting for processes to exit"
 +msgstr "oczekiwanie na zakoñczenie procesów"
 +
-+#: src/common/lpd_jobs.c:1326
++#: src/common/lpd_jobs.c:1327
 +#, c-format
 +msgid "Remote_job: %d datafiles and only allowed %d"
 +msgstr "Remote_job: %d plików danych, a dozwolonych tylko %d"
 +
-+#: src/common/lpd_jobs.c:1360
++#: src/common/lpd_jobs.c:1361
 +#, c-format
 +msgid "link failure while sending job '%s'"
 +msgstr "b³±d po³±czenia podczas wysy³ania zadania '%s'"
 +
-+#: src/common/lpd_jobs.c:1366
++#: src/common/lpd_jobs.c:1367
 +#, c-format
 +msgid "no permission to spool job '%s'"
 +msgstr "brak uprawnieñ do skolejkowania zadania '%s'"
 +
-+#: src/common/lpd_jobs.c:1372
++#: src/common/lpd_jobs.c:1373
 +#, c-format
 +msgid "failed to send job '%s'"
 +msgstr "wys³anie zadania '%s' nie powiod³o siê"
 +
-+#: src/common/lpd_jobs.c:1538
++#: src/common/lpd_jobs.c:1539
 +msgid "Fork_subserver: fork failed"
 +msgstr "Fork_subserver: fork nie powiod³o siê"
 +
-+#: src/common/lpd_jobs.c:1604
++#: src/common/lpd_jobs.c:1605
 +#, c-format
 +msgid "subserver pid %d exit status '%s'"
 +msgstr "podserwer pid %d zakoñczony ze statusem '%s'"
 +
-+#: src/common/lpd_jobs.c:1608
++#: src/common/lpd_jobs.c:1609
 +#, c-format
 +msgid "subserver pid %d died with signal '%s'"
 +msgstr "podserwer pid %d umar³ od sygna³u '%s'"
 +
-+#: src/common/lpd_jobs.c:1651
++#: src/common/lpd_jobs.c:1652
 +msgid "Wait_for_subserver: Mergesort failed"
 +msgstr "Wait_for_subserver: Mergesort nie powiod³o siê"
 +
-+#: src/common/lpd_jobs.c:1680
++#: src/common/lpd_jobs.c:1681
 +msgid "succ"
 +msgstr "succ"
 +
-+#: src/common/lpd_jobs.c:1681
++#: src/common/lpd_jobs.c:1682
 +msgid "jsucc"
 +msgstr "jsucc"
 +
-+#: src/common/lpd_jobs.c:1682
++#: src/common/lpd_jobs.c:1683
 +msgid "success"
 +msgstr "success"
 +
-+#: src/common/lpd_jobs.c:1683
++#: src/common/lpd_jobs.c:1684
 +msgid "jsuccess"
 +msgstr "jsuccess"
 +
-+#: src/common/lpd_jobs.c:1684
++#: src/common/lpd_jobs.c:1685
 +msgid "abort"
 +msgstr "abort"
 +
-+#: src/common/lpd_jobs.c:1685
++#: src/common/lpd_jobs.c:1686
 +msgid "jabort"
 +msgstr "jabort"
 +
-+#: src/common/lpd_jobs.c:1686
++#: src/common/lpd_jobs.c:1687
 +msgid "hold"
 +msgstr "hold"
 +
-+#: src/common/lpd_jobs.c:1687
++#: src/common/lpd_jobs.c:1688
 +msgid "jhold"
 +msgstr "jhold"
 +
-+#: src/common/lpd_jobs.c:1688
++#: src/common/lpd_jobs.c:1689
 +msgid "remove"
 +msgstr "remove"
 +
-+#: src/common/lpd_jobs.c:1689
++#: src/common/lpd_jobs.c:1690
 +msgid "jremove"
 +msgstr "jremove"
 +
-+#: src/common/lpd_jobs.c:1863
++#: src/common/lpd_jobs.c:1864
 +#, c-format
 +msgid "Update_status: no identifier for '%s'"
 +msgstr "Update_status: brak identyfikatora dla '%s'"
 +
-+#: src/common/lpd_jobs.c:1896 src/common/lpd_jobs.c:2003
-+#: src/common/lpd_jobs.c:2045 src/common/lpd_jobs.c:2089
++#: src/common/lpd_jobs.c:1897 src/common/lpd_jobs.c:2004
++#: src/common/lpd_jobs.c:2046 src/common/lpd_jobs.c:2090
 +#, c-format
 +msgid "job '%s' saved"
 +msgstr "zadanie '%s' zachowane"
 +
-+#: src/common/lpd_jobs.c:1901 src/common/lpd_jobs.c:2009
-+#: src/common/lpd_jobs.c:2051 src/common/lpd_jobs.c:2095
++#: src/common/lpd_jobs.c:1902 src/common/lpd_jobs.c:2010
++#: src/common/lpd_jobs.c:2052 src/common/lpd_jobs.c:2096
 +#, c-format
 +msgid "could not remove job '%s'"
 +msgstr "nie mo¿na usun±æ zadania '%s'"
 +
-+#: src/common/lpd_jobs.c:1903 src/common/lpd_jobs.c:2011
-+#: src/common/lpd_jobs.c:2053 src/common/lpd_jobs.c:2097
++#: src/common/lpd_jobs.c:1904 src/common/lpd_jobs.c:2012
++#: src/common/lpd_jobs.c:2054 src/common/lpd_jobs.c:2098
 +#, c-format
 +msgid "job '%s' removed"
 +msgstr "zadanie '%s' usuniête"
 +
-+#: src/common/lpd_jobs.c:1933
++#: src/common/lpd_jobs.c:1934
 +#, c-format
 +msgid "job '%s', attempt %d, allowed %d"
 +msgstr "zadanie '%s', próba %d, dozwolonych %d"
 +
-+#: src/common/lpd_jobs.c:1937
++#: src/common/lpd_jobs.c:1938
 +msgid "treating as successful"
 +msgstr "traktowane jako pomy¶lne"
 +
-+#: src/common/lpd_jobs.c:1938
++#: src/common/lpd_jobs.c:1939
 +msgid "retrying job"
 +msgstr "ponawianie próby"
 +
-+#: src/common/lpd_jobs.c:1939
++#: src/common/lpd_jobs.c:1940
 +msgid "no retry"
 +msgstr "bez ponawiania"
 +
-+#: src/common/lpd_jobs.c:1940
++#: src/common/lpd_jobs.c:1941
 +msgid "aborting server"
 +msgstr "przerwanie zadania"
 +
-+#: src/common/lpd_jobs.c:1941
++#: src/common/lpd_jobs.c:1942
 +msgid "removing job - status JREMOVE"
 +msgstr "usuwanie zadania - status JREMOVE"
 +
-+#: src/common/lpd_jobs.c:1942
++#: src/common/lpd_jobs.c:1943
 +msgid "holding job"
 +msgstr "wstrzymywanie zadania"
 +
-+#: src/common/lpd_jobs.c:1945
++#: src/common/lpd_jobs.c:1946
 +#, c-format
 +msgid "unexpected status 0x%x"
 +msgstr "nieoczekiwany status 0x%x"
 +
-+#: src/common/lpd_jobs.c:1950
++#: src/common/lpd_jobs.c:1951
 +#, c-format
 +msgid "job '%s', %s"
 +msgstr "zadanie '%s', %s"
 +
-+#: src/common/lpd_jobs.c:1954
++#: src/common/lpd_jobs.c:1955
 +#, c-format
 +msgid "job '%s' attempt %d, trying %d times"
 +msgstr "zadanie '%s' próba %d, próbowanie %d razy"
 +
-+#: src/common/lpd_jobs.c:1957
++#: src/common/lpd_jobs.c:1958
 +#, c-format
 +msgid "job '%s' attempt %d, trying indefinitely"
 +msgstr "zadanie '%s' próba %d, próbowanie bez koñca"
 +
-+#: src/common/lpd_jobs.c:1976
++#: src/common/lpd_jobs.c:1977
 +msgid "failed, no retry"
 +msgstr "nie powiod³o siê, bez ponownych prób"
 +
-+#: src/common/lpd_jobs.c:2007
++#: src/common/lpd_jobs.c:2008
 +#, c-format
 +msgid "removing job '%s' - JFAILNORETRY"
 +msgstr "usuwanie zadania '%s' - JFAILNORETRY"
 +
-+#: src/common/lpd_jobs.c:2019
++#: src/common/lpd_jobs.c:2020
 +msgid "aborting operations"
 +msgstr "przerywanie operacji"
 +
-+#: src/common/lpd_jobs.c:2049
++#: src/common/lpd_jobs.c:2050
 +#, c-format
 +msgid "removing job '%s' - JABORT"
 +msgstr "usuwanie zadania '%s' - JABORT"
 +
-+#: src/common/lpd_jobs.c:2058
++#: src/common/lpd_jobs.c:2059
 +msgid "stopping printing on filter JABORT exit code"
 +msgstr "zatrzymywanie drukowania po kodzie wyj¶cia filtra JABORT"
 +
-+#: src/common/lpd_jobs.c:2068
++#: src/common/lpd_jobs.c:2069
 +msgid "removing destination due to errors"
 +msgstr "usuwanie celu z powodu b³êdów"
 +
-+#: src/common/lpd_jobs.c:2079
++#: src/common/lpd_jobs.c:2080
 +msgid "too many errors"
 +msgstr "za du¿o b³êdów"
 +
-+#: src/common/lpd_jobs.c:2093
++#: src/common/lpd_jobs.c:2094
 +#, c-format
 +msgid "removing job '%s' - JREMOVE"
 +msgstr "usuwanie zadania '%s' - JREMOVE"
@@ -1005,16 +1006,16 @@
 +msgid "Service_worker: no identifier for '%s'"
 +msgstr "Service_worker: brak identyfikatora dla '%s'"
 +
-+#: src/common/lpd_jobs.c:2922
++#: src/common/lpd_jobs.c:2916
 +#, c-format
 +msgid "job '%s' removed- status expired"
 +msgstr "zadanie '%s' usuniête - status wygas³"
 +
-+#: src/common/lpd_rcvjob.c:136 src/common/lpd_rcvjob.c:489
++#: src/common/lpd_rcvjob.c:136 src/common/lpd_rcvjob.c:491
 +msgid "bad command line"
 +msgstr "b³êdna linia polecenia"
 +
-+#: src/common/lpd_rcvjob.c:140 src/common/lpd_rcvjob.c:493
++#: src/common/lpd_rcvjob.c:140 src/common/lpd_rcvjob.c:495
 +msgid "bad printer name"
 +msgstr "b³êdna nazwa drukarki"
 +
@@ -1023,7 +1024,7 @@
 +msgid "%s: cannot set up print queue"
 +msgstr "%s: nie mo¿na ustawiæ kolejki wydruków"
 +
-+#: src/common/lpd_rcvjob.c:184 src/common/lpd_rcvjob.c:536
++#: src/common/lpd_rcvjob.c:184 src/common/lpd_rcvjob.c:538
 +#: src/common/lpd_secure.c:189
 +#, c-format
 +msgid "%s: spooling disabled"
@@ -1044,88 +1045,88 @@
 +msgid "Receive_job: cannot lock lockfile '%s'"
 +msgstr "Receive_job: nie mo¿na zablokowaæ pliku blokuj±cego '%s'"
 +
-+#: src/common/lpd_rcvjob.c:268
++#: src/common/lpd_rcvjob.c:270
 +#, c-format
 +msgid "%s: Receive_job - bad control line '%s', len %0.0f, name '%s'"
 +msgstr ""
 +"%s: Receive_job - b³êdna linia kontrolna '%s', d³ugo¶æ %0.0f, nazwa '%s'"
 +
-+#: src/common/lpd_rcvjob.c:284
++#: src/common/lpd_rcvjob.c:286
 +#, c-format
 +msgid "%s: job size %0.3fK is larger than %d K"
 +msgstr "%s: rozmiar zadania %0.3fK jest wiêkszy ni¿ %d K"
 +
-+#: src/common/lpd_rcvjob.c:290 src/common/lpd_rcvjob.c:554
++#: src/common/lpd_rcvjob.c:292 src/common/lpd_rcvjob.c:556
 +#: src/common/lpd_secure.c:203
 +#, c-format
 +msgid "%s: insufficient file space"
 +msgstr "%s: za ma³o miejsca na plik"
 +
-+#: src/common/lpd_rcvjob.c:303 src/common/lpd_rcvjob.c:606
++#: src/common/lpd_rcvjob.c:305 src/common/lpd_rcvjob.c:608
 +#, c-format
 +msgid "%s: sending ACK 0 for '%s' failed"
 +msgstr "%s: wysy³anie ACK 0 dla '%s' nie powiod³o siê"
 +
-+#: src/common/lpd_rcvjob.c:331 src/common/lpd_rcvjob.c:579
++#: src/common/lpd_rcvjob.c:333 src/common/lpd_rcvjob.c:581
 +#, c-format
 +msgid "%s: transfer of '%s' from '%s' failed"
 +msgstr "%s: przesy³anie '%s' z '%s' nie powiod³o siê"
 +
-+#: src/common/lpd_rcvjob.c:429
++#: src/common/lpd_rcvjob.c:431
 +#, c-format
 +msgid "Receive_jobs: write to fd '%d' failed"
 +msgstr "Receive_jobs: zapis do deskryptora '%d' nie powiód³ siê"
 +
-+#: src/common/lpd_rcvjob.c:500
++#: src/common/lpd_rcvjob.c:502
 +#, c-format
 +msgid "%s: cannot set up printer"
 +msgstr "%s: nie mo¿na ustawiæ drukarki"
 +
-+#: src/common/lpd_rcvjob.c:548
++#: src/common/lpd_rcvjob.c:550
 +#, c-format
 +msgid "%s: job size %0.3f is larger than %dK"
 +msgstr "%s: rozmiar zadania %0.3f jest wiêkszy ni¿ %dK"
 +
-+#: src/common/lpd_rcvjob.c:568
++#: src/common/lpd_rcvjob.c:570
 +#, c-format
 +msgid "%s: Receive_block_job: sending ACK 0 failed"
 +msgstr "%s: Receive_block_job: wysy³anie ACK 0 nie powiod³o siê"
 +
-+#: src/common/lpd_rcvjob.c:589
++#: src/common/lpd_rcvjob.c:591
 +#, c-format
 +msgid "Receive_block_job: lseek failed '%s'"
 +msgstr "Receive_block_job: lseek nie powiod³o siê: '%s'"
 +
-+#: src/common/lpd_rcvjob.c:636
++#: src/common/lpd_rcvjob.c:638
 +#, c-format
 +msgid "Receive_block_jobs: write to fd '%d' failed"
 +msgstr "Receive_block_jobs: zapis do deskryptora '%d' nie powiód³ siê"
 +
-+#: src/common/lpd_rcvjob.c:698 src/common/lpd_rcvjob.c:742
++#: src/common/lpd_rcvjob.c:700 src/common/lpd_rcvjob.c:744
 +#, c-format
 +msgid "Scan_block_file: lseek failed '%s'"
 +msgstr "Scan_block_file: lseek nie powiod³o siê: '%s'"
 +
-+#: src/common/lpd_rcvjob.c:713
++#: src/common/lpd_rcvjob.c:715
 +#, c-format
 +msgid "bad length information '%s'"
 +msgstr "b³êdna informacja o d³ugo¶ci '%s'"
 +
-+#: src/common/lpd_rcvjob.c:730
++#: src/common/lpd_rcvjob.c:732
 +#, c-format
 +msgid "Scan_block_file: read failed '%s'"
 +msgstr "Scan_block_file: odczyt nie powiód³ siê: '%s'"
 +
-+#: src/common/lpd_rcvjob.c:735
++#: src/common/lpd_rcvjob.c:737
 +msgid "Scan_block_file: read unexecpted EOF"
 +msgstr "Scan_block_file: nieoczekiwany EOF przy odczycie"
 +
-+#: src/common/lpd_rcvjob.c:870
++#: src/common/lpd_rcvjob.c:872
 +#, c-format
 +msgid "%s: no permission to print"
 +msgstr "%s: brak uprawnieñ do drukowania"
 +
-+#: src/common/lpd_rcvjob.c:1302
++#: src/common/lpd_rcvjob.c:1306
 +#, c-format
 +msgid "Get_route: no identifier for '%s'"
 +msgstr "Get_route: brak identyfikatora dla '%s'"
@@ -1207,6 +1208,14 @@
 +#, c-format
 +msgid "%s: no permission to show status"
 +msgstr "%s: brak uprawnieñ do pokazania stanu"
++
++#: src/common/lpd_status.c:470
++msgid "Server Printer"
++msgstr "Serwer drukarek:"
++
++#: src/common/lpd_status.c:470
++msgid "Printer"
++msgstr "Drukarka"
 +
 +#: src/common/lpd_status.c:477
 +#, c-format
@@ -1539,6 +1548,10 @@
 +#: src/common/lpq.c:556
 +msgid "  -V           - print version information\n"
 +msgstr "  -V           - wypisanie informacji o wersji\n"
++
++#: src/common/lpq.c:557
++msgid "  -v           - print in key: value format\n"
++msgstr "  -v           - wypisanie w postaci klucz: warto¶æ\n"
 +
 +#: src/common/lpr.c:161
 +msgid "nothing to print"
