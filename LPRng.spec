@@ -65,6 +65,7 @@ niezawodno¶æ i bezpieczeñstwo.
 %patch3 -p1
 
 %build
+rm -f missing
 gettextize --copy --force
 aclocal
 automake -c -a
