@@ -11,6 +11,8 @@ Source1:	%{name}.init
 Source2:	%{name}.conf
 Patch0:		%{name}-autoconf.patch
 Patch1:		%{name}-filter.patch
+Patch2:		%{name}-ac_fixes.patch
+BuildRequires:	gettext-devel
 BuildRequires:	ncurses-devel >= 5.0
 Requires:	/sbin/chkconfig
 Requires:	rc-scripts >= 0.2.0
@@ -56,12 +58,12 @@ niezawodno¶æ i bezpieczeñstwo.
 %setup  -q
 %patch0 -p1
 %patch1 -p1
+%patch2 -p1
 
 %build
 gettextize --copy --force
 aclocal
 autoconf
-LDFLAGS="-s"; export LDFLAGS
 %configure \
 	--enable-nls \
 	--disable-setuid \
@@ -77,22 +79,20 @@ rm -rf $RPM_BUILD_ROOT
 install -d  $RPM_BUILD_ROOT{/etc/rc.d/init.d,%{_var}/spool/lpd}
 
 %{__make} install \
-	INSTALL_PREFIX=$RPM_BUILD_ROOT \
-	LPD_CONF_PATH=$RPM_BUILD_ROOT%{_sysconfdir}/lpd.conf \
-	LPD_PERMS_PATH=$RPM_BUILD_ROOT%{_sysconfdir}/lpd.perms
+	DESTDIR=$RPM_BUILD_ROOT
 
 install %{SOURCE1} $RPM_BUILD_ROOT/etc/rc.d/init.d/lpd
 # yes, overwrite distribution lpd.conf
 install %{SOURCE2} $RPM_BUILD_ROOT%{_sysconfdir}/lpd.conf
 install printcap $RPM_BUILD_ROOT%{_sysconfdir}/
+install lpd.perms $RPM_BUILD_ROOT%{_sysconfdir}/
 
 rm -fr TESTSUPPORT/{Makefile*,LPD}
 mv -f lpd.conf TESTSUPPORT/lpd.conf.distrib
 
-gzip -9nf $RPM_BUILD_ROOT%{_mandir}/man*/* \
-	CHANGES CONTRIBUTORS README* TESTSUPPORT/*
+gzip -9nf CHANGES CONTRIBUTORS README* TESTSUPPORT/*
 
-#%find_lang %{name}
+%find_lang %{name}
 
 %post
 /sbin/chkconfig --add lpd
@@ -113,7 +113,7 @@ fi
 %clean
 rm -rf $RPM_BUILD_ROOT
 
-%files
+%files -f %{name}.lang
 %defattr(644,root,root,755)
 %config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/lpd.conf
 %config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/lpd.perms
