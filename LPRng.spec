@@ -8,6 +8,7 @@ Group:		Utilities/System
 Group(pl):	Narzêdzia/System
 Source0:	ftp://ftp.astart.com/pub/LPRng/LPRng/%{name}-%{version}.tgz
 Source1:	LPRng.init
+Patch0:		LPRng-autoconf.patch
 BuildRequires:	ncurses-devel >= 5.0
 Requires:	/sbin/chkconfig
 Requires:	rc-scripts >= 0.2.0
@@ -53,15 +54,17 @@ niezawodno¶æ i bezpieczeñstwo.
 
 %prep
 %setup  -q
+%patch0 -p1
 
 %build
-mv -f aclocal.m4 acinclude.m4
-aclocal
 gettextize --copy --force
+aclocal
 autoconf
 LDFLAGS="-s"; export LDFLAGS
 %configure \
-	--disable-setuid
+	--enable-nls \
+	--disable-setuid \
+	--without-included-gettext
 
 %{__make}
 
@@ -79,8 +82,9 @@ install %{SOURCE1} $RPM_BUILD_ROOT/etc/rc.d/init.d/lpd
 rm -fr TESTSUPPORT/{Makefile*,LPD}
 
 gzip -9nf $RPM_BUILD_ROOT%{_mandir}/man*/* \
-	CHANGES CONTRIBUTORS \
-	README* TESTSUPPORT/* HOWTO/LPRng-HOWTO.html
+	CHANGES CONTRIBUTORS README* TESTSUPPORT/*
+
+%find_lang %{name}
 
 %post
 /sbin/chkconfig --add lpd
@@ -101,12 +105,11 @@ fi
 %clean
 rm -rf $RPM_BUILD_ROOT
 
-%files
+%files -f %{name}.lang
 %defattr(644,root,root,755)
 %config(noreplace) %{_sysconfdir}/lpd.conf
 %config(noreplace) %{_sysconfdir}/lpd.perms
-%doc {CHANGES,CONTRIBUTORS}.gz
-%doc {HOWTO/LPRng-HOWTO.html,README*}.gz TESTSUPPORT
+%doc {CHANGES,CONTRIBUTORS,README*}.gz TESTSUPPORT HOWTO/LPRng-HOWTO.html
 %attr(754,root,root) /etc/rc.d/init.d/lpd
 %attr(755,root,root) %{_bindir}/*
 %attr(755,root,root) %{_libdir}/*
