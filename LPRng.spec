@@ -104,7 +104,7 @@ fi
 %clean
 rm -rf $RPM_BUILD_ROOT
 
-%files -f
+%files
 %defattr(644,root,root,755)
 %config(noreplace) %{_sysconfdir}/lpd.conf
 %config(noreplace) %{_sysconfdir}/lpd.perms
