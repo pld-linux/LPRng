@@ -19,8 +19,8 @@ LPRng is the "next generation" printing system for UNIX, featuring
 enhanced reliability and security.
 
 %description -l pl
-LPRng jest systemem drukowania nowej generacji zwiêkszaj±cym niezawodno¶æ i
-bezpieczeñstwo.
+LPRng jest systemem drukowania nowej generacji zwiêkszaj±cym niezawodno¶æ 
+i bezpieczeñstwo.
 
 %prep
 %setup -q
@@ -50,9 +50,9 @@ install lpd.conf lpd.perms $RPM_BUILD_ROOT/etc
 # /etc/printcap is in the setup package
 # touch $RPM_BUILD_ROOT/etc/printcap
 
-gzip -9nf $RPM_BUILD_ROOT/usr/man/man*/*
-gzip -9nf ABOUT-NLS.LPRng ANNOUNCE Artistic.license CHANGES CONTRIBUTORS
-gzip -9nf Commercial.license HOWTO INSTALL LICENSE README* TESTSUPPORT
+gzip -9nf $RPM_BUILD_ROOT/usr/man/man*/* \
+	ANNOUNCE Artistic.license CHANGES CONTRIBUTORS \
+	Commercial.license HOWTO README* TESTSUPPORT
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -77,17 +77,17 @@ then
 fi
 
 %files
-%defattr(644, root, root, 755)
+%defattr(644,root,root,755)
 # /etc/printcap is in the setup package
 # %config /etc/printcap
 %config /etc/lpd.conf
 %config /etc/lpd.perms
-%doc ABOUT-NLS.LPRng ANNOUNCE Artistic.license CHANGES CONTRIBUTORS
-%doc Commercial.license HOWTO INSTALL LICENSE README* TESTSUPPORT
+%doc {ANNOUNCE,Artistic.license,CHANGES,CONTRIBUTORS}.gz
+%doc {Commercial.license,HOWTO,README*,TESTSUPPORT}.gz
 %attr(755,root,root) /etc/rc.d/init.d/lpd
 %attr(755,root,root) /usr/bin/*
 %attr(755,root,root) /usr/sbin/*
-%attr(644,root, man) /usr/man/man[158]/*
+/usr/man/man[158]/*
 
 %changelog
 * Tue Feb  9 1999 Micha³ Kuratczyk <kurkens@polbox.com>
