@@ -25,8 +25,7 @@ LPRng jest systemem drukowania nowej generacji zwiêkszaj±cym niezawodno¶æ
 i bezpieczeñstwo.
 
 %prep
-%setup -q
-%setup -a1 
+%setup -q -a1
 %patch -p0
 
 %build
@@ -44,6 +43,7 @@ install -d  $RPM_BUILD_ROOT/etc/rc.d/init.d
 
 make install \
 	prefix=$RPM_BUILD_ROOT/usr \
+	MAN=$RPM_BUILD_ROOT/%{_mandir} \
 	INSTALL_LIB=$RPM_BUILD_ROOT%{_sbindir} \
 	INSTALL_MAINT=$RPM_BUILD_ROOT%{_sbindir} \
 	LPD_CONF_PATH=$RPM_BUILD_ROOT/etc/lpd.conf \
@@ -51,13 +51,14 @@ make install \
 	SUID_ROOT_PERMS="755"
 
 install $RPM_SOURCE_DIR/lpd.init $RPM_BUILD_ROOT/etc/rc.d/init.d/lpd
-install lpd.conf lpd.perms $RPM_BUILD_ROOT/etc
+# install lpd.conf lpd.perms $RPM_BUILD_ROOT/etc
 # /etc/printcap is in the setup package
 # touch $RPM_BUILD_ROOT/etc/printcap
 
+rm -fr TESTSUPPORT/{Makefile*,LPD}
 gzip -9nf $RPM_BUILD_ROOT%{_mandir}/man*/* \
-	ANNOUNCE Artistic.license CHANGES CONTRIBUTORS \
-	Commercial.license HOWTO README* TESTSUPPORT
+	ANNOUNCE CHANGES CONTRIBUTORS \
+	README* TESTSUPPORT/* HOWTO/LPRng-HOWTO.txt
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -87,8 +88,8 @@ fi
 # %config /etc/printcap
 %config /etc/lpd.conf
 %config /etc/lpd.perms
-%doc {ANNOUNCE,Artistic.license,CHANGES,CONTRIBUTORS}.gz
-%doc {Commercial.license,HOWTO,README*,TESTSUPPORT}.gz
+%doc {ANNOUNCE,CHANGES,CONTRIBUTORS}.gz
+%doc {HOWTO/LPRng-HOWTO,README*}.gz TESTSUPPORT
 %attr(754,root,root) /etc/rc.d/init.d/lpd
 %attr(755,root,root) %{_bindir}/*
 %attr(755,root,root) %{_sbindir}/*
