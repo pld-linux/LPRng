@@ -5,12 +5,12 @@ Summary(ru):	Спулер печати LPRng
 Summary(uk):	Спулер друку LPRng
 Summary(zh_CN):	LPRng--╢Рс║ЁлпР
 Name:		LPRng
-Version:	3.8.22
+Version:	3.8.23
 Release:	1
 License:	GPL or Artistic
 Group:		Applications/System
 Source0:	ftp://ftp.lprng.com/pub/LPRng/LPRng/%{name}-%{version}.tgz
-# Source0-md5:	ac7742d87433ea6908517ddb3b8a648a
+# Source0-md5:	d0522cf8af07f14c00e43a7f506dbd3c
 Source1:	%{name}.init
 Source2:	%{name}.conf
 Source3:	%{name}.printcap
