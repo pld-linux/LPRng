@@ -11,6 +11,8 @@ Source1:	%{name}.init
 Source2:	%{name}.conf
 Patch0:		%{name}-filter.patch
 Patch1:		%{name}-ac_fixes.patch
+BuildRequires:	autoconf
+BuildRequires:	automake
 BuildRequires:	gettext-devel
 BuildRequires:	ncurses-devel >= 5.0
 Requires:	/sbin/chkconfig
