@@ -51,7 +51,7 @@ install lpd.conf lpd.perms $RPM_BUILD_ROOT/etc
 # /etc/printcap is in the setup package
 # touch $RPM_BUILD_ROOT/etc/printcap
 
-gzip -9nf $RPM_BUILD_ROOT/usr/man/man*/* \
+gzip -9nf $RPM_BUILD_ROOT%{_mandir}/man*/* \
 	ANNOUNCE Artistic.license CHANGES CONTRIBUTORS \
 	Commercial.license HOWTO README* TESTSUPPORT
 
@@ -88,7 +88,7 @@ fi
 %attr(755,root,root) /etc/rc.d/init.d/lpd
 %attr(755,root,root) /usr/bin/*
 %attr(755,root,root) /usr/sbin/*
-/usr/man/man[158]/*
+%{_mandir}/man[158]/*
 
 %changelog
 * Tue Feb  9 1999 Micha³ Kuratczyk <kurkens@polbox.com>
