@@ -18,12 +18,13 @@ Patch4:		%{name}-manpage.patch
 Patch5:		%{name}-shutdown.patch
 Patch6:		%{name}-lockfile.patch
 Patch7:		%{name}-setgroups.patch
+URL:		http://www.astart.com/lprng/LPRng.html
 BuildRequires:	autoconf
+BuildRequires:	automake
 BuildRequires:	gettext-devel
 BuildRequires:	ncurses-devel >= 5.0
 Prereq:		/sbin/chkconfig
 Prereq:		rc-scripts >= 0.2.0
-URL:		http://www.astart.com/lprng/LPRng.html
 Provides:	lpr
 Obsoletes:	lpr
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
@@ -110,6 +111,9 @@ gzip -9nf CHANGES CONTRIBUTORS README* TESTSUPPORT/*
 
 %find_lang %{name}
 
+%clean
+rm -rf $RPM_BUILD_ROOT
+
 %post
 /sbin/chkconfig --add lpd
 if [ -f /var/lock/subsys/lpd ]; then
@@ -125,9 +129,6 @@ if [ "$1" = "0" ]; then
 	fi
 	/sbin/chkconfig --del lpd
 fi
-
-%clean
-rm -rf $RPM_BUILD_ROOT
 
 %files -f %{name}.lang
 %defattr(644,root,root,755)
