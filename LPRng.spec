@@ -15,18 +15,19 @@ Patch0:		%{name}-jobfilescan.patch
 Patch1:		%{name}-ac_fixes.patch
 Patch2:		%{name}-manpage.patch
 Patch3:		%{name}-shutdown.patch
+Patch4:		%{name}-nproc-unlimited.patch
 URL:		http://www.astart.com/lprng/LPRng.html
 BuildRequires:	autoconf
 BuildRequires:	automake
 BuildRequires:	gettext-devel
 BuildRequires:	libtool
 BuildRequires:	ncurses-devel >= 5.0
+Prereq:		/sbin/ldconfig
 Prereq:		/sbin/chkconfig
 Prereq:		rc-scripts >= 0.2.0
 Provides:	lpr
 Obsoletes:	lpr
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
-
 
 %description
 The LPRng software is an enhanced, extended, and portable
@@ -101,13 +102,13 @@ Static LPRng libraries.
 %description -l pl static
 Biblioteki statyczne LPRng.
 
-
 %prep
 %setup  -q
 %patch0 -p1
 %patch1 -p1
 %patch2 -p1
 %patch3 -p1
+%patch4 -p1
 
 %build
 rm -f missing acinclude.m4
@@ -153,6 +154,7 @@ gzip -9nf CHANGES CONTRIBUTORS README* TESTSUPPORT/*
 rm -rf $RPM_BUILD_ROOT
 
 %post
+/sbin/ldconfig
 /sbin/chkconfig --add lpd
 if [ -f /var/lock/subsys/lpd ]; then
 	/etc/rc.d/init.d/lpd restart 1>&2
@@ -167,6 +169,8 @@ if [ "$1" = "0" ]; then
 	fi
 	/sbin/chkconfig --del lpd
 fi
+
+%postun -p /sbin/ldconfig
 
 %files -f %{name}.lang
 %defattr(644,root,root,755)
@@ -186,4 +190,5 @@ fi
 %{_mandir}/man[158]/*
 
 %files static
+%defattr(644,root,root,755)
 %{_libdir}/*.a
