@@ -1,150 +1,406 @@
---- LPRng-3.7.5/src/Makefile.in.wiget	Wed Jan 10 01:59:06 2001
-+++ LPRng-3.7.5/src/Makefile.in	Tue Oct  9 14:53:05 2001
-@@ -33,7 +33,8 @@
- @SET_MAKE@
+diff -Nru LPRng-3.8.0/Makefile.in LPRng-3.8.0.new/Makefile.in
+--- LPRng-3.8.0/Makefile.in	Tue Oct 16 22:09:21 2001
++++ LPRng-3.8.0.new/Makefile.in	Tue Oct 23 11:08:12 2001
+@@ -46,7 +46,6 @@
+ LOCKFILE=\"@LOCKFILE@\"
+ PSHOWALL="@PSHOWALL@"
+ FILTER_DIR=@FILTER_DIR@
+-LOCALEDIR=@LOCALEDIR@
+ INIT=@INIT@
+ USE_NLS=@USE_NLS@
+ USE_GDBM=@USE_GDBM@
+@@ -113,7 +112,7 @@
+ ###############################################################################
+ $(ALLDIRS):
+ 	if [ "$@" != po -o "$(USE_NLS)" != "no" ] ; then \
+-		cd $@; $(MAKE) localedir=${DESTDIR}${LOCALEDIR} \
++		cd $@; $(MAKE) \
+ 			DESTDIR=$(DESTDIR) $(MAKETARGET) ; \
+ 	fi
  
- # what C compiler to use.
--CC:=@CC@
-+CC=@CC@
-+datadir=@datadir@
+--- LPRng-3.8.0/configure.in~	Tue Oct 16 22:27:47 2001
++++ LPRng-3.8.0/configure.in	Tue Oct 23 16:08:57 2001
+@@ -7,52 +7,16 @@
+ AC_INIT(Makefile.in)
  
- # what command to use to "ranlib" or "lorder" the library.
- RANLIB=@RANLIB@
-@@ -47,14 +48,9 @@
- SHELL_PATH=@SHELL@
- SHELL = @SHELL@
  
--# loader for c programs
--LDCC=@LDCC@
+-PACKAGE=LPRng
+-VERSION=3.8.0
 -
- # any libs that need to be used to get these programs to compile:
--LIBS=@USE_GDBM_LIB@ @INTLLIBS@ @LIBS@
-+LIBS=@LIBS@
+-
+ AC_CONFIG_AUX_DIR(.)
+-AC_CANONICAL_SYSTEM
+ AC_CONFIG_HEADER(config.h)
  
--# add path to internationalization
--INTLINCS=@INTLINCS@
+-AC_DEFINE_UNQUOTED(PACKAGE, "$PACKAGE")
+-AC_DEFINE_UNQUOTED(VERSION, "$VERSION")
+-AC_SUBST(PACKAGE)
+-AC_SUBST(VERSION)
+-ALL_LINGUAS="fr"
+-
+-WITH_CC dnl
+-WITH_CCOPTS dnl
+-WITH_LINKER dnl
+-WITH_LDOPTS dnl
+-WITH_CPPOPTS dnl
+-if test -z "$LOCALEDIR" ; then
+-    LOCALEDIR='${prefix}/share/locale'
+-fi;
+-WITH_LOCALEDIR dnl
+-export LOCALEDIR
+-
+-AC_PREFIX_DEFAULT(/usr/local)
+-AC_SUBST(INSTALL)
+-AC_SUBST(INSTALL_MAN)
+-AC_SUBST(SHELL)
+-AC_SUBST(CPP)
+-AC_SUBST(CFLAGS)
+-AC_SUBST(CPPFLAGS)
+-AC_SUBST(LDFLAGS)
+-AC_SUBST(LDCC)
+-
++AM_INIT_AUTOMAKE(LPRng, 3.8.0)
  
- ### PATHS ####
- # prefix
-@@ -72,12 +68,10 @@
+ dnl check for awk
+ AC_PROG_AWK
+-AC_SUBST(AWK)
+-AC_PATH_PROG(PERL,perl)dnl
+-AC_SUBST(PERL)dnl
+-AC_PATH_PROG(CHOWN,chown)dnl
+-AC_SUBST(CHOWN)dnl
+-AC_PATH_PROG(CHGRP,chgrp)dnl
+-AC_SUBST(CHGRP)dnl
+-
++AC_PATH_PROG(PERL,perl)
++AC_PATH_PROG(CHOWN,chown)
++AC_PATH_PROG(CHGRP,chgrp)
  
- # install options
+ dnl ----------------------------------------------------------------------------
+ dnl ----------- XXXXXX START OF OPTIONS ----------------------------------------
+@@ -333,16 +297,6 @@
+ AC_MSG_RESULT($FILTER_DIR)
+ AC_SUBST(FILTER_DIR)
  
--STRIP=@STRIP@
+-dnl default strip binaries 
+-AC_MSG_CHECKING(disable stripped binaries)
+-AC_ARG_ENABLE( strip,
+-[  --disable-strip                   disable stripping binaries by default],
+-[v=no; STRIP=""; ],
+-[v=yes;  STRIP="-s"; ]
+-)
+-AC_MSG_RESULT($v)
+-AC_SUBST(STRIP)
+-
+ dnl ----------------------------------------------------------------------------
+ dnl ------------   OS Checks  --------------------------------------------------
  
- CFLAGS:= @CPPFLAGS@ @CFLAGS@ @DEFS@ \
-  -I${top_builddir} \
-- -I${SRC}/include -I${SRC}/common @INTLINCS@ \
-- -I@USE_GDBM_INC_DIR@ \
-+ -I${SRC}/include -I${SRC}/common \
-  -DCHOWN=\"@CHOWN@\"  \
-  -DCHGRP=\"@CHGRP@\"  \
-  -DPRINTCAP_PATH=\"@PRINTCAP_PATH@\"  \
-@@ -91,16 +85,15 @@
-  -DCLEAR=\"@CLEAR@\"  \
-  -DUSERID=\"@USERID@\"  \
-  -DGROUPID=\"@GROUPID@\"  \
-- -DLOCALEDIR=\"@LOCALEDIR@\"
-+ -DLOCALEDIR=\"$(datadir)/locale\"
+@@ -350,50 +304,12 @@
+ AC_MINIX
+ AC_AIX
+ 
+-
+-changequote(, )dnl
+-release=`uname -r 2>/dev/null; exit 0`;
+-version=`echo $target_os | sed -e 's/[^0-9][^0-9]*//' -e 's/\./X/' -e 's/\.//g' -e 's/X/./' \
+-	| awk '{ v=$1+0; if( v > 0 ){ while( v < 100 || int(v) != v ){v = v * 10;}}; print v; }' `;
+-if test "$version" -eq 0 ; then
+-	version=`echo $release | sed -e 's/-.*//' -e 's/\.//g' \
+-	| awk '{ v=$1+0; if( v > 0 ){ while( v < 100 || int(v) != v ){v = v * 10;}}; print v; }' `;
+-fi
+-osword=`echo $target_os | sed -e 's/[0-9].*//'`; export osword
+-changequote([, ])dnl
+-AC_MSG_RESULT([Target is $target, arch $target_cpu, os $target_os, release $release, version $version])
+-
+-AC_DEFINE_UNQUOTED(ARCHITECTURE,"$target_cpu")
+-AC_DEFINE_UNQUOTED(OSNAME,"$osword")
+-AC_DEFINE_UNQUOTED(OSVERSION,$version)
+-OSNAME=$osword
+-OSVERSION=$version
+-AC_SUBST(OSNAME)dnl
+-AC_SUBST(OSVERSION)dnl
+-
+-
+ dnl ----------------------------------------------------------------------------
+ dnl -----------   C compiler checks    -----------------------------------------
+ 
+ AC_PROG_CPP
+ AC_PROG_CC
+ 
+-if test "$ac_cv_prog_gcc" = yes; then
+-	cat >conftest.c <<EOF
+-#if __GNUC__ < 2 || (__GNUC__ == 2 && __GNUC_MINOR__ < 5)
+-yes
+-#endif
+-EOF
+-    if ${CC-cc} -E conftest.c | egrep yes >/dev/null 2>&1; then
+-        gcc -v
+-		echo "WARNING: gcc -O (version 2.4.5 and below) produces incorrect code"
+-		echo "  for lpd.c and other large routines. Update your GCC compiler"
+-		exit 1
+-	fi;
+-fi;
+-
+-LDCC="$CC"
+-
+ AM_PROG_LIBTOOL
+ 
+ AC_C_CONST
+@@ -451,77 +367,6 @@
+   AC_DEFINE(HAVE_QUAD_T)
+ fi
+ 
+-
+-dnl ----------------------------------------------------------------------------
+-dnl OS dependency checks
+-checklibs=
+-case $target_os in
+-	 *linux* )
+-		no_resolv_lib=yes;
+-		case $release in
+-changequote(, )dnl
+-		2.2.1[0-5]* )
+-changequote([, ])dnl
+-			AC_DEFINE(SETUID_CHECK)
+-			AC_MSG_WARN([Kernel may have SETUID compromise.  Update kernel])
+-			;;
+-		esac
+-		;;
+-	 *bsdi* )
+-		LDCC=shlicc
+-		dnl BSDI uses this for setproctitle
+-		AC_CHECK_LIB(util, setproctitle, [LIBS="-lutil $LIBS"])
+-		;;
+-	 *bsd* )
+-		dnl *BSD uses this for setproctitle
+-		AC_CHECK_LIB(util, setproctitle, [LIBS="-lutil $LIBS"])
+-		;;
+-	 *unicos* )
+-		checklibs=no
+-		;;
+-	 *irix6* )
+-		checklibs=no
+-		AC_DEFINE_UNQUOTED(IRIX,$version)
+-		;;
+-	 *irix5* )
+-		checklibs=no
+-		AC_DEFINE(HAVE_BROKEN_TIOCEXCL)
+-		AC_DEFINE(SVR4)
+-		AC_DEFINE_UNQUOTED(IRIX,$version)
+-		;;
+-	 *irix* )
+-		checklibs=no
+-		AC_DEFINE_UNQUOTED(IRIX,$version)
+-		;;
+-	*solaris* )
+-		AC_DEFINE(SVR4)
+-		AC_DEFINE_UNQUOTED(SOLARIS,$version)
+-		no_resolv_lib=yes;
+-		;;
+-	*hpux* )
+-		AC_DEFINE(_HPUX_SOURCE)
+-		CPPFLAGS="$CPPFLAGS -D_HPUX_SOURCE=1"
+-		CFLAGS="$CFLAGS -D_HPUX_SOURCE=1"
+-		AC_DEFINE_UNQUOTED(HPUX,$version)
+-		;;
+-	*sunos* )
+-		AC_DEFINE_UNQUOTED(SUNOS,$version)
+-		;;
+-	osf* )
+-		AC_DEFINE_UNQUOTED(DECALPHA,$version)
+-		if test "$ac_cv_prog_gcc" != yes; then
+-			CPPFLAGS="$CPPFLAGS -std";
+-			CFLAGS="$CFLAGS -std";
+-        else
+-            CPPFLAGS="$CPPFLAGS -DAES_SOURCE"
+-            CFLAGS="$CFLAGS -DAES_SOURCE"
+-		fi
+-		;;
+-	*mips-sni* )
+-		;;
+-esac
+-AC_MSG_RESULT([using CPPFLAGS=\"${CPPFLAGS}\", CFLAGS=\"${CFLAGS}\"])
+-
+ dnl ----------------------------------------------------------------------------
+ dnl headers:
+ 
+@@ -549,7 +394,6 @@
+ 	dnl A/UX uses this...
+ 	AC_CHECK_LIB(posix, getpwent, [LIBS="$LIBS -lposix"])
+ 
+-	dnl use old-style shared libs if we have 'em.
+ 	AC_CHECK_LIB(socket_s, socket, [LIBS="$LIBS -lsocket_s"; have_socket=1], ,-lnsl)
+ 	if test -z "$have_socket"; then
+ 		AC_CHECK_LIB(socket, socket, [LIBS="$LIBS -lsocket"], , -lnsl)
+@@ -1007,8 +851,8 @@
+ dnl ----------------------------------------------------------------------------
+ dnl check to see if you have getpgrp(0) or getpgrp()
+ dnl
+-dnl POSIX `getpgrp(void)'  define HAVE_GETPGRP_0
+-dnl BSD   `getpgrp(int)' - takes 0 as argument
++dnl POSIX getpgrp(void)  define HAVE_GETPGRP_0
++dnl BSD   getpgrp(int) - takes 0 as argument
+ dnl                        define HAVE_GETPGRP_0 0
+ 
+ dnl check to see if you have getpgrp(0) or getpgrp()
+@@ -1055,11 +899,11 @@
+ 
+ dnl ----------------------------------------------------------------------------
+ dnl just for (really) backwards compatibility
+-dnl we really try not to use union wait -- it's heinously unportable.
++dnl we really try not to use union wait -- it is heinously unportable.
+ dnl nicked this check from Tcl as well. ;
+ dnl
+ dnl The check below checks whether <sys/wait.h> defines the type
+-dnl "union wait" correctly.  It's needed because of weirdness in
++dnl "union wait" correctly.  It is needed because of weirdness in
+ dnl HP-UX where "union wait" is defined in both the BSD and SYS-V
+ dnl environments.  Checking the usability of WIFEXITED seems to do
+ dnl the trick.
+@@ -1307,41 +1151,9 @@
+ 
+ AC_PROG_MAKE_SET
+ 
+-dnl ----------------- force this to be Bourne Shell for now ---------------
+-AC_MSG_CHECKING(for shell)
+-SHELL=/bin/sh
+-AC_MSG_RESULT(using $SHELL (FORCED))
+-
++ALL_LINGUAS="fr"
+ AM_GNU_GETTEXT
+ 
+-AC_MSG_RESULT([LIBS $LIBS, INTLLIBS $INTLLIBS])
+- if test "${USE_NLS}" = yes; then
+-   AC_MSG_RESULT([Using NLS, localedir ${LOCALEDIR}, need intl/libintl.a - "${USE_INCLUDED_LIBINTL}" ])
+-   if test "${USE_INCLUDED_LIBINTL}" = yes ; then
+-      CPPFLAGS="$CPPFLAGS -I \${top_builddir}/intl"
+-	  AC_MSG_RESULT([using \${top_builddir}/intl])
+-	  if test "$nls_cv_force_use_gnu_gettext" = no ; then
+-		echo "NLS enabled and requested system gettext support not available."
+-		echo " You may need to use:"
+-		echo "  configure '--with-cppopts=-I/usr/local/include' '--with-ldopts=-L/usr/local/lib'"
+-		echo " See ${srcdir}/ABOUT-NLS.LPRng in the LPRng distribution for details."
+-		exit 1;
+-      fi
+-	  if test ! -f ${srcdir}/intl/gettext.h ; then
+-		echo "gettext code is not in the ${srcdir}/intl directory."
+-		echo "See ${srcdir}/ABOUT-NLS.LPRng in the LPRng distribution for details."
+-		exit 1;
+-	  fi
+-   fi
+-   LIBS="$INTLLIBS $LIBS"
+- else
+-   AC_MSG_RESULT([No NLS])
+- fi   
+- if test "$XGETTEXT" = "" ; then
+-	 XGETTEXT=xgettext;
+- fi
+- AC_MSG_RESULT(using XGETTEXT $XGETTEXT)
+-
+ dnl ----------------------------------------------------------------------------
+ dnl ----------------- END OF GENERAL CONFIGURATION   ---------------------------
+ 
+@@ -1393,12 +1205,12 @@
+ 		found=
+ 		if test "$found" = "" ; then
+ 			LIBS=" -lcrypto -lcom_err $SAVELIBS"
+-			AC_CHECKING(for krb5_des_string_to_key in $LIBS, )
++			AC_MSG_NOTICE([for krb5_des_string_to_key in $LIBS])
+ 			AC_TRY_LINK_FUNC(krb5_des_string_to_key,found="yes")
+ 		fi;
+ 		if test "$found" = "" ; then
+ 			LIBS=" -lk5crypto -lcom_err $SAVELIBS"
+-			AC_CHECKING(for krb5_des_string_to_keyin $LIBS, )
++			AC_MSG_NOTICE([for krb5_des_string_to_keyin $LIBS])
+ 			AC_TRY_LINK_FUNC(krb5_des_string_to_key,found="yes")
+ 		fi;
+ 		if test "$found" = "" ; then
+@@ -1413,7 +1225,7 @@
+ 		found= 
+ 		if test "$found" = "" ; then
+ 			LIBS=" -lkrb5 $SAVELIBS"
+-			AC_CHECKING(for krb5_init_context in $LIBS, )
++			AC_CHECKING([for krb5_init_context in $LIBS])
+ 			AC_TRY_LINK_FUNC(krb5_init_context,found="yes")
+ 		fi;
+ 		if test "$found" = "" ; then
+@@ -1427,12 +1239,12 @@
+ 			found=;
+ 			if test "$found" = "" ; then
+ 				LIBS=" -lkrb4 -ldes425 $SAVELIBS"
+-				AC_CHECKING(for krb_recvauth in $LIBS, )
++				AC_CHECKING([for krb_recvauth in $LIBS])
+ 				AC_TRY_LINK_FUNC(krb5_init_context,found="yes")
+ 			fi;
+ 			if test "$found" = "" ; then
+ 				LIBS=" -lkrb4 -ldes $SAVELIBS"
+-				AC_CHECKING(for krb_recvauth in $LIBS, )
++				AC_CHECKING([for krb_recvauth in $LIBS])
+ 				AC_TRY_LINK_FUNC(krb5_init_context,found="yes")
+ 			fi;
+ 			if test "$found" = "" ; then
+@@ -1501,12 +1313,7 @@
+ dnl ----------------- START OF OUTPUT ------------------------------------------
  
  
- USER_OBJS := @USER_OBJS@
--LDFLAGS   := -L@USE_GDBM_LIB_DIR@ @LDFLAGS@
-+LDFLAGS   := @LDFLAGS@
+-if test "$ac_cv_prog_gcc" = yes; then
+-	CFLAGS="$CFLAGS -Wall -Werror"
+-fi;
+-
+-AC_OUTPUT(
+-[
++AC_OUTPUT([
+ Makefile
+ HOWTO/Makefile
+ TESTSUPPORT/Makefile
+@@ -1535,29 +1342,23 @@
+ src/psbanner
+ po/Makefile.in
+ intl/Makefile
+-],
+-[
+-for i in  \
+-UTILS/LPRng.pm \
+-UTILS/accounting.pl \
+-UTILS/decode_args_with_perl \
+-UTILS/decode_args_with_sh \
+-UTILS/fixid \
+-UTILS/fixupdate \
+-UTILS/lpq_in_perl \
+-UTILS/lpr_in_perl \
+-UTILS/lprm_in_perl \
+-UTILS/make_lpd_conf \
+-UTILS/make_printcap_use \
+-UTILS/makeinc \
+-UTILS/read_conf \
+-UTILS/remote_active \
+-UTILS/test_read \
+-UTILS/update_z.pl \
+-; do chmod +x $i ; done
+-]
+-
+-)
++UTILS/LPRng.pm
++UTILS/accounting.pl
++UTILS/decode_args_with_perl
++UTILS/decode_args_with_sh
++UTILS/fixid
++UTILS/fixupdate
++UTILS/lpq_in_perl
++UTILS/lpr_in_perl
++UTILS/lprm_in_perl
++UTILS/make_lpd_conf
++UTILS/make_printcap_use
++UTILS/makeinc
++UTILS/read_conf
++UTILS/remote_active
++UTILS/test_read
++UTILS/update_z.pl
++])
  
- FILTER_DIR = @FILTER_DIR@
- LPD_DIR    = @LPD_DIR@
- 
--STRIP      = @STRIP@
- 
- #********************** End of configure modifiable settings ************
- 
-@@ -178,7 +171,7 @@
- 
- 
- SRCDIRS=${SRC}/common ${SRC}/AUTHENTICATE
--INCLUDE=.. ${SRC}/include ${INTLINCS}
-+INCLUDE=.. ${SRC}/include
- 
- VPATH=..:.:${SRC}/include:${SRC}/common
- 
-@@ -244,33 +237,33 @@
- 	$(RANLIB) $@
- 
- lpd: $(LPD_OBJS) liblpr.a
--	$(LDCC) $(LDFLAGS) -o $@ ${LPD_OBJS} liblpr.a $(LIBS)
-+	$(CC) $(LDFLAGS) -o $@ ${LPD_OBJS} liblpr.a $(LIBS)
- lpr: $(LPR_OBJS) liblpr.a
--	$(LDCC) $(LDFLAGS) -o $@ ${LPR_OBJS} liblpr.a $(LIBS)
-+	$(CC) $(LDFLAGS) -o $@ ${LPR_OBJS} liblpr.a $(LIBS)
- lpq: $(LPQ_OBJS) liblpr.a
--	$(LDCC) $(LDFLAGS) -o $@ ${LPQ_OBJS} liblpr.a $(LIBS)
-+	$(CC) $(LDFLAGS) -o $@ ${LPQ_OBJS} liblpr.a $(LIBS)
- lpstat: $(LPSTAT_OBJS) liblpr.a
--	$(LDCC) $(LDFLAGS) -o $@ ${LPSTAT_OBJS} liblpr.a $(LIBS)
-+	$(CC) $(LDFLAGS) -o $@ ${LPSTAT_OBJS} liblpr.a $(LIBS)
- lprm: $(LPRM_OBJS) liblpr.a
--	$(LDCC) $(LDFLAGS) -o $@ ${LPRM_OBJS} liblpr.a $(LIBS)
-+	$(CC) $(LDFLAGS) -o $@ ${LPRM_OBJS} liblpr.a $(LIBS)
- lpc: $(LPC_OBJS) liblpr.a
--	$(LDCC) $(LDFLAGS) -o $@ ${LPC_OBJS} liblpr.a $(LIBS)
-+	$(CC) $(LDFLAGS) -o $@ ${LPC_OBJS} liblpr.a $(LIBS)
- checkpc: $(CHECKPC_OBJS) liblpr.a
--	$(LDCC) $(LDFLAGS) -o $@ ${CHECKPC_OBJS} liblpr.a $(LIBS)
-+	$(CC) $(LDFLAGS) -o $@ ${CHECKPC_OBJS} liblpr.a $(LIBS)
- lpf: $(LPF_OBJS)
--	$(LDCC) $(LDFLAGS) -o $@ ${LPF_OBJS} $(LIBS)
-+	$(CC) $(LDFLAGS) -o $@ ${LPF_OBJS} $(LIBS)
- lpbanner: $(LPBANNER_OBJS)
--	$(LDCC) $(LDFLAGS) -o $@ ${LPBANNER_OBJS} $(LIBS)
-+	$(CC) $(LDFLAGS) -o $@ ${LPBANNER_OBJS} $(LIBS)
- monitor: $(MONITOR_OBJS) liblpr.a
--	$(LDCC) $(LDFLAGS) -o $@ ${MONITOR_OBJS} liblpr.a $(LIBS)
-+	$(CC) $(LDFLAGS) -o $@ ${MONITOR_OBJS} liblpr.a $(LIBS)
- 
- authenticate_pgp: ${SRC}/AUTHENTICATE/authenticate_pgp.sh
- 	rm -f $@; cp ${SRC}/AUTHENTICATE/authenticate_pgp.sh $@; chmod 555 $@
- 
- sserver: sserver.o liblpr.a
--	$(LDCC) $(LDFLAGS) -o $@ sserver.o liblpr.a $(LIBS)
-+	$(CC) $(LDFLAGS) -o $@ sserver.o liblpr.a $(LIBS)
- sclient: sclient.o liblpr.a
--	$(LDCC) $(LDFLAGS) -o $@ sclient.o liblpr.a $(LIBS)
-+	$(CC) $(LDFLAGS) -o $@ sclient.o liblpr.a $(LIBS)
- 
- sendauth.o lpd_secure.o :	user_auth.stub
- 
-@@ -307,17 +300,17 @@
- 	  if [ ! -d $$i ] ; then ${SRC}/mkinstalldirs $$i ; fi; \
- 	done;
- 
--	${INSTALLCMD} ${STRIP} -m $(@PERMS@) lpq ${DESTDIR}${bindir}
--	${INSTALLCMD} ${STRIP} -m $(@PERMS@) lprm ${DESTDIR}${bindir}
--	${INSTALLCMD} ${STRIP} -m $(@PERMS@) lpr ${DESTDIR}${bindir}
--	${INSTALLCMD} ${STRIP} -m $(@PERMS@) lpstat ${DESTDIR}${bindir}
--	${INSTALLCMD} ${STRIP} -m $(@PERMS@) lpc ${DESTDIR}${sbindir}
--	${INSTALLCMD} ${STRIP} -m $(NORM_PERMS) lpd ${DESTDIR}${LPD_DIR}
--	${INSTALLCMD} ${STRIP} -m $(NORM_PERMS) lpf ${DESTDIR}${FILTER_DIR}
--	${INSTALLCMD} ${STRIP} -m $(NORM_PERMS) lpbanner ${DESTDIR}${FILTER_DIR}
--	${INSTALLCMD}    -m $(NORM_PERMS) pclbanner ${DESTDIR}${FILTER_DIR}
--	${INSTALLCMD}    -m $(NORM_PERMS) psbanner ${DESTDIR}${FILTER_DIR}
--	${INSTALLCMD} ${STRIP} -m $(NORM_PERMS) checkpc ${DESTDIR}${sbindir}
-+	${INSTALLCMD} -m $(@PERMS@) lpq ${DESTDIR}${bindir}
-+	${INSTALLCMD} -m $(@PERMS@) lprm ${DESTDIR}${bindir}
-+	${INSTALLCMD} -m $(@PERMS@) lpr ${DESTDIR}${bindir}
-+	${INSTALLCMD} -m $(@PERMS@) lpstat ${DESTDIR}${bindir}
-+	${INSTALLCMD} -m $(@PERMS@) lpc ${DESTDIR}${sbindir}
-+	${INSTALLCMD} -m $(NORM_PERMS) lpd ${DESTDIR}${LPD_DIR}
-+	${INSTALLCMD} -m $(NORM_PERMS) lpf ${DESTDIR}${FILTER_DIR}
-+	${INSTALLCMD} -m $(NORM_PERMS) lpbanner ${DESTDIR}${FILTER_DIR}
-+	${INSTALLCMD} -m $(NORM_PERMS) pclbanner ${DESTDIR}${FILTER_DIR}
-+	${INSTALLCMD} -m $(NORM_PERMS) psbanner ${DESTDIR}${FILTER_DIR}
-+	${INSTALLCMD} -m $(NORM_PERMS) checkpc ${DESTDIR}${sbindir}
- 	cd ${DESTDIR}${bindir}; rm -f lp cancel; ln -s lpr lp; ln -s lprm cancel;
- 
- uninstall:
---- LPRng-3.7.5/man/Makefile.in.wiget	Mon Jan  8 20:19:50 2001
-+++ LPRng-3.7.5/man/Makefile.in	Tue Oct  9 14:53:05 2001
+ dnl ----------------------------------------------------------------------------
+ dnl ----------------- END OF OUTPUT --------------------------------------------
+--- LPRng-3.8.0/man/Makefile.in	Sat Aug 25 20:10:01 2001
++++ LPRng-3.8.0.new/man/Makefile.in	Tue Oct 23 11:08:12 2001
 @@ -22,8 +22,8 @@
  
  ## fix up prefix to be a make variable
@@ -186,252 +442,126 @@
  	    done; \
  	  fi; \
  	done;
---- LPRng-3.7.5/configure.in.wiget	Mon Jan 15 21:26:40 2001
-+++ LPRng-3.7.5/configure.in	Tue Oct  9 14:53:05 2001
-@@ -13,46 +13,13 @@
- AC_CANONICAL_SYSTEM
- AC_CONFIG_HEADER(config.h)
+--- LPRng-3.8.0/src/Makefile.in~	Sat Aug 25 20:02:01 2001
++++ LPRng-3.8.0/src/Makefile.in	Tue Oct 23 20:41:57 2001
+@@ -33,7 +33,8 @@
+ @SET_MAKE@
  
--AC_DEFINE_UNQUOTED(PACKAGE, "$PACKAGE")
--AC_DEFINE_UNQUOTED(VERSION, "$VERSION")
--AC_SUBST(PACKAGE)
--AC_SUBST(VERSION)
--ALL_LINGUAS="fr"
--
--AC_PREFIX_DEFAULT(/usr/local)
--AC_SUBST(INSTALL)
--AC_SUBST(INSTALL_MAN)
--AC_SUBST(SHELL)
--AC_SUBST(CPP)
--AC_SUBST(CFLAGS)
--AC_SUBST(CPPFLAGS)
--AC_SUBST(LDFLAGS)
--AC_SUBST(LDCC)
-+AM_INIT_AUTOMAKE(LPRng, 3.7.4)
+ # what C compiler to use.
+-CC:=@CC@
++CC=@CC@
++datadir=@datadir@
  
- dnl check for awk
- AC_PROG_AWK
--AC_SUBST(AWK)
--AC_PATH_PROG(PERL,perl)dnl
--AC_SUBST(PERL)dnl
--AC_PATH_PROG(CHOWN,chown)dnl
--AC_SUBST(CHOWN)dnl
--AC_PATH_PROG(CHGRP,chgrp)dnl
--AC_SUBST(CHGRP)dnl
--
--
--WITH_CC dnl
--WITH_CCOPTS dnl
--WITH_LINKER dnl
--WITH_LDOPTS dnl
--WITH_CPPOPTS dnl
--
--if test -z "$LOCALEDIR" ; then
--	LOCALEDIR='$(prefix)/share/locale'
--fi;
--
--WITH_LOCALEDIR dnl
--
--
-+AC_PATH_PROG(PERL,perl)
-+AC_PATH_PROG(CHOWN,chown)
-+AC_PATH_PROG(CHGRP,chgrp)
+ # what command to use to "ranlib" or "lorder" the library.
+ RANLIB=@RANLIB@
+@@ -47,9 +48,6 @@
+ SHELL_PATH=@SHELL@
+ SHELL = @SHELL@
  
- dnl ----------------------------------------------------------------------------
- dnl ----------- XXXXXX START OF OPTIONS ----------------------------------------
-@@ -86,31 +53,6 @@
- 	USE_GDBM_BUILD_DIR=`pwd`/db
- 	USE_GDBM_LIB_DIR=`pwd`/db/.libs
- 	USE_GDBM_INC_DIR=`pwd`/db
--	d=${srcdir}/${USE_GDBM}
--#	USE_GDBM=db-3.1.17
--#	USE_GDBM_LIB="-ldb"
--#	USE_GDBM_BUILD_DIR=`pwd`/db
--#	USE_GDBM_LIB_DIR=`pwd`/db
--#	USE_GDBM_INC_DIR=`pwd`/db
--#	d=${srcdir}/${USE_GDBM}/dist
--	if test "!" -d db ; then
--		mkdir db
--	fi
--	if test "!" -d ${d} ; then
--		echo "Missing $d";
--		exit 1
--	fi
--	e=`cd $d; pwd`
--	echo DIR $d is $e
--	f=$e/configure
--	if test "!" -f $f ; then
--		echo "Missing $f";
--		exit 1
--	fi
--	echo "#!/bin/sh
--/bin/sh $f \"\$@\" --srcdir=$e
--" >db/configure
--	chmod a+x db/configure
- fi
- AC_SUBST(USE_GDBM)dnl
- AC_SUBST(USE_GDBM_LIB)dnl
-@@ -382,38 +324,11 @@
- AC_MSG_RESULT($FILTER_DIR)
- AC_SUBST(FILTER_DIR)
- 
--dnl default strip binaries 
--AC_MSG_CHECKING(disable stripped binaries)
--AC_ARG_ENABLE( strip,
--[  --disable-strip                   disable stripping binaries by default],
--[v=no; STRIP=""; ],
--[v=yes;  STRIP="-s"; ]
--)
--AC_MSG_RESULT($v)
--AC_SUBST(STRIP)
+-# loader for c programs
+-LDCC=@LDCC@
 -
--
- dnl ----------------------------------------------------------------------------
- dnl -----------   C compiler checks    -----------------------------------------
- AC_PROG_CC
- AC_PROG_CPP
+ # any libs that need to be used to get these programs to compile:
+ LIBS= @LIBS@
  
--if test "$ac_cv_prog_gcc" = yes; then
--	cat >conftest.c <<EOF
--#if __GNUC__ < 2 || (__GNUC__ == 2 && __GNUC_MINOR__ < 5)
--yes
--#endif
--EOF
--    if ${CC-cc} -E conftest.c | egrep yes >/dev/null 2>&1; then
--        gcc -v
--		echo "WARNING: gcc -O (version 2.4.5 and below) produces incorrect code"
--		echo "  for lpd.c and other large routines. Update your GCC compiler"
--		exit 1
--	fi;
--fi;
--
--LDCC="$CC"
--
- dnl ----------------------------------------------------------------------------
- dnl ------------   OS Checks  --------------------------------------------------
- AC_ISC_POSIX
-@@ -1359,38 +1274,9 @@
- SHELL=/bin/sh
- AC_MSG_RESULT(using $SHELL (FORCED))
+@@ -74,8 +72,6 @@
  
-+ALL_LINGUAS="fr"
- AM_GNU_GETTEXT
+ # install options
  
-- if test "${USE_NLS}" = yes; then
--   AC_MSG_CHECKING([Using NLS, localedir ${LOCALEDIR}, ])
--   if test "${USE_INCLUDED_LIBINTL}" = yes ; then
--	  AC_MSG_RESULT([using the local libintl installation])
--	  if test -f ${srcdir}/${nls_cv_header_libgt} ; then
--		INTLINCS='-I $(top_builddir)/intl'
--	  else
--		AC_MSG_RESULT([NLS enabled, local libintl support is needed, and])
--		AC_MSG_RESULT([ source code is not in the ${srcdir}/intl directory.])
--		AC_MSG_RESULT([ See ${srcdir}/ABOUT-NLS.LPRng in the LPRng distribution for details.])
--		exit 1;
--	  fi
--   else
--	  AC_MSG_RESULT([using -lintl])
--	  INTLLIBS=-lintl
--   fi
-- else
--   AC_MSG_RESULT([No NLS])
-- fi   
-- if test "${USE_NLS}" != yes -o "${USE_INCLUDED_LIBINTL}" != yes ; then
--	nls_cv_header_intl=
--	nls_cv_header_libgt=
-- fi
-- if test "$XGETTEXT" = "" ; then
--	 XGETTEXT=xgettext;
-- fi
-- AC_MSG_RESULT(using XGETTEXT $XGETTEXT)
-- AC_SUBST(INTLINCS)
-- AC_SUBST(INTLLIBS)
+-STRIP=@STRIP@
 -
- dnl ----------------------------------------------------------------------------
- dnl ----------------- END OF GENERAL CONFIGURATION   ---------------------------
+ CFLAGS:= \
+ 	-I${top_builddir} \
+ 	-I${SRC}/include -I${SRC}/common \
+@@ -93,7 +89,7 @@
+ 	-DCLEAR=\"@CLEAR@\"  \
+ 	-DUSERID=\"@USERID@\"  \
+ 	-DGROUPID=\"@GROUPID@\"  \
+-	-DLOCALEDIR=\"@LOCALEDIR@\"
++	-DLOCALEDIR=\"$(datadir)/locale\"
  
-@@ -1525,11 +1411,7 @@
- fi;
+ USER_OBJS := @USER_OBJS@
+ LDFLAGS   := @LDFLAGS@
+@@ -101,8 +97,6 @@
+ FILTER_DIR = @FILTER_DIR@
+ LPD_DIR    = @LPD_DIR@
+ 
+-STRIP      = @STRIP@
+-
+ #********************** End of configure modifiable settings ************
  
  
--if test "$USE_GDBM" != ""  ; then
--	AC_CONFIG_SUBDIRS( db )
--fi
- AC_OUTPUT(
--[
- Makefile
- HOWTO/Makefile
- TESTSUPPORT/Makefile
-@@ -1558,28 +1440,22 @@
- src/psbanner
- po/Makefile.in
- intl/Makefile
--],
--[
--for i in  \
--UTILS/LPRng.pm \
--UTILS/accounting.pl \
--UTILS/decode_args_with_perl \
--UTILS/decode_args_with_sh \
--UTILS/fixid \
--UTILS/fixupdate \
--UTILS/lpq_in_perl \
--UTILS/lpr_in_perl \
--UTILS/lprm_in_perl \
--UTILS/make_lpd_conf \
--UTILS/make_printcap_use \
--UTILS/makeinc \
--UTILS/read_conf \
--UTILS/remote_active \
--UTILS/test_read \
--UTILS/update_z.pl \
--; do chmod +x $i ; done
--]
--
-+UTILS/LPRng.pm
-+UTILS/accounting.pl
-+UTILS/decode_args_with_perl
-+UTILS/decode_args_with_sh
-+UTILS/fixid
-+UTILS/fixupdate
-+UTILS/lpq_in_perl
-+UTILS/lpr_in_perl
-+UTILS/lprm_in_perl
-+UTILS/make_lpd_conf
-+UTILS/make_printcap_use
-+UTILS/makeinc
-+UTILS/read_conf
-+UTILS/remote_active
-+UTILS/test_read
-+UTILS/update_z.pl
- )
+@@ -187,7 +181,7 @@
+ ########################################################################
  
- dnl ----------------------------------------------------------------------------
---- LPRng-3.7.5/Makefile.in.wiget	Mon Jan 15 22:27:47 2001
-+++ LPRng-3.7.5/Makefile.in	Tue Oct  9 14:53:45 2001
-@@ -44,7 +44,6 @@
- LOCKFILE=\"@LOCKFILE@\"
- PSHOWALL="@PSHOWALL@"
- FILTER_DIR=@FILTER_DIR@
--LOCALEDIR=@LOCALEDIR@
- INIT=@INIT@
- USE_NLS=@USE_NLS@
- USE_GDBM=@USE_GDBM@
-@@ -58,7 +57,7 @@
- # ALLDIRS for other such as documentation
- #=============================================================================
+ .SUFFIXES: .lo
+-LINK =  $(LIBTOOL) --mode=link $(LDCC) $(LDFLAGS) -o $@
++LINK =  $(LIBTOOL) --mode=link $(CC) -o $@
+ .c.lo:
+ 	$(LIBTOOL) --mode=compile $(CC) $(CFLAGS) -c $<
  
--DIRS= UTILS ${USE_GDBM_BUILD_DIR} intl src po man
-+DIRS= UTILS intl src po man
- INSTALLDIRS= UTILS intl src po man
- FILES=./postinstall ./preremove ./postremove ./lpd.conf
- ALLDIRS= ${DIRS} ${SRC}/TESTSUPPORT ${SRC}/HOWTO ${SRC}/DISTRIBUTIONS
-@@ -113,7 +112,7 @@
- ###############################################################################
- $(ALLDIRS): FRC
- 	if [ "$@" != po -o "$(USE_NLS)" != "no" ] ; then \
--		cd $@; $(MAKE) localedir=${DESTDIR}${LOCALEDIR} \
-+		cd $@; $(MAKE) \
- 			DESTDIR=$(DESTDIR) $(MAKETARGET) ; \
- 	fi
+@@ -249,25 +243,25 @@
+ 	$(LINK) $(LIBLPR_OBJS) -rpath ${libdir}
  
+ lpd: $(LPD_OBJS) liblpr.la
+-	$(LINK) ${LPD_OBJS} liblpr.la $(LIBS)
++	$(LINK) $(LDFLAGS) ${LPD_OBJS} liblpr.la $(LIBS)
+ lpr: $(LPR_OBJS) liblpr.la
+-	$(LINK) ${LPR_OBJS} liblpr.la $(LIBS)
++	$(LINK) $(LDFLAGS) ${LPR_OBJS} liblpr.la $(LIBS)
+ lpq: $(LPQ_OBJS) liblpr.la
+-	$(LINK) ${LPQ_OBJS} liblpr.la $(LIBS)
++	$(LINK) $(LDFLAGS) ${LPQ_OBJS} liblpr.la $(LIBS)
+ lpstat: $(LPSTAT_OBJS) liblpr.la
+-	$(LINK) ${LPSTAT_OBJS} liblpr.la $(LIBS)
++	$(LINK) $(LDFLAGS) ${LPSTAT_OBJS} liblpr.la $(LIBS)
+ lprm: $(LPRM_OBJS) liblpr.la
+-	$(LINK) ${LPRM_OBJS} liblpr.la $(LIBS)
++	$(LINK) $(LDFLAGS) ${LPRM_OBJS} liblpr.la $(LIBS)
+ lpc: $(LPC_OBJS) liblpr.la
+-	$(LINK) ${LPC_OBJS} liblpr.la $(LIBS)
++	$(LINK) $(LDFLAGS) ${LPC_OBJS} liblpr.la $(LIBS)
+ checkpc: $(CHECKPC_OBJS) liblpr.la
+-	$(LINK) ${CHECKPC_OBJS} liblpr.la $(LIBS)
++	$(LINK) $(LDFLAGS) ${CHECKPC_OBJS} liblpr.la $(LIBS)
+ lpf: $(LPF_OBJS)
+-	$(LINK) ${LPF_OBJS} $(LIBS)
++	$(LINK) $(LDFLAGS) ${LPF_OBJS} $(LIBS)
+ lpbanner: $(LPBANNER_OBJS)
+-	$(LINK) ${LPBANNER_OBJS} $(LIBS)
++	$(LINK) $(LDFLAGS) ${LPBANNER_OBJS} $(LIBS)
+ monitor: $(MONITOR_OBJS) liblpr.la
+-	$(LINK) ${MONITOR_OBJS} liblpr.la $(LIBS)
++	$(LINK) $(LDFLAGS) ${MONITOR_OBJS} liblpr.la $(LIBS)
+ 
+ authenticate_pgp: ${SRC}/AUTHENTICATE/authenticate_pgp.sh
+ 	rm -f $@; cp ${SRC}/AUTHENTICATE/authenticate_pgp.sh $@; chmod 555 $@
+@@ -313,17 +307,17 @@
+ 	done;
+ 
+ 	${LIBTOOL} --mode=install $(INSTALLCMD) liblpr.la $(DESTDIR)$(libdir)/liblpr.la
+-	${LIBTOOL} --mode=install ${INSTALLCMD} ${STRIP} -m $(@PERMS@) lpq ${DESTDIR}${bindir}
+-	${LIBTOOL} --mode=install ${INSTALLCMD} ${STRIP} -m $(@PERMS@) lprm ${DESTDIR}${bindir}
+-	${LIBTOOL} --mode=install ${INSTALLCMD} ${STRIP} -m $(@PERMS@) lpr ${DESTDIR}${bindir}
+-	${LIBTOOL} --mode=install ${INSTALLCMD} ${STRIP} -m $(@PERMS@) lpstat ${DESTDIR}${bindir}
+-	${LIBTOOL} --mode=install ${INSTALLCMD} ${STRIP} -m $(@PERMS@) lpc ${DESTDIR}${sbindir}
+-	${LIBTOOL} --mode=install ${INSTALLCMD} ${STRIP} -m $(NORM_PERMS) lpd ${DESTDIR}${LPD_DIR}
+-	${LIBTOOL} --mode=install ${INSTALLCMD} ${STRIP} -m $(NORM_PERMS) lpf ${DESTDIR}${FILTER_DIR}
+-	${LIBTOOL} --mode=install ${INSTALLCMD} ${STRIP} -m $(NORM_PERMS) lpbanner ${DESTDIR}${FILTER_DIR}
+-	${LIBTOOL} --mode=install ${INSTALLCMD}    -m $(NORM_PERMS) pclbanner ${DESTDIR}${FILTER_DIR}
+-	${LIBTOOL} --mode=install ${INSTALLCMD}    -m $(NORM_PERMS) psbanner ${DESTDIR}${FILTER_DIR}
+-	${LIBTOOL} --mode=install ${INSTALLCMD} ${STRIP} -m $(NORM_PERMS) checkpc ${DESTDIR}${sbindir}
++	${LIBTOOL} --mode=install ${INSTALLCMD} -m $(@PERMS@) lpq ${DESTDIR}${bindir}
++	${LIBTOOL} --mode=install ${INSTALLCMD} -m $(@PERMS@) lprm ${DESTDIR}${bindir}
++	${LIBTOOL} --mode=install ${INSTALLCMD} -m $(@PERMS@) lpr ${DESTDIR}${bindir}
++	${LIBTOOL} --mode=install ${INSTALLCMD} -m $(@PERMS@) lpstat ${DESTDIR}${bindir}
++	${LIBTOOL} --mode=install ${INSTALLCMD} -m $(@PERMS@) lpc ${DESTDIR}${sbindir}
++	${LIBTOOL} --mode=install ${INSTALLCMD} -m $(NORM_PERMS) lpd ${DESTDIR}${LPD_DIR}
++	${LIBTOOL} --mode=install ${INSTALLCMD} -m $(NORM_PERMS) lpf ${DESTDIR}${FILTER_DIR}
++	${LIBTOOL} --mode=install ${INSTALLCMD} -m $(NORM_PERMS) lpbanner ${DESTDIR}${FILTER_DIR}
++	${LIBTOOL} --mode=install ${INSTALLCMD} -m $(NORM_PERMS) pclbanner ${DESTDIR}${FILTER_DIR}
++	${LIBTOOL} --mode=install ${INSTALLCMD} -m $(NORM_PERMS) psbanner ${DESTDIR}${FILTER_DIR}
++	${LIBTOOL} --mode=install ${INSTALLCMD} -m $(NORM_PERMS) checkpc ${DESTDIR}${sbindir}
+ 	cd ${DESTDIR}${bindir}; rm -f lp cancel; ln -s lpr lp; ln -s lprm cancel;
+ 
+ uninstall:
