@@ -4,8 +4,9 @@ Name:		LPRng
 Version:	3.7.4
 Release:	25
 License:	GPL
-Group:		Utilities/System
-Group(pl):	Narzêdzia/System
+Group:		Applications/System
+Group(de):	Applikationen/System
+Group(pl):	Aplikacje/System
 Source0:	ftp://ftp.astart.com/pub/LPRng/LPRng/%{name}-%{version}.tgz
 Source1:	%{name}.init
 Source2:	%{name}.conf
@@ -15,7 +16,7 @@ Patch2:		%{name}-inet_ntop.patch
 Patch3:		%{name}-direct.patch
 Patch4:		%{name}-manpage.patch
 Patch5:		%{name}-shutdown.patch
-Patch6: 	%{name}-lockfile.patch
+Patch6:		%{name}-lockfile.patch
 Patch7:		%{name}-setgroups.patch
 BuildRequires:	autoconf
 BuildRequires:	gettext-devel
