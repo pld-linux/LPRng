@@ -15,7 +15,7 @@ URL:		http://www.astart.com/lprng/LPRng.html
 BuildRequires:	ncurses-devel >= 5.0
 Provides:	lpr
 Obsoletes:	lpr
-BuildRoot:	/tmp/%{name}-%{version}-root
+BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %define		_libdir		%{_sbindir}
 %define		_sysconfdir	/etc
