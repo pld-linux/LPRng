@@ -6,7 +6,7 @@ Summary(uk):	Спулер друку LPRng
 Summary(zh_CN):	LPRng--╢Рс║ЁлпР
 Name:		LPRng
 Version:	3.8.1
-Release:	4
+Release:	5
 License:	GPL
 Group:		Applications/System
 Source0:	ftp://ftp.astart.com/pub/LPRng/LPRng/%{name}-%{version}.tgz
@@ -19,6 +19,8 @@ Patch1:		%{name}-ac_fixes.patch
 Patch2:		%{name}-manpage.patch
 Patch3:		%{name}-shutdown.patch
 Patch4:		%{name}-nproc-unlimited.patch
+Patch5:		%{name}-lpd-perms.patch
+PAtch6:		%{name}-pr.patch
 URL:		http://www.astart.com/lprng/LPRng.html
 BuildRequires:	autoconf
 BuildRequires:	automake
@@ -156,13 +158,16 @@ Support та аутентикац╕ю PGP. LPRng прийнято за стандарт в MIT для
 %patch2 -p1
 %patch3 -p1
 %patch4 -p1
+%patch5 -p1
+%patch6 -p1
 
 %build
 rm -f missing acinclude.m4
 gettextize --copy --force
-libtoolize --copy --force
+%{__libtoolize}
 aclocal
 %{__autoconf}
+cp -f /usr/share/automake/{config.,missing}* .
 PSHOWALL="-ax"; export PSHOWALL
 %configure \
 	--disable-setuid \
