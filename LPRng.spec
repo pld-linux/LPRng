@@ -110,10 +110,10 @@ gzip -9nf CHANGES CONTRIBUTORS README* TESTSUPPORT/*
 %find_lang %{name}
 
 %post
-NAME=lpd; DESC="LPRng lpd daemon"; %chkconfig_post
+NAME=lpd; DESC="LPRng lpd daemon"; %chkconfig_add
 
 %preun
-NAME=lpd; %chkconfig_preun
+NAME=lpd; %chkconfig_del
 
 %clean
 rm -rf $RPM_BUILD_ROOT
