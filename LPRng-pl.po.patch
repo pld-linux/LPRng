@@ -9,20 +9,21 @@
  
  if test -z "$LOCALEDIR" ; then
      LOCALEDIR='${prefix}/share/locale'
---- LPRng-3.8.25/po/pl.po.orig	1970-01-01 01:00:00.000000000 +0100
-+++ LPRng-3.8.25/po/pl.po	2004-02-22 19:26:59.722148008 +0100
-@@ -0,0 +1,2285 @@
+--- LPRng-3.8.26/po/pl.po.orig	1970-01-01 01:00:00.000000000 +0100
++++ LPRng-3.8.26/po/pl.po	2004-03-07 20:34:51.480995728 +0100
+@@ -0,0 +1,2331 @@
 +# Polish translation for LPRng.
++# This file is distributed under the same license as the LPRng package.
 +# Jakub Bogusz <qboosh@pld-linux.org>, 2002-2004.
 +#
 +#: src/common/lpc.c:276 src/common/lpc.c:441 src/common/lpq.c:530
 +msgid ""
 +msgstr ""
-+"Project-Id-Version: LPRng 3.8.25\n"
-+"POT-Creation-Date: 2004-02-22 19:21+0100\n"
-+"PO-Revision-Date: 2004-02-22 19:24+0100\n"
++"Project-Id-Version: LPRng 3.8.26\n"
++"POT-Creation-Date: 2004-03-07 20:22+0100\n"
++"PO-Revision-Date: 2004-03-07 20:24+0100\n"
 +"Last-Translator: Jakub Bogusz <qboosh@pld-linux.org>\n"
-+"Language-Team: Polish <pl@li.org>\n"
++"Language-Team: Polish <translation-team-pl@lists.sourceforge.net>\n"
 +"MIME-Version: 1.0\n"
 +"Content-Type: text/plain; charset=ISO-8859-2\n"
 +"Content-Transfer-Encoding: 8bit\n"
@@ -496,50 +497,50 @@
 +msgid "cannot open or lock lockfile - %s"
 +msgstr "nie mo¿na otworzyæ lub zablokowaæ pliku blokuj±cego - %s"
 +
-+#: src/common/lpd.c:262
++#: src/common/lpd.c:261
 +msgid "lpd: main() dofork failed"
 +msgstr "lpd: main() dofork nie powiod³o siê"
 +
-+#: src/common/lpd.c:307 src/common/lpd.c:318
++#: src/common/lpd.c:306 src/common/lpd.c:317
 +msgid "lpd: pipe call failed"
 +msgstr "lpd: wywo³anie pipe nie powiod³o siê"
 +
-+#: src/common/lpd.c:325
++#: src/common/lpd.c:324
 +msgid "lpd: cannot start initial logger process"
 +msgstr "lpd: nie mo¿na uruchomiæ pocz±tkowego procesu loguj±cego"
 +
-+#: src/common/lpd.c:607
++#: src/common/lpd.c:606
 +msgid "lpd: select error!"
 +msgstr "lpd: b³±d select!"
 +
-+#: src/common/lpd.c:632
++#: src/common/lpd.c:631
 +msgid "lpd: Lpd_request pipe EOF! cannot happen"
 +msgstr "lpd: EOF potoku w Lpd_request! niemo¿liwe"
 +
-+#: src/common/lpd.c:658 src/common/lpd.c:661
++#: src/common/lpd.c:657 src/common/lpd.c:660
 +msgid "Setup_log: open /dev/null failed"
 +msgstr "Setup_log: otwarcie /dev/null nie powiod³o siê"
 +
-+#: src/common/lpd.c:668 src/common/lpd.c:672
++#: src/common/lpd.c:667 src/common/lpd.c:671
 +#, c-format
 +msgid "Setup_log: dup2(%d,%d) failed"
 +msgstr "Setup_log: dup2(%d,%d) nie powiod³o siê"
 +
-+#: src/common/lpd.c:677
++#: src/common/lpd.c:676
 +#, c-format
 +msgid "Setup_log: open %s failed"
 +msgstr "Setup_log: otwarcie %s nie powiod³o siê"
 +
-+#: src/common/lpd.c:721
++#: src/common/lpd.c:720
 +msgid "lpd: Cannot truncate lock file"
 +msgstr "lpd: Nie mo¿na skróciæ pliku blokuj±cego"
 +
-+#: src/common/lpd.c:739
++#: src/common/lpd.c:738
 +#, c-format
 +msgid "lpd: Cannot open lock file '%s'"
 +msgstr "lpd: Nie mo¿na otworzyæ pliku blokuj±cego '%s'"
 +
-+#: src/common/lpd.c:819
++#: src/common/lpd.c:818
 +#, c-format
 +msgid ""
 +"usage: %s [-FV][-D dbg][-L log][-P path][-p port][-R remote LPD TCP/IP "
@@ -548,27 +549,27 @@
 +"sk³adnia: %s [-FV] [-D dbg][-L log][-P gniazdo][-p port][-R port TCP/IP "
 +"zdalnego LPD]\n"
 +
-+#: src/common/lpd.c:820
++#: src/common/lpd.c:819
 +msgid " Options\n"
 +msgstr " Opcje\n"
 +
-+#: src/common/lpd.c:821
++#: src/common/lpd.c:820
 +msgid " -D dbg      - set debug level and flags\n"
 +msgstr " -D dbg      - ustawienie poziomu i flag ¶ledzenia\n"
 +
-+#: src/common/lpd.c:822
++#: src/common/lpd.c:821
 +msgid " -F          - run in foreground, log to STDERR\n"
 +msgstr " -F          - uruchomienie na pierwszym planie, logi na STDERR\n"
 +
-+#: src/common/lpd.c:823
++#: src/common/lpd.c:822
 +msgid " -L logfile  - append log information to logfile\n"
 +msgstr " -L plikloga - do³±czanie logowanych informacji do plikuloga\n"
 +
-+#: src/common/lpd.c:824
++#: src/common/lpd.c:823
 +msgid " -V          - show version info\n"
 +msgstr " -V          - pokazanie informacji o wersji\n"
 +
-+#: src/common/lpd.c:825
++#: src/common/lpd.c:824
 +msgid ""
 +" -p port     - TCP/IP listen port, 'off' disables TCP/IP listening port "
 +"(lpd_listen_port)\n"
@@ -576,7 +577,7 @@
 +" -p port     - port nas³uchuj±cy TCP/IP, 'off' wy³±cza nas³uch TCP/IP "
 +"(lpd_listen_port)\n"
 +
-+#: src/common/lpd.c:826
++#: src/common/lpd.c:825
 +msgid ""
 +" -P path     - UNIX socket path, 'off' disables UNIX listening socket "
 +"(unix_socket_path)\n"
@@ -584,19 +585,19 @@
 +" -P gniazdo  - ¶cie¿ka gniazda uniksowego, 'off' wy³±cza gniazdo "
 +"(unix_socket_path)\n"
 +
-+#: src/common/lpd.c:827
++#: src/common/lpd.c:826
 +msgid " -R port     - remote LPD server port (lpd_port)\n"
 +msgstr " -R port     - port zdalnego serwera LPD (lpd_port)\n"
 +
-+#: src/common/lpd.c:921
++#: src/common/lpd.c:920
 +msgid "lpd: fork() failed"
 +msgstr "lpd: fork() nie powiod³o siê"
 +
-+#: src/common/lpd.c:932
++#: src/common/lpd.c:931
 +msgid "lpd: accept on listening socket failed"
 +msgstr "lpd: accept na gnie¼dzie s³uchaj±cym nie powiod³o siê"
 +
-+#: src/common/lpd.c:951
++#: src/common/lpd.c:950
 +msgid "Start_all: pipe failed!"
 +msgstr "Start_all: pipe nie powiod³o siê!"
 +
@@ -860,7 +861,8 @@
 +#: src/common/lpd_jobs.c:1658
 +#, c-format
 +msgid "Wait_for_subserver: LOGIC ERROR! waiting for pid %d failed"
-+msgstr "Wait_for_subserver: B£¡D LOGIKI! oczekiwanie na pid %d nie powiod³o siê"
++msgstr ""
++"Wait_for_subserver: B£¡D LOGIKI! oczekiwanie na pid %d nie powiod³o siê"
 +
 +#: src/common/lpd_jobs.c:1683
 +msgid "succ"
@@ -2216,56 +2218,100 @@
 +
 +#: src/common/lpstat.c:587
 +#, c-format
-+msgid ""
-+"usage: %s [-A] [-d] [-l] [-r] [-R] [-s] [-t] [-a [list]]\n"
-+"  [-c [list]] [-f [list]] [-o [list]]\n"
-+"  [-p [list]] [-P] [-S [list]] [list]\n"
-+"  [-u [login-ID-list]] [-v [list]] [-V] [-n] [-Tdbgflags]\n"
-+" list is a list of print queues\n"
-+" -A        use authentication specified by AUTH environment variable\n"
-+" -a [list] destination status *\n"
-+" -c [list] class status *\n"
-+" -d        print default destination\n"
-+" -f [list] forms status *\n"
-+" -o [list] job or printer status *\n"
-+" -n        each -n increases number of status lines (default 1) *\n"
-+" -N        maximum number of status lines *\n"
-+" -p [list] printer status *\n"
-+" -P        paper types - ignored\n"
-+" -r        scheduler status\n"
-+" -s        summary status information - short format\n"
-+" -S [list] character set - ignored\n"
-+" -t        all status information - long format\n"
-+" -u [joblist] job status information\n"
-+" -v [list] printer mapping *\n"
-+" -V        verbose mode \n"
-+" -Tdbgflags debug flags\n"
-+"    * - long status format produced\n"
-+msgstr ""
-+"sk³adnia: %s [-A] [-d] [-l] [-r] [-R] [-s] [-t] [-a [lista]]\n"
-+"  [-c [lista]] [-f [lista]] [-o [lista]]\n"
-+"  [-p [lista]] [-P] [-S [lista]] [lista]\n"
-+"  [-u [lista-login-ID]] [-v [lista]] [-V] [-n] [-Topc¶ledz]\n"
-+" lista to lista kolejek wydruków\n"
-+" -A         u¿ycie uwierzytelnienia zgodnego ze zmienn± ¶rodowiskow± AUTH\n"
-+" -a [lista] stan dla celu *\n"
-+" -c [lista] stan dla klasy *\n"
-+" -d         wypisanie domy¶lnego celu\n"
-+" -f [lista] stan dla form *\n"
-+" -o [lista] stan dla zadania lub drukarki\n"
-+" -n         ka¿de -n zwiêksza liczbê linii stanu (domy¶lnie 1) *\n"
-+" -N         maksymalna liczba linii stanu *\n"
-+" -p [lista] stan dla drukarki *\n"
-+" -P         rodzaje papieru - ignorowane\n"
-+" -r         stan schedulera\n"
-+" -s         podsumowanie informacji o stanie - krótki format\n"
-+" -S [lista] zestaw znaków - ignorowany\n"
-+" -t         wszystkie informacje o stanie - d³ugi format\n"
-+" -u [lista-zadañ] informacje o stanie zadañ\n"
-+" -v [lista] przypisanie drukarki *\n"
-+" -V         tryb z du¿± ilo¶ci± informacji\n"
-+" -Topc¶ledz flagi ¶ledzenia\n"
-+"    * - stan wy¶wietlany jest w d³ugim formacie\n"
++msgid "usage: %s [-A] [-d] [-l] [-r] [-R] [-s] [-t] [-a [list]]\n"
++msgstr "sk³adnia: %s [-A] [-d] [-l] [-r] [-R] [-s] [-t] [-a [lista]]\n"
++
++#: src/common/lpstat.c:588
++msgid "  [-c [list]] [-f [list]] [-o [list]]\n"
++msgstr "  [-c [lista]] [-f [lista]] [-o [lista]]\n"
++
++#: src/common/lpstat.c:589
++msgid "  [-p [list]] [-P] [-S [list]] [list]\n"
++msgstr "  [-p [lista]] [-P] [-S [lista]] [lista]\n"
++
++#: src/common/lpstat.c:590
++msgid "  [-u [login-ID-list]] [-v [list]] [-V] [-n] [-Tdbgflags]\n"
++msgstr "  [-u [lista-login-ID]] [-v [lista]] [-V] [-n] [-Topc¶ledz]\n"
++
++#: src/common/lpstat.c:591
++msgid " list is a list of print queues\n"
++msgstr " lista to lista kolejek wydruków\n"
++
++#: src/common/lpstat.c:592
++msgid " -A        use authentication specified by AUTH environment variable\n"
++msgstr " -A         u¿ycie uwierzytelnienia zgodnego ze zmienn± ¶rodowiskow± AUTH\n"
++
++#: src/common/lpstat.c:593
++msgid " -a [list] destination status *\n"
++msgstr " -a [lista] stan dla celu *\n"
++
++#: src/common/lpstat.c:594
++msgid " -c [list] class status *\n"
++msgstr " -c [lista] stan dla klasy *\n"
++
++#: src/common/lpstat.c:595
++msgid " -d        print default destination\n"
++msgstr " -d         wypisanie domy¶lnego celu\n"
++
++#: src/common/lpstat.c:596
++msgid " -f [list] forms status *\n"
++msgstr " -f [lista] stan dla form *\n"
++
++#: src/common/lpstat.c:597
++msgid " -o [list] job or printer status *\n"
++msgstr " -o [lista] stan dla zadania lub drukarki\n"
++
++#: src/common/lpstat.c:598
++msgid " -n        each -n increases number of status lines (default 1) *\n"
++msgstr " -n         ka¿de -n zwiêksza liczbê linii stanu (domy¶lnie 1) *\n"
++
++#: src/common/lpstat.c:599
++msgid " -N        maximum number of status lines *\n"
++msgstr " -N         maksymalna liczba linii stanu *\n"
++
++#: src/common/lpstat.c:600
++msgid " -p [list] printer status *\n"
++msgstr " -p [lista] stan dla drukarki *\n"
++
++#: src/common/lpstat.c:601
++msgid " -P        paper types - ignored\n"
++msgstr " -P         rodzaje papieru - ignorowane\n"
++
++#: src/common/lpstat.c:602
++msgid " -r        scheduler status\n"
++msgstr " -r         stan schedulera\n"
++
++#: src/common/lpstat.c:603
++msgid " -s        summary status information - short format\n"
++msgstr " -s         podsumowanie informacji o stanie - krótki format\n"
++
++#: src/common/lpstat.c:604
++msgid " -S [list] character set - ignored\n"
++msgstr " -S [lista] zestaw znaków - ignorowany\n"
++
++#: src/common/lpstat.c:605
++msgid " -t        all status information - long format\n"
++msgstr " -t         wszystkie informacje o stanie - d³ugi format\n"
++
++#: src/common/lpstat.c:606
++msgid " -u [joblist] job status information\n"
++msgstr " -u [lista-zadañ] informacje o stanie zadañ\n"
++
++#: src/common/lpstat.c:607
++msgid " -v [list] printer mapping *\n"
++msgstr " -v [lista] przypisanie drukarki *\n"
++
++#: src/common/lpstat.c:608
++msgid " -V        verbose mode \n"
++msgstr " -V         tryb z du¿± ilo¶ci± informacji\n"
++
++#: src/common/lpstat.c:609
++msgid " -Tdbgflags debug flags\n"
++msgstr " -Topc¶ledz flagi ¶ledzenia\n"
++
++#: src/common/lpstat.c:610
++msgid "    * - long status format produced\n"
++msgstr "    * - stan wy¶wietlany jest w d³ugim formacie\n"
 +
 +#: src/common/sendjob.c:167
 +#, c-format

@@ -1,5 +1,5 @@
---- LPRng-3.8.15/src/common/lpstat.c.orig	Mon Aug 12 02:01:45 2002
-+++ LPRng-3.8.15/src/common/lpstat.c	Fri Dec 27 16:57:53 2002
+--- LPRng-3.8.26/src/common/lpstat.c.orig	2004-02-24 20:37:34.000000000 +0100
++++ LPRng-3.8.26/src/common/lpstat.c	2004-03-07 20:15:44.259399920 +0100
 @@ -113,7 +113,7 @@
  	Setup_configuration();
  	Get_parms(argc, argv );      /* scan input args */
@@ -75,30 +75,70 @@
  									RemotePrinter_DYN, RemoteHost_DYN ); 
  						if( Write_fd_str( output, msg ) < 0 ) return(1);
  					}
-@@ -584,7 +584,7 @@
+@@ -584,30 +584,30 @@
  }
  
-  char *lpstat_msg =
--"usage: %s [-A] [-d] [-l] [-r] [-R] [-s] [-t] [-a [list]]\n\
-+N_("usage: %s [-A] [-d] [-l] [-r] [-R] [-s] [-t] [-a [list]]\n\
-   [-c [list]] [-f [list]] [-o [list]]\n\
-   [-p [list]] [-P] [-S [list]] [list]\n\
-   [-u [login-ID-list]] [-v [list]] [-V] [-n] [-Tdbgflags]\n\
-@@ -607,12 +607,12 @@
-  -v [list] printer mapping *\n\
-  -V        verbose mode \n\
-  -Tdbgflags debug flags\n\
--    * - long status format produced\n";
-+    * - long status format produced\n");
+  static char *lpstat_msg[] = {
+-	"usage: %s [-A] [-d] [-l] [-r] [-R] [-s] [-t] [-a [list]]\n",
+-	"  [-c [list]] [-f [list]] [-o [list]]\n",
+-	"  [-p [list]] [-P] [-S [list]] [list]\n",
+-	"  [-u [login-ID-list]] [-v [list]] [-V] [-n] [-Tdbgflags]\n",
+-	" list is a list of print queues\n",
+-	" -A        use authentication specified by AUTH environment variable\n",
+-	" -a [list] destination status *\n",
+-	" -c [list] class status *\n",
+-	" -d        print default destination\n",
+-	" -f [list] forms status *\n",
+-	" -o [list] job or printer status *\n",
+-	" -n        each -n increases number of status lines (default 1) *\n",
+-	" -N        maximum number of status lines *\n",
+-	" -p [list] printer status *\n",
+-	" -P        paper types - ignored\n",
+-	" -r        scheduler status\n",
+-	" -s        summary status information - short format\n",
+-	" -S [list] character set - ignored\n",
+-	" -t        all status information - long format\n",
+-	" -u [joblist] job status information\n",
+-	" -v [list] printer mapping *\n",
+-	" -V        verbose mode \n",
+-	" -Tdbgflags debug flags\n",
+-	"    * - long status format produced\n",
++	N_("usage: %s [-A] [-d] [-l] [-r] [-R] [-s] [-t] [-a [list]]\n"),
++	N_("  [-c [list]] [-f [list]] [-o [list]]\n"),
++	N_("  [-p [list]] [-P] [-S [list]] [list]\n"),
++	N_("  [-u [login-ID-list]] [-v [list]] [-V] [-n] [-Tdbgflags]\n"),
++	N_(" list is a list of print queues\n"),
++	N_(" -A        use authentication specified by AUTH environment variable\n"),
++	N_(" -a [list] destination status *\n"),
++	N_(" -c [list] class status *\n"),
++	N_(" -d        print default destination\n"),
++	N_(" -f [list] forms status *\n"),
++	N_(" -o [list] job or printer status *\n"),
++	N_(" -n        each -n increases number of status lines (default 1) *\n"),
++	N_(" -N        maximum number of status lines *\n"),
++	N_(" -p [list] printer status *\n"),
++	N_(" -P        paper types - ignored\n"),
++	N_(" -r        scheduler status\n"),
++	N_(" -s        summary status information - short format\n"),
++	N_(" -S [list] character set - ignored\n"),
++	N_(" -t        all status information - long format\n"),
++	N_(" -u [joblist] job status information\n"),
++	N_(" -v [list] printer mapping *\n"),
++	N_(" -V        verbose mode \n"),
++	N_(" -Tdbgflags debug flags\n"),
++	N_("    * - long status format produced\n"),
+ 	0 };
  
  
- void usage(void)
+@@ -615,7 +615,7 @@
  {
--	FPRINTF( STDERR, lpstat_msg, Name );
-+	FPRINTF( STDERR, _(lpstat_msg), Name );
+ 	char **sptr, *s;
+ 	for( sptr= lpstat_msg; (s = *sptr); ++sptr ){
+-			FPRINTF( STDERR, s, Name );
++			FPRINTF( STDERR, _(s), Name );
+ 	}
  	Parse_debug("=",-1);
  	FPRINTF( STDOUT, "%s\n", Version );
- 	exit(1);
 --- LPRng-3.8.15/src/common/getopt.c.orig	Mon Aug 12 02:01:44 2002
 +++ LPRng-3.8.15/src/common/getopt.c	Fri Dec 27 17:02:40 2002
 @@ -89,7 +89,7 @@
