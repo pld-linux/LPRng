@@ -1,17 +1,17 @@
-diff -Nru LPRng-3.6.8/configure.in LPRng-3.6.8.new/configure.in
---- LPRng-3.6.8/configure.in	Sat Aug 28 03:37:51 1999
-+++ LPRng-3.6.8.new/configure.in	Mon Aug 30 01:16:28 1999
-@@ -1213,7 +1213,6 @@
+diff -Nru LPRng-3.6.12/configure.in LPRng-3.6.12.new/configure.in
+--- LPRng-3.6.12/configure.in	Thu Oct 28 03:30:07 1999
++++ LPRng-3.6.12.new/configure.in	Thu Nov 25 07:41:16 1999
+@@ -1255,7 +1255,6 @@
  
  dnl ----------------- Option for enabling GNU gettext --------------------
  AM_GNU_GETTEXT
 -test "$USE_NLS" = yes && LIBS="$LIBS -lintl"
  
  dnl ----------------- GCC Compilation ----------------------------------
- AC_OUTPUT(Makefile
-diff -Nru LPRng-3.6.8/man/Makefile.in LPRng-3.6.8.new/man/Makefile.in
---- LPRng-3.6.8/man/Makefile.in	Sat Aug 28 03:38:57 1999
-+++ LPRng-3.6.8.new/man/Makefile.in	Mon Aug 30 01:17:50 1999
+ AC_OUTPUT(
+diff -Nru LPRng-3.6.12/man/Makefile.in LPRng-3.6.12.new/man/Makefile.in
+--- LPRng-3.6.12/man/Makefile.in	Thu Nov 25 07:47:59 1999
++++ LPRng-3.6.12.new/man/Makefile.in	Thu Nov 25 07:41:16 1999
 @@ -21,9 +21,9 @@
  MANEXT =	
  
@@ -61,9 +61,9 @@ diff -Nru LPRng-3.6.8/man/Makefile.in LPRng-3.6.8.new/man/Makefile.in
  	
  realclean mostlyclean distclean:: clean
  	rm -f Makefile
-diff -Nru LPRng-3.6.8/src/Makefile.in LPRng-3.6.8.new/src/Makefile.in
---- LPRng-3.6.8/src/Makefile.in	Sat Aug 28 03:37:56 1999
-+++ LPRng-3.6.8.new/src/Makefile.in	Mon Aug 30 01:20:19 1999
+diff -Nru LPRng-3.6.12/src/Makefile.in LPRng-3.6.12.new/src/Makefile.in
+--- LPRng-3.6.12/src/Makefile.in	Thu Oct 28 03:30:11 1999
++++ LPRng-3.6.12.new/src/Makefile.in	Thu Nov 25 07:44:08 1999
 @@ -57,17 +57,17 @@
  
  ### PATHS ####
@@ -88,7 +88,7 @@ diff -Nru LPRng-3.6.8/src/Makefile.in LPRng-3.6.8.new/src/Makefile.in
  # locale
  localedir = $(prefix)/@DATADIRNAME@/locale
  
-@@ -371,29 +371,29 @@
+@@ -399,29 +399,29 @@
  
  install: all
  	echo "SETUID_ROOT IS ${PERMS}, PERMS $(ROOT_PERMS)";
@@ -97,42 +97,42 @@ diff -Nru LPRng-3.6.8/src/Makefile.in LPRng-3.6.8.new/src/Makefile.in
  	  if [ ! -d $$i ] ; then ${SRC}/mkinstalldirs $$i ; fi; \
  	done;
  
--	${INSTALLCMD} -s -m $(ROOT_PERMS) lpq ${bindir}
--	${INSTALLCMD} -s -m $(ROOT_PERMS) lprm ${bindir}
--	${INSTALLCMD} -s -m $(ROOT_PERMS) lpr ${bindir}
--	${INSTALLCMD} -s -m $(ROOT_PERMS) lpstat ${bindir}
--	${INSTALLCMD} -s -m $(ROOT_PERMS) lpc ${sbindir}
--	${INSTALLCMD} -s -m $(ROOT_PERMS) lpd ${LPD_DIR}
--	${INSTALLCMD} -s -m $(NORM_PERMS) lpf ${FILTER_DIR}
--	${INSTALLCMD} -s -m $(NORM_PERMS) lpbanner ${FILTER_DIR}
+-	${INSTALLCMD} ${STRIP} -m $(ROOT_PERMS) lpq ${bindir}
+-	${INSTALLCMD} ${STRIP} -m $(ROOT_PERMS) lprm ${bindir}
+-	${INSTALLCMD} ${STRIP} -m $(ROOT_PERMS) lpr ${bindir}
+-	${INSTALLCMD} ${STRIP} -m $(ROOT_PERMS) lpstat ${bindir}
+-	${INSTALLCMD} ${STRIP} -m $(ROOT_PERMS) lpc ${sbindir}
+-	${INSTALLCMD} ${STRIP} -m $(ROOT_PERMS) lpd ${LPD_DIR}
+-	${INSTALLCMD} ${STRIP} -m $(NORM_PERMS) lpf ${FILTER_DIR}
+-	${INSTALLCMD} ${STRIP} -m $(NORM_PERMS) lpbanner ${FILTER_DIR}
 -	${INSTALLCMD}    -m $(NORM_PERMS) pclbanner ${FILTER_DIR}
 -	${INSTALLCMD}    -m $(NORM_PERMS) psbanner ${FILTER_DIR}
--	${INSTALLCMD} -s -m $(NORM_PERMS) checkpc ${sbindir}
--	${INSTALLCMD} -s -m $(NORM_PERMS) lpraccnt ${sbindir}
--	cd ${bindir}; rm -f lp cancel; ln -s lpr lp; ln -s lprm cancel;
-+	${INSTALLCMD} -s -m $(ROOT_PERMS) lpq $(DESTDIR)$(bindir)
-+	${INSTALLCMD} -s -m $(ROOT_PERMS) lprm $(DESTDIR)$(bindir)
-+	${INSTALLCMD} -s -m $(ROOT_PERMS) lpr $(DESTDIR)$(bindir)
-+	${INSTALLCMD} -s -m $(ROOT_PERMS) lpstat $(DESTDIR)$(bindir)
-+	${INSTALLCMD} -s -m $(ROOT_PERMS) lpc $(DESTDIR)$(sbindir)
-+	${INSTALLCMD} -s -m $(ROOT_PERMS) lpd $(DESTDIR)$(LPD_DIR)
-+	${INSTALLCMD} -s -m $(NORM_PERMS) lpf $(DESTDIR)$(FILTER_DIR)
-+	${INSTALLCMD} -s -m $(NORM_PERMS) lpbanner $(DESTDIR)$(FILTER_DIR)
+-	${INSTALLCMD} ${STRIP} -m $(NORM_PERMS) checkpc ${sbindir}
+-	${INSTALLCMD} ${STRIP} -m $(NORM_PERMS) lpraccnt ${sbindir}
+-	cd ${bindir}; rm -f lp cancel; ln ${STRIP} lpr lp; ln -s lprm cancel;
++	${INSTALLCMD} ${STRIP} -m $(ROOT_PERMS) lpq $(DESTDIR)$(bindir)
++	${INSTALLCMD} ${STRIP} -m $(ROOT_PERMS) lprm $(DESTDIR)$(bindir)
++	${INSTALLCMD} ${STRIP} -m $(ROOT_PERMS) lpr $(DESTDIR)$(bindir)
++	${INSTALLCMD} ${STRIP} -m $(ROOT_PERMS) lpstat $(DESTDIR)$(bindir)
++	${INSTALLCMD} ${STRIP} -m $(ROOT_PERMS) lpc $(DESTDIR)$(sbindir)
++	${INSTALLCMD} ${STRIP} -m $(ROOT_PERMS) lpd $(DESTDIR)$(LPD_DIR)
++	${INSTALLCMD} ${STRIP} -m $(NORM_PERMS) lpf $(DESTDIR)$(FILTER_DIR)
++	${INSTALLCMD} ${STRIP} -m $(NORM_PERMS) lpbanner $(DESTDIR)$(FILTER_DIR)
 +	${INSTALLCMD}    -m $(NORM_PERMS) pclbanner $(DESTDIR)$(FILTER_DIR)
 +	${INSTALLCMD}    -m $(NORM_PERMS) psbanner $(DESTDIR)$(FILTER_DIR)
-+	${INSTALLCMD} -s -m $(NORM_PERMS) checkpc $(DESTDIR)$(sbindir)
-+	${INSTALLCMD} -s -m $(NORM_PERMS) lpraccnt $(DESTDIR)$(sbindir)
-+	cd $(DESTDIR)$(bindir); rm -f lp cancel; ln -s lpr lp; ln -s lprm cancel;
++	${INSTALLCMD} ${STRIP} -m $(NORM_PERMS) checkpc $(DESTDIR)$(sbindir)
++	${INSTALLCMD} ${STRIP} -m $(NORM_PERMS) lpraccnt $(DESTDIR)$(sbindir)
++	cd $(DESTDIR)$(bindir); rm -f lp cancel; ln ${STRIP} lpr lp; ln -s lprm cancel;
  
  uninstall:
 -	rm -f ${LPD_DIR}/lpd
 -	cd ${FILTER_DIR}; rm -f lpf lpbanner pclbanner psbanner
 -	cd ${bindir}; rm -f lp lpq lpstat lpr lp cancel;
 -	cd ${sbindir}; rm -f lpc checkpc lpraccnt;
-+	rm -f $(LPD_DIR)/lpd
-+	cd $(FILTER_DIR); rm -f lpf lpbanner pclbanner psbanner
-+	cd $(bindir); rm -f lp lpq lpstat lpr lp cancel;
-+	cd $(sbindir); rm -f lpc checkpc lpraccnt;
++	rm -f $(DESTDIR)$(LPD_DIR)/lpd
++	cd $(DESTDIR)$(FILTER_DIR); rm -f lpf lpbanner pclbanner psbanner
++	cd $(DESTDIR)$(bindir); rm -f lp lpq lpstat lpr lp cancel;
++	cd $(DESTDIR)$(sbindir); rm -f lpc checkpc lpraccnt;
  
  
  ###########################################################################
