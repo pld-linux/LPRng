@@ -1,0 +1,147 @@
+--- LPRng-3.8.15/src/common/lpstat.c.orig	Mon Aug 12 02:01:45 2002
++++ LPRng-3.8.15/src/common/lpstat.c	Fri Dec 27 16:57:53 2002
+@@ -113,7 +113,7 @@
+ 	Setup_configuration();
+ 	Get_parms(argc, argv );      /* scan input args */
+ 	if( A_flag && !getenv( "AUTH" ) ){
+-		FPRINTF(STDERR,"lpstat: requested authenticated transfer (-A) and AUTH environment variable not set");
++		FPRINTF(STDERR,_("lpstat: requested authenticated transfer (-A) and AUTH environment variable not set"));
+ 		usage();
+ 	}
+ 
+@@ -161,14 +161,14 @@
+ 	if(DEBUGL1)Dump_line_list("lpstat - options", &options);
+ 
+ 	if( r_flag ){
+-		Write_fd_str(1,"scheduler is running\n");
++		Write_fd_str(1,_("scheduler is running\n"));
+ 	}
+ 	if( d_flag ){
+ 		if( Printer_DYN == 0 ){
+-			Write_fd_str(1,"no system default destination\n");
++			Write_fd_str(1,_("no system default destination\n"));
+ 		} else {
+ 			SNPRINTF(msg,sizeof(msg))
+-				"system default destination: %s\n", Printer_DYN);
++				_("system default destination: %s\n"), Printer_DYN);
+ 			Write_fd_str(1,msg);
+ 		}
+ 	}
+@@ -176,7 +176,7 @@
+ 		for( i = 0; i < request_list.count; ++i ){
+ 			Set_DYN(&Printer_DYN,request_list.list[i] );
+ 			Fix_Rm_Rp_info(0,0);
+-			SNPRINTF(msg,sizeof(msg)) "system for %s: %s\n", Printer_DYN, RemoteHost_DYN);
++			SNPRINTF(msg,sizeof(msg)) _("system for %s: %s\n"), Printer_DYN, RemoteHost_DYN);
+ 			Write_fd_str(1,msg);
+ 		}
+ 	}
+@@ -220,7 +220,7 @@
+ 
+ 	if( Check_for_rg_group( Logname_DYN ) ){
+ 		SNPRINTF( msg, sizeof(msg))
+-			"  Printer: %s - cannot use printer, not in privileged group\n", Printer_DYN );
++			_("  Printer: %s - cannot use printer, not in privileged group\n"), Printer_DYN );
+ 		if(  Write_fd_str( 1, msg ) < 0 ) cleanup(0);
+ 		return;
+ 	}
+@@ -358,25 +358,25 @@
+ 					if( a_flag ){
+ 						if( !nospool ){
+ 							SNPRINTF(msg,sizeof(msg))
+-							"%s accepting requests since %s\n",
++							_("%s accepting requests since %s\n"),
+ 							Printer_DYN, Time_str(0,0) );
+ 						} else {
+ 							SNPRINTF(msg,sizeof(msg))
+-							"%s not accepting requests since %s -\n\tunknown reason\n",
++							_("%s not accepting requests since %s -\n\tunknown reason\n"),
+ 							Printer_DYN, Time_str(0,0) );
+ 						}
+ 						if( Write_fd_str( output, msg ) < 0 ) return(1);
+ 					}
+ 					if( p_flag ){
+ 						SNPRINTF(msg,sizeof(msg))
+-						"printer %s unknown state. %s since %s. available\n",
++						_("printer %s unknown state. %s since %s. available\n"),
+ 						Printer_DYN, noprint?"disabled":"enabled",
+ 						Pretty_time(0));
+ 						if( Write_fd_str( output, msg ) < 0 ) return(1);
+ 					}
+ 					if( p_flag && D_flag ){
+ 						SNPRINTF(msg,sizeof(msg))
+-							"\tDescription: %s@%s\n",
++							_("\tDescription: %s@%s\n"),
+ 									RemotePrinter_DYN, RemoteHost_DYN ); 
+ 						if( Write_fd_str( output, msg ) < 0 ) return(1);
+ 					}
+@@ -584,7 +584,7 @@
+ }
+ 
+  char *lpstat_msg =
+-"usage: %s [-A] [-d] [-l] [-r] [-R] [-s] [-t] [-a [list]]\n\
++N_("usage: %s [-A] [-d] [-l] [-r] [-R] [-s] [-t] [-a [list]]\n\
+   [-c [list]] [-f [list]] [-o [list]]\n\
+   [-p [list]] [-P] [-S [list]] [list]\n\
+   [-u [login-ID-list]] [-v [list]] [-V] [-n] [-Tdbgflags]\n\
+@@ -607,12 +607,12 @@
+  -v [list] printer mapping *\n\
+  -V        verbose mode \n\
+  -Tdbgflags debug flags\n\
+-    * - long status format produced\n";
++    * - long status format produced\n");
+ 
+ 
+ void usage(void)
+ {
+-	FPRINTF( STDERR, lpstat_msg, Name );
++	FPRINTF( STDERR, _(lpstat_msg), Name );
+ 	Parse_debug("=",-1);
+ 	FPRINTF( STDOUT, "%s\n", Version );
+ 	exit(1);
+--- LPRng-3.8.15/src/common/getopt.c.orig	Mon Aug 12 02:01:44 2002
++++ LPRng-3.8.15/src/common/getopt.c	Fri Dec 27 17:02:40 2002
+@@ -89,7 +89,7 @@
+ 	if (option == '-') {
+ 		if( *next_opt ){
+ 			if( Opterr ){
+-				(void) FPRINTF (STDERR, "--X option form illegal\n" );
++				(void) FPRINTF (STDERR, _("--X option form illegal\n") );
+ 				return('?');
+ 			}
+ 		}
+@@ -100,7 +100,7 @@
+ 	 */
+ 	if ((match = (char *) safestrchr (optstring, option)) == 0 ){
+ 		if( Opterr ){
+-		    (void) FPRINTF (STDERR, "%s: Illegal option '%c'\n", Name, option);
++		    (void) FPRINTF (STDERR, _("%s: Illegal option '%c'\n"), Name, option);
+ 		}
+ 		return( '?' );
+ 	}
+@@ -122,7 +122,7 @@
+ 		}
+ 		if( Optarg == 0 && Opterr ) {
+ 			(void) FPRINTF (STDERR,
+-				"%s: missing argument for '%c'\n", Name, option);
++				_("%s: missing argument for '%c'\n"), Name, option);
+ 			option = '?';
+ 		}
+ 		next_opt = 0;
+--- LPRng-3.8.15/po/POTFILES.in.orig	Wed Aug 22 01:19:53 2001
++++ LPRng-3.8.15/po/POTFILES.in	Fri Dec 27 17:11:07 2002
+@@ -1,5 +1,6 @@
+ src/common/accounting.c
+ src/common/controlword.c
++src/common/getopt.c
+ src/common/linelist.c
+ src/common/lpc.c
+ src/common/lpd.c
+@@ -12,6 +13,7 @@
+ src/common/lpq.c
+ src/common/lpr.c
+ src/common/lprm.c
++src/common/lpstat.c
+ src/common/sendjob.c
+ src/common/sendmail.c
+ src/common/sendreq.c

@@ -1,0 +1,2253 @@
+--- LPRng-3.8.15/configure.in.orig	Sun Nov 24 20:12:09 2002
++++ LPRng-3.8.15/configure.in	Fri Dec 27 16:01:46 2002
+@@ -19,7 +19,7 @@
+ AC_DEFINE_UNQUOTED(VERSION, "$VERSION")
+ AC_SUBST(PACKAGE)
+ AC_SUBST(VERSION)
+-ALL_LINGUAS="fr"
++ALL_LINGUAS="fr pl"
+ 
+ if test -z "$LOCALEDIR" ; then
+     LOCALEDIR='${prefix}/share/locale'
+--- LPRng-3.8.15/po/pl.po.orig	Thu Jan  1 01:00:00 1970
++++ LPRng-3.8.15/po/pl.po	Fri Dec 27 17:41:01 2002
+@@ -0,0 +1,2239 @@
++# Polish translations for LPRng
++# Jakub Bogusz <qboosh@pld.org.pl>, 2002.
++#
++#: src/common/lpc.c:276 src/common/lpc.c:437 src/common/lpq.c:529
++msgid ""
++msgstr ""
++"Project-Id-Version: LPRng 3.8.15\n"
++"POT-Creation-Date: 2002-12-27 17:31+0100\n"
++"PO-Revision-Date: 2002-12-27 17:37+0100\n"
++"Last-Translator: Jakub Bogusz <qboosh@pld.org.pl>\n"
++"Language-Team: Polish <pl@li.org>\n"
++"MIME-Version: 1.0\n"
++"Content-Type: text/plain; charset=ISO-8859-2\n"
++"Content-Transfer-Encoding: 8bit\n"
++"Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
++"|| n%100>=20) ? 1 : 2);\n"
++
++#: src/common/accounting.c:137
++#, c-format
++msgid "connection to accounting server '%s' failed '%s'"
++msgstr "po³±czenie z serwerem rozliczeñ '%s' nie powiod³o siê: '%s'"
++
++#: src/common/controlword.c:20
++msgid "ABORT"
++msgstr "ABORT"
++
++#: src/common/controlword.c:21
++msgid "ACTIVE"
++msgstr "ACTIVE"
++
++#: src/common/controlword.c:22
++msgid "CLASS"
++msgstr "CLASS"
++
++#: src/common/controlword.c:23
++msgid "CLIENT"
++msgstr "CLIENT"
++
++#: src/common/controlword.c:24
++msgid "DEBUG"
++msgstr "DEBUG"
++
++#: src/common/controlword.c:25
++msgid "DEFAULTQ"
++msgstr "DEFAULTQ"
++
++#: src/common/controlword.c:26
++msgid "DISABLE"
++msgstr "DISABLE"
++
++#: src/common/controlword.c:27
++msgid "DOWN"
++msgstr "DOWN"
++
++#: src/common/controlword.c:28
++msgid "ENABLE"
++msgstr "ENABLE"
++
++#: src/common/controlword.c:29
++msgid "HOLD"
++msgstr "HOLD"
++
++#: src/common/controlword.c:30
++msgid "HOLDALL"
++msgstr "HOLDALL"
++
++#: src/common/controlword.c:31
++msgid "KILL"
++msgstr "KILL"
++
++#: src/common/controlword.c:32
++msgid "LPD"
++msgstr "LPD"
++
++#: src/common/controlword.c:33
++msgid "LPQ"
++msgstr "LPQ"
++
++#: src/common/controlword.c:34
++msgid "LPRM"
++msgstr "LPRM"
++
++#: src/common/controlword.c:35
++msgid "MOVE"
++msgstr "MOVE"
++
++#: src/common/controlword.c:36
++msgid "MSG"
++msgstr "MSG"
++
++#: src/common/controlword.c:37
++msgid "NOHOLDALL"
++msgstr "NOHOLDALL"
++
++#: src/common/controlword.c:38
++msgid "PRINTCAP"
++msgstr "PRINTCAP"
++
++#: src/common/controlword.c:39
++msgid "REDIRECT"
++msgstr "REDIRECT"
++
++#: src/common/controlword.c:40
++msgid "REDO"
++msgstr "REDO"
++
++#: src/common/controlword.c:41
++msgid "RELEASE"
++msgstr "RELEASE"
++
++#: src/common/controlword.c:42
++msgid "REREAD"
++msgstr "REREAD"
++
++#: src/common/controlword.c:43
++msgid "START"
++msgstr "START"
++
++#: src/common/controlword.c:44
++msgid "STATUS"
++msgstr "STATUS"
++
++#: src/common/controlword.c:45
++msgid "STOP"
++msgstr "STOP"
++
++#: src/common/controlword.c:46
++msgid "TOPQ"
++msgstr "TOPQ"
++
++#: src/common/controlword.c:47
++msgid "UP"
++msgstr "UP"
++
++#: src/common/controlword.c:48
++msgid "SERVER"
++msgstr "SERVER"
++
++#: src/common/controlword.c:49
++msgid "DEFAULTS"
++msgstr "DEFAULTS"
++
++#: src/common/controlword.c:50
++msgid "FLUSH"
++msgstr "FLUSH"
++
++#: src/common/controlword.c:51
++msgid "LANG"
++msgstr "LANG"
++
++#: src/common/getopt.c:92
++msgid "--X option form illegal\n"
++msgstr "--X nie jest poprawn± form± opcji\n"
++
++#: src/common/getopt.c:103
++#, c-format
++msgid "%s: Illegal option '%c'\n"
++msgstr "%s: Niepoprawna opcja '%c'\n"
++
++#: src/common/getopt.c:125
++#, c-format
++msgid "%s: missing argument for '%c'\n"
++msgstr "%s: brakuje argumentu dla '%c'\n"
++
++#: src/common/lpc.c:134 src/common/lpr.c:94 src/common/lprm.c:150
++msgid ""
++"authentication requested (-A option) and AUTH environment variable not set"
++msgstr ""
++"¿±dano uwierzytelnienia (opcja -A), ale nie ustawiono zmiennej ¶rodowiskowej "
++"AUTH"
++
++#: src/common/lpc.c:203
++msgid "exit"
++msgstr "koniec"
++
++#: src/common/lpc.c:248 src/common/lpq.c:216
++#, c-format
++msgid "Printer: %s - cannot get status from device '%s'\n"
++msgstr "Drukarka: %s - nie mo¿na odczytaæ stanu z urz±dzenia '%s'\n"
++
++#: src/common/lpc.c:255 src/common/lpq.c:238 src/common/lprm.c:258
++#, c-format
++msgid "Printer: %s - direct connection to device '%s'\n"
++msgstr "Drukarka: %s - bezpo¶rednie po³±czenie z urz±dzeniem '%s'\n"
++
++#: src/common/lpc.c:273
++#, c-format
++msgid "Locale information directory '%s'\n"
++msgstr "Katalog z informacjami o lokalizacji '%s'\n"
++
++#: src/common/lpc.c:275 src/common/lpc.c:436 src/common/lpq.c:528
++#, c-format
++msgid "LANG environment variable '%s'\n"
++msgstr "Zmienna ¶rodowiskowa LANG '%s'\n"
++
++#: src/common/lpc.c:278 src/common/lpc.c:439 src/common/lpq.c:531
++#, c-format
++msgid "gettext translation information '%s'\n"
++msgstr "informacje o t³umaczeniu gettext '%s'\n"
++
++#: src/common/lpc.c:280 src/common/lpc.c:441 src/common/lpq.c:533
++msgid "No translation available\n"
++msgstr "T³umaczenie nie dostêpne\n"
++
++#: src/common/lpc.c:282
++msgid "TRANSLATION TEST"
++msgstr "TEST T£UMACZENIA"
++
++#: src/common/lpc.c:312 src/common/lpc.c:323 src/common/lpc.c:341
++msgid "all"
++msgstr "wszystko"
++
++#: src/common/lpc.c:317 src/common/lpc.c:326
++msgid "\n"
++msgstr "\n"
++
++#: src/common/lpc.c:318 src/common/lpc.c:327
++msgid "# Printcap Information\n"
++msgstr "# Informacje printcap\n"
++
++#: src/common/lpc.c:356
++#, c-format
++msgid "execvp failed - '%s'"
++msgstr "execvp nie powiod³o siê - '%s'"
++
++#: src/common/lpc.c:359
++#, c-format
++msgid "fork failed - '%s'"
++msgstr "fork nie powiod³o siê - '%s'"
++
++#: src/common/lpc.c:367
++#, c-format
++msgid "doaction: waitpid(%d) failed"
++msgstr "doaction: waitpid(%d) nie powiod³o siê"
++
++#: src/common/lpc.c:452
++#, c-format
++msgid ""
++"usage: %s [-a][-Ddebuglevel][-Pprinter][-Shost][-Uusername][-V] [command]\n"
++msgstr ""
++"sk³adnia: %s [-a][-Dpoz¶ledz][-Pdrukarka][-Shost][-Uu¿ytkownik][-V] "
++"[polecenie]\n"
++
++#: src/common/lpc.c:453
++msgid " with no command, reads from STDIN\n"
++msgstr " bez polecenia, czyta ze standardowego wej¶cia\n"
++
++#: src/common/lpc.c:454
++msgid "  -a           - alias for -Pall\n"
++msgstr "  -a           - alias dla -Pall\n"
++
++#: src/common/lpc.c:455 src/common/lpq.c:552 src/common/lprm.c:343
++#: src/common/lprm.c:361
++msgid "  -Ddebuglevel - debug level\n"
++msgstr "  -Dpoz¶ledz   - poziom ¶ledzenia (debug level)\n"
++
++#: src/common/lpc.c:456
++msgid "  -Pprinter    - printer\n"
++msgstr "  -Pdrukarka   - drukarka\n"
++
++#: src/common/lpc.c:457
++msgid "  -Pprinter@host - printer on lpd server on host\n"
++msgstr "  -Pdrukarka@host - drukarka na serwerze lpd na ho¶cie\n"
++
++#: src/common/lpc.c:458
++msgid "  -Shost       - connect to lpd server on host\n"
++msgstr "  -Shost       - po³±czenie z serwerem lpd na ho¶cie\n"
++
++#: src/common/lpc.c:459
++msgid "  -Uuser       - identify command as coming from user\n"
++msgstr ""
++"  -Uu¿ytkownik - identyfikacja polecenia jako pochodz±ce od u¿ytkownika\n"
++
++#: src/common/lpc.c:460
++msgid "  -V           - increase information verbosity\n"
++msgstr "  -V           - zwiêkszenie ilo¶ci informacji\n"
++
++#: src/common/lpc.c:461
++msgid " commands:\n"
++msgstr " polecenia:\n"
++
++#: src/common/lpc.c:462
++msgid " active    (printer[@host])        - check for active server\n"
++msgstr " active    (drukarka[@host])       - sprawdzenie aktywno¶ci serwera\n"
++
++#: src/common/lpc.c:463
++msgid " abort     (printer[@host] | all)  - stop server\n"
++msgstr " abort     (drukarka[@host] | all) - zatrzymanie serwera\n"
++
++#: src/common/lpc.c:464
++msgid ""
++" class     printer[@host] (class | off)      - show/set class printing\n"
++msgstr ""
++" class     drukarka[@host] (klasa | off)     - pokazanie/ustawienie "
++"drukowania\n"
++"                                                  klas\n"
++
++#: src/common/lpc.c:465
++msgid " disable   (printer[@host] | all)  - disable queueing\n"
++msgstr " disable   (drukarka[@host] | all) - wy³±czenie kolejkowania\n"
++
++#: src/common/lpc.c:466
++msgid ""
++" debug     (printer[@host] | all) debugparms - set debug level for printer\n"
++msgstr ""
++" debug     (drukarka[@host] | all) parametry - ustawienie poziomu ¶ledzenia\n"
++
++#: src/common/lpc.c:467
++msgid " down      (printer[@host] | all)  - disable printing and queueing\n"
++msgstr ""
++" down      (drukarka[@host] | all) - wy³±czenie drukowania i kolejkowania\n"
++
++#: src/common/lpc.c:468
++msgid " enable    (printer[@host] | all)  - enable queueing\n"
++msgstr " enable    (drukarka[@host] | all) - w³±czenie kolejkowania\n"
++
++#: src/common/lpc.c:469
++msgid " flush     (printer[@host] | all)  - flush cached status\n"
++msgstr ""
++" flush     (drukarka[@host] | all) - wyczyszczenie zapamiêtanego stanu\n"
++
++#: src/common/lpc.c:470
++msgid ""
++" hold      (printer[@host] | all) (name[@host] | job | all)*   - hold job\n"
++msgstr ""
++" hold      (drukarka@host] | all) (nazwa[@host] | zad. | all)*  - "
++"wstrzymanie\n"
++"                                                                   zadania\n"
++
++#: src/common/lpc.c:471
++msgid " holdall   (printer[@host] | all)  - hold all jobs on\n"
++msgstr " holdall   (drukarka[@host] | all) - wstrzymanie wszystkich zadañ\n"
++
++#: src/common/lpc.c:472
++msgid " kill      (printer[@host] | all)  - stop and restart server\n"
++msgstr " kill      (drukarka[@host] | all) - zatrzymanie i restart serwera\n"
++
++#: src/common/lpc.c:473
++msgid " lpd       (printer[@host])        - get LPD PID \n"
++msgstr " lpd       (drukarka[@host])       - odczyt PID-u LPD\n"
++
++#: src/common/lpc.c:474
++msgid ""
++" lpq       (printer[@host] | all) (name[@host] | job | all)*   - invoke LPQ\n"
++msgstr ""
++" lpq       (drukarka[@host] | all) (nazwa[@host] | zad | all)* - wywo³anie "
++"LPQ\n"
++
++#: src/common/lpc.c:475
++msgid ""
++" lprm      (printer[@host] | all) (name[@host]|host|job| all)* - invoke "
++"LPRM\n"
++msgstr ""
++" lprm      (drukarka[@host] | all) (nazwa[@host]|host|zad|all)*- wywo³anie "
++"LPRM\n"
++
++#: src/common/lpc.c:476
++msgid " msg       printer message text  - set status message\n"
++msgstr ""
++" msg       drukarka komunikat tekst  - ustawienie komunikatu o stanie\n"
++
++#: src/common/lpc.c:477
++msgid " move      printer (user|jobid)* target - move jobs to new queue\n"
++msgstr ""
++" move      drukarka (u¿ytkownik|idzad)* cel - wys³anie zadañ do nowej "
++"kolejki\n"
++
++#: src/common/lpc.c:478
++msgid " noholdall (printer[@host] | all)  - hold all jobs off\n"
++msgstr " noholdall (drukarka[@host] | all) - wznowienie wszystkich zadañ\n"
++
++#: src/common/lpc.c:479
++msgid " printcap  (printer[@host] | all)  - report printcap values\n"
++msgstr " printcap  (drukarka[@host] | all) - przekazanie warto¶ci printcap\n"
++
++#: src/common/lpc.c:480
++msgid " quit                              - exit LPC\n"
++msgstr " quit                              - zakoñczenie LPC\n"
++
++#: src/common/lpc.c:481
++msgid ""
++" redirect  (printer[@host] | all) (printer@host | off )*       - redirect "
++"jobs\n"
++msgstr ""
++" redirect  (drukarka[@host] | all) (drukarka@host | off )*     - "
++"przekierowanie\n"
++"                                                                   zadañ\n"
++
++#: src/common/lpc.c:482
++msgid ""
++" redo      (printer[@host] | all) (name[@host] | job | all)*   - reprint "
++"jobs\n"
++msgstr ""
++" redo      (drukarka[@host] | all) (nazwa[@host] | zad | all)* - ponowny "
++"wydruk\n"
++"                                                                   zadañ\n"
++
++#: src/common/lpc.c:483
++msgid ""
++" release   (printer[@host] | all) (name[@host] | job | all)*   - release "
++"jobs\n"
++msgstr ""
++" release   (drukarka[@host] | all) (nazwa[@host] | zad | all)* - uwolnienie\n"
++"                                                                   zadañ\n"
++
++#: src/common/lpc.c:484
++msgid " reread                            - LPD reread database information\n"
++msgstr ""
++" reread                            - ponowne odczytanie bazy informacji LPD\n"
++
++#: src/common/lpc.c:485
++msgid " start     (printer[@host] | all)  - start printing\n"
++msgstr " start     (drukarka[@host] | all) - uruchomienie drukowania\n"
++
++#: src/common/lpc.c:486
++msgid " status    (printer[@host] | all)  - status of printers\n"
++msgstr " status    (drukarka[@host] | all) - stan drukarek\n"
++
++#: src/common/lpc.c:487
++msgid " stop      (printer[@host] | all)  - stop  printing\n"
++msgstr " stop      (drukarka[@host] | all) - zatrzymanie drukowania\n"
++
++#: src/common/lpc.c:488
++msgid ""
++" topq      (printer[@host] | all) (name[@host] | job | all)*   - reorder "
++"jobs\n"
++msgstr ""
++" topq      (drukarka[@host] | all) (nazwa[@host] | zad | all)* - zamiana "
++"zadañ\n"
++
++#: src/common/lpc.c:489
++msgid " up        (printer[@host] | all) - enable printing and queueing\n"
++msgstr ""
++" up        (drukarka[@host] | all) - w³±czenie drukowania i kolejkowania\n"
++
++#: src/common/lpc.c:490
++msgid "   diagnostic:\n"
++msgstr "   diagnostyka:\n"
++
++#: src/common/lpc.c:491
++msgid "      defaultq               - show default queue for LPD server\n"
++msgstr ""
++"      defaultq               - pokazanie domy¶lnej kolejki serwera LPD\n"
++
++#: src/common/lpc.c:492
++msgid "      defaults               - show default configuration values\n"
++msgstr ""
++"      defaults               - pokazanie domy¶lnych warto¶ci ustawieñ\n"
++
++#: src/common/lpc.c:493
++msgid ""
++"      lang                   - show current i18n (iNTERNATIONALIZATIONn) "
++"support\n"
++msgstr ""
++"      lang                   - pokazanie aktualnie obs³ugiwanej lokalizacji\n"
++
++#: src/common/lpc.c:494
++msgid "      client (printer | all) - client config and printcap information\n"
++msgstr ""
++"      client (drukarka | all) - informacja o konfiguracji i printcap "
++"klienta\n"
++
++#: src/common/lpc.c:495
++msgid "      server (printer | all) - server config and printcap\n"
++msgstr "      server (drukarka | all) - konfiguracja i printcap serwera\n"
++
++#: src/common/lpd.c:172
++msgid "No LPD lockfile specified!"
++msgstr "Nie podano pliku blokuj±cego LPD!"
++
++#: src/common/lpd.c:183 src/common/lpd.c:196
++#, c-format
++msgid "Another print spooler active, possibly lpd process '%d'"
++msgstr "Inny demon wydruku aktywny, prawdopodobnie proces lpd '%d'"
++
++#: src/common/lpd.c:188
++#, c-format
++msgid "cannot open or lock lockfile - %s"
++msgstr "nie mo¿na otworzyæ lub zablokowaæ pliku blokuj±cego - %s"
++
++#: src/common/lpd.c:242
++msgid "lpd: main() dofork failed"
++msgstr "lpd: main() dofork nie powiod³o siê"
++
++#: src/common/lpd.c:287 src/common/lpd.c:298
++msgid "lpd: pipe call failed"
++msgstr "lpd: wywo³anie pipe nie powiod³o siê"
++
++#: src/common/lpd.c:305
++msgid "lpd: cannot start initial logger process"
++msgstr "lpd: nie mo¿na uruchomiæ pocz±tkowego procesu loguj±cego"
++
++#: src/common/lpd.c:490
++msgid "lpd: select error!"
++msgstr "lpd: b³±d select!"
++
++#: src/common/lpd.c:525 src/common/lpd.c:570
++msgid "lpd: fork() failed"
++msgstr "lpd: fork() nie powiod³o siê"
++
++#: src/common/lpd.c:542 src/common/lpd.c:588
++msgid "lpd: accept on listening socket failed"
++msgstr "lpd: accept na gnie¼dzie s³uchaj±cym nie powiod³o siê"
++
++#: src/common/lpd.c:594
++msgid "lpd: Lpd_request pipe EOF! cannot happen"
++msgstr "lpd: EOF potoku w Lpd_request! niemo¿liwe"
++
++#: src/common/lpd.c:620 src/common/lpd.c:623
++msgid "Setup_log: open /dev/null failed"
++msgstr "Setup_log: otwarcie /dev/null nie powiod³o siê"
++
++#: src/common/lpd.c:630 src/common/lpd.c:634
++#, c-format
++msgid "Setup_log: dup2(%d,%d) failed"
++msgstr "Setup_log: dup2(%d,%d) nie powiod³o siê"
++
++#: src/common/lpd.c:639
++#, c-format
++msgid "Setup_log: open %s failed"
++msgstr "Setup_log: otwarcie %s nie powiod³o siê"
++
++#: src/common/lpd.c:683
++msgid "lpd: Cannot truncate lock file"
++msgstr "lpd: Nie mo¿na skróciæ pliku blokuj±cego"
++
++#: src/common/lpd.c:701
++#, c-format
++msgid "lpd: Cannot open lock file '%s'"
++msgstr "lpd: Nie mo¿na otworzyæ pliku blokuj±cego '%s'"
++
++#: src/common/lpd.c:781
++#, c-format
++msgid ""
++"usage: %s [-FV][-D dbg][-L log][-P path][-p port][-R remote LPD TCP/IP "
++"destination port]\n"
++msgstr ""
++"sk³adnia: %s [-FV] [-D dbg][-L log][-P gniazdo][-p port][-R port TCP/IP "
++"zdalnego LPD]\n"
++
++#: src/common/lpd.c:782
++msgid " Options\n"
++msgstr " Opcje\n"
++
++#: src/common/lpd.c:783
++msgid " -D dbg      - set debug level and flags\n"
++msgstr " -D dbg      - ustawienie poziomu i flag ¶ledzenia\n"
++
++#: src/common/lpd.c:784
++msgid " -F          - run in foreground, log to STDERR\n"
++msgstr " -F          - uruchomienie na pierwszym planie, logi na STDERR\n"
++
++#: src/common/lpd.c:785
++msgid " -L logfile  - append log information to logfile\n"
++msgstr " -L plikloga - do³±czanie logowanych informacji do plikuloga\n"
++
++#: src/common/lpd.c:786
++msgid " -V          - show version info\n"
++msgstr " -V          - pokazanie informacji o wersji\n"
++
++#: src/common/lpd.c:787
++msgid ""
++" -p port     - TCP/IP listen port, 'off' disables TCP/IP listening port "
++"(lpd_listen_port)\n"
++msgstr ""
++" -p port     - port nas³uchuj±cy TCP/IP, 'off' wy³±cza nas³uch TCP/IP "
++"(lpd_listen_port)\n"
++
++#: src/common/lpd.c:788
++msgid ""
++" -P path     - UNIX socket path, 'off' disables UNIX listening socket "
++"(unix_socket_path)\n"
++msgstr ""
++" -P gniazdo  - ¶cie¿ka gniazda uniksowego, 'off' wy³±cza gniazdo "
++"(unix_socket_path)\n"
++
++#: src/common/lpd.c:789
++msgid " -R port     - remote LPD server port (lpd_port)\n"
++msgstr " -R port     - port zdalnego serwera LPD (lpd_port)\n"
++
++#: src/common/lpd.c:849
++msgid "Start_all: pipe failed!"
++msgstr "Start_all: pipe nie powiod³o siê!"
++
++#: src/common/lpd_control.c:71
++#, c-format
++msgid "bad control command '%s'"
++msgstr "b³êdne polecenie kontrolne '%s'"
++
++#: src/common/lpd_control.c:86
++#, c-format
++msgid "printer '%s' has illegal char at '%s' in name"
++msgstr "drukarka '%s' ma nieprawid³owy znak przy '%s' w nazwie"
++
++#: src/common/lpd_control.c:98
++#, c-format
++msgid "%s: unknown control request '%s'"
++msgstr "%s: nieznane ¿±danie kontrolne '%s'"
++
++#: src/common/lpd_control.c:179
++msgid "Use: OP_MOVE printer (user|jobid)* target"
++msgstr "Sk³adnia: OP_MOVE drukarka (u¿ytkownik|idzadania)* cel"
++
++#: src/common/lpd_control.c:190
++msgid "no permission to control server"
++msgstr "brak uprawnieñ do kontrolowania serwera"
++
++#: src/common/lpd_control.c:441
++msgid "not implemented yet"
++msgstr "jeszcze nie zaimplementowano"
++
++#: src/common/lpd_control.c:470
++#, c-format
++msgid "server process PID %d exited\n"
++msgstr "procesu serwera PID %d zakoñczy³ siê\n"
++
++#: src/common/lpd_control.c:473
++#, c-format
++msgid "kill server process PID %d with %s\n"
++msgstr "zabicie procesu serwera PID %d przez %s\n"
++
++#: src/common/lpd_control.c:482
++msgid "enabled and started"
++msgstr "w³±czono i uruchomiono"
++
++#: src/common/lpd_control.c:483
++msgid "disabled and stopped"
++msgstr "wy³±czono i zatrzymano"
++
++#: src/common/lpd_control.c:484
++msgid "stopped"
++msgstr "zatrzymano"
++
++#: src/common/lpd_control.c:486
++msgid "started"
++msgstr "uruchomiono"
++
++#: src/common/lpd_control.c:487
++msgid "disabled"
++msgstr "wy³±czono"
++
++#: src/common/lpd_control.c:488
++msgid "enabled"
++msgstr "w³±czono"
++
++#: src/common/lpd_control.c:489
++msgid "redirected"
++msgstr "przekierowano"
++
++#: src/common/lpd_control.c:490
++msgid "holdall on"
++msgstr "wstrzymano wszystko"
++
++#: src/common/lpd_control.c:491
++msgid "holdall off"
++msgstr "wznowiono wszystko"
++
++#: src/common/lpd_control.c:492
++msgid "move done"
++msgstr "przeniesienie wykonane"
++
++#: src/common/lpd_control.c:493
++msgid "class updated"
++msgstr "klasa uaktualniona"
++
++#: src/common/lpd_control.c:494
++msgid "killed job"
++msgstr "usuniêto zadanie"
++
++#: src/common/lpd_control.c:495
++msgid "aborted job"
++msgstr "przerwano zadanie"
++
++#: src/common/lpd_control.c:496
++msgid "flushed status"
++msgstr "wyczyszczono stan"
++
++#: src/common/lpd_control.c:517
++#, c-format
++msgid ""
++"WARNING: the main load balance server may have exited before\n"
++"it could be informed that there were new jobs.\n"
++"Please use 'lpc start %s' to start the server\n"
++msgstr ""
++"UWAGA: g³ówny serwer rozk³adaj±cy obci±¿enie móg³ zakoñczyæ\n"
++"pracê przed poinformowaniem, ¿e s± nowe zadania.\n"
++"Proszê u¿yæ 'lpc start %s', aby uruchomiæ serwer\n"
++
++#: src/common/lpd_control.c:551
++#, c-format
++msgid "Do_queue_control: write to fd '%d' failed"
++msgstr "Do_queue_control: zapis do deskryptora '%d' nie powiód³ siê"
++
++#: src/common/lpd_control.c:634
++#, c-format
++msgid "%s: no permission '%s'\n"
++msgstr "%s: brak uprawnienia '%s'\n"
++
++#: src/common/lpd_control.c:716
++#, c-format
++msgid "%s: selected '%s'\n"
++msgstr "%s: wybrano '%s'\n"
++
++#: src/common/lpd_control.c:726
++#, c-format
++msgid "%s: cannot set hold file '%s'\n"
++msgstr "%s: nie mo¿na ustawiæ pliku wstrzymania '%s'\n"
++
++#: src/common/lpd_control.c:832
++msgid " holdall"
++msgstr " wszystko-wstrzymane"
++
++#: src/common/lpd_control.c:836
++#, c-format
++msgid " class=%s"
++msgstr " klasa=%s"
++
++#: src/common/lpd_control.c:840
++msgid " autohold"
++msgstr " autowstrzymanie"
++
++#: src/common/lpd_control.c:912 src/common/lpd_control.c:967
++#: src/common/lpd_control.c:1022
++#, c-format
++msgid "wrong number arguments, %d"
++msgstr "b³êdna liczba argumentów - %d"
++
++#: src/common/lpd_control.c:918
++#, c-format
++msgid "forwarding to '%s'\n"
++msgstr "przekazywanie do '%s'\n"
++
++#: src/common/lpd_control.c:920
++msgid "forwarding off\n"
++msgstr "przekazywanie wy³±czone\n"
++
++#: src/common/lpd_control.c:974
++#, c-format
++msgid "classes printed '%s'\n"
++msgstr "wydrukowane klasy '%s'\n"
++
++#: src/common/lpd_control.c:977
++msgid "all classes printed\n"
++msgstr "wszystkie klasy wydrukowane\n"
++
++#: src/common/lpd_control.c:1028
++#, c-format
++msgid "debugging override set to '%s'"
++msgstr "wymuszenie ¶ledzenia ustawione na '%s'"
++
++#: src/common/lpd_control.c:1030
++msgid "debugging override off"
++msgstr "wymuszenie ¶ledzenia wy³±czone"
++
++#: src/common/lpd_jobs.c:425
++#, c-format
++msgid "Do_queue_jobs: cannot open lockfile '%s'"
++msgstr "Do_queue_jobs: nie mo¿na otworzyæ pliku blokuj±cego '%s'"
++
++#: src/common/lpd_jobs.c:738 src/common/lpd_jobs.c:2232
++#, c-format
++msgid "cannot update hold file for '%s'"
++msgstr "nie mo¿na uaktualniæ pliku wstrzymania dla '%s'"
++
++#: src/common/lpd_jobs.c:741
++#, c-format
++msgid "Do_queue_jobs: cannot update hold file for '%s'"
++msgstr "Do_queue_jobs: nie mo¿na uaktualniæ pliku wstrzymania dla '%s'"
++
++#: src/common/lpd_jobs.c:745
++#, c-format
++msgid "removing job '%s' - no permissions"
++msgstr "usuwanie zadania '%s' - brak uprawnieñ"
++
++#: src/common/lpd_jobs.c:1004
++#, c-format
++msgid "Do_queue_jobs: LOGIC ERROR - no identifer '%s'"
++msgstr "Do_queue_jobs: B£¡D LOGIKI - brak identyfikatora '%s'"
++
++#: src/common/lpd_jobs.c:1028
++#, c-format
++msgid "cannot update hold file '%s'"
++msgstr "nie mo¿na uaktualniæ pliku wstrzymania '%s'"
++
++#: src/common/lpd_jobs.c:1030
++#, c-format
++msgid "Do_queue_jobs: cannot update hold file '%s'"
++msgstr "Do_queue_jobs: nie mo¿na uaktualniæ pliku wstrzymania '%s'"
++
++#: src/common/lpd_jobs.c:1157
++msgid "sleeping, waiting for processes to exit"
++msgstr "oczekiwanie na zakoñczenie procesów"
++
++#: src/common/lpd_jobs.c:1329
++#, c-format
++msgid "Remote_job: %d datafiles and only allowed %d"
++msgstr "Remote_job: %d plików danych, a dozwolonych tylko %d"
++
++#: src/common/lpd_jobs.c:1363
++#, c-format
++msgid "link failure while sending job '%s'"
++msgstr "b³±d po³±czenia podczas wysy³ania zadania '%s'"
++
++#: src/common/lpd_jobs.c:1369
++#, c-format
++msgid "no permission to spool job '%s'"
++msgstr "brak uprawnieñ do skolejkowania zadania '%s'"
++
++#: src/common/lpd_jobs.c:1375
++#, c-format
++msgid "failed to send job '%s'"
++msgstr "wys³anie zadania '%s' nie powiod³o siê"
++
++#: src/common/lpd_jobs.c:1540
++msgid "Fork_subserver: fork failed"
++msgstr "Fork_subserver: fork nie powiod³o siê"
++
++#: src/common/lpd_jobs.c:1606
++#, c-format
++msgid "subserver pid %d exit status '%s'"
++msgstr "podserwer pid %d zakoñczony ze statusem '%s'"
++
++#: src/common/lpd_jobs.c:1610
++#, c-format
++msgid "subserver pid %d died with signal '%s'"
++msgstr "podserwer pid %d umar³ od sygna³u '%s'"
++
++#: src/common/lpd_jobs.c:1656
++msgid "Wait_for_subserver: Mergesort failed"
++msgstr "Wait_for_subserver: Mergesort nie powiod³o siê"
++
++#: src/common/lpd_jobs.c:1685
++msgid "succ"
++msgstr "succ"
++
++#: src/common/lpd_jobs.c:1686
++msgid "jsucc"
++msgstr "jsucc"
++
++#: src/common/lpd_jobs.c:1687
++msgid "success"
++msgstr "success"
++
++#: src/common/lpd_jobs.c:1688
++msgid "jsuccess"
++msgstr "jsuccess"
++
++#: src/common/lpd_jobs.c:1689
++msgid "abort"
++msgstr "abort"
++
++#: src/common/lpd_jobs.c:1690
++msgid "jabort"
++msgstr "jabort"
++
++#: src/common/lpd_jobs.c:1691
++msgid "hold"
++msgstr "hold"
++
++#: src/common/lpd_jobs.c:1692
++msgid "jhold"
++msgstr "jhold"
++
++#: src/common/lpd_jobs.c:1693
++msgid "remove"
++msgstr "remove"
++
++#: src/common/lpd_jobs.c:1694
++msgid "jremove"
++msgstr "jremove"
++
++#: src/common/lpd_jobs.c:1792 src/common/lpd_jobs.c:1870
++#, c-format
++msgid "Update_status: no identifier for '%s'"
++msgstr "Update_status: brak identyfikatora dla '%s'"
++
++#: src/common/lpd_jobs.c:1903
++#, c-format
++msgid "could not remove job '%s'"
++msgstr "nie mo¿na usun±æ zadania '%s'"
++
++#: src/common/lpd_jobs.c:1905 src/common/lpd_jobs.c:2933
++#, c-format
++msgid "job '%s' removed"
++msgstr "zadanie '%s' usuniête"
++
++#: src/common/lpd_jobs.c:1908
++#, c-format
++msgid "job '%s' saved"
++msgstr "zadanie '%s' zachowane"
++
++#: src/common/lpd_jobs.c:1939
++#, c-format
++msgid "job '%s', attempt %d, allowed %d"
++msgstr "zadanie '%s', próba %d, dozwolonych %d"
++
++#: src/common/lpd_jobs.c:1943
++msgid "treating as successful"
++msgstr "traktowane jako pomy¶lne"
++
++#: src/common/lpd_jobs.c:1944
++msgid "retrying job"
++msgstr "ponawianie próby"
++
++#: src/common/lpd_jobs.c:1945
++msgid "no retry"
++msgstr "bez ponawiania"
++
++#: src/common/lpd_jobs.c:1946
++msgid "aborting server"
++msgstr "przerwanie zadania"
++
++#: src/common/lpd_jobs.c:1947
++msgid "removing job - status JREMOVE"
++msgstr "usuwanie zadania - status JREMOVE"
++
++#: src/common/lpd_jobs.c:1948
++msgid "holding job"
++msgstr "wstrzymywanie zadania"
++
++#: src/common/lpd_jobs.c:1951
++#, c-format
++msgid "unexpected status 0x%x"
++msgstr "nieoczekiwany status 0x%x"
++
++#: src/common/lpd_jobs.c:1956
++#, c-format
++msgid "job '%s', %s"
++msgstr "zadanie '%s', %s"
++
++#: src/common/lpd_jobs.c:1960
++#, c-format
++msgid "job '%s' attempt %d, trying %d times"
++msgstr "zadanie '%s' próba %d, próbowanie %d razy"
++
++#: src/common/lpd_jobs.c:1963
++#, c-format
++msgid "job '%s' attempt %d, trying indefinitely"
++msgstr "zadanie '%s' próba %d, próbowanie bez koñca"
++
++#: src/common/lpd_jobs.c:1982
++msgid "failed, no retry"
++msgstr "nie powiod³o siê, bez ponownych prób"
++
++#: src/common/lpd_jobs.c:2009
++#, c-format
++msgid "removing job '%s' - failed, no retry"
++msgstr "usuwanie zadania '%s' - nie powiod³o siê, bez ponownych prób"
++
++#: src/common/lpd_jobs.c:2016
++msgid "aborting operations"
++msgstr "przerywanie operacji"
++
++#: src/common/lpd_jobs.c:2042
++#, c-format
++msgid "removing job '%s' - ABORT"
++msgstr "usuwanie zadania '%s' - ABORT"
++
++#: src/common/lpd_jobs.c:2046
++msgid "stopping printing on filter JABORT exit code"
++msgstr "zatrzymywanie drukowania po kodzie wyj¶cia filtra JABORT"
++
++#: src/common/lpd_jobs.c:2056
++msgid "removing destination due to errors"
++msgstr "usuwanie celu z powodu b³êdów"
++
++#: src/common/lpd_jobs.c:2067
++msgid "removing job due to errors"
++msgstr "usuwanie zadania z powodu b³êdów"
++
++#: src/common/lpd_jobs.c:2074
++#, c-format
++msgid "removing job '%s' - JREMOVE"
++msgstr "usuwanie zadania '%s' - JREMOVE"
++
++#: src/common/lpd_jobs.c:2079
++msgid "job removal requested"
++msgstr "¿±dano usuniêcia zadania"
++
++#: src/common/lpd_jobs.c:2084
++#, c-format
++msgid "keeping error job '%s'"
++msgstr "trzymanie b³êdnego zadania '%s'"
++
++#: src/common/lpd_jobs.c:2205
++#, c-format
++msgid "Service_worker: cannot open lockfile '%s'"
++msgstr "Service_worker: nie mo¿na otworzyæ pliku blokuj±cego '%s'"
++
++#: src/common/lpd_jobs.c:2235
++#, c-format
++msgid "Service_worker: cannot update hold file for '%s'"
++msgstr "Service_worker: nie mo¿na uaktualniæ pliku wstrzymania '%s'"
++
++#: src/common/lpd_jobs.c:2242
++#, c-format
++msgid "Service_worker: no identifier for '%s'"
++msgstr "Service_worker: brak identyfikatora dla '%s'"
++
++#: src/common/lpd_jobs.c:2904
++#, c-format
++msgid "job '%s' removed- status expired"
++msgstr "zadanie '%s' usuniête - status wygas³"
++
++#: src/common/lpd_rcvjob.c:135 src/common/lpd_rcvjob.c:456
++msgid "bad command line"
++msgstr "b³êdna linia polecenia"
++
++#: src/common/lpd_rcvjob.c:139 src/common/lpd_rcvjob.c:460
++msgid "bad printer name"
++msgstr "b³êdna nazwa drukarki"
++
++#: src/common/lpd_rcvjob.c:147
++#, c-format
++msgid "%s: cannot set up print queue"
++msgstr "%s: nie mo¿na ustawiæ kolejki wydruków"
++
++#: src/common/lpd_rcvjob.c:187 src/common/lpd_rcvjob.c:503
++#: src/common/lpd_secure.c:189
++#, c-format
++msgid "%s: spooling disabled"
++msgstr "%s: buforowanie wy³±czone"
++
++#: src/common/lpd_rcvjob.c:198
++#, c-format
++msgid "%s: Receive_job: sending ACK 0 failed"
++msgstr "%s: Receive_job: wysy³anie ACK 0 nie powiod³o siê"
++
++#: src/common/lpd_rcvjob.c:248
++#, c-format
++msgid "%s: Receive_job - bad control line '%s', len %0.0f, name '%s'"
++msgstr ""
++"%s: Receive_job - b³êdna linia kontrolna '%s', d³ugo¶æ %0.0f, nazwa '%s'"
++
++#: src/common/lpd_rcvjob.c:264 src/common/lpd_secure.c:196
++#, c-format
++msgid "%s: job size %0.0f is larger than %d K"
++msgstr "%s: rozmiar zadania %0.0f jest wiêkszy ni¿ %d K"
++
++#: src/common/lpd_rcvjob.c:270 src/common/lpd_rcvjob.c:521
++#: src/common/lpd_secure.c:203
++#, c-format
++msgid "%s: insufficient file space"
++msgstr "%s: za ma³o miejsca na plik"
++
++#: src/common/lpd_rcvjob.c:283 src/common/lpd_rcvjob.c:573
++#, c-format
++msgid "%s: sending ACK 0 for '%s' failed"
++msgstr "%s: wysy³anie ACK 0 dla '%s' nie powiod³o siê"
++
++#: src/common/lpd_rcvjob.c:311 src/common/lpd_rcvjob.c:546
++#, c-format
++msgid "%s: transfer of '%s' from '%s' failed"
++msgstr "%s: przesy³anie '%s' z '%s' nie powiod³o siê"
++
++#: src/common/lpd_rcvjob.c:406
++#, c-format
++msgid "Receive_jobs: write to fd '%d' failed"
++msgstr "Receive_jobs: zapis do deskryptora '%d' nie powiód³ siê"
++
++#: src/common/lpd_rcvjob.c:467
++#, c-format
++msgid "%s: cannot set up printer"
++msgstr "%s: nie mo¿na ustawiæ drukarki"
++
++#: src/common/lpd_rcvjob.c:515
++#, c-format
++msgid "%s: job size %0.0f is larger than %dK"
++msgstr "%s: rozmiar zadania %0.0f jest wiêkszy ni¿ %dK"
++
++#: src/common/lpd_rcvjob.c:535
++#, c-format
++msgid "%s: Receive_block_job: sending ACK 0 failed"
++msgstr "%s: Receive_block_job: wysy³anie ACK 0 nie powiod³o siê"
++
++#: src/common/lpd_rcvjob.c:556
++#, c-format
++msgid "Receive_block_job: lseek failed '%s'"
++msgstr "Receive_block_job: lseek nie powiod³o siê: '%s'"
++
++#: src/common/lpd_rcvjob.c:660 src/common/lpd_rcvjob.c:704
++#, c-format
++msgid "Scan_block_file: lseek failed '%s'"
++msgstr "Scan_block_file: lseek nie powiod³o siê: '%s'"
++
++#: src/common/lpd_rcvjob.c:675
++#, c-format
++msgid "bad length information '%s'"
++msgstr "b³êdna informacja o d³ugo¶ci '%s'"
++
++#: src/common/lpd_rcvjob.c:692
++#, c-format
++msgid "Scan_block_file: read failed '%s'"
++msgstr "Scan_block_file: odczyt nie powiód³ siê: '%s'"
++
++#: src/common/lpd_rcvjob.c:697
++msgid "Scan_block_file: read unexecpted EOF"
++msgstr "Scan_block_file: nieoczekiwany EOF przy odczycie"
++
++#: src/common/lpd_rcvjob.c:832
++#, c-format
++msgid "%s: no permission to print"
++msgstr "%s: brak uprawnieñ do drukowania"
++
++#: src/common/lpd_rcvjob.c:1273
++#, c-format
++msgid "Get_route: no identifier for '%s'"
++msgstr "Get_route: brak identyfikatora dla '%s'"
++
++#: src/common/lpd_remove.c:72
++msgid "missing user or printer name"
++msgstr "brak nazwy u¿ytkownika lub drukarki"
++
++#: src/common/lpd_remove.c:80 src/common/lpd_status.c:177
++#, c-format
++msgid "printer '%s' has illegal character at '%s' in name"
++msgstr "drukarka '%s' ma nieprawid³owy znak przy '%s' w nazwie"
++
++#: src/common/lpd_remove.c:109
++#, c-format
++msgid "Job_remove: error '%s'"
++msgstr "Job_remove: b³±d '%s'"
++
++#: src/common/lpd_remove.c:202
++#, c-format
++msgid "Printer %s@%s:\n"
++msgstr "Drukarka %s@%s:\n"
++
++#: src/common/lpd_remove.c:229
++#, c-format
++msgid "  checking perms '%s'\n"
++msgstr "  sprawdzanie uprawnieñ '%s'\n"
++
++#: src/common/lpd_remove.c:246
++#, c-format
++msgid "  no permissions '%s'\n"
++msgstr "  brak uprawnieñ '%s'\n"
++
++#: src/common/lpd_remove.c:255
++#, c-format
++msgid "  dequeued '%s'\n"
++msgstr "  usuniêto z kolejki '%s'\n"
++
++#: src/common/lpd_remove.c:262
++#, c-format
++msgid "error: could not remove '%s'"
++msgstr "b³±d: nie mo¿na usun±æ '%s'"
++
++#: src/common/lpd_remove.c:374
++msgid " ERROR: "
++msgstr " B£¡D: "
++
++#: src/common/lpd_secure.c:82
++#, c-format
++msgid "bad command line '%s'"
++msgstr "b³êdna linia polecenia '%s'"
++
++#: src/common/lpd_secure.c:114
++#, c-format
++msgid "bad printer name '%s'"
++msgstr "b³êdna nazwa drukarki '%s'"
++
++#: src/common/lpd_secure.c:125
++#, c-format
++msgid "bad printer '%s'"
++msgstr "b³êdna drukarka '%s'"
++
++#: src/common/lpd_secure.c:167
++#, c-format
++msgid "unsupported authentication '%s'"
++msgstr "nieobs³ugiwane uwierzytelnienie '%s'"
++
++#: src/common/lpd_secure.c:174
++#, c-format
++msgid "no receive method supported for '%s'"
++msgstr "brak obs³ugiwanej metody otrzymywania dla '%s'"
++
++#: src/common/lpd_status.c:358
++#, c-format
++msgid "%s: no permission to show status"
++msgstr "%s: brak uprawnieñ do pokazania stanu"
++
++#: src/common/lpd_status.c:477
++#, c-format
++msgid " (originally %s)"
++msgstr " (oryginalnie %s)"
++
++#: src/common/lpd_status.c:484
++msgid ""
++"\n"
++" Error: "
++msgstr ""
++"\n"
++" B³±d: "
++
++#: src/common/lpd_status.c:489
++#, c-format
++msgid " - %s"
++msgstr " - %s"
++
++#: src/common/lpd_status.c:492
++#, c-format
++msgid " - printer %s@%s not in printcap"
++msgstr " - drukarka %s@%s nie wystêpuje w printcap"
++
++#: src/common/lpd_status.c:496
++#, c-format
++msgid " - printer %s@%s has bad printcap entry"
++msgstr " - drukarka %s@%s ma b³êdny wpis w printcap"
++
++#: src/common/lpd_status.c:727
++#, c-format
++msgid " <cpy %d/%d>"
++msgstr " <kopia %d/%d>"
++
++#: src/common/lpd_status.c:739
++#, c-format
++msgid " Job: %s"
++msgstr " Zadanie: %s"
++
++#: src/common/lpd_status.c:740
++#, c-format
++msgid "%s status= %s"
++msgstr "%s stan= %s"
++
++#: src/common/lpd_status.c:743
++#, c-format
++msgid "%s size= %0.0f"
++msgstr "%s rozmiar= %0.0f"
++
++#: src/common/lpd_status.c:746
++#, c-format
++msgid "%s time= %s"
++msgstr "%s czas= %s"
++
++#: src/common/lpd_status.c:750
++#, c-format
++msgid "%s error= %s"
++msgstr "%s b³±d= %s"
++
++#: src/common/lpd_status.c:754
++#, c-format
++msgid "%s CONTROL="
++msgstr "%s CONTROL="
++
++#: src/common/lpd_status.c:760
++#, c-format
++msgid "%s HOLDFILE="
++msgstr "%s HOLDFILE="
++
++#: src/common/lpd_status.c:779
++#, c-format
++msgid " %d job"
++msgid_plural " %d jobs"
++msgstr[0] " %d zadanie"
++msgstr[1] " %d zadania"
++msgstr[2] " %d zadañ"
++
++#: src/common/lpd_status.c:783
++#, c-format
++msgid " (%d held)"
++msgstr " (%d wstrzymanych)"
++
++#: src/common/lpd_status.c:788
++#, c-format
++msgid " (%d move)"
++msgstr " (%d przeniesionych)"
++
++#: src/common/lpd_status.c:811
++#, c-format
++msgid " Comment: %s"
++msgstr " Komentarz: %s"
++
++#: src/common/lpd_status.c:822
++#, c-format
++msgid ""
++"\n"
++" Printing: %s\n"
++" Aborted: %s\n"
++" Spooling: %s"
++msgstr ""
++"\n"
++" Drukowanie: %s\n"
++" Przerwane: %s\n"
++" Buforowanie: %s"
++
++#: src/common/lpd_status.c:868
++#, c-format
++msgid ""
++"\n"
++" %s: "
++msgstr ""
++"\n"
++" %s: "
++
++#: src/common/lpd_status.c:876
++#, c-format
++msgid " (%s"
++msgstr " (%s"
++
++#: src/common/lpd_status.c:891
++#, c-format
++msgid ""
++"\n"
++" Redirected_to: %s"
++msgstr ""
++"\n"
++" Przekierowane_do: %s"
++
++#: src/common/lpd_status.c:894
++#, c-format
++msgid " (redirect %s)"
++msgstr " (przekierowanie %s)"
++
++#: src/common/lpd_status.c:904
++#, c-format
++msgid " (dest %s@%s)"
++msgstr " (cel %s@%s)"
++
++#: src/common/lpd_status.c:911
++#, c-format
++msgid ""
++"\n"
++" Serving: %s"
++msgstr ""
++"\n"
++" Wysy³anie: %s"
++
++#: src/common/lpd_status.c:914
++#, c-format
++msgid " (serving %s)"
++msgstr " (wysy³anie %s)"
++
++#: src/common/lpd_status.c:921
++#, c-format
++msgid ""
++"\n"
++" Classes: %s"
++msgstr ""
++"\n"
++" Klasy: %s"
++
++#: src/common/lpd_status.c:924
++#, c-format
++msgid " (classes %s)"
++msgstr " (klasy %s)"
++
++#: src/common/lpd_status.c:931
++msgid ""
++"\n"
++" Hold_all: on"
++msgstr ""
++"\n"
++" Wstrzymanie_wszystkiego: tak"
++
++#: src/common/lpd_status.c:934
++msgid " (holdall)"
++msgstr " (wstrzymanie wszystkiego)"
++
++#: src/common/lpd_status.c:941
++msgid ""
++"\n"
++" Auto_hold: on"
++msgstr ""
++"\n"
++" Autowstrzymanie: tak"
++
++#: src/common/lpd_status.c:944
++msgid " (autohold)"
++msgstr " (autowstrzymanie)"
++
++#: src/common/lpd_status.c:952
++#, c-format
++msgid ""
++"\n"
++" Message: %s"
++msgstr ""
++"\n"
++" Komunikat: %s"
++
++#: src/common/lpd_status.c:955
++#, c-format
++msgid " (message: %s)"
++msgstr " (komunikat: %s)"
++
++#: src/common/lpd_status.c:992
++msgid " Queue: no printable jobs in queue\n"
++msgstr " Kolejka: brak drukowalnych zadañ w kolejce\n"
++
++#: src/common/lpd_status.c:995
++#, c-format
++msgid " Queue: %d printable job\n"
++msgid_plural " Queue: %d printable jobs\n"
++msgstr[0] " Kolejka: %d drukowalne zadanie\n"
++msgstr[1] " Kolejka: %d drukowalne zadania\n"
++msgstr[2] " Kolejka: %d drukowalnych zadañ\n"
++
++#: src/common/lpd_status.c:1001
++#, c-format
++msgid " Holding: %d held jobs in queue\n"
++msgstr " Wstrzymane: %d wstrzymanych zadañ w kolejce\n"
++
++#: src/common/lpd_status.c:1007
++msgid " Server: no server active"
++msgstr " Serwer: brak aktywnych serwerów"
++
++#: src/common/lpd_status.c:1010
++#, c-format
++msgid " Server: pid %d active"
++msgstr " Serwer: pid %d aktywny"
++
++#: src/common/lpd_status.c:1018
++#, c-format
++msgid " Unspooler: pid %d active"
++msgstr " Unspooler: pid %d aktywny"
++
++#: src/common/lpd_status.c:1030
++#, c-format
++msgid "%s SPOOLCONTROL=\n"
++msgstr "%s SPOOLCONTROL=\n"
++
++#: src/common/lpd_status.c:1044
++msgid " Status: "
++msgstr " Status: "
++
++#: src/common/lpd_status.c:1048
++msgid " Filter_status: "
++msgstr " Status_filtra: "
++
++#: src/common/lpq.c:160
++msgid "authentication requested (-A) and no AUTH environment variable"
++msgstr "¿±dano uwierzytelnienia (-A), ale brak zmiennej ¶rodowiskowej AUTH"
++
++#: src/common/lpq.c:224
++#, c-format
++msgid "Printer: %s is %s@%s\n"
++msgstr "Drukarka: %s to %s@%s\n"
++
++#: src/common/lpq.c:231
++#, c-format
++msgid "Printer: %s - cannot use printer, not in privileged group\n"
++msgstr "Drukarka: %s - nie mo¿na u¿yæ drukarki, spoza grupy uprzywilejowanej\n"
++
++#: src/common/lpq.c:346 src/common/lpq.c:351 src/common/lpq.c:361
++#: src/common/lpq.c:408 src/common/lpq.c:415
++msgid "Printer:"
++msgstr "Drukarka:"
++
++#: src/common/lpq.c:454
++msgid "fork() failed"
++msgstr "fork() nie powiod³o siê"
++
++#: src/common/lpq.c:461
++#, c-format
++msgid "Term_clear: waitpid(%d) failed"
++msgstr "Term_clear: waitpid(%d) nie powiod³o siê"
++
++#: src/common/lpq.c:492
++msgid "lpq:  please use the LPRng lpstat program\n"
++msgstr "lpq:  proszê u¿yæ programu LPRng lpstat\n"
++
++#: src/common/lpq.c:544
++#, c-format
++msgid "usage: %s [-aAclV] [-Ddebuglevel] [-Pprinter] [-tsleeptime]\n"
++msgstr "sk³adnia: %s [-aAclV] [-Dpoz¶ledz] [-Pdrukarka] [-tczasoczek]\n"
++
++#: src/common/lpq.c:545
++msgid ""
++"  -A           - use authentication specified by AUTH environment variable\n"
++msgstr ""
++"  -A           - u¿ycie uwierzytelnienia zgodnego ze zmienn± ¶rodowiskow± "
++"AUTH\n"
++
++#: src/common/lpq.c:546 src/common/lprm.c:357
++msgid "  -a           - all printers\n"
++msgstr "  -a           - wszystkie drukarki\n"
++
++#: src/common/lpq.c:547
++msgid "  -c           - clear screen before update\n"
++msgstr "  -c           - wyczyszczenie ekranu przed uaktualnieniem\n"
++
++#: src/common/lpq.c:548
++msgid "  -l           - increase (lengthen) detailed status information\n"
++msgstr ""
++"  -l           - zwiêkszenie (wyd³u¿enie) szczegó³owych informacji o stanie\n"
++
++#: src/common/lpq.c:549
++msgid "                 additional l flags add more detail.\n"
++msgstr "                 dodatkowe flagi l dodaj± wiêcej szczegó³ów.\n"
++
++#: src/common/lpq.c:550
++msgid "  -L           - maximum detailed status information\n"
++msgstr "  -L           - najbardziej szczegó³owe informacje o stanie\n"
++
++#: src/common/lpq.c:551
++msgid "  -n linecount - linecount lines of detailed status information\n"
++msgstr "  -n linii     - tyle linii szczegó³owych informacji o stanie\n"
++
++#: src/common/lpq.c:553
++msgid "  -Pprinter    - specify printer\n"
++msgstr "  -Pdrukarka   - podanie drukarki\n"
++
++#: src/common/lpq.c:554
++msgid "  -s           - short (summary) format\n"
++msgstr "  -s           - krótki (sumaryczny) format\n"
++
++#: src/common/lpq.c:555
++msgid "  -tsleeptime  - sleeptime between updates\n"
++msgstr "  -tczasoczek  - czas oczekiwania miêdzy uaktualnieniami\n"
++
++#: src/common/lpq.c:556
++msgid "  -V           - print version information\n"
++msgstr "  -V           - wypisanie informacji o wersji\n"
++
++#: src/common/lpr.c:160
++msgid "nothing to print"
++msgstr "nie ma niczego do wydrukowania"
++
++#: src/common/lpr.c:165
++msgid "cannot use printer - not in privileged group\n"
++msgstr "nie mo¿na u¿yæ drukarki - spoza uprzywilejowalnej grupy\n"
++
++#: src/common/lpr.c:171
++#, c-format
++msgid "no remote support for %s@%s"
++msgstr "brak zdalnej obs³ugi dla %s@%s"
++
++#: src/common/lpr.c:182
++#, c-format
++msgid "%d data files and maximum allowed %d"
++msgstr "%d plików danych, a dozwolone %d"
++
++#: src/common/lpr.c:224 src/common/lpr.c:1155
++#, c-format
++msgid "Cannot open file '%s', %s"
++msgstr "Nie mo¿na otworzyæ pliku '%s': %s"
++
++#: src/common/lpr.c:235
++msgid "(lpr_filter)"
++msgstr "(filtr_lpr)"
++
++#: src/common/lpr.c:303
++msgid ""
++"Status Information:\n"
++" "
++msgstr ""
++"Informacje o stanie:\n"
++" "
++
++#: src/common/lpr.c:311
++#, c-format
++msgid "job failed - %s\n"
++msgstr "zadanie nie powiod³o siê - %s\n"
++
++#: src/common/lpr.c:324
++#, c-format
++msgid "request id is %s\n"
++msgstr "id ¿±dania to %s\n"
++
++#: src/common/lpr.c:327
++#, c-format
++msgid "request id is %d\n"
++msgstr "id ¿±dania to %d\n"
++
++#: src/common/lpr.c:339
++#, c-format
++msgid "Error unlinking '%s' - %s"
++msgstr "B³±d podczas usuwania '%s' - %s"
++
++#: src/common/lpr.c:347
++#, c-format
++msgid "Done %d\n"
++msgstr "Zakoñczono %d\n"
++
++#: src/common/lpr.c:404 src/common/lpr.c:578
++msgid "USER environment variable undefined"
++msgstr "Nie zdefiniowana zmienna ¶rodowiskowa USER"
++
++#: src/common/lpr.c:422
++msgid "-ncopies -number of copies must be greater than 0\n"
++msgstr "-nkopii - liczba kopii musi byæ wiêksza od 0\n"
++
++#: src/common/lpr.c:426
++msgid "nobanner"
++msgstr "beznag³ówka"
++
++#: src/common/lpr.c:429
++msgid "width"
++msgstr "szeroko¶æ"
++
++#: src/common/lpr.c:505
++#, c-format
++msgid "bad -F format string '%s'\n"
++msgstr "b³êdny ³añcuch formatuj±cy -F '%s'\n"
++
++#: src/common/lpr.c:508
++#, c-format
++msgid "duplicate format specification -F%s\n"
++msgstr "powtórzona specyfikacja formatu -F%s\n"
++
++#: src/common/lpr.c:520
++msgid "-Kcopies -number of copies must be greater than 0\n"
++msgstr "-Kkopii - liczba kopii musi byæ wiêksza od 0\n"
++
++#: src/common/lpr.c:583
++msgid "Missing mail name"
++msgstr "Brak nazwy dla poczty"
++
++#: src/common/lpr.c:597
++#, c-format
++msgid "duplicate format specification -%c\n"
++msgstr "powtórzona specyfikacja formatu -%c\n"
++
++#: src/common/lpr.c:640
++#, c-format
++msgid ""
++"Usage: %s [-Pprinter[@host]] [-A] [-B] [-Cclass] [-Fformat] [-G] [-Jinfo]\n"
++msgstr ""
++"Sk³adnia: %s [-Pdrukarka[@host]] [-A] [-B] [-Cklasa] [-Fformat] [-G] [-"
++"Jinfo]\n"
++
++#: src/common/lpr.c:641
++msgid ""
++"   [-(K|#)copies] [-Q] [-Raccountname]  [-Ttitle]  [-Uuser[@host]] [-V]\n"
++msgstr ""
++"   [-(K|#)kopii] [-Q] [-Rnazwakonta]  [-Ttytu³]  [-Uu¿ytkownik[@host]] [-V]\n"
++
++#: src/common/lpr.c:642
++msgid ""
++"   [-Zoptions] [-b] [-m mailaddr] [-h] [-i indent] [-l] [-w width ] [-r]\n"
++msgstr ""
++"   [-Zopcje] [-b] [-m adrespoczty] [-h] [-i wciêcie] [-l] [-w szeroko¶æ] [-"
++"r]\n"
++
++#: src/common/lpr.c:643
++msgid "   [-Ddebugopt ] [--] [ filenames ...  ]\n"
++msgstr "   [-Dopc¶ledz ] [--] [ nazwy plików ...  ]\n"
++
++#: src/common/lpr.c:644 src/common/lpr.c:683
++msgid ""
++" -A          - use authentication specified by AUTH environment variable\n"
++msgstr ""
++" -A          - u¿ycie uwierzytelnienia zgodnego ze zmienn± ¶rodowiskow± "
++"AUTH\n"
++
++#: src/common/lpr.c:645 src/common/lpr.c:684
++msgid ""
++" -B          - filter files and reduce job to single file before sending\n"
++msgstr ""
++" -B          - filtrowanie plików i zmniejszenie zadania do pojedynczego "
++"pliku\n"
++"                 przed wys³aniem\n"
++
++#: src/common/lpr.c:646
++msgid " -C class    - job class\n"
++msgstr "  -C klasa   - klasa zadania\n"
++
++#: src/common/lpr.c:647
++msgid " -D debugopt - debugging flags\n"
++msgstr " -D opc¶ledz - flagi ¶ledzenia\n"
++
++#: src/common/lpr.c:648
++msgid " -F format   - job format\n"
++msgstr " -F format   - format zadania\n"
++
++#: src/common/lpr.c:649
++msgid "   -b,-l        - binary or literal format\n"
++msgstr "   -b,-l        - format binarny lub dok³adny\n"
++
++#: src/common/lpr.c:650
++msgid "    c,d,f,g,l,m,p,t,v are also format options\n"
++msgstr "    c,d,f,g,l,m,p,t,v tak¿e s± opcjami formatu\n"
++
++#: src/common/lpr.c:651 src/common/lpr.c:689
++msgid " -G          - filter individual job files before sending\n"
++msgstr ""
++" -G          - filtrowanie poszczególnych plików zadañ przed wys³aniem\n"
++
++#: src/common/lpr.c:652
++msgid " -J info     - banner and job information\n"
++msgstr " -J info     - informacje o nag³ówku i zadaniu\n"
++
++#: src/common/lpr.c:653
++msgid " -K copies, -# copies   - number of copies\n"
++msgstr " -K kopii, -# kopii     - liczba kopii\n"
++
++#: src/common/lpr.c:654
++msgid " -P printer[@host] - printer on host\n"
++msgstr " -P drukarka[@host] - drukarka na ho¶cie\n"
++
++#: src/common/lpr.c:655
++msgid " -Q          - put 'queuename' in control file\n"
++msgstr " -Q          - umieszczenie 'nazwy kolejki' w pliku kontrolnym\n"
++
++#: src/common/lpr.c:656
++msgid " -Raccntname - accounting information\n"
++msgstr " -Rnazwakonta - informacje do rozliczeñ\n"
++
++#: src/common/lpr.c:657
++msgid " -T title    - title for 'pr' (-p) formatting\n"
++msgstr " -T tytu³    - tytu³ dla formatowania 'pr' (-p)\n"
++
++#: src/common/lpr.c:658
++msgid " -U username - override user name (restricted)\n"
++msgstr " -U u¿ytkownik - wymuszenie nazwy u¿ytkownika (ograniczone)\n"
++
++#: src/common/lpr.c:659
++msgid " -V          - Verbose information during spooling\n"
++msgstr " -V          - szczegó³owe informacje podczas kolejkowania\n"
++
++#: src/common/lpr.c:660 src/common/lpr.c:703
++msgid " -X path     - user specified filter for job files\n"
++msgstr " -X ¶cie¿ka  - w³asny filtr dla plików zadañ\n"
++
++#: src/common/lpr.c:661 src/common/lpr.c:704
++msgid " -Y          - connect and send to TCP/IP port (direct mode)\n"
++msgstr ""
++" -Y          - po³±czenie i wys³anie na port TCP/IP (tryb bezpo¶redni)\n"
++
++#: src/common/lpr.c:662
++msgid " -Z options  - options to pass to filter\n"
++msgstr " -Z opcje    - opcje do przekazania do filtra\n"
++
++#: src/common/lpr.c:663
++msgid " -h          - no header or banner page\n"
++msgstr " -h          - bez nag³ówka ani strony nag³ówkowej\n"
++
++#: src/common/lpr.c:664
++msgid " -i indent   - indentation\n"
++msgstr " -i wciêcie  - obs³uga wciêæ\n"
++
++#: src/common/lpr.c:665
++msgid " -k          - do not use tempfile when sending to server\n"
++msgstr ""
++" -k          - nie u¿ywanie pliku tymczasowego przy wysy³aniu do serwera\n"
++
++#: src/common/lpr.c:666
++msgid " -m mailaddr - mail final status to mailaddr\n"
++msgstr " -m adres    - wys³anie statusu poczt± na adres\n"
++
++#: src/common/lpr.c:667
++msgid " -r          - remove files after spooling\n"
++msgstr " -r          - usuniêcie plików po skolejkowaniu\n"
++
++#: src/common/lpr.c:668
++msgid " -w width    - width to use\n"
++msgstr " -w szer     - szeroko¶æ do wykorzystania\n"
++
++#: src/common/lpr.c:669 src/common/lpr.c:706
++msgid " --          - end of options, files follow\n"
++msgstr " --          - koniec opcji, reszta to pliki\n"
++
++#: src/common/lpr.c:670 src/common/lpr.c:707
++msgid " filename '-'  reads from STDIN\n"
++msgstr " nazwa pliku '-' oznacza odczyt z STDIN\n"
++
++#: src/common/lpr.c:671
++msgid ""
++" PRINTER, LPDEST, NPRINTER, NGPRINTER environment variables set default "
++"printer.\n"
++msgstr ""
++" Zmienne PRINTER, LPDEST, NPRINTER, NGPRINTER wybieraj± domy¶ln± drukarkê.\n"
++
++#: src/common/lpr.c:675
++#, c-format
++msgid "Usage: %s [-A] [-B] [-c] [-G] [-m] [-p] [-s] [-w] [-d printer@[host]]\n"
++msgstr ""
++"Sk³adnia: %s [-A] [-B] [-c] [-G] [-m] [-p] [-s] [-w] [-d drukarka[@host]]\n"
++
++#: src/common/lpr.c:676
++msgid "  [-f form-name] [-H special-handling]\n"
++msgstr "  [-f nazwa-form] [-H specjalna-obs³uga]\n"
++
++#: src/common/lpr.c:677
++msgid "  [-n number] [-o options] [-P page-list]\n"
++msgstr "  [-n liczba] [-o opcje] [-P lista-stron]\n"
++
++#: src/common/lpr.c:678
++msgid "  [-q priority-level] [-S character-set]\n"
++msgstr "  [-q priorytet] [-S zestaw-znaków]\n"
++
++#: src/common/lpr.c:679
++msgid "  [-S print-wheel] [-t title]\n"
++msgstr "  [-S print-wheel] [-t tytu³]\n"
++
++#: src/common/lpr.c:680
++msgid "  [-T content-type [-r]] [-y mode-list]\n"
++msgstr "  [-T content-type [-r]] [-y lista-trybów]\n"
++
++#: src/common/lpr.c:681
++msgid "  [-Ddebugopt ] [ filenames ...  ]\n"
++msgstr "  [-Dopcje¶ledz ] [ nazwy plików ...  ]\n"
++
++#: src/common/lpr.c:682
++msgid " lp simulator using LPRng,  functionality may differ slightly\n"
++msgstr " symulator lp u¿ywaj±cy LPRng, funkcjonalno¶æ mo¿e siê nieco ró¿niæ\n"
++
++#: src/common/lpr.c:685
++msgid " -c          - (make copy before printing - ignored)\n"
++msgstr " -c          - (tworzenie kopii przed drukowaniem - ignorowane)\n"
++
++#: src/common/lpr.c:686
++msgid " -d printer[@host]  - printer on host\n"
++msgstr " -d drukarka[@host] - drukarka na ho¶cie\n"
++
++#: src/common/lpr.c:687
++msgid " -D debugflags  - debugging flags\n"
++msgstr " -D opcje¶ledz  - flagi ¶ledzenia\n"
++
++#: src/common/lpr.c:688
++msgid " -f formname - first letter used as job format\n"
++msgstr " -f nazwaformatu - pierwsza litera u¿ywana jako format zadania\n"
++
++#: src/common/lpr.c:690
++msgid " -H handling - (passed as -Z handling)\n"
++msgstr " -H obs³uga - (przekazywane jako -Z obs³uga)\n"
++
++#: src/common/lpr.c:691
++msgid " -m          - mail sent to $USER on completion\n"
++msgstr " -m          - wys³anie poczty do $USER po zakoñczeniu zadania\n"
++
++#: src/common/lpr.c:692
++msgid " -n copies   - number of copies\n"
++msgstr " -n kopii    - liczba kopii\n"
++
++#: src/common/lpr.c:693
++msgid " -o option     nobanner, width recognized\n"
++msgstr " -o opcja      rozpoznawane: nobanner, width\n"
++
++#: src/common/lpr.c:694
++msgid "               (others passed as -Z option)\n"
++msgstr "               (inne przekazywane jako opcja -Z)\n"
++
++#: src/common/lpr.c:695
++msgid " -P pagelist - (print page list - ignored)\n"
++msgstr " -P listastron - (lista stron do drukowania - ignorowana)\n"
++
++#: src/common/lpr.c:696
++msgid " -p          - (notification on completion - ignored)\n"
++msgstr " -p          - (powiadomienie po zakoñczeniu - ignorowane)\n"
++
++#: src/common/lpr.c:697
++msgid " -q          - priority - 0 -> Z (highest), 25 -> A (lowest)\n"
++msgstr " -q          - priorytet - 0 -> Z (najwy¿szy), 25 -> A (najni¿szy)\n"
++
++#: src/common/lpr.c:698
++msgid " -s          - (suppress messages - ignored)\n"
++msgstr " -s          - (pominiêcie komunikatów - ignorowane)\n"
++
++#: src/common/lpr.c:699
++msgid " -S charset  - (passed as -Z charset)\n"
++msgstr " -S zestaw   - (zestaw znaków - przekazywany jako -Z zestaw)\n"
++
++#: src/common/lpr.c:700
++msgid " -t title    - job title\n"
++msgstr " -t tytu³    - tytu³ zadania\n"
++
++#: src/common/lpr.c:701
++msgid " -T content  - (passed as -Z content)\n"
++msgstr " -T tre¶æ    - (przekazywane jako -Z tre¶æ)\n"
++
++#: src/common/lpr.c:702
++msgid " -w          - (write message on completion - ignored)\n"
++msgstr " -w          - (wypisanie komunikatu po zakoñczeniu - ignorowane)\n"
++
++#: src/common/lpr.c:705
++msgid " -y mode     - (passed as -Z mode)\n"
++msgstr " -y tryb     - (przekazywane jako -Z tryb)\n"
++
++#: src/common/lpr.c:708
++msgid ""
++" PRINTER, LPDEST, NGPRINTER, NPRINTER environment variables set default "
++"printer.\n"
++msgstr ""
++" Zmienne PRINTER, LPDEST, NGPRINTER, NPRINTER wybieraj± domy¶ln± drukarkê.\n"
++
++#: src/common/lpr.c:795
++msgid "Priority (first letter of Class) not 'A' (lowest) to 'Z' (highest)"
++msgstr ""
++"Priorytet (pierwsza litera klasy), nie 'A' (najni¿szy) do 'Z' (najwy¿szy)"
++
++#: src/common/lpr.c:819 src/common/lpr.c:824
++msgid "(STDIN)"
++msgstr "(STDIN)"
++
++#: src/common/lpr.c:873
++msgid "-U (username) can only be used by ROOT"
++msgstr "-U (u¿ytkownik) mo¿e byæ podany tylko przez ROOTa"
++
++#: src/common/lpr.c:889
++#, c-format
++msgid "Get_local_host: '%s' FQDN name not found!"
++msgstr "Get_local_host: nie znaleziono nazwy FQDN '%s'!"
++
++#: src/common/lpr.c:916
++#, c-format
++msgid "Bad format specification '%c'"
++msgstr "B³êdne okre¶lenie formatu '%c'"
++
++#: src/common/lpr.c:923
++#, c-format
++msgid "Sorry, can only print %d files at a time, split job up"
++msgstr ""
++"Niestety, mo¿na drukowaæ tylko %d plików jednocze¶nie, trzeba podzieliæ "
++"zadanie"
++
++#: src/common/lpr.c:929
++#, c-format
++msgid "Maximum of %d copies allowed"
++msgstr "Dozwolone maksymalnie %d kopii"
++
++#: src/common/lpr.c:993
++msgid "authentication conficts with -k option"
++msgstr "uwierzytelnienie jest w konflikcie z opcj± -k"
++
++#: src/common/lpr.c:996
++msgid "send_block_format configuration option conficts with -k option"
++msgstr "opcja konfiguracji send_block_format jest w konflikcie z opcj± -k"
++
++#: src/common/lpr.c:999
++msgid "send_data_first configuration option conficts with -k option"
++msgstr "opcja konfiguracji send_data_first jest w konflikcie z opcj± -k"
++
++#: src/common/lpr.c:1002
++msgid "multiple copies conficts with -k option"
++msgstr "wiele kopii jest w konflikcie z opcj± -k"
++
++#: src/common/lpr.c:1005
++msgid "files on command line conflicts with -k option"
++msgstr "pliki w linii poleceñ s± w konflikcie z opcj± -k"
++
++#: src/common/lpr.c:1092
++msgid "Make_temp_fd failed"
++msgstr "Make_temp_fd nie powiod³o siê"
++
++#: src/common/lpr.c:1094
++msgid "You have closed STDIN! cannot pipe from a closed connection"
++msgstr ""
++"STDIN jest zamkniête! nie mo¿na utworzyæ potoku z zamkniêtego po³±czenia"
++
++#: src/common/lpr.c:1101
++msgid "Copy_STDIN: write to temp file failed"
++msgstr "Copy_STDIN: zapis do pliku tymczasowego nie powiód³ siê"
++
++#: src/common/lpr.c:1106
++#, c-format
++msgid "Copy_STDIN: stat of temp fd '%d' failed"
++msgstr "Copy_STDIN: stat na tymczasowym deskryptorze '%d' nie powiod³o siê"
++
++#: src/common/lpr.c:1162
++#, c-format
++msgid "Check_files: stat of temp fd '%d' failed"
++msgstr "Check_files: stat na tymczasowym deskryptorze '%d' nie powiod³o siê"
++
++#: src/common/lpr.c:1204
++#, c-format
++msgid "cannot print '%s': %s"
++msgstr "nie mo¿na wydrukowaæ '%s': %s"
++
++#: src/common/lpr.c:1213
++msgid "not a regular file"
++msgstr "nie jest zwyk³ym plikiem"
++
++#: src/common/lpr.c:1218
++msgid "cannot read it"
++msgstr "nie mo¿na tego przeczytaæ"
++
++#: src/common/lpr.c:1222
++msgid "executable program"
++msgstr "program wykonywalny"
++
++#: src/common/lpr.c:1224
++msgid "archive file"
++msgstr "plik archiwum"
++
++#: src/common/lpr.c:1237
++msgid ""
++"unprintable characters at start of file, check your LANG environment "
++"variable as well as the input file"
++msgstr ""
++"niedrukowalne znaki na pocz±tku pliku - nale¿y sprawdziæ zmienn± "
++"¶rodowiskow± LANG oraz plik wej¶ciowy"
++
++#: src/common/lpr.c:1365
++#, c-format
++msgid "option '%c' missing argument"
++msgstr "przy opcji '%c' brakuje argumentu"
++
++#: src/common/lpr.c:1384
++#, c-format
++msgid "option %c parameter `%s` is not positive integer value"
++msgstr "przy opcji %c parametr `%s` nie jest dodatni± liczb± ca³kowit±"
++
++#: src/common/lpr.c:1388
++#, c-format
++msgid "option %c parameter `%s` is not integer value from 0 - %d"
++msgstr "przy opcji %c parametr `%s` nie jest liczb± ca³kowit± od 0 do %d"
++
++#: src/common/lprm.c:239
++#, c-format
++msgid "Printer: %s - cannot remove jobs from device '%s'\n"
++msgstr "Drukarka: %s - nie mo¿na usun±æ zadañ z urz±dzenia '%s'\n"
++
++#: src/common/lprm.c:251
++#, c-format
++msgid "Printer: %s - not in privileged group\n"
++msgstr "Drukarka: %s - spoza uprzywilejowanej grupy\n"
++
++#: src/common/lprm.c:341
++#, c-format
++msgid " usage: %s [-A] [-Ddebuglevel] (jobid|user|'all')* [printer]\n"
++msgstr ""
++" sk³adnia: %s [-A] [-Dopcje¶ledz] (idzad|u¿ytkownik|'all')* [drukarka]\n"
++
++#: src/common/lprm.c:342 src/common/lprm.c:358
++msgid "  -A           - use authentication\n"
++msgstr "  -A           - u¿ycie uwierzytelnienia\n"
++
++#: src/common/lprm.c:344 src/common/lprm.c:363
++msgid "  user           removes user jobs\n"
++msgstr "  u¿ytkownik     usuniêcie zadañ u¿ytkownika\n"
++
++#: src/common/lprm.c:345 src/common/lprm.c:364
++msgid "  all            removes all jobs\n"
++msgstr "  all            usuniêcie wszystkich zadañ\n"
++
++#: src/common/lprm.c:346 src/common/lprm.c:365
++msgid "  jobid          removes job number jobid\n"
++msgstr "  idzad          usuniêcie zadania o tym identyfikatorze\n"
++
++#: src/common/lprm.c:347 src/common/lprm.c:366
++msgid " Example:\n"
++msgstr " Przyk³ad:\n"
++
++#: src/common/lprm.c:348
++msgid "    'clean 30 lp' removes job 30 on printer lp\n"
++msgstr "    'clean 30 lp' usuwa zadanie 30 z drukarki lp\n"
++
++#: src/common/lprm.c:349
++msgid "    'clean'       removes first job on default printer\n"
++msgstr "    'clean'       usuwa pierwsze zadanie z domy¶lnej drukarki\n"
++
++#: src/common/lprm.c:350
++msgid "    'clean all'      removes all your jobs on default printer\n"
++msgstr ""
++"    'clean all'      usuwa wszystkie w³asne zadania z domy¶lnej drukarki\n"
++
++#: src/common/lprm.c:351
++msgid "    'clean all all'  removes all your jobs on all printers\n"
++msgstr ""
++"    'clean all all'  usuwa wszystkie w³asne zadania ze wszystkich drukarek\n"
++
++#: src/common/lprm.c:352
++msgid "  Note: clean removes only jobs for which you have removal permission\n"
++msgstr ""
++"  Uwaga: clean usuwa tylko te zadania, do których ma siê prawo usuwania\n"
++
++#: src/common/lprm.c:356
++#, c-format
++msgid " usage: %s [-A] [-a | -Pprinter] [-Ddebuglevel] (jobid|user|'all')*\n"
++msgstr ""
++" sk³adnia: %s [-A] [-a | -Pdrukarka] [-Dpoz¶ledz] (idzad|u¿ytkownik|'all')*\n"
++
++#: src/common/lprm.c:359
++msgid "  -Pprinter    - printer (default PRINTER environment variable)\n"
++msgstr ""
++"  -Pdrukarka   - drukarka (domy¶lna jest podana przez zmienn± PRINTER)\n"
++
++#: src/common/lprm.c:360
++msgid "  -Uuser       - impersonate this user (root or privileged user only)\n"
++msgstr ""
++"  -Uu¿ytkownik - wcielenie siê w u¿ytkownika (tylko root lub "
++"uprzywilejowani)\n"
++
++#: src/common/lprm.c:362
++msgid "  -V           - show version information\n"
++msgstr "  -V           - pokazanie informacji o wersji\n"
++
++#: src/common/lprm.c:367
++msgid "    'lprm -Plp 30' removes job 30 on printer lp\n"
++msgstr "    'lprm -Plp 30' usuwa zadanie 30 z drukarki lp\n"
++
++#: src/common/lprm.c:368
++msgid "    'lprm -a'      removes all your jobs on all printers\n"
++msgstr ""
++"    'lprm -a'      usuwa wszystkie w³asne zadania ze wszystkich drukarek\n"
++
++#: src/common/lprm.c:369
++msgid "    'lprm -a all'  removes all jobs on all printers\n"
++msgstr "    'lprm -a all'  usuwa wszystkie zadania ze wszystkich drukarek\n"
++
++#: src/common/lprm.c:370
++msgid "  Note: lprm removes only jobs for which you have removal permission\n"
++msgstr "  Uwaga: lprm usuwa tylko zadania do których ma siê prawo usuwania\n"
++
++#: src/common/lpstat.c:116
++msgid ""
++"lpstat: requested authenticated transfer (-A) and AUTH environment variable "
++"not set"
++msgstr ""
++"lpstat: ¿±dano uwierzytelnienia (-A), ale nie ustawiono zmiennej "
++"¶rodowiskowej AUTH"
++
++#: src/common/lpstat.c:164
++msgid "scheduler is running\n"
++msgstr "scheduler dzia³a\n"
++
++#: src/common/lpstat.c:168
++msgid "no system default destination\n"
++msgstr "nie ma celu domy¶lnego dla systemu\n"
++
++#: src/common/lpstat.c:171
++#, c-format
++msgid "system default destination: %s\n"
++msgstr "domy¶lny cel systemu: %s\n"
++
++#: src/common/lpstat.c:179
++#, c-format
++msgid "system for %s: %s\n"
++msgstr "system dla %s: %s\n"
++
++#: src/common/lpstat.c:223
++#, c-format
++msgid "  Printer: %s - cannot use printer, not in privileged group\n"
++msgstr ""
++"  Drukarka: %s - nie mo¿na u¿yæ drukarki, spoza grupy uprzywilejowanej\n"
++
++#: src/common/lpstat.c:232
++#, c-format
++msgid " Printer: %s - direct connection to device '%s'\n"
++msgstr " Drukarka: %s - bezpo¶rednie po³±czenie z urz±dzeniem '%s'\n"
++
++#: src/common/lpstat.c:361
++#, c-format
++msgid "%s accepting requests since %s\n"
++msgstr "%s: akceptuje ¿±dania od %s\n"
++
++#: src/common/lpstat.c:365
++#, c-format
++msgid ""
++"%s not accepting requests since %s -\n"
++"\tunknown reason\n"
++msgstr ""
++"%s nie akceptuje ¿±dañ od %s -\n"
++"\tprzyczyna nieznana\n"
++
++#: src/common/lpstat.c:372
++#, c-format
++msgid "printer %s unknown state. %s since %s. available\n"
++msgstr "drukarka %s w nieznanym stanie. %s od %s. dostêpna\n"
++
++#: src/common/lpstat.c:379
++#, c-format
++msgid "\tDescription: %s@%s\n"
++msgstr "\tOpis: %s@%s\n"
++
++#: src/common/lpstat.c:587
++#, c-format
++msgid ""
++"usage: %s [-A] [-d] [-l] [-r] [-R] [-s] [-t] [-a [list]]\n"
++"  [-c [list]] [-f [list]] [-o [list]]\n"
++"  [-p [list]] [-P] [-S [list]] [list]\n"
++"  [-u [login-ID-list]] [-v [list]] [-V] [-n] [-Tdbgflags]\n"
++" list is a list of print queues\n"
++" -A        use authentication specified by AUTH environment variable\n"
++" -a [list] destination status *\n"
++" -c [list] class status *\n"
++" -d        print default destination\n"
++" -f [list] forms status *\n"
++" -o [list] job or printer status *\n"
++" -n        each -n increases number of status lines (default 1) *\n"
++" -N        maximum number of status lines *\n"
++" -p [list] printer status *\n"
++" -P        paper types - ignored\n"
++" -r        scheduler status\n"
++" -s        summary status information - short format\n"
++" -S [list] character set - ignored\n"
++" -t        all status information - long format\n"
++" -u [joblist] job status information\n"
++" -v [list] printer mapping *\n"
++" -V        verbose mode \n"
++" -Tdbgflags debug flags\n"
++"    * - long status format produced\n"
++msgstr ""
++"sk³adnia: %s [-A] [-d] [-l] [-r] [-R] [-s] [-t] [-a [lista]]\n"
++"  [-c [lista]] [-f [lista]] [-o [lista]]\n"
++"  [-p [lista]] [-P] [-S [lista]] [lista]\n"
++"  [-u [lista-login-ID]] [-v [lista]] [-V] [-n] [-Topc¶ledz]\n"
++" lista to lista kolejek wydruków\n"
++" -A         u¿ycie uwierzytelnienia zgodnego ze zmienn± ¶rodowiskow± AUTH\n"
++" -a [lista] stan dla celu *\n"
++" -c [lista] stan dla klasy *\n"
++" -d         wypisanie domy¶lnego celu\n"
++" -f [lista] stan dla form *\n"
++" -o [lista] stan dla zadania lub drukarki\n"
++" -n         ka¿de -n zwiêksza liczbê linii stanu (domy¶lnie 1) *\n"
++" -N         maksymalna liczba linii stanu *\n"
++" -p [lista] stan dla drukarki *\n"
++" -P         rodzaje papieru - ignorowane\n"
++" -r         stan schedulera\n"
++" -s         podsumowanie informacji o stanie - krótki format\n"
++" -S [lista] zestaw znaków - ignorowany\n"
++" -t         wszystkie informacje o stanie - d³ugi format\n"
++" -u [lista-zadañ] informacje o stanie zadañ\n"
++" -v [lista] przypisanie drukarki *\n"
++" -V         tryb z du¿± ilo¶ci± informacji\n"
++" -Topc¶ledz flagi ¶ledzenia\n"
++"    * - stan wy¶wietlany jest w d³ugim formacie\n"
++
++#: src/common/sendjob.c:167
++#, c-format
++msgid "sleeping %d secs before retry, starting sleep"
++msgstr "czekanie %d sekund przed powtórzeniem, rozpoczêcie czekania"
++
++#: src/common/sendmail.c:87
++#, c-format
++msgid "printer %s job %s"
++msgstr "drukarka %s zadanie %s"
++
++#: src/common/sendmail.c:93
++msgid " was successful.\n"
++msgstr " powiod³o siê.\n"
++
++#: src/common/sendmail.c:98
++msgid " failed, and retry count was exceeded.\n"
++msgstr " nie powiod³o siê, licznik prób wygas³.\n"
++
++#: src/common/sendmail.c:103
++msgid " failed and could not be retried.\n"
++msgstr " nie powiod³o siê i próba nie mo¿e byæ powtórzona.\n"
++
++#: src/common/sendmail.c:108
++msgid " died a horrible death.\n"
++msgstr " zmar³o okropn± ¶mierci±.\n"
++
++#: src/common/sendreq.c:118
++#, c-format
++msgid "no network support for '%s' operation"
++msgstr "brak obs³ugi sieci dla operacji '%s'"
