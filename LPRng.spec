@@ -6,7 +6,7 @@ Summary(uk):	Û–’Ã≈“ ƒ“’À’ LPRng
 Summary(zh_CN):	LPRng--¥Ú”°≥Ã–Ú
 Name:		LPRng
 Version:	3.8.21
-Release:	1
+Release:	2
 License:	GPL
 Group:		Applications/System
 Source0:	ftp://ftp.lprng.com/pub/LPRng/LPRng/%{name}-%{version}.tgz
@@ -22,6 +22,7 @@ Patch2:		%{name}-no_dupl_DESDIR.patch
 Patch3:		%{name}-ngettext.patch
 Patch4:		%{name}-missing-nls.patch
 Patch5:		%{name}-pl.po.patch
+Patch6:		%{name}-types.patch
 URL:		http://www.astart.com/lprng/LPRng.html
 BuildRequires:	autoconf
 BuildRequires:	automake
@@ -66,9 +67,9 @@ Sites.
 
 %description -l pl
 LPRng jest rozszerzon±, ulepszon± i portowaln± implementacj±
-Berkeley'owskiego LPR print spooler'a. Dostarcza ten sam interfejs
-oraz jest zgodny z wymaganiami RFC1179. Jednocze∂nie wykonanie jest
-ca≥kowicie nowe i dostarcza nastÍpuj±ce rzeczy:
+Berkeleyowskiego LPR, czyli spoolera wydrukÛw. Dostarcza ten sam
+interfejs oraz jest zgodny z wymaganiami RFC1179. Jednocze∂nie
+wykonanie jest ca≥kowicie nowe i dostarcza nastÍpuj±ce rzeczy:
 - programy - "lekki" lpr (nie s± potrzebne øadne bazy danych), lpc,
   oraz lprm;
 - dynamiczna redyrekcja do kolejek;
@@ -79,7 +80,7 @@ ca≥kowicie nowe i dostarcza nastÍpuj±ce rzeczy:
 - mocno rozszerzona kontrola bezpieczeÒstwa;
 - mocno rozszerzone mechanizmy bezpieczeÒstwa i kontroli uprawnieÒ.
 
-Oprogramowanie to kompiluje siÍ i dzia≥a na wielu systemach UNIX'owych
+Oprogramowanie to kompiluje siÍ i dzia≥a na wielu systemach uniksowych
 i jest kompatybilne z innymi print spoolami oraz drukarkami
 sieciowymi, ktÛre uøywaj± interfejsu LPR oraz spe≥niaj± wymagania
 RFC1179. LPRng dostarcza pakiety emulacyjne dla programÛw SVR4 lp oraz
@@ -87,7 +88,7 @@ lpstat, eliminuj±c w ten sposÛb konieczno∂Ê posiadania jeszcze jednego
 pakietu print spoola. Te pakiety mog± byÊ modyfikowane zgodnie z
 lokalnymi wymaganiami.
 
-Dla uøytkownikÛw, ktÛrzy potrzebuj± bezpiecznej i autentyfikowanej
+Dla uøytkownikÛw, ktÛrzy potrzebuj± bezpiecznej i uwierzytelnianej
 obs≥ugi drukowania LPRng wspiera Kerberos V, MIT Kerberos IV Print
 Support oraz PGP.
 
@@ -160,6 +161,7 @@ Support ‘¡ ¡’‘≈Œ‘…À¡√¶¿ PGP. LPRng –“… Œ—‘œ ⁄¡ ”‘¡Œƒ¡“‘ ◊ MIT ƒÃ—
 %patch3 -p1
 %patch4 -p1
 %patch5 -p1
+%patch6 -p1
 
 %build
 rm -f missing
