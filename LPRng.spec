@@ -31,8 +31,8 @@ i bezpieczeñstwo.
 CFLAGS="$RPM_OPT_FLAGS" LDFLAGS="-s" \
 ./configure %{_target} \
 	--prefix=/usr 
-#	--with-lpddir=/usr/sbin \
-#	--with-admindir=/usr/sbin
+#	--with-lpddir=%{_sbindir} \
+#	--with-admindir=%{_sbindir}
 
 make
 
@@ -42,8 +42,8 @@ install -d  $RPM_BUILD_ROOT/etc/rc.d/init.d
 
 make install \
 	prefix=$RPM_BUILD_ROOT/usr \
-	INSTALL_LIB=$RPM_BUILD_ROOT/usr/sbin \
-	INSTALL_MAINT=$RPM_BUILD_ROOT/usr/sbin \
+	INSTALL_LIB=$RPM_BUILD_ROOT%{_sbindir} \
+	INSTALL_MAINT=$RPM_BUILD_ROOT%{_sbindir} \
 	SUID_ROOT_PERMS="755"
 
 install $RPM_SOURCE_DIR/lpd.init $RPM_BUILD_ROOT/etc/rc.d/init.d/lpd
@@ -87,7 +87,7 @@ fi
 %doc {Commercial.license,HOWTO,README*,TESTSUPPORT}.gz
 %attr(755,root,root) /etc/rc.d/init.d/lpd
 %attr(755,root,root) %{_bindir}/*
-%attr(755,root,root) /usr/sbin/*
+%attr(755,root,root) %{_sbindir}/*
 %{_mandir}/man[158]/*
 
 %changelog
