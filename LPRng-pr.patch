@@ -1,0 +1,11 @@
+--- LPRng-3.8.4/src/common/vars.c.pr	Mon Jan 21 11:37:13 2002
++++ LPRng-3.8.4/src/common/vars.c	Mon Jan 21 11:37:15 2002
+@@ -374,7 +374,7 @@
+    /*  page length (in lines) */
+ { "pl", 0,  INTEGER_K,  &Page_length_DYN,0,0,"=66"},
+    /*  pr program for p format */
+-{ "pr", 0,  STRING_K,  &Pr_program_DYN,0,0,"=/bin/pr"},
++{ "pr", 0,  STRING_K,  &Pr_program_DYN,0,0,"=/usr/bin/pr"},
+    /* prefix control file line to line, "Z O" -> Z to O, "OS Z" does O and S to Z */
+ { "prefix_option_to_option", 0, STRING_K, &Prefix_option_to_option_DYN,0,0},
+    /* prefix these -Z options to start of options list on outgoing or filters */
