@@ -22,19 +22,15 @@
 [ -f /etc/sysconfig/lpd ] && . /etc/sysconfig/lpd
 
 # Check that networking is up.
-if is_yes "${NETWORKING}"; then
-	if [ ! -f /var/lock/subsys/network -a "$1" != stop -a "$1" != status ]; then
-		msg_network_down LPRng
-		exit 1
-	fi
-else
-	exit 0
+if [ "${NETWORKING}" = "no" ]; then
+	msg_network_down LPRng
+	exit 1
 fi
 
 # Sanity check
 [ -f /etc/printcap ] || exit 0
 
-RETVAL=0
+
 # See how we were called.
 case "$1" in
   start)
@@ -46,8 +42,9 @@ case "$1" in
 		[ $RETVAL -eq 0 ] && touch /var/lock/subsys/lpd
 	else
 		msg_already_running "LPRng"
+		exit 1
 	fi
-	;;
+        ;;
   stop)
 	if [ -f /var/lock/subsys/lpd ]; then
 		msg_stopping "LPRng"
@@ -55,20 +52,20 @@ case "$1" in
 		rm -f /var/lock/subsys/lpd >/dev/null 2>&1
 	else
 		msg_not_running "LPRng"
+		exit 1
 	fi
-	;;
+        ;;
   status)
 	status lpd
 	exit $?
 	;;
-  restart|force-reload)
+  restart|reload)
 	$0 stop
 	$0 start
-	exit $?
 	;;
   *)
-	msg_usage "$0 {start|stop|restart|force-reload|status}"
-	exit 3
+        msg_usage "$0 {start|stop|status|restart|reload}"
+        exit 1
 esac
 
 exit $RETVAL
