@@ -17,7 +17,7 @@ BuildRequires:	automake
 BuildRequires:	gettext-devel
 BuildRequires:	ncurses-devel >= 5.0
 Requires:	/sbin/chkconfig
-Requires:	rc-scripts >= 0.2.0
+Prereq:		rc-scripts >= 0.2.0
 URL:		http://www.astart.com/lprng/LPRng.html
 Provides:	lpr
 Obsoletes:	lpr
