@@ -6,7 +6,7 @@ Summary(uk):	óÐÕÌÅÒ ÄÒÕËÕ LPRng
 Summary(zh_CN):	LPRng--´òÓ¡³ÌÐò
 Name:		LPRng
 Version:	3.8.12
-Release:	1
+Release:	2
 License:	GPL
 Group:		Applications/System
 Source0:	ftp://ftp.lprng.com/pub/LPRng/LPRng/%{name}-%{version}.tgz
@@ -27,7 +27,6 @@ BuildRequires:	ncurses-devel >= 5.0
 Prereq:		/sbin/ldconfig
 Prereq:		/sbin/chkconfig
 Prereq:		rc-scripts >= 0.2.0
-Provides:	lpr
 Obsoletes:	lpr
 Obsoletes:	cups
 Obsoletes:	cups-clients
