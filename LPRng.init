@@ -23,7 +23,7 @@
 
 # Check that networking is up.
 if [ "${NETWORKING}" = "no" ]; then
-	echo "WARNING: Networking is down. LPRng lpd can't be runed."
+	echo "WARNING: Networking is down. LPRng lpd can't be run."
 	exit 1
 fi
 
