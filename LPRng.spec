@@ -9,6 +9,7 @@ Group(pl):	Narzêdzia/System
 Source0:	ftp://ftp.astart.com/pub/LPRng/LPRng/%{name}-%{version}.tgz
 Source1:	ftp://ftp.astart.com/pub/LPRng/LPRng/%{name}_DOC-%{version}.tgz
 Source2:	lpd.init
+Patch:		LPRng-install.patch
 Requires:	/sbin/chkconfig
 URL:		http://www.astart.com/lprng/LPRng.html
 Provides:	lpr
@@ -25,7 +26,8 @@ i bezpieczeñstwo.
 
 %prep
 %setup -q
-# %setup -a1 
+%setup -a1 
+%patch -p0
 
 %build
 CFLAGS="$RPM_OPT_FLAGS" LDFLAGS="-s" \
@@ -44,6 +46,8 @@ make install \
 	prefix=$RPM_BUILD_ROOT/usr \
 	INSTALL_LIB=$RPM_BUILD_ROOT%{_sbindir} \
 	INSTALL_MAINT=$RPM_BUILD_ROOT%{_sbindir} \
+	LPD_CONF_PATH=$RPM_BUILD_ROOT/etc/lpd.conf \
+	LPD_PERMS_PATH=$RPM_BUILD_ROOT/etc/lpd.perms \
 	SUID_ROOT_PERMS="755"
 
 install $RPM_SOURCE_DIR/lpd.init $RPM_BUILD_ROOT/etc/rc.d/init.d/lpd
