@@ -1,6 +1,6 @@
-diff -Nur LPRng-3.8.15.orig/configure.in LPRng-3.8.15/configure.in
---- LPRng-3.8.15.orig/configure.in	Mon Aug 12 01:57:28 2002
-+++ LPRng-3.8.15/configure.in	Mon Nov  4 14:08:10 2002
+diff -Nur LPRng-3.8.19.orig/configure.in LPRng-3.8.19/configure.in
+--- LPRng-3.8.19.orig/configure.in	Mon Aug 12 01:57:28 2002
++++ LPRng-3.8.19/configure.in	Mon Nov  4 14:08:10 2002
 @@ -21,41 +21,23 @@
  AC_SUBST(VERSION)
  ALL_LINGUAS="fr"
@@ -78,10 +78,10 @@ diff -Nur LPRng-3.8.15.orig/configure.in LPRng-3.8.15/configure.in
  
  
  if test "$ac_cv_prog_gcc" = yes; then
--	CFLAGS="$CFLAGS -g -W -Wall -Werror -Wno-unused "
--	CPPFLAGS="$CPPFLAGS -g -W -Wall -Werror -Wno-unused "
-+	CFLAGS="$CFLAGS -W -Wall -Werror -Wno-unused "
-+	CPPFLAGS="$CPPFLAGS -W -Wall -Werror -Wno-unused "
+-	CFLAGS="$CFLAGS -g -W -Wall $werror -Wno-unused "
+-	CPPFLAGS="$CPPFLAGS -g -W -Wall $werror -Wno-unused "
++	CFLAGS="$CFLAGS -W -Wall $werror -Wno-unused "
++	CPPFLAGS="$CPPFLAGS -W -Wall $werror -Wno-unused "
  fi;
  
  AC_OUTPUT(

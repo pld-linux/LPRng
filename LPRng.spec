@@ -5,8 +5,8 @@ Summary(ru):	Спулер печати LPRng
 Summary(uk):	Спулер друку LPRng
 Summary(zh_CN):	LPRng--╢Рс║ЁлпР
 Name:		LPRng
-Version:	3.8.15
-Release:	3
+Version:	3.8.19
+Release:	1
 License:	GPL
 Group:		Applications/System
 Source0:	ftp://ftp.lprng.com/pub/LPRng/LPRng/%{name}-%{version}.tgz
@@ -15,12 +15,11 @@ Source2:	%{name}.conf
 Source3:	%{name}.printcap
 Source4:	http://www.mif.pg.gda.pl/homepages/ankry/man-PLD/%{name}-pl-man-pages.tar.bz2
 Patch0:		%{name}-ac_fixes.patch
-Patch1:		%{name}-nproc-unlimited.patch
-Patch2:		%{name}-lpd-perms.patch
-Patch3:		%{name}-no_dupl_DESDIR.patch
-Patch4:		%{name}-ngettext.patch
-Patch5:		%{name}-missing-nls.patch
-Patch6:		%{name}-pl.po.patch
+Patch1:		%{name}-lpd-perms.patch
+Patch2:		%{name}-no_dupl_DESDIR.patch
+Patch3:		%{name}-ngettext.patch
+Patch4:		%{name}-missing-nls.patch
+Patch5:		%{name}-pl.po.patch
 URL:		http://www.astart.com/lprng/LPRng.html
 BuildRequires:	autoconf
 BuildRequires:	automake
@@ -159,7 +158,6 @@ Support та аутентикац╕ю PGP. LPRng прийнято за стандарт в MIT для
 %patch3 -p1
 %patch4 -p1
 %patch5 -p1
-%patch6 -p1
 
 %build
 rm -f missing
