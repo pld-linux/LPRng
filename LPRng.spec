@@ -2,7 +2,7 @@ Summary:	A next-generation printing system for UNIX
 Summary(pl):	System drukowania nowej generacji
 Name:		LPRng
 Version:	3.6.22
-Release:	1
+Release:	2
 License:	GPL
 Group:		Utilities/System
 Group(pl):	Narzêdzia/System
@@ -115,9 +115,9 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-%config(noreplace) %{_sysconfdir}/lpd.conf
-%config(noreplace) %{_sysconfdir}/lpd.perms
-%config(noreplace) %{_sysconfdir}/printcap
+%config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/lpd.conf
+%config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/lpd.perms
+%config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/printcap
 %doc {CHANGES,CONTRIBUTORS,README*}.gz TESTSUPPORT HOWTO/LPRng-HOWTO.html
 %attr(754,root,root) /etc/rc.d/init.d/lpd
 %attr(755,root,root) %{_bindir}/*
