@@ -110,10 +110,20 @@ gzip -9nf CHANGES CONTRIBUTORS README* TESTSUPPORT/*
 %find_lang %{name}
 
 %post
-NAME=lpd; DESC="LPRng lpd daemon"; %chkconfig_add
+/sbin/chkconfig --add lpd
+if [ -f /var/lock/subsys/lpd ]; then
+	/etc/rc.d/init.d/lpd restart 1>&2
+else
+	echo "Run \"/etc/rc.d/init.d/lpd start\" to start LPRng lpd daemon."
+fi
 
 %preun
-NAME=lpd; %chkconfig_del
+if [ "$1" = "0" ]; then
+	if [ -f /var/lock/subsys/lpd ]; then
+		/etc/rc.d/init.d/lpd stop 1>&2
+	fi
+	/sbin/chkconfig --del lpd
+fi
 
 %clean
 rm -rf $RPM_BUILD_ROOT
