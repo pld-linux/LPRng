@@ -1,5 +1,8 @@
 Summary:	A next-generation printing system for UNIX
 Summary(pl):	System drukowania nowej generacji
+Summary(pt_BR):	Gerenciador de impressЦo para UNIX e NT
+Summary(ru):	Спулер печати LPRng
+Summary(uk):	Спулер друку LPRng
 Summary(zh_CN):	LPRng--╢Рс║ЁлпР
 Name:		LPRng
 Version:	3.8.1
@@ -60,12 +63,12 @@ current public distribution is available from the listed FTP and Web
 Sites.
 
 %description -l pl
-LPRng jest rozszerzon╠, ulepszon╠ i portowaln╠ implementacj╠ 
+LPRng jest rozszerzon╠, ulepszon╠ i portowaln╠ implementacj╠
 Berkeley'owskiego LPR print spooler'a. Dostarcza ten sam interfejs
 oraz jest zgodny z wymaganiami RFC1179. Jednocze╤nie wykonanie jest
-caЁkowicie nowe i dostarcza nastЙpuj╠ce rzeczy: 
-- programy - "lekki" lpr (nie s╠ potrzebne ©adne bazy danych), 
-  lpc, oraz lprm;
+caЁkowicie nowe i dostarcza nastЙpuj╠ce rzeczy:
+- programy - "lekki" lpr (nie s╠ potrzebne ©adne bazy danych), lpc,
+  oraz lprm;
 - dynamiczna redyrekcja do kolejek;
 - automatyczne wstrzymywanie zadaЯ;
 - "gadatliwa" diagnostyka;
@@ -75,16 +78,77 @@ caЁkowicie nowe i dostarcza nastЙpuj╠ce rzeczy:
 - mocno rozszerzone mechanizmy bezpieczeЯstwa i kontroli uprawnieЯ.
 
 Oprogramowanie to kompiluje siЙ i dziaЁa na wielu systemach UNIX'owych
-i jest kompatybilne z innymi print spoolami oraz drukarkami sieciowymi, 
-ktСre u©ywaj╠ interfejsu LPR oraz speЁniaj╠ wymagania RFC1179. LPRng
-dostarcza pakiety emulacyjne dla programСw SVR4 lp oraz lpstat, 
-eliminuj╠c w ten sposСb konieczno╤Ф posiadania jeszcze jednego pakietu
-print spoola. Te pakiety mog╠ byФ modyfikowane zgodnie z lokalnymi 
-wymaganiami. 
+i jest kompatybilne z innymi print spoolami oraz drukarkami
+sieciowymi, ktСre u©ywaj╠ interfejsu LPR oraz speЁniaj╠ wymagania
+RFC1179. LPRng dostarcza pakiety emulacyjne dla programСw SVR4 lp oraz
+lpstat, eliminuj╠c w ten sposСb konieczno╤Ф posiadania jeszcze jednego
+pakietu print spoola. Te pakiety mog╠ byФ modyfikowane zgodnie z
+lokalnymi wymaganiami.
 
 Dla u©ytkownikСw, ktСrzy potrzebuj╠ bezpiecznej i autentyfikowanej
-obsЁugi drukowania LPRng wspiera Kerberos V, MIT Kerberos IV Print 
-Support oraz PGP. 
+obsЁugi drukowania LPRng wspiera Kerberos V, MIT Kerberos IV Print
+Support oraz PGP.
+
+%description -l pt_BR
+LPRng И uma versЦo melhorada, estendida e mais segura do gerenciador
+de impressЦo LPR. Entre as melhorias se destacam: redirecionamento
+dinБmico de filas de impressЦo, suspensЦo automАtica de trabalhos de
+impressЦo, diagnСstico detalhado, vАrias impressoras por fila,
+programas cliente nЦo precisam ser SUID root e um mecanismo bastante
+melhorado de permissУes e autorizaГУes.
+
+%description -l ru
+LPRng - это улучшенная, расширенная и портируемая реализация
+функциональности спулера печати Berkeley LPR. Предоставляя тот же
+интерфейс и отвечая всем требованиям RFC1179, эта реализация
+совершенно новая и предоставляет поддержку следующих возможностей:
+компактный (не требующий базы данных) lpr, программы lpc и lprm;
+динамическая переадресация очередей печати; автоматическая
+приостановка заданий; очень детальная диагностика; обслуживание одной
+очереди несколькими принтерами; клиентские программы не должны быть
+SUID root; сильно улучшенная система безопасности; сильно улучшенные
+механизмы авторизации и прав доступа.
+
+Программное обеспечение компиллируется и работает на большом
+количестве UNIX-систем и совместимо с другими спулерами печати и
+сетевыми принтерами, которые используют интерфейс LPR и отвечают
+требованиям RFC1179. LPRng также предоставляет пакеты эмуляции для
+программ SVR4 lp и lpstat, исключая потребность в другом пакете
+спулера печати. Эти пакеты эмуляции могут быть модифицированы в
+соответствии с локальными требованиями для поддержки антикварных
+систем печати.
+
+Для пользователей, которым нужна безопасная и/или аутентицируемая
+поддержка печати, LPRng поддерживает Kerberos V, MIT Kerberos IV Print
+Support и аутентикацию PGP. LPRng принят за стандарт в MIT для
+использования в качестве системы поддержки печати в их кампусе.
+Дополнительная поддержка аутентикации может быть добавлена без особых
+усилий.
+
+%description -l uk
+LPRng - це покращена, розширена та портована реал╕зац╕я функц╕йност╕
+спулеру друку Berkeley LPR. Надаючи той же ╕нтерфейс та в╕дпов╕даючи
+ус╕м вимогам RFC1179, ця реал╕зац╕я абсолютно нова ╕ нада╓ п╕дтримку
+таких можливостей: компактний (не вимагаючий бази даних) lpr, програми
+lpc та lprm; динам╕чна переадресац╕я черг друку; автоматичне
+призупинення завдань; дуже детальна д╕агностика; обслуговування одно╖
+черги к╕лькома пр╕нтерами; кл╕╓нтськ╕ програми не повинн╕ бути SUID
+root; сильно покращена система безпеки; сильно покращен╕ механ╕зми
+авторизац╕╖ та прав доступу.
+
+Програмне забезпечення комп╕лю╓ться та працю╓ на велик╕й к╕лькост╕
+UNIX-систем ╕ сум╕сне з ╕ншими спулерами друку та мережевими
+пр╕нтерами, котр╕ використовують ╕нтерфейс LPR та в╕дпов╕дають вимогам
+RFC1179. LPRng також нада╓ пакети емуляц╕╖ для програм SVR4 lp та
+lpstat, виключаючи потребу в ╕ншому пакет╕ спулера друку. Ц╕ пакети
+емуляции можуть бути модиф╕кован╕ у в╕дпов╕дност╕ з локальними
+вимогами для п╕дтримки антикварних систем друку.
+
+Для користувач╕в, яким потр╕бна безпечна та/або аутентиф╕кована
+п╕дтримка друку, LPRng п╕дтриму╓ Kerberos V, MIT Kerberos IV Print
+Support та аутентикац╕ю PGP. LPRng прийнято за стандарт в MIT для
+використання в якост╕ системи п╕дтримки друку в ╖х кампус╕. Додаткова
+п╕дтримка аутентикац╕╖ може бути додана без особливих зусиль.
 
 %prep
 %setup  -q
@@ -109,6 +173,8 @@ autoconf
 
 %{__make}
 
+gzip -9nf CHANGES CONTRIBUTORS README* TESTSUPPORT/*
+
 %install
 rm -rf $RPM_BUILD_ROOT
 install -d  $RPM_BUILD_ROOT{/etc/rc.d/init.d,%{_var}/spool/lpd/lp}
@@ -129,8 +195,6 @@ rm -fr TESTSUPPORT/{Makefile*,LPD}
 mv -f lpd.conf TESTSUPPORT/lpd.conf.distrib
 
 bzip2 -dc %{SOURCE4} | tar xf - -C $RPM_BUILD_ROOT%{_mandir}
-
-gzip -9nf CHANGES CONTRIBUTORS README* TESTSUPPORT/*
 
 %find_lang %{name}
 
