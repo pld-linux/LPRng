@@ -124,7 +124,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %files -f %{name}.lang
 %defattr(644,root,root,755)
-%doc *.gz TESTSUPPORT HOWTO/LPRng-HOWTO.{html,gif}
+%doc *.gz TESTSUPPORT HOWTO/LPRng-HOWTO.html
 %config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/lpd.conf
 %config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/lpd.perms
 %config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/printcap
