@@ -1,11 +1,51 @@
---- LPRng-3.8.21/src/common/vars.c.orig	Wed Apr 16 01:37:42 2003
-+++ LPRng-3.8.21/src/common/vars.c	Tue Aug  5 13:37:05 2003
-@@ -211,7 +211,7 @@
+--- LPRng-3.8.21/src/common/vars.c.orig	Tue Aug  5 16:02:18 2003
++++ LPRng-3.8.21/src/common/vars.c	Tue Aug  5 15:48:18 2003
+@@ -175,7 +175,7 @@
+    /* connection timeout for remote printers */
+ { "connect_timeout", 0, INTEGER_K, &Connect_timeout_DYN,0,0,"=10"},
+    /* control file line order */
+-{ "control_file_line_order", 0, STRING_K, &Control_filter_DYN,0,0,0},
++{ "control_file_line_order", 0, STRING_K, &Control_file_line_order_DYN,0,0,0},
+    /* control file filter */
+ { "control_filter", 0, STRING_K, &Control_filter_DYN,0,0,0},
+    /* create files in spool directory */
+@@ -211,9 +211,9 @@
     /*  string to send for a form feed */
  { "ff", 0,  STRING_K,  &Form_feed_DYN,0,0,"=\\f"},
     /*  string to send for a form feed */
 -{ "ff_separator", 0,  STRING_K,  &FF_separator_DYN,0,0,0},
 +{ "ff_separator", 0,  FLAG_K,  &FF_separator_DYN,0,0,0},
     /* enforce FIFO (first in, first out) order */
- { "fifo", 0, STRING_K, &Fifo_DYN,0,0,0},
+-{ "fifo", 0, STRING_K, &Fifo_DYN,0,0,0},
++{ "fifo", 0, FLAG_K, &Fifo_DYN,0,0,0},
     /* FIFO lock file */
+ { "fifo_lock_file", 0, STRING_K, &Fifo_lock_file_DYN,0,0,"=fifo.lock"},
+    /* default filter */
+--- LPRng-3.8.21/src/include/lp.h.orig	Wed Apr 16 01:37:43 2003
++++ LPRng-3.8.21/src/include/lp.h	Tue Aug  5 16:01:33 2003
+@@ -231,7 +231,6 @@
+ EXTERN char *ShortHost_FQDN;		/* Short hostname for logging */
+ EXTERN char *FQDNHost_FQDN;		/* FQDN hostname */
+ EXTERN char* FQDNRemote_FQDN;    /* FQDN of Remote host */
+-EXTERN char* FQDNRemote_FQDN;    /* FQDN of Remote host */
+ EXTERN char* ShortRemote_FQDN;   /* Short form of Remote host */
+ /* EXTERN char* Auth_client_id_DYN;	/ * client sent/received authentication info */
+ 
+@@ -267,7 +266,7 @@
+ EXTERN int Check_for_protocol_violations_DYN;	/* check for RFC1179 protocol violations */
+ EXTERN char* Chooser_DYN;	/* choose the destination for a load balance queue */
+ EXTERN int Chooser_interval_DYN;	/* interval between tests for load balance destination */
+-EXTERN char* Chooser_routine_DYN;	/* choose the destination for a load balance queue */
++EXTERN int Chooser_routine_DYN;	/* choose the destination for a load balance queue */
+ EXTERN int Class_in_status_DYN;	/* Show class in status information */
+ EXTERN char* Comment_tag_DYN; /* comment identifying printer (LPQ) */
+ EXTERN char* Config_file_DYN;
+@@ -392,7 +391,7 @@
+ EXTERN char* Prefix_Z_DYN; /* prefix -Z options on outgoing or filter*/
+ EXTERN char* Prefix_option_to_option_DYN; /* prefix option to option, ie, "z,o" */
+ EXTERN char* Printcap_path_DYN;
+-EXTERN char* Printer_DYN;		/* Printe r name for logging */
++/* EXTERN char* Printer_DYN; duplicate??? */		/* Printe r name for logging */
+ EXTERN char* Printer_DYN;	/* printer name */
+ EXTERN char* Printer_perms_path_DYN;
+ EXTERN char* Queue_name_DYN;	/* Queue name used for spooling */
