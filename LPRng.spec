@@ -6,7 +6,7 @@ Summary(uk):	óÐÕÌÅÒ ÄÒÕËÕ LPRng
 Summary(zh_CN):	LPRng--´òÓ¡³ÌÐò
 Name:		LPRng
 Version:	3.8.1
-Release:	3
+Release:	4
 License:	GPL
 Group:		Applications/System
 Source0:	ftp://ftp.astart.com/pub/LPRng/LPRng/%{name}-%{version}.tgz
@@ -25,7 +25,6 @@ BuildRequires:	automake
 BuildRequires:	gettext-devel
 BuildRequires:	libtool
 BuildRequires:	ncurses-devel >= 5.0
-BuildRequires:	procps
 Prereq:		/sbin/ldconfig
 Prereq:		/sbin/chkconfig
 Prereq:		rc-scripts >= 0.2.0
@@ -164,6 +163,7 @@ gettextize --copy --force
 libtoolize --copy --force
 aclocal
 autoconf
+PSHOWALL="-ax"; export PSHOWALL
 %configure \
 	--disable-setuid \
 	--with-userid=lp \
