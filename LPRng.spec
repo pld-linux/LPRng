@@ -162,7 +162,7 @@ rm -f missing acinclude.m4
 gettextize --copy --force
 libtoolize --copy --force
 aclocal
-autoconf
+%{__autoconf}
 PSHOWALL="-ax"; export PSHOWALL
 %configure \
 	--disable-setuid \
