@@ -1,0 +1,164 @@
+diff -Nru LPRng-3.6.2/configure.in LPRng-3.6.2.new/configure.in
+--- LPRng-3.6.2/configure.in	Sun Jun 13 02:14:48 1999
++++ LPRng-3.6.2.new/configure.in	Sat Jul 10 16:19:24 1999
+@@ -1074,7 +1074,6 @@
+ 
+ dnl ----------------- Option for enabling GNU gettext --------------------
+ AM_GNU_GETTEXT
+-test "$USE_NLS" = yes && LIBS="$LIBS -lintl"
+ 
+ dnl ----------------- GCC Compilation ----------------------------------
+ AC_OUTPUT(Makefile
+diff -Nru LPRng-3.6.2/man/Makefile.in LPRng-3.6.2.new/man/Makefile.in
+--- LPRng-3.6.2/man/Makefile.in	Sun Jun 13 02:15:52 1999
++++ LPRng-3.6.2.new/man/Makefile.in	Sat Jul 10 16:23:23 1999
+@@ -22,7 +22,7 @@
+ 
+ ## fix up prefix to be a make variable
+ prefix = @prefix@
+-MAN =		$(prefix)/man
++mandir = @mandir@
+ SHELL =		@SHELL@
+ 
+ 
+@@ -52,25 +52,25 @@
+ # Standard man install target.
+ #
+ install:
+-	-${SRC}/mkinstalldirs $(MAN)/man1 $(MAN)/man5 $(MAN)/man8
+-	for i in ${SRC}/*.1; do $(MANINSTCMD) $$i $(MAN)/man1/`basename $$i`$(MANEXT); done
+-	for i in ${SRC}/*.5; do $(MANINSTCMD) $$i $(MAN)/man5/`basename $$i`$(MANEXT); done
+-	for i in ${SRC}/*.8; do $(MANINSTCMD) $$i $(MAN)/man8/`basename $$i`$(MANEXT); done
++	-${SRC}/mkinstalldirs $(DESTDIR)$(mandir)/man1 $(DESTDIR)$(mandir)/man5 $(DESTDIR)$(mandir)/man8
++	for i in ${SRC}/*.1; do $(MANINSTCMD) $$i $(DESTDIR)$(mandir)/man1/`basename $$i`$(MANEXT); done
++	for i in ${SRC}/*.5; do $(MANINSTCMD) $$i $(DESTDIR)$(mandir)/man5/`basename $$i`$(MANEXT); done
++	for i in ${SRC}/*.8; do $(MANINSTCMD) $$i $(DESTDIR)$(mandir)/man8/`basename $$i`$(MANEXT); done
+ 
+ # Install man pages in compressed form.
+ #
+ install.zman:
+ 	for i in ${SRC}/*.1; do compress < $$i >/tmp/_; \
+-		 $(MANINSTCMD) /tmp/_ $(MAN)/man1.Z/$$i$(MANEXT); rm -f /tmp/_; done
++		 $(MANINSTCMD) /tmp/_ $(mandir)/man1.Z/$$i$(MANEXT); rm -f /tmp/_; done
+ 	for i in ${SRC}/*.5; do compress < $$i >/tmp/_; \
+-		 $(MANINSTCMD) /tmp/_ $(MAN)/man5.Z/$$i$(MANEXT); rm -f /tmp/_; done
++		 $(MANINSTCMD) /tmp/_ $(mandir)/man5.Z/$$i$(MANEXT); rm -f /tmp/_; done
+ 	for i in ${SRC}/*.8; do compress < $$i >/tmp/_; \
+-		 $(MANINSTCMD) /tmp/_ $(MAN)/man8.Z/$$i$(MANEXT); rm -f /tmp/_; done
++		 $(MANINSTCMD) /tmp/_ $(mandir)/man8.Z/$$i$(MANEXT); rm -f /tmp/_; done
+ 
+ uninstall:
+-	for i in *.1; do rm -f $(MAN)/man1/$$i$(MANEXT); done
+-	for i in *.5; do rm -f $(MAN)/man5/$$i$(MANEXT); done
+-	for i in *.8; do rm -f $(MAN)/man8/$$i$(MANEXT); done
++	for i in *.1; do rm -f $(mandir)/man1/$$i$(MANEXT); done
++	for i in *.5; do rm -f $(mandir)/man5/$$i$(MANEXT); done
++	for i in *.8; do rm -f $(mandir)/man8/$$i$(MANEXT); done
+ 	
+ realclean mostlyclean distclean:: clean
+ 	rm -f Makefile
+diff -Nru LPRng-3.6.2/src/Makefile.in LPRng-3.6.2.new/src/Makefile.in
+--- LPRng-3.6.2/src/Makefile.in	Sun Jun 13 02:14:52 1999
++++ LPRng-3.6.2.new/src/Makefile.in	Sat Jul 10 16:49:51 1999
+@@ -60,20 +60,15 @@
+ LDCC=@LDCC@
+ 
+ # where executables are installed
+-prefix=@prefix@
+-exec_prefix=@exec_prefix@
+-bindir     = @bindir@
+-sbindir    = @sbindir@
+-libexecdir = @libexecdir@
+-libdir     = @libdir@
+-localedir = $(prefix)/@DATADIRNAME@/locale
+-INSTALL_BIN =     @bindir@
+-# where daemons are installed: lpd
+-#INSTALL_LIB =     ${prefix}/lib
+-INSTALL_LIB =     @LPRNGLPDDIR@
+-# where maintenance commands are installed: checkpc, setstatus
+-#INSTALL_MAINT =   ${exec_prefix}/bin
+-INSTALL_MAINT =   @LPRNGADMINDIR@
++prefix		= @prefix@
++exec_prefix	= @exec_prefix@
++bindir		= @bindir@
++sbindir		= @sbindir@
++libexecdir	= @libexecdir@
++libdir		= @libdir@
++localedir	= $(prefix)/@DATADIRNAME@/locale
++bindir		= @bindir@
++sbindir		= @sbindir@
+ 
+ CF := @CPPFLAGS@ @CFLAGS@ @DEFS@ -DLOCALEDIR=\"$(localedir)\"
+ LF := @LDFLAGS@
+@@ -329,21 +324,24 @@
+ PERMS=$(SUID_ROOT_PERMS)
+ ###########################################################################
+ 
+-install: all ${INSTALL_LIB} ${INSTALL_BIN} ${INSTALL_MAINT}
+-	${INSTALLCMD} -m $(PERMS) lpq ${INSTALL_BIN}
+-	${INSTALLCMD} -m $(PERMS) lprm ${INSTALL_BIN}
+-	${INSTALLCMD} -m $(PERMS) lpr ${INSTALL_BIN}
+-	${INSTALLCMD} -m $(PERMS) lpstat ${INSTALL_BIN}
+-	${INSTALLCMD} -m $(PERMS) lpc ${INSTALL_MAINT}
+-	${INSTALLCMD} -m $(NORM_PERMS) lpd ${INSTALL_LIB}
+-	${INSTALLCMD} -m $(NORM_PERMS) lpf ${INSTALL_LIB}
+-	${INSTALLCMD} -m $(NORM_PERMS) lpbanner ${INSTALL_LIB}
+-	${INSTALLCMD} -m $(NORM_PERMS) pclbanner ${INSTALL_LIB}
+-	${INSTALLCMD} -m $(NORM_PERMS) psbanner ${INSTALL_LIB}
+-	${INSTALLCMD} -m $(NORM_PERMS) checkpc ${INSTALL_MAINT}
+-	${INSTALLCMD} -m $(NORM_PERMS) lpraccnt ${INSTALL_MAINT}
+-	rm -f ${INSTALL_BIN}/lp;     ln -s lpr  ${INSTALL_BIN}/lp;
+-	rm -f ${INSTALL_BIN}/cancel; ln -s lprm ${INSTALL_BIN}/cancel;
++installdirs:
++	${SRC}/mkinstalldirs $(DESTDIR)$(bindir) $(DESTDIR)$(sbindir)
++	
++install: all installdirs
++	${INSTALLCMD} -m $(PERMS) lpq $(DESTDIR)$(bindir)
++	${INSTALLCMD} -m $(PERMS) lprm $(DESTDIR)$(bindir)
++	${INSTALLCMD} -m $(PERMS) lpr $(DESTDIR)$(bindir)
++	${INSTALLCMD} -m $(PERMS) lpstat $(DESTDIR)$(bindir)
++	${INSTALLCMD} -m $(PERMS) lpc $(DESTDIR)$(sbindir)
++	${INSTALLCMD} -m $(NORM_PERMS) lpd $(DESTDIR)$(sbindir)
++	${INSTALLCMD} -m $(NORM_PERMS) lpf $(DESTDIR)$(sbindir)
++	${INSTALLCMD} -m $(NORM_PERMS) lpbanner $(DESTDIR)$(sbindir)
++	${INSTALLCMD} -m $(NORM_PERMS) pclbanner $(DESTDIR)$(sbindir)
++	${INSTALLCMD} -m $(NORM_PERMS) psbanner $(DESTDIR)$(sbindir)
++	${INSTALLCMD} -m $(NORM_PERMS) checkpc $(DESTDIR)$(sbindir)
++	${INSTALLCMD} -m $(NORM_PERMS) lpraccnt $(DESTDIR)$(sbindir)
++	rm -f $(bindir)/lp;     ln -s lpr  $(DESTDIR)$(bindir)/lp;
++	rm -f $(bindir)/cancel; ln -s lprm $(DESTDIR)$(bindir)/cancel;
+ 	f=/etc/lpd.conf; \
+ 	if [ -n "$(LPD_CONF_PATH)" ] ; then f=$(LPD_CONF_PATH); fi; \
+ 	if [ ! -f "$$f" ] ; then \
+@@ -352,23 +350,15 @@
+ 		${INSTALLCMD} -m $(NORM_PERMS) lpd.conf $$f.sample ; \
+ 	fi;
+ 
+-${INSTALL_LIB}::
+-	${SRC}/mkinstalldirs $@
+-${INSTALL_BIN}::
+-	${SRC}/mkinstalldirs $@
+-${INSTALL_MAINT}::
+-	${SRC}/mkinstalldirs $@
+-
+-
+ uninstall:
+-	rm -f ${INSTALL_LIB}/lpd
+-	rm -f ${INSTALL_LIB}/lpf
+-	rm -f ${INSTALL_BIN}/lpq
+-	rm -f ${INSTALL_BIN}/lpstat
+-	rm -f ${INSTALL_BIN}/lprm
+-	rm -f ${INSTALL_BIN}/lpr
+-	rm -f ${INSTALL_MAINT}/lpc
+-	rm -f ${INSTALL_MAINT}/checkpc
++	rm -f $(libdir)/lpd
++	rm -f $(libdir)/lpf
++	rm -f $(bindir)/lpq
++	rm -f $(bindir)/lpstat
++	rm -f $(bindir)/lprm
++	rm -f $(bindir)/lpr
++	rm -f $(sbindir)/lpc
++	rm -f $(sbindir)/checkpc
+ 
+ 
+ ###########################################################################
