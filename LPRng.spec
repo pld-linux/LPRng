@@ -3,7 +3,7 @@ Summary(pl):	System drukowania nowej generacji
 Summary(zh_CN):	LPRng--¥Ú”°≥Ã–Ú
 Name:		LPRng
 Version:	3.8.1
-Release:	1
+Release:	2
 License:	GPL
 Group:		Applications/System
 Group(de):	Applikationen/System
