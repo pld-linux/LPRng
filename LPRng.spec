@@ -5,22 +5,19 @@ Summary(ru):	Спулер печати LPRng
 Summary(uk):	Спулер друку LPRng
 Summary(zh_CN):	LPRng--╢Рс║ЁлпР
 Name:		LPRng
-Version:	3.8.1
-Release:	6
+Version:	3.8.12
+Release:	1
 License:	GPL
 Group:		Applications/System
-Source0:	ftp://ftp.astart.com/pub/LPRng/LPRng/%{name}-%{version}.tgz
+Source0:	ftp://ftp.lprng.com/pub/LPRng/LPRng/%{name}-%{version}.tgz
 Source1:	%{name}.init
 Source2:	%{name}.conf
 Source3:	%{name}.printcap
 Source4:	http://www.mif.pg.gda.pl/homepages/ankry/man-PLD/%{name}-pl-man-pages.tar.bz2
-Patch0:		%{name}-jobfilescan.patch
-Patch1:		%{name}-ac_fixes.patch
-Patch2:		%{name}-manpage.patch
-Patch3:		%{name}-shutdown.patch
-Patch4:		%{name}-nproc-unlimited.patch
-Patch5:		%{name}-lpd-perms.patch
-PAtch6:		%{name}-pr.patch
+Patch0:		%{name}-ac_fixes.patch
+Patch1:		%{name}-shutdown.patch
+Patch2:		%{name}-nproc-unlimited.patch
+Patch3:		%{name}-lpd-perms.patch
 URL:		http://www.astart.com/lprng/LPRng.html
 BuildRequires:	autoconf
 BuildRequires:	automake
@@ -158,9 +155,6 @@ Support та аутентикац╕ю PGP. LPRng прийнято за стандарт в MIT для
 %patch1 -p1
 %patch2 -p1
 %patch3 -p1
-%patch4 -p1
-%patch5 -p1
-%patch6 -p1
 
 %build
 rm -f missing acinclude.m4
@@ -178,6 +172,7 @@ PSHOWALL="-ax"; export PSHOWALL
 	--with-lockfile=%{_var}/spool/lpd/lpd
 
 %{__make}
+%{__make} -C man
 
 %install
 rm -rf $RPM_BUILD_ROOT
@@ -186,6 +181,8 @@ install -d  $RPM_BUILD_ROOT{/etc/rc.d/init.d,%{_var}/spool/lpd/lp}
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT \
 	POSTINSTALL="NO"
+%{__make} install -C man \
+	DESTDIR=$RPM_BUILD_ROOT
 
 install %{SOURCE1} $RPM_BUILD_ROOT/etc/rc.d/init.d/lpd
 # yes, overwrite distribution lpd.conf
