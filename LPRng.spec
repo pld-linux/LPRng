@@ -6,7 +6,7 @@ Summary(uk):	Спулер друку LPRng
 Summary(zh_CN):	LPRng--╢Рс║ЁлпР
 Name:		LPRng
 Version:	3.8.1
-Release:	5
+Release:	6
 License:	GPL
 Group:		Applications/System
 Source0:	ftp://ftp.astart.com/pub/LPRng/LPRng/%{name}-%{version}.tgz
@@ -33,6 +33,7 @@ Prereq:		rc-scripts >= 0.2.0
 Provides:	lpr
 Obsoletes:	lpr
 Obsoletes:	cups
+Obsoletes:	cups-clients
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -163,7 +164,7 @@ Support та аутентикац╕ю PGP. LPRng прийнято за стандарт в MIT для
 
 %build
 rm -f missing acinclude.m4
-gettextize --copy --force
+%{__gettextize}
 %{__libtoolize}
 aclocal
 %{__autoconf}
@@ -222,7 +223,7 @@ fi
 
 %files -f %{name}.lang
 %defattr(644,root,root,755)
-%doc *.gz HOWTO/LPRng-HOWTO.html HOWTO/CHANGES
+%doc CHANGES README HOWTO/LPRng-HOWTO.html HOWTO/CHANGES
 %config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/lpd.conf
 %config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/lpd.perms
 %config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/printcap
