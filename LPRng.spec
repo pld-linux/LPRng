@@ -2,12 +2,13 @@ Summary:	A next-generation printing system for UNIX
 Summary(pl):	System drukowania nowej generacji
 Name:		LPRng
 Version:	3.6.18
-Release:	3
+Release:	4
 License:	GPL
 Group:		Utilities/System
 Group(pl):	Narzêdzia/System
 Source0:	ftp://ftp.astart.com/pub/LPRng/LPRng/%{name}-%{version}.tgz
 Source1:	LPRng.init
+Source2:	LPRng.conf
 Patch0:		LPRng-autoconf.patch
 BuildRequires:	ncurses-devel >= 5.0
 Requires:	/sbin/chkconfig
@@ -17,8 +18,6 @@ Provides:	lpr
 Obsoletes:	lpr
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
-%define		_libdir		%{_sbindir}
-%define		_sysconfdir	/etc
 
 %description
 The LPRng software is an enhanced, extended, and portable
@@ -63,13 +62,17 @@ autoconf
 LDFLAGS="-s"; export LDFLAGS
 %configure \
 	--enable-nls \
-	--disable-setuid
+	--disable-setuid \
+	--with-userid=lp \
+	--with-groupid=lp \
+	--with-filterdir=%{_libdir}/lpfilters \
+	--with-lockfile=%{_var}/spool/lpd/lpd
 
 %{__make}
 
 %install
 rm -rf $RPM_BUILD_ROOT
-install -d  $RPM_BUILD_ROOT/etc/rc.d/init.d
+install -d  $RPM_BUILD_ROOT{/etc/rc.d/init.d,%{_var}/spool/lpd}
 
 %{__make} install \
 	INSTALL_PREFIX=$RPM_BUILD_ROOT \
@@ -77,8 +80,12 @@ install -d  $RPM_BUILD_ROOT/etc/rc.d/init.d
 	LPD_PERMS_PATH=$RPM_BUILD_ROOT%{_sysconfdir}/lpd.perms
 
 install %{SOURCE1} $RPM_BUILD_ROOT/etc/rc.d/init.d/lpd
+# yes, overwrite distribution lpd.conf
+install %{SOURCE2} $RPM_BUILD_ROOT/etc/lpd.conf
+install printcap   $RPM_BUILD_ROOT/etc/
 
 rm -fr TESTSUPPORT/{Makefile*,LPD}
+mv -f lpd.conf TESTSUPPORT/lpd.conf.distrib
 
 gzip -9nf $RPM_BUILD_ROOT%{_mandir}/man*/* \
 	CHANGES CONTRIBUTORS README* TESTSUPPORT/*
@@ -108,10 +115,12 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %config(noreplace) %{_sysconfdir}/lpd.conf
 %config(noreplace) %{_sysconfdir}/lpd.perms
+%config(noreplace) %{_sysconfdir}/printcap
 %doc {CHANGES,CONTRIBUTORS,README*}.gz TESTSUPPORT HOWTO/LPRng-HOWTO.html
 %attr(754,root,root) /etc/rc.d/init.d/lpd
 %attr(755,root,root) %{_bindir}/*
-%attr(755,root,root) %{_libdir}/*
-%dir %{_libexecdir}/filters
-%attr(755,root,root) %{_libexecdir}/filters/*
+%attr(755,root,root) %{_sbindir}/*
+%dir %{_libdir}/lpfilters
+%attr(755,root,root) %{_libdir}/lpfilters/*
+%dir %attr(750,root,lp) %{_var}/spool/lpd
 %{_mandir}/man[158]/*
