@@ -20,7 +20,7 @@ diff -Nru LPRng-3.7.2/configure.in LPRng-3.7.2.new/configure.in
 -AC_SUBST(CPPFLAGS)
 -AC_SUBST(LDFLAGS)
 -AC_SUBST(LDCC)
-+AM_INIT_AUTOMAKE(LPRng, 3.7.2)
++AM_INIT_AUTOMAKE(LPRng, 3.7.3)
  
  dnl check for awk
  AC_PROG_AWK
