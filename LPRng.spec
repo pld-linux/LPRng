@@ -10,6 +10,7 @@ Source0:	ftp://ftp.astart.com/pub/LPRng/LPRng/%{name}-%{version}.tgz
 Source1:	lpd.init
 Patch0:		LPRng-autoconf.patch
 Requires:	/sbin/chkconfig
+Requires:	rc-scripts
 URL:		http://www.astart.com/lprng/LPRng.html
 Provides:	lpr
 Obsoletes:	lpr
