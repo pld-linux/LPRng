@@ -6,7 +6,7 @@ Summary(uk):	Û–’Ã≈“ ƒ“’À’ LPRng
 Summary(zh_CN):	LPRng--¥Ú”°≥Ã–Ú
 Name:		LPRng
 Version:	3.8.12
-Release:	2
+Release:	3
 License:	GPL
 Group:		Applications/System
 Source0:	ftp://ftp.lprng.com/pub/LPRng/LPRng/%{name}-%{version}.tgz
@@ -168,7 +168,8 @@ PSHOWALL="-ax"; export PSHOWALL
 	--with-userid=lp \
 	--with-groupid=lp \
 	--with-filterdir=%{_libdir}/lpfilters \
-	--with-lockfile=%{_var}/spool/lpd/lpd
+	--with-lockfile=%{_var}/spool/lpd/lpd \
+	--with-done_jobs=0
 
 %{__make}
 %{__make} -C man
