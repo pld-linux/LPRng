@@ -1,7 +1,7 @@
-diff -Nru LPRng-3.6.2/configure.in LPRng-3.6.2.new/configure.in
---- LPRng-3.6.2/configure.in	Sun Jun 13 02:14:48 1999
-+++ LPRng-3.6.2.new/configure.in	Sat Jul 10 16:19:24 1999
-@@ -1074,7 +1074,6 @@
+diff -Nru LPRng-3.6.8/configure.in LPRng-3.6.8.new/configure.in
+--- LPRng-3.6.8/configure.in	Sat Aug 28 03:37:51 1999
++++ LPRng-3.6.8.new/configure.in	Mon Aug 30 01:16:28 1999
+@@ -1213,7 +1213,6 @@
  
  dnl ----------------- Option for enabling GNU gettext --------------------
  AM_GNU_GETTEXT
@@ -9,18 +9,22 @@ diff -Nru LPRng-3.6.2/configure.in LPRng-3.6.2.new/configure.in
  
  dnl ----------------- GCC Compilation ----------------------------------
  AC_OUTPUT(Makefile
-diff -Nru LPRng-3.6.2/man/Makefile.in LPRng-3.6.2.new/man/Makefile.in
---- LPRng-3.6.2/man/Makefile.in	Sun Jun 13 02:15:52 1999
-+++ LPRng-3.6.2.new/man/Makefile.in	Sat Jul 10 16:23:23 1999
-@@ -22,7 +22,7 @@
+diff -Nru LPRng-3.6.8/man/Makefile.in LPRng-3.6.8.new/man/Makefile.in
+--- LPRng-3.6.8/man/Makefile.in	Sat Aug 28 03:38:57 1999
++++ LPRng-3.6.8.new/man/Makefile.in	Mon Aug 30 01:17:50 1999
+@@ -21,9 +21,9 @@
+ MANEXT =	
  
  ## fix up prefix to be a make variable
- prefix = @prefix@
--MAN =		$(prefix)/man
-+mandir = @mandir@
- SHELL =		@SHELL@
+-prefix = @prefix@
+-MAN =		@mandir@
+-SHELL =		@SHELL@
++prefix		= @prefix@
++mandir		= @mandir@
++SHELL		= @SHELL@
  
  
+ all:
 @@ -52,25 +52,25 @@
  # Standard man install target.
  #
@@ -57,108 +61,78 @@ diff -Nru LPRng-3.6.2/man/Makefile.in LPRng-3.6.2.new/man/Makefile.in
  	
  realclean mostlyclean distclean:: clean
  	rm -f Makefile
-diff -Nru LPRng-3.6.2/src/Makefile.in LPRng-3.6.2.new/src/Makefile.in
---- LPRng-3.6.2/src/Makefile.in	Sun Jun 13 02:14:52 1999
-+++ LPRng-3.6.2.new/src/Makefile.in	Sat Jul 10 16:49:51 1999
-@@ -60,20 +60,15 @@
- LDCC=@LDCC@
+diff -Nru LPRng-3.6.8/src/Makefile.in LPRng-3.6.8.new/src/Makefile.in
+--- LPRng-3.6.8/src/Makefile.in	Sat Aug 28 03:37:56 1999
++++ LPRng-3.6.8.new/src/Makefile.in	Mon Aug 30 01:20:19 1999
+@@ -57,17 +57,17 @@
  
- # where executables are installed
+ ### PATHS ####
+ # prefix
 -prefix=@prefix@
++prefix			= @prefix@
+ # exec prefix
 -exec_prefix=@exec_prefix@
--bindir     = @bindir@
--sbindir    = @sbindir@
--libexecdir = @libexecdir@
--libdir     = @libdir@
--localedir = $(prefix)/@DATADIRNAME@/locale
--INSTALL_BIN =     @bindir@
--# where daemons are installed: lpd
--#INSTALL_LIB =     ${prefix}/lib
--INSTALL_LIB =     @LPRNGLPDDIR@
--# where maintenance commands are installed: checkpc, setstatus
--#INSTALL_MAINT =   ${exec_prefix}/bin
--INSTALL_MAINT =   @LPRNGADMINDIR@
-+prefix		= @prefix@
-+exec_prefix	= @exec_prefix@
-+bindir		= @bindir@
-+sbindir		= @sbindir@
-+libexecdir	= @libexecdir@
-+libdir		= @libdir@
-+localedir	= $(prefix)/@DATADIRNAME@/locale
-+bindir		= @bindir@
-+sbindir		= @sbindir@
++exec_prefix		= @exec_prefix@
+ # for binaries
+-bindir=@bindir@
++bindir			= @bindir@
+ # for admin type of binaries
+-sbindir=@sbindir@
++sbindir			= @sbindir@
+ # for the filters
+-libexecdir=@libexecdir@
++libexecdir		= @libexecdir@
+ # for the configuration stuff
+-sysconfdir=@sysconfdir@
++sysconfdir		= @sysconfdir@
+ # locale
+ localedir = $(prefix)/@DATADIRNAME@/locale
  
- CF := @CPPFLAGS@ @CFLAGS@ @DEFS@ -DLOCALEDIR=\"$(localedir)\"
- LF := @LDFLAGS@
-@@ -329,21 +324,24 @@
- PERMS=$(SUID_ROOT_PERMS)
- ###########################################################################
+@@ -371,29 +371,29 @@
  
--install: all ${INSTALL_LIB} ${INSTALL_BIN} ${INSTALL_MAINT}
--	${INSTALLCMD} -m $(PERMS) lpq ${INSTALL_BIN}
--	${INSTALLCMD} -m $(PERMS) lprm ${INSTALL_BIN}
--	${INSTALLCMD} -m $(PERMS) lpr ${INSTALL_BIN}
--	${INSTALLCMD} -m $(PERMS) lpstat ${INSTALL_BIN}
--	${INSTALLCMD} -m $(PERMS) lpc ${INSTALL_MAINT}
--	${INSTALLCMD} -m $(NORM_PERMS) lpd ${INSTALL_LIB}
--	${INSTALLCMD} -m $(NORM_PERMS) lpf ${INSTALL_LIB}
--	${INSTALLCMD} -m $(NORM_PERMS) lpbanner ${INSTALL_LIB}
--	${INSTALLCMD} -m $(NORM_PERMS) pclbanner ${INSTALL_LIB}
--	${INSTALLCMD} -m $(NORM_PERMS) psbanner ${INSTALL_LIB}
--	${INSTALLCMD} -m $(NORM_PERMS) checkpc ${INSTALL_MAINT}
--	${INSTALLCMD} -m $(NORM_PERMS) lpraccnt ${INSTALL_MAINT}
--	rm -f ${INSTALL_BIN}/lp;     ln -s lpr  ${INSTALL_BIN}/lp;
--	rm -f ${INSTALL_BIN}/cancel; ln -s lprm ${INSTALL_BIN}/cancel;
-+installdirs:
-+	${SRC}/mkinstalldirs $(DESTDIR)$(bindir) $(DESTDIR)$(sbindir)
-+	
-+install: all installdirs
-+	${INSTALLCMD} -m $(PERMS) lpq $(DESTDIR)$(bindir)
-+	${INSTALLCMD} -m $(PERMS) lprm $(DESTDIR)$(bindir)
-+	${INSTALLCMD} -m $(PERMS) lpr $(DESTDIR)$(bindir)
-+	${INSTALLCMD} -m $(PERMS) lpstat $(DESTDIR)$(bindir)
-+	${INSTALLCMD} -m $(PERMS) lpc $(DESTDIR)$(sbindir)
-+	${INSTALLCMD} -m $(NORM_PERMS) lpd $(DESTDIR)$(sbindir)
-+	${INSTALLCMD} -m $(NORM_PERMS) lpf $(DESTDIR)$(sbindir)
-+	${INSTALLCMD} -m $(NORM_PERMS) lpbanner $(DESTDIR)$(sbindir)
-+	${INSTALLCMD} -m $(NORM_PERMS) pclbanner $(DESTDIR)$(sbindir)
-+	${INSTALLCMD} -m $(NORM_PERMS) psbanner $(DESTDIR)$(sbindir)
-+	${INSTALLCMD} -m $(NORM_PERMS) checkpc $(DESTDIR)$(sbindir)
-+	${INSTALLCMD} -m $(NORM_PERMS) lpraccnt $(DESTDIR)$(sbindir)
-+	rm -f $(bindir)/lp;     ln -s lpr  $(DESTDIR)$(bindir)/lp;
-+	rm -f $(bindir)/cancel; ln -s lprm $(DESTDIR)$(bindir)/cancel;
- 	f=/etc/lpd.conf; \
- 	if [ -n "$(LPD_CONF_PATH)" ] ; then f=$(LPD_CONF_PATH); fi; \
- 	if [ ! -f "$$f" ] ; then \
-@@ -352,23 +350,15 @@
- 		${INSTALLCMD} -m $(NORM_PERMS) lpd.conf $$f.sample ; \
- 	fi;
+ install: all
+ 	echo "SETUID_ROOT IS ${PERMS}, PERMS $(ROOT_PERMS)";
+-	for i in ${bindir} ${sbindir} ${LPD_DIR} ${FILTER_DIR}; do \
++	for i in $(DESTDIR)$(bindir) $(DESTDIR)$(sbindir) $(DESTDIR)$(LPD_DIR) $(DESTDIR)$(FILTER_DIR); do \
+ 	  if [ ! -d $$i ] ; then ${SRC}/mkinstalldirs $$i ; fi; \
+ 	done;
  
--${INSTALL_LIB}::
--	${SRC}/mkinstalldirs $@
--${INSTALL_BIN}::
--	${SRC}/mkinstalldirs $@
--${INSTALL_MAINT}::
--	${SRC}/mkinstalldirs $@
--
--
+-	${INSTALLCMD} -s -m $(ROOT_PERMS) lpq ${bindir}
+-	${INSTALLCMD} -s -m $(ROOT_PERMS) lprm ${bindir}
+-	${INSTALLCMD} -s -m $(ROOT_PERMS) lpr ${bindir}
+-	${INSTALLCMD} -s -m $(ROOT_PERMS) lpstat ${bindir}
+-	${INSTALLCMD} -s -m $(ROOT_PERMS) lpc ${sbindir}
+-	${INSTALLCMD} -s -m $(ROOT_PERMS) lpd ${LPD_DIR}
+-	${INSTALLCMD} -s -m $(NORM_PERMS) lpf ${FILTER_DIR}
+-	${INSTALLCMD} -s -m $(NORM_PERMS) lpbanner ${FILTER_DIR}
+-	${INSTALLCMD}    -m $(NORM_PERMS) pclbanner ${FILTER_DIR}
+-	${INSTALLCMD}    -m $(NORM_PERMS) psbanner ${FILTER_DIR}
+-	${INSTALLCMD} -s -m $(NORM_PERMS) checkpc ${sbindir}
+-	${INSTALLCMD} -s -m $(NORM_PERMS) lpraccnt ${sbindir}
+-	cd ${bindir}; rm -f lp cancel; ln -s lpr lp; ln -s lprm cancel;
++	${INSTALLCMD} -s -m $(ROOT_PERMS) lpq $(DESTDIR)$(bindir)
++	${INSTALLCMD} -s -m $(ROOT_PERMS) lprm $(DESTDIR)$(bindir)
++	${INSTALLCMD} -s -m $(ROOT_PERMS) lpr $(DESTDIR)$(bindir)
++	${INSTALLCMD} -s -m $(ROOT_PERMS) lpstat $(DESTDIR)$(bindir)
++	${INSTALLCMD} -s -m $(ROOT_PERMS) lpc $(DESTDIR)$(sbindir)
++	${INSTALLCMD} -s -m $(ROOT_PERMS) lpd $(DESTDIR)$(LPD_DIR)
++	${INSTALLCMD} -s -m $(NORM_PERMS) lpf $(DESTDIR)$(FILTER_DIR)
++	${INSTALLCMD} -s -m $(NORM_PERMS) lpbanner $(DESTDIR)$(FILTER_DIR)
++	${INSTALLCMD}    -m $(NORM_PERMS) pclbanner $(DESTDIR)$(FILTER_DIR)
++	${INSTALLCMD}    -m $(NORM_PERMS) psbanner $(DESTDIR)$(FILTER_DIR)
++	${INSTALLCMD} -s -m $(NORM_PERMS) checkpc $(DESTDIR)$(sbindir)
++	${INSTALLCMD} -s -m $(NORM_PERMS) lpraccnt $(DESTDIR)$(sbindir)
++	cd $(DESTDIR)$(bindir); rm -f lp cancel; ln -s lpr lp; ln -s lprm cancel;
+ 
  uninstall:
--	rm -f ${INSTALL_LIB}/lpd
--	rm -f ${INSTALL_LIB}/lpf
--	rm -f ${INSTALL_BIN}/lpq
--	rm -f ${INSTALL_BIN}/lpstat
--	rm -f ${INSTALL_BIN}/lprm
--	rm -f ${INSTALL_BIN}/lpr
--	rm -f ${INSTALL_MAINT}/lpc
--	rm -f ${INSTALL_MAINT}/checkpc
-+	rm -f $(libdir)/lpd
-+	rm -f $(libdir)/lpf
-+	rm -f $(bindir)/lpq
-+	rm -f $(bindir)/lpstat
-+	rm -f $(bindir)/lprm
-+	rm -f $(bindir)/lpr
-+	rm -f $(sbindir)/lpc
-+	rm -f $(sbindir)/checkpc
+-	rm -f ${LPD_DIR}/lpd
+-	cd ${FILTER_DIR}; rm -f lpf lpbanner pclbanner psbanner
+-	cd ${bindir}; rm -f lp lpq lpstat lpr lp cancel;
+-	cd ${sbindir}; rm -f lpc checkpc lpraccnt;
++	rm -f $(LPD_DIR)/lpd
++	cd $(FILTER_DIR); rm -f lpf lpbanner pclbanner psbanner
++	cd $(bindir); rm -f lp lpq lpstat lpr lp cancel;
++	cd $(sbindir); rm -f lpc checkpc lpraccnt;
  
  
  ###########################################################################
