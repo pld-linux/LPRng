@@ -10,6 +10,7 @@ Source0:	ftp://ftp.astart.com/pub/LPRng/LPRng/%{name}-%{version}.tgz
 Source1:	ftp://ftp.astart.com/pub/LPRng/LPRng/%{name}_DOC-%{version}.tgz
 Source2:	lpd.init
 Requires:	/sbin/chkconfig
+URL:		http://www.astart.com/lprng/LPRng.html
 Provides:	lpr
 Obsoletes:	lpr
 BuildRoot:	/tmp/%{name}-%{version}-root
