@@ -1,35 +1,19 @@
---- LPRng-3.8.12/configure.in.orig	Mon May  6 18:00:12 2002
-+++ LPRng-3.8.12/configure.in	Wed Jul 10 00:25:05 2002
-@@ -6,54 +6,17 @@
- dnl ----------------- START OF GENERAL CONFIGURATION ---------------------------
- AC_INIT(Makefile.in)
+diff -Nur LPRng-3.8.15.orig/configure.in LPRng-3.8.15/configure.in
+--- LPRng-3.8.15.orig/configure.in	Mon Aug 12 01:57:28 2002
++++ LPRng-3.8.15/configure.in	Mon Nov  4 14:08:10 2002
+@@ -21,41 +21,23 @@
+ AC_SUBST(VERSION)
+ ALL_LINGUAS="fr"
  
--
--PACKAGE=LPRng
--VERSION=3.8.12
--
-+AM_INIT_AUTOMAKE(LPRng, 3.8.12)
- 
- AC_CONFIG_AUX_DIR(.)
--AC_CANONICAL_SYSTEM
- AC_CONFIG_HEADER(config.h)
- 
--AC_DEFINE_UNQUOTED(PACKAGE, "$PACKAGE")
--AC_DEFINE_UNQUOTED(VERSION, "$VERSION")
--AC_SUBST(PACKAGE)
--AC_SUBST(VERSION)
--ALL_LINGUAS="fr"
--
--WITH_CC dnl
 -WITH_CCOPTS dnl
--WITH_LDOPTS dnl
 -WITH_CPPOPTS dnl
--if test -z "$LOCALEDIR" ; then
--    LOCALEDIR='${prefix}/share/locale'
--fi;
--WITH_LOCALEDIR dnl
--export LOCALEDIR
--
+-WITH_LDOPTS dnl
+ if test -z "$LOCALEDIR" ; then
+     LOCALEDIR='${prefix}/share/locale'
+ fi;
+ WITH_LOCALEDIR dnl
+ export LOCALEDIR
+ 
 -AC_PREFIX_DEFAULT(/usr/local)
 -AC_SUBST(INSTALL)
 -AC_SUBST(INSTALL_MAN)
@@ -38,9 +22,9 @@
 -AC_SUBST(CFLAGS)
 -AC_SUBST(CPPFLAGS)
 -AC_SUBST(LDFLAGS)
--AC_SUBST(LDCC)
--
--
+ AC_SUBST(LDCC)
+ 
+ 
  dnl check for awk
  AC_PROG_AWK
 -AC_SUBST(AWK)
@@ -52,15 +36,20 @@
 -AC_SUBST(CHGRP)dnl
 -AC_PATH_PROG(PRUTIL,pr)dnl
 -AC_SUBST(PRUTIL)dnl
--
+-AC_PATH_PROG(OPENSSL,openssl)dnl
+-AC_SUBST(OPENSSL)dnl
+-AC_PATH_PROG(PGP_PATH,pgp)dnl
+-AC_SUBST(PGP_PATH)dnl
 +AC_PATH_PROG(PERL,perl)
 +AC_PATH_PROG(CHOWN,chown)
 +AC_PATH_PROG(CHGRP,chgrp)
-+AC_PATH_PROG(PRUTIL,pe)
++AC_PATH_PROG(PRUTIL,pr)
++AC_PATH_PROG(OPENSSL,openssl)
++AC_PATH_PROG(PGP_PATH,pgp)
+ AC_DEFINE_UNQUOTED(PGP_PATH, "$PGP_PATH")
  
- dnl ----------------------------------------------------------------------------
- dnl ----------- XXXXXX START OF OPTIONS ----------------------------------------
-@@ -367,16 +330,6 @@
+ 
+@@ -426,22 +408,8 @@
  AC_MSG_RESULT($FILTER_DIR)
  AC_SUBST(FILTER_DIR)
  
@@ -68,420 +57,31 @@
 -AC_MSG_CHECKING(disable stripped binaries)
 -AC_ARG_ENABLE( strip,
 -[  --disable-strip                   disable stripping binaries by default],
--[v=no; STRIP_OPTION=""; ],
--[v=yes;  STRIP_OPTION=" -s "; ]
--)
--AC_MSG_RESULT($v)
--AC_SUBST(STRIP_OPTION)
--
- dnl ----------------------------------------------------------------------------
- dnl ------------   OS Checks  --------------------------------------------------
- 
-@@ -384,50 +337,12 @@
- AC_MINIX
- AC_AIX
- 
--
--changequote(, )dnl
--release=`uname -r 2>/dev/null; exit 0`;
--version=`echo $target_os | sed -e 's/[^0-9][^0-9]*//' -e 's/\./X/' -e 's/\.//g' -e 's/X/./' \
--	| awk '{ v=$1+0; if( v > 0 ){ while( v < 100 || int(v) != v ){v = v * 10;}}; print v; }' `;
--if test "$version" -eq 0 ; then
--	version=`echo $release | sed -e 's/-.*//' -e 's/\.//g' \
--	| awk '{ v=$1+0; if( v > 0 ){ while( v < 100 || int(v) != v ){v = v * 10;}}; print v; }' `;
+-[
+-if test "$enableval" = "yes" ; then
+-	v=yes;  STRIP_OPTION=" -s ";
+-else
+-	v=no; STRIP_OPTION="";
 -fi
--osword=`echo $target_os | sed -e 's/[0-9].*//'`; export osword
--changequote([, ])dnl
--AC_MSG_RESULT([Target is $target, arch $target_cpu, os $target_os, release $release, version $version])
--
--AC_DEFINE_UNQUOTED(ARCHITECTURE,"$target_cpu")
--AC_DEFINE_UNQUOTED(OSNAME,"$osword")
--AC_DEFINE_UNQUOTED(OSVERSION,$version)
--OSNAME=$osword
--OSVERSION=$version
--AC_SUBST(OSNAME)dnl
--AC_SUBST(OSVERSION)dnl
--
--
- dnl ----------------------------------------------------------------------------
- dnl -----------   C compiler checks    -----------------------------------------
- 
- AC_PROG_CPP
- AC_PROG_CC
- 
--if test "$ac_cv_prog_gcc" = yes; then
--	cat >conftest.c <<EOF
--#if __GNUC__ < 2 || (__GNUC__ == 2 && __GNUC_MINOR__ < 5)
--yes
--#endif
--EOF
--    if ${CC-cc} -E conftest.c | egrep yes >/dev/null 2>&1; then
--        gcc -v
--		echo "WARNING: gcc -O (version 2.4.5 and below) produces incorrect code"
--		echo "  for lpd.c and other large routines. Update your GCC compiler"
--		exit 1
--	fi;
--fi;
--
--LDCC="$CC"
--
- AM_PROG_LIBTOOL
- 
- AC_C_CONST
-@@ -486,77 +401,6 @@
-   AC_DEFINE(HAVE_QUAD_T)
- fi
- 
--
--dnl ----------------------------------------------------------------------------
--dnl OS dependency checks
--checklibs=
--case $target_os in
--	 *linux* )
--		no_resolv_lib=yes;
--		case $release in
--changequote(, )dnl
--		2.2.1[0-5]* )
--changequote([, ])dnl
--			AC_DEFINE(SETUID_CHECK)
--			AC_MSG_WARN([Kernel may have SETUID compromise.  Update kernel])
--			;;
--		esac
--		;;
--	 *bsdi* )
--		LDCC=shlicc
--		dnl BSDI uses this for setproctitle
--		AC_CHECK_LIB(util, setproctitle, [LIBS="-lutil $LIBS"])
--		;;
--	 *bsd* )
--		dnl *BSD uses this for setproctitle
--		AC_CHECK_LIB(util, setproctitle, [LIBS="-lutil $LIBS"])
--		;;
--	 *unicos* )
--		checklibs=no
--		;;
--	 *irix6* )
--		checklibs=no
--		AC_DEFINE_UNQUOTED(IRIX,$version)
--		;;
--	 *irix5* )
--		checklibs=no
--		AC_DEFINE(HAVE_BROKEN_TIOCEXCL)
--		AC_DEFINE(SVR4)
--		AC_DEFINE_UNQUOTED(IRIX,$version)
--		;;
--	 *irix* )
--		checklibs=no
--		AC_DEFINE_UNQUOTED(IRIX,$version)
--		;;
--	*solaris* )
--		AC_DEFINE(SVR4)
--		AC_DEFINE_UNQUOTED(SOLARIS,$version)
--		no_resolv_lib=yes;
--		;;
--	*hpux* )
--		AC_DEFINE(_HPUX_SOURCE)
--		CPPFLAGS="$CPPFLAGS -D_HPUX_SOURCE=1"
--		CFLAGS="$CFLAGS -D_HPUX_SOURCE=1"
--		AC_DEFINE_UNQUOTED(HPUX,$version)
--		;;
--	*sunos* )
--		AC_DEFINE_UNQUOTED(SUNOS,$version)
--		;;
--	osf* )
--		AC_DEFINE_UNQUOTED(DECALPHA,$version)
--		if test "$ac_cv_prog_gcc" != yes; then
--			CPPFLAGS="$CPPFLAGS -std";
--			CFLAGS="$CFLAGS -std";
--        else
--            CPPFLAGS="$CPPFLAGS -DAES_SOURCE"
--            CFLAGS="$CFLAGS -DAES_SOURCE"
--		fi
--		;;
--	*mips-sni* )
--		;;
--esac
--AC_MSG_RESULT([using CPPFLAGS=\"${CPPFLAGS}\", CFLAGS=\"${CFLAGS}\"])
--
- dnl ----------------------------------------------------------------------------
- dnl headers:
- 
-@@ -584,7 +428,6 @@
- 	dnl A/UX uses this...
- 	AC_CHECK_LIB(posix, getpwent, [LIBS="$LIBS -lposix"])
- 
--	dnl use old-style shared libs if we have 'em.
- 	AC_CHECK_LIB(socket_s, socket, [LIBS="$LIBS -lsocket_s"; have_socket=1], ,-lnsl)
- 	if test -z "$have_socket"; then
- 		AC_CHECK_LIB(socket, socket, [LIBS="$LIBS -lsocket"], , -lnsl)
-@@ -1042,8 +885,8 @@
- dnl ----------------------------------------------------------------------------
- dnl check to see if you have getpgrp(0) or getpgrp()
- dnl
--dnl POSIX `getpgrp(void)'  define HAVE_GETPGRP_0
--dnl BSD   `getpgrp(int)' - takes 0 as argument
-+dnl POSIX getpgrp(void)  define HAVE_GETPGRP_0
-+dnl BSD   getpgrp(int) - takes 0 as argument
- dnl                        define HAVE_GETPGRP_0 0
- 
- dnl check to see if you have getpgrp(0) or getpgrp()
-@@ -1090,11 +933,11 @@
- 
- dnl ----------------------------------------------------------------------------
- dnl just for (really) backwards compatibility
--dnl we really try not to use union wait -- it's heinously unportable.
-+dnl we really try not to use union wait -- it is heinously unportable.
- dnl nicked this check from Tcl as well. ;
- dnl
- dnl The check below checks whether <sys/wait.h> defines the type
--dnl "union wait" correctly.  It's needed because of weirdness in
-+dnl "union wait" correctly.  It is needed because of weirdness in
- dnl HP-UX where "union wait" is defined in both the BSD and SYS-V
- dnl environments.  Checking the usability of WIFEXITED seems to do
- dnl the trick.
-@@ -1342,41 +1185,9 @@
- 
- AC_PROG_MAKE_SET
- 
--dnl ----------------- force this to be Bourne Shell for now ---------------
--AC_MSG_CHECKING(for shell)
--SHELL=/bin/sh
--AC_MSG_RESULT(using $SHELL (FORCED))
--
-+ALL_LINGUAS="fr"
- AM_GNU_GETTEXT
- 
--AC_MSG_RESULT([LIBS $LIBS, INTLLIBS $INTLLIBS])
-- if test "${USE_NLS}" = yes; then
--   AC_MSG_RESULT([Using NLS, localedir ${LOCALEDIR}, need intl/libintl.a - "${USE_INCLUDED_LIBINTL}" ])
--   if test "${USE_INCLUDED_LIBINTL}" = yes ; then
--      CPPFLAGS="$CPPFLAGS -I \${top_builddir}/intl"
--	  AC_MSG_RESULT([using \${top_builddir}/intl])
--	  if test "$nls_cv_force_use_gnu_gettext" = no ; then
--		echo "NLS enabled and requested system gettext support not available."
--		echo " You may need to use:"
--		echo "  configure '--with-cppopts=-I/usr/local/include' '--with-ldopts=-L/usr/local/lib'"
--		echo " See ${srcdir}/ABOUT-NLS.LPRng in the LPRng distribution for details."
--		exit 1;
--      fi
--	  if test ! -f ${srcdir}/intl/gettext.h ; then
--		echo "gettext code is not in the ${srcdir}/intl directory."
--		echo "See ${srcdir}/ABOUT-NLS.LPRng in the LPRng distribution for details."
--		exit 1;
--	  fi
--   fi
--   LIBS="$INTLLIBS $LIBS"
-- else
--   AC_MSG_RESULT([No NLS])
-- fi   
-- if test "$XGETTEXT" = "" ; then
--	 XGETTEXT=xgettext;
-- fi
-- AC_MSG_RESULT(using XGETTEXT $XGETTEXT)
--
- dnl ----------------------------------------------------------------------------
- dnl ----------------- END OF GENERAL CONFIGURATION   ---------------------------
- 
-@@ -1454,12 +1265,12 @@
- 		found=
- 		if test "$found" = "" ; then
- 			LIBS=" -lcrypto -lcom_err $SAVELIBS"
--			AC_CHECKING(for krb5_des_string_to_key in $LIBS, )
-+			AC_MSG_NOTICE([for krb5_des_string_to_key in $LIBS])
- 			AC_TRY_LINK_FUNC(krb5_des_string_to_key,found="yes")
- 		fi;
- 		if test "$found" = "" ; then
- 			LIBS=" -lk5crypto -lcom_err $SAVELIBS"
--			AC_CHECKING(for krb5_des_string_to_keyin $LIBS, )
-+			AC_MSG_NOTICE([for krb5_des_string_to_keyin $LIBS])
- 			AC_TRY_LINK_FUNC(krb5_des_string_to_key,found="yes")
- 		fi;
- 		if test "$found" = "" ; then
-@@ -1474,7 +1285,7 @@
- 		found= 
- 		if test "$found" = "" ; then
- 			LIBS=" -lkrb5 $SAVELIBS"
--			AC_CHECKING(for krb5_init_context in $LIBS, )
-+			AC_CHECKING([for krb5_init_context in $LIBS])
- 			AC_TRY_LINK_FUNC(krb5_init_context,found="yes")
- 		fi;
- 		if test "$found" = "" ; then
-@@ -1488,12 +1299,12 @@
- 			found=;
- 			if test "$found" = "" ; then
- 				LIBS=" -lkrb4 -ldes425 $SAVELIBS"
--				AC_CHECKING(for krb_recvauth in $LIBS, )
-+				AC_CHECKING([for krb_recvauth in $LIBS])
- 				AC_TRY_LINK_FUNC(krb5_init_context,found="yes")
- 			fi;
- 			if test "$found" = "" ; then
- 				LIBS=" -lkrb4 -ldes $SAVELIBS"
--				AC_CHECKING(for krb_recvauth in $LIBS, )
-+				AC_CHECKING([for krb_recvauth in $LIBS])
- 				AC_TRY_LINK_FUNC(krb5_init_context,found="yes")
- 			fi;
- 			if test "$found" = "" ; then
-@@ -1562,11 +1373,6 @@
- dnl ----------------- START OF OUTPUT ------------------------------------------
- 
- 
--if test "$ac_cv_prog_gcc" = yes; then
--	CFLAGS="$CFLAGS -g -W -Wall -Werror -Wno-unused "
--	CPPFLAGS="$CPPFLAGS -g -W -Wall -Werror -Wno-unused "
--fi;
--
- AC_OUTPUT(
- [
- Makefile
-@@ -1597,29 +1403,23 @@
- src/psbanner
- po/Makefile.in
- intl/Makefile
 -],
 -[
--for i in  \
--UTILS/LPRng.pm \
--UTILS/accounting.pl \
--UTILS/decode_args_with_perl \
--UTILS/decode_args_with_sh \
--UTILS/fixid \
--UTILS/fixupdate \
--UTILS/lpq_in_perl \
--UTILS/lpr_in_perl \
--UTILS/lprm_in_perl \
--UTILS/make_lpd_conf \
--UTILS/make_printcap_use \
--UTILS/makeinc \
--UTILS/read_conf \
--UTILS/remote_active \
--UTILS/test_read \
--UTILS/update_z.pl \
--; do chmod +x $i ; done
+-	v=yes;  STRIP_OPTION=" -s ";
 -]
--
 -)
-+UTILS/LPRng.pm
-+UTILS/accounting.pl
-+UTILS/decode_args_with_perl
-+UTILS/decode_args_with_sh
-+UTILS/fixid
-+UTILS/fixupdate
-+UTILS/lpq_in_perl
-+UTILS/lpr_in_perl
-+UTILS/lprm_in_perl
-+UTILS/make_lpd_conf
-+UTILS/make_printcap_use
-+UTILS/makeinc
-+UTILS/read_conf
-+UTILS/remote_active
-+UTILS/test_read
-+UTILS/update_z.pl
-+])
+-AC_MSG_RESULT($v)
++dnl disable stripping binaries 
++STRIP_OPTION=""
+ AC_SUBST(STRIP_OPTION)
  
  dnl ----------------------------------------------------------------------------
- dnl ----------------- END OF OUTPUT --------------------------------------------
---- LPRng-3.8.12/src/Makefile.in.orig	Mon May  6 17:26:46 2002
-+++ LPRng-3.8.12/src/Makefile.in	Wed Jul 10 00:14:35 2002
-@@ -47,9 +47,6 @@
- SHELL_PATH=@SHELL@
- SHELL = @SHELL@
+@@ -1836,8 +1804,8 @@
  
--# loader for c programs
--LDCC=@LDCC@
--
- # any libs that need to be used to get these programs to compile:
- LIBS= @LIBS@
  
-@@ -74,8 +71,6 @@
+ if test "$ac_cv_prog_gcc" = yes; then
+-	CFLAGS="$CFLAGS -g -W -Wall -Werror -Wno-unused "
+-	CPPFLAGS="$CPPFLAGS -g -W -Wall -Werror -Wno-unused "
++	CFLAGS="$CFLAGS -W -Wall -Werror -Wno-unused "
++	CPPFLAGS="$CPPFLAGS -W -Wall -Werror -Wno-unused "
+ fi;
  
- # install options
- 
--STRIP=@STRIP_OPTION@
--
- CFLAGS:= \
- 	-I${top_builddir} \
- 	-I${SRC}/include -I${SRC}/common \
-@@ -93,7 +88,7 @@
- 	-DCLEAR=\"@CLEAR@\"  \
- 	-DUSERID=\"@USERID@\"  \
- 	-DGROUPID=\"@GROUPID@\"  \
--	-DLOCALEDIR=\"@LOCALEDIR@\" \
-+	-DLOCALEDIR=\"${datdadir}\locale\" \
- 	-DDONE_JOBS=\"@DONE_JOBS@\" \
- 	-DDONE_JOBS_MAX_AGE=\"@DONE_JOBS_MAX_AGE@\" \
- 	-DUNIXSOCKETPATH=\"@UNIXSOCKETPATH@\" \
-@@ -190,7 +185,7 @@
- ########################################################################
- 
- .SUFFIXES: .lo
--LINK =  $(LIBTOOL) --mode=link $(LDCC) $(LDFLAGS) -o $@
-+LINK =  $(LIBTOOL) --mode=link $(CC) $(LDFLAGS) -o $@
- .c.lo:
- 	$(LIBTOOL) --mode=compile $(CC) $(CFLAGS) -c $<
- 
-@@ -317,17 +312,17 @@
- 	done;
- 
- 	${LIBTOOL} --mode=install $(INSTALLCMD) liblpr.la $(DESTDIR)$(libdir)/liblpr.la
--	${LIBTOOL} --mode=install ${INSTALLCMD} ${STRIP} -m $(@PERMS@) lpq ${DESTDIR}${bindir}
--	${LIBTOOL} --mode=install ${INSTALLCMD} ${STRIP} -m $(@PERMS@) lprm ${DESTDIR}${bindir}
--	${LIBTOOL} --mode=install ${INSTALLCMD} ${STRIP} -m $(@PERMS@) lpr ${DESTDIR}${bindir}
--	${LIBTOOL} --mode=install ${INSTALLCMD} ${STRIP} -m $(@PERMS@) lpstat ${DESTDIR}${bindir}
--	${LIBTOOL} --mode=install ${INSTALLCMD} ${STRIP} -m $(@PERMS@) lpc ${DESTDIR}${sbindir}
--	${LIBTOOL} --mode=install ${INSTALLCMD} ${STRIP} -m $(NORM_PERMS) lpd ${DESTDIR}${LPD_DIR}
--	${LIBTOOL} --mode=install ${INSTALLCMD} ${STRIP} -m $(NORM_PERMS) lpf ${DESTDIR}${FILTER_DIR}
--	${LIBTOOL} --mode=install ${INSTALLCMD} ${STRIP} -m $(NORM_PERMS) lpbanner ${DESTDIR}${FILTER_DIR}
--	${LIBTOOL} --mode=install ${INSTALLCMD}    -m $(NORM_PERMS) pclbanner ${DESTDIR}${FILTER_DIR}
--	${LIBTOOL} --mode=install ${INSTALLCMD}    -m $(NORM_PERMS) psbanner ${DESTDIR}${FILTER_DIR}
--	${LIBTOOL} --mode=install ${INSTALLCMD} ${STRIP} -m $(NORM_PERMS) checkpc ${DESTDIR}${sbindir}
-+	${LIBTOOL} --mode=install ${INSTALLCMD} -m $(@PERMS@) lpq ${DESTDIR}${bindir}
-+	${LIBTOOL} --mode=install ${INSTALLCMD} -m $(@PERMS@) lprm ${DESTDIR}${bindir}
-+	${LIBTOOL} --mode=install ${INSTALLCMD} -m $(@PERMS@) lpr ${DESTDIR}${bindir}
-+	${LIBTOOL} --mode=install ${INSTALLCMD} -m $(@PERMS@) lpstat ${DESTDIR}${bindir}
-+	${LIBTOOL} --mode=install ${INSTALLCMD} -m $(@PERMS@) lpc ${DESTDIR}${sbindir}
-+	${LIBTOOL} --mode=install ${INSTALLCMD} -m $(NORM_PERMS) lpd ${DESTDIR}${LPD_DIR}
-+	${LIBTOOL} --mode=install ${INSTALLCMD} -m $(NORM_PERMS) lpf ${DESTDIR}${FILTER_DIR}
-+	${LIBTOOL} --mode=install ${INSTALLCMD} -m $(NORM_PERMS) lpbanner ${DESTDIR}${FILTER_DIR}
-+	${LIBTOOL} --mode=install ${INSTALLCMD} -m $(NORM_PERMS) pclbanner ${DESTDIR}${FILTER_DIR}
-+	${LIBTOOL} --mode=install ${INSTALLCMD} -m $(NORM_PERMS) psbanner ${DESTDIR}${FILTER_DIR}
-+	${LIBTOOL} --mode=install ${INSTALLCMD} -m $(NORM_PERMS) checkpc ${DESTDIR}${sbindir}
- 	cd ${DESTDIR}${bindir}; rm -f lp cancel; ln -s lpr lp; ln -s lprm cancel;
- 
- uninstall:
---- LPRng-3.8.12/Makefile.in.orig	Wed Apr 10 18:45:43 2002
-+++ LPRng-3.8.12/Makefile.in	Tue Jul  9 23:59:48 2002
-@@ -46,10 +46,7 @@
- LOCKFILE=\"@LOCKFILE@\"
- PSHOWALL="@PSHOWALL@"
- FILTER_DIR=@FILTER_DIR@
--LOCALEDIR=@LOCALEDIR@
- INIT=@INIT@
--USE_NLS=@USE_NLS@
--LIBTOOL=@LIBTOOL@
- 
- #=============================================================================
- # List the directories you want to generate:
-@@ -115,12 +112,6 @@
- MAKETARGET=all
- 
- ###############################################################################
--$(ALLDIRS):
--	if [ "$@" != po -o "$(USE_NLS)" != "no" ] ; then \
--		cd $@; $(MAKE) localedir=${DESTDIR}${LOCALEDIR} \
--			DESTDIR=$(DESTDIR) $(MAKETARGET) ; \
--	fi
--
- TAGS clean::
- 	-$(MAKE) MAKETARGET=$@ DESTDIR=$(DESTDIR) $(DIRS)
- 
-@@ -129,7 +120,9 @@
- 	-rm -f *.bak ? ?.* core *.old
- 
- install: all
--	$(MAKE) MAKETARGET=$@ DESTDIR=$(DESTDIR) $(INSTALLDIRS)
-+	for i in $(INSTALLDIRS); do \
-+		$(MAKE) install DESTDIR=$(DESTDIR) -C $$i; \
-+	done
- 
- 	if [ "${POSTINSTALL}" != "NO" -a "${POSTINSTALL}" != "no" ] ; then \
- 		MAKEINSTALL=YES DESTDIR=$(DESTDIR) $(SHELL) postinstall ; \
+ AC_OUTPUT(
