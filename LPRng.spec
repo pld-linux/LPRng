@@ -99,7 +99,10 @@ gettextize --copy --force
 libtoolize --copy --force
 aclocal
 autoconf
-(cd gdbm-1.8.0 ; aclocal ; autoconf )
+cd gdbm-1.8.0
+	aclocal
+	autoconf
+cd ..
 %configure \
 	--disable-setuid \
 	--with-userid=lp \
