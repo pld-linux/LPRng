@@ -86,7 +86,7 @@ fi
 %doc {ANNOUNCE,Artistic.license,CHANGES,CONTRIBUTORS}.gz
 %doc {Commercial.license,HOWTO,README*,TESTSUPPORT}.gz
 %attr(755,root,root) /etc/rc.d/init.d/lpd
-%attr(755,root,root) /usr/bin/*
+%attr(755,root,root) %{_bindir}/*
 %attr(755,root,root) /usr/sbin/*
 %{_mandir}/man[158]/*
 
