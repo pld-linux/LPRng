@@ -1,0 +1,12 @@
+diff -urN LPRng-3.7.4/src/include/linksupport.h LPRng-3.7.4-new/src/include/linksupport.h
+--- LPRng-3.7.4/src/include/linksupport.h	Thu Dec 28 13:06:14 2000
++++ LPRng-3.7.4-new/src/include/linksupport.h	Wed Jan 13 16:19:20 2049
+@@ -47,8 +47,6 @@
+ const char *Ack_err_str (int n);
+ int AF_Protocol(void);
+ int inet_pton( int family, const char *strptr, void *addr );
+-const char *inet_ntop( int family, const void *addr,
+-	char *str, size_t len );
+ const char *inet_ntop_sockaddr( struct sockaddr *addr,
+ 	char *str, int len );
+ 
