@@ -1,0 +1,11 @@
+--- LPRng-3.7.3/src/common/checkpc.c.jobfilescan	Thu Mar 29 14:58:23 2001
++++ LPRng-3.7.3/src/common/checkpc.c	Thu Mar 29 14:59:51 2001
+@@ -440,7 +440,7 @@
+ 				continue;
+ 			}
+ 		}
+-		Check_file( cf_name, Fix, 0, 0 );
++		if ( jobfile ) Check_file( cf_name, Fix, 0, 0 );
+ 	}
+ 	closedir(dir);
+ 
