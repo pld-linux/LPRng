@@ -1,33 +1,15 @@
-diff -Nru LPRng-3.8.0/Makefile.in LPRng-3.8.0.new/Makefile.in
---- LPRng-3.8.0/Makefile.in	Tue Oct 16 22:09:21 2001
-+++ LPRng-3.8.0.new/Makefile.in	Tue Oct 23 11:08:12 2001
-@@ -46,7 +46,6 @@
- LOCKFILE=\"@LOCKFILE@\"
- PSHOWALL="@PSHOWALL@"
- FILTER_DIR=@FILTER_DIR@
--LOCALEDIR=@LOCALEDIR@
- INIT=@INIT@
- USE_NLS=@USE_NLS@
- USE_GDBM=@USE_GDBM@
-@@ -113,7 +112,7 @@
- ###############################################################################
- $(ALLDIRS):
- 	if [ "$@" != po -o "$(USE_NLS)" != "no" ] ; then \
--		cd $@; $(MAKE) localedir=${DESTDIR}${LOCALEDIR} \
-+		cd $@; $(MAKE) \
- 			DESTDIR=$(DESTDIR) $(MAKETARGET) ; \
- 	fi
- 
---- LPRng-3.8.0/configure.in~	Tue Oct 16 22:27:47 2001
-+++ LPRng-3.8.0/configure.in	Tue Oct 23 16:08:57 2001
-@@ -7,52 +7,16 @@
+--- LPRng-3.8.1/configure.in.orig	Fri Nov 16 17:01:56 2001
++++ LPRng-3.8.1/configure.in	Sun Nov 18 13:01:43 2001
+@@ -6,53 +6,19 @@
+ dnl ----------------- START OF GENERAL CONFIGURATION ---------------------------
  AC_INIT(Makefile.in)
  
- 
+-
 -PACKAGE=LPRng
--VERSION=3.8.0
--
--
+-VERSION=3.8.1
++AM_INIT_AUTOMAKE(LPRng, 3.8.0)
+ 
+ 
  AC_CONFIG_AUX_DIR(.)
 -AC_CANONICAL_SYSTEM
  AC_CONFIG_HEADER(config.h)
@@ -36,8 +18,8 @@ diff -Nru LPRng-3.8.0/Makefile.in LPRng-3.8.0.new/Makefile.in
 -AC_DEFINE_UNQUOTED(VERSION, "$VERSION")
 -AC_SUBST(PACKAGE)
 -AC_SUBST(VERSION)
--ALL_LINGUAS="fr"
--
+ ALL_LINGUAS="fr"
+ 
 -WITH_CC dnl
 -WITH_CCOPTS dnl
 -WITH_LINKER dnl
@@ -59,8 +41,7 @@ diff -Nru LPRng-3.8.0/Makefile.in LPRng-3.8.0.new/Makefile.in
 -AC_SUBST(LDFLAGS)
 -AC_SUBST(LDCC)
 -
-+AM_INIT_AUTOMAKE(LPRng, 3.8.0)
- 
+-
  dnl check for awk
  AC_PROG_AWK
 -AC_SUBST(AWK)
@@ -77,7 +58,7 @@ diff -Nru LPRng-3.8.0/Makefile.in LPRng-3.8.0.new/Makefile.in
  
  dnl ----------------------------------------------------------------------------
  dnl ----------- XXXXXX START OF OPTIONS ----------------------------------------
-@@ -333,16 +297,6 @@
+@@ -333,16 +299,6 @@
  AC_MSG_RESULT($FILTER_DIR)
  AC_SUBST(FILTER_DIR)
  
@@ -94,7 +75,7 @@ diff -Nru LPRng-3.8.0/Makefile.in LPRng-3.8.0.new/Makefile.in
  dnl ----------------------------------------------------------------------------
  dnl ------------   OS Checks  --------------------------------------------------
  
-@@ -350,50 +304,12 @@
+@@ -350,50 +306,12 @@
  AC_MINIX
  AC_AIX
  
@@ -145,7 +126,7 @@ diff -Nru LPRng-3.8.0/Makefile.in LPRng-3.8.0.new/Makefile.in
  AM_PROG_LIBTOOL
  
  AC_C_CONST
-@@ -451,77 +367,6 @@
+@@ -451,77 +369,6 @@
    AC_DEFINE(HAVE_QUAD_T)
  fi
  
@@ -223,7 +204,7 @@ diff -Nru LPRng-3.8.0/Makefile.in LPRng-3.8.0.new/Makefile.in
  dnl ----------------------------------------------------------------------------
  dnl headers:
  
-@@ -549,7 +394,6 @@
+@@ -549,7 +396,6 @@
  	dnl A/UX uses this...
  	AC_CHECK_LIB(posix, getpwent, [LIBS="$LIBS -lposix"])
  
@@ -231,7 +212,7 @@ diff -Nru LPRng-3.8.0/Makefile.in LPRng-3.8.0.new/Makefile.in
  	AC_CHECK_LIB(socket_s, socket, [LIBS="$LIBS -lsocket_s"; have_socket=1], ,-lnsl)
  	if test -z "$have_socket"; then
  		AC_CHECK_LIB(socket, socket, [LIBS="$LIBS -lsocket"], , -lnsl)
-@@ -1007,8 +851,8 @@
+@@ -1007,8 +853,8 @@
  dnl ----------------------------------------------------------------------------
  dnl check to see if you have getpgrp(0) or getpgrp()
  dnl
@@ -242,7 +223,7 @@ diff -Nru LPRng-3.8.0/Makefile.in LPRng-3.8.0.new/Makefile.in
  dnl                        define HAVE_GETPGRP_0 0
  
  dnl check to see if you have getpgrp(0) or getpgrp()
-@@ -1055,11 +899,11 @@
+@@ -1055,11 +901,11 @@
  
  dnl ----------------------------------------------------------------------------
  dnl just for (really) backwards compatibility
@@ -256,7 +237,7 @@ diff -Nru LPRng-3.8.0/Makefile.in LPRng-3.8.0.new/Makefile.in
  dnl HP-UX where "union wait" is defined in both the BSD and SYS-V
  dnl environments.  Checking the usability of WIFEXITED seems to do
  dnl the trick.
-@@ -1307,41 +1151,9 @@
+@@ -1307,41 +1153,9 @@
  
  AC_PROG_MAKE_SET
  
@@ -299,7 +280,7 @@ diff -Nru LPRng-3.8.0/Makefile.in LPRng-3.8.0.new/Makefile.in
  dnl ----------------------------------------------------------------------------
  dnl ----------------- END OF GENERAL CONFIGURATION   ---------------------------
  
-@@ -1393,12 +1205,12 @@
+@@ -1393,12 +1207,12 @@
  		found=
  		if test "$found" = "" ; then
  			LIBS=" -lcrypto -lcom_err $SAVELIBS"
@@ -314,7 +295,7 @@ diff -Nru LPRng-3.8.0/Makefile.in LPRng-3.8.0.new/Makefile.in
  			AC_TRY_LINK_FUNC(krb5_des_string_to_key,found="yes")
  		fi;
  		if test "$found" = "" ; then
-@@ -1413,7 +1225,7 @@
+@@ -1413,7 +1227,7 @@
  		found= 
  		if test "$found" = "" ; then
  			LIBS=" -lkrb5 $SAVELIBS"
@@ -323,7 +304,7 @@ diff -Nru LPRng-3.8.0/Makefile.in LPRng-3.8.0.new/Makefile.in
  			AC_TRY_LINK_FUNC(krb5_init_context,found="yes")
  		fi;
  		if test "$found" = "" ; then
-@@ -1427,12 +1239,12 @@
+@@ -1427,12 +1241,12 @@
  			found=;
  			if test "$found" = "" ; then
  				LIBS=" -lkrb4 -ldes425 $SAVELIBS"
@@ -338,7 +319,7 @@ diff -Nru LPRng-3.8.0/Makefile.in LPRng-3.8.0.new/Makefile.in
  				AC_TRY_LINK_FUNC(krb5_init_context,found="yes")
  			fi;
  			if test "$found" = "" ; then
-@@ -1501,12 +1313,7 @@
+@@ -1501,12 +1315,7 @@
  dnl ----------------- START OF OUTPUT ------------------------------------------
  
  
@@ -352,7 +333,7 @@ diff -Nru LPRng-3.8.0/Makefile.in LPRng-3.8.0.new/Makefile.in
  Makefile
  HOWTO/Makefile
  TESTSUPPORT/Makefile
-@@ -1535,29 +1342,23 @@
+@@ -1535,29 +1344,23 @@
  src/psbanner
  po/Makefile.in
  intl/Makefile
@@ -399,62 +380,9 @@ diff -Nru LPRng-3.8.0/Makefile.in LPRng-3.8.0.new/Makefile.in
  
  dnl ----------------------------------------------------------------------------
  dnl ----------------- END OF OUTPUT --------------------------------------------
---- LPRng-3.8.0/man/Makefile.in	Sat Aug 25 20:10:01 2001
-+++ LPRng-3.8.0.new/man/Makefile.in	Tue Oct 23 11:08:12 2001
-@@ -22,8 +22,8 @@
- 
- ## fix up prefix to be a make variable
- prefix = @prefix@
--MAN =		@mandir@
--SHELL =		@SHELL@
-+mandir = @mandir@
-+SHELL =	@SHELL@
- 
- # Install man pages in compressed form.
- # COMPRESS     = compression utility
-@@ -61,13 +61,13 @@
- install:
- 	for suffix in 1 2 3 4 5 6 7 8 ; do \
- 	  if ls ${SRC}/*.$${suffix} >/dev/null 2>&1 ; then \
--	    if [ ! -d $(DESTDIR)$(MAN)/man$${suffix} ] ; then \
--		    echo ${SRC}/mkinstalldirs $(DESTDIR)$(MAN)/man$${suffix}; \
--		    ${SRC}/mkinstalldirs $(DESTDIR)$(MAN)/man$${suffix}; \
-+	    if [ ! -d $(DESTDIR)$(mandir)/man$${suffix} ] ; then \
-+		    echo ${SRC}/mkinstalldirs $(DESTDIR)$(mandir)/man$${suffix}; \
-+		    ${SRC}/mkinstalldirs $(DESTDIR)$(mandir)/man$${suffix}; \
- 	    fi; \
- 	    for i in ${SRC}/*.$$suffix; do \
--		echo   $(INSTALL) -m 644 $$i $(DESTDIR)$(MAN)/man$$suffix/`basename $$i`$(MANEXT); \
--		$(INSTALL)   -m 644 $$i $(DESTDIR)$(MAN)/man$$suffix/`basename $$i`$(MANEXT); \
-+		echo   $(INSTALL) -m 644 $$i $(DESTDIR)$(mandir)/man$$suffix/`basename $$i`$(mandirEXT); \
-+		$(INSTALL)   -m 644 $$i $(DESTDIR)$(mandir)/man$$suffix/`basename $$i`$(mandirEXT); \
- 	    done; \
- 	  fi; \
- 	done;
-@@ -76,8 +76,8 @@
- 	for suffix in 1 2 3 4 5 6 7 8 ; do \
- 	  if ls ${SRC}/*.$${suffix} >/dev/null 2>&1 ; then \
- 	    for i in ${SRC}/*.$$suffix; do \
--		echo   rm $(DESTDIR)$(MAN)/man$$suffix/`basename $$i`$(MANEXT); \
--		rm   $(DESTDIR)$(MAN)/man$$suffix/`basename $$i`$(MANEXT); \
-+		echo   rm $(DESTDIR)$(mandir)/man$$suffix/`basename $$i`$(mandirEXT); \
-+		rm   $(DESTDIR)$(mandir)/man$$suffix/`basename $$i`$(MANEXT); \
- 	    done; \
- 	  fi; \
- 	done;
---- LPRng-3.8.0/src/Makefile.in~	Sat Aug 25 20:02:01 2001
-+++ LPRng-3.8.0/src/Makefile.in	Tue Oct 23 20:41:57 2001
-@@ -33,7 +33,8 @@
- @SET_MAKE@
- 
- # what C compiler to use.
--CC:=@CC@
-+CC=@CC@
-+datadir=@datadir@
- 
- # what command to use to "ranlib" or "lorder" the library.
- RANLIB=@RANLIB@
-@@ -47,9 +48,6 @@
+--- LPRng-3.8.1/src/Makefile.in~	Fri Nov 16 17:01:32 2001
++++ LPRng-3.8.1/src/Makefile.in	Sun Nov 18 23:24:17 2001
+@@ -47,9 +47,6 @@
  SHELL_PATH=@SHELL@
  SHELL = @SHELL@
  
@@ -464,7 +392,7 @@ diff -Nru LPRng-3.8.0/Makefile.in LPRng-3.8.0.new/Makefile.in
  # any libs that need to be used to get these programs to compile:
  LIBS= @LIBS@
  
-@@ -74,8 +72,6 @@
+@@ -71,8 +71,6 @@
  
  # install options
  
@@ -473,16 +401,7 @@ diff -Nru LPRng-3.8.0/Makefile.in LPRng-3.8.0.new/Makefile.in
  CFLAGS:= \
  	-I${top_builddir} \
  	-I${SRC}/include -I${SRC}/common \
-@@ -93,7 +89,7 @@
- 	-DCLEAR=\"@CLEAR@\"  \
- 	-DUSERID=\"@USERID@\"  \
- 	-DGROUPID=\"@GROUPID@\"  \
--	-DLOCALEDIR=\"@LOCALEDIR@\"
-+	-DLOCALEDIR=\"$(datadir)/locale\"
- 
- USER_OBJS := @USER_OBJS@
- LDFLAGS   := @LDFLAGS@
-@@ -101,8 +97,6 @@
+@@ -98,8 +96,6 @@
  FILTER_DIR = @FILTER_DIR@
  LPD_DIR    = @LPD_DIR@
  
@@ -491,52 +410,16 @@ diff -Nru LPRng-3.8.0/Makefile.in LPRng-3.8.0.new/Makefile.in
  #********************** End of configure modifiable settings ************
  
  
-@@ -187,7 +181,7 @@
+@@ -187,7 +184,7 @@
  ########################################################################
  
  .SUFFIXES: .lo
 -LINK =  $(LIBTOOL) --mode=link $(LDCC) $(LDFLAGS) -o $@
-+LINK =  $(LIBTOOL) --mode=link $(CC) -o $@
++LINK =  $(LIBTOOL) --mode=link $(CC) $(LDFLAGS) -o $@
  .c.lo:
  	$(LIBTOOL) --mode=compile $(CC) $(CFLAGS) -c $<
  
-@@ -249,25 +243,25 @@
- 	$(LINK) $(LIBLPR_OBJS) -rpath ${libdir}
- 
- lpd: $(LPD_OBJS) liblpr.la
--	$(LINK) ${LPD_OBJS} liblpr.la $(LIBS)
-+	$(LINK) $(LDFLAGS) ${LPD_OBJS} liblpr.la $(LIBS)
- lpr: $(LPR_OBJS) liblpr.la
--	$(LINK) ${LPR_OBJS} liblpr.la $(LIBS)
-+	$(LINK) $(LDFLAGS) ${LPR_OBJS} liblpr.la $(LIBS)
- lpq: $(LPQ_OBJS) liblpr.la
--	$(LINK) ${LPQ_OBJS} liblpr.la $(LIBS)
-+	$(LINK) $(LDFLAGS) ${LPQ_OBJS} liblpr.la $(LIBS)
- lpstat: $(LPSTAT_OBJS) liblpr.la
--	$(LINK) ${LPSTAT_OBJS} liblpr.la $(LIBS)
-+	$(LINK) $(LDFLAGS) ${LPSTAT_OBJS} liblpr.la $(LIBS)
- lprm: $(LPRM_OBJS) liblpr.la
--	$(LINK) ${LPRM_OBJS} liblpr.la $(LIBS)
-+	$(LINK) $(LDFLAGS) ${LPRM_OBJS} liblpr.la $(LIBS)
- lpc: $(LPC_OBJS) liblpr.la
--	$(LINK) ${LPC_OBJS} liblpr.la $(LIBS)
-+	$(LINK) $(LDFLAGS) ${LPC_OBJS} liblpr.la $(LIBS)
- checkpc: $(CHECKPC_OBJS) liblpr.la
--	$(LINK) ${CHECKPC_OBJS} liblpr.la $(LIBS)
-+	$(LINK) $(LDFLAGS) ${CHECKPC_OBJS} liblpr.la $(LIBS)
- lpf: $(LPF_OBJS)
--	$(LINK) ${LPF_OBJS} $(LIBS)
-+	$(LINK) $(LDFLAGS) ${LPF_OBJS} $(LIBS)
- lpbanner: $(LPBANNER_OBJS)
--	$(LINK) ${LPBANNER_OBJS} $(LIBS)
-+	$(LINK) $(LDFLAGS) ${LPBANNER_OBJS} $(LIBS)
- monitor: $(MONITOR_OBJS) liblpr.la
--	$(LINK) ${MONITOR_OBJS} liblpr.la $(LIBS)
-+	$(LINK) $(LDFLAGS) ${MONITOR_OBJS} liblpr.la $(LIBS)
- 
- authenticate_pgp: ${SRC}/AUTHENTICATE/authenticate_pgp.sh
- 	rm -f $@; cp ${SRC}/AUTHENTICATE/authenticate_pgp.sh $@; chmod 555 $@
-@@ -313,17 +307,17 @@
+@@ -310,17 +306,17 @@
  	done;
  
  	${LIBTOOL} --mode=install $(INSTALLCMD) liblpr.la $(DESTDIR)$(libdir)/liblpr.la
@@ -565,3 +448,39 @@ diff -Nru LPRng-3.8.0/Makefile.in LPRng-3.8.0.new/Makefile.in
  	cd ${DESTDIR}${bindir}; rm -f lp cancel; ln -s lpr lp; ln -s lprm cancel;
  
  uninstall:
+--- LPRng-3.8.1/Makefile.in~	Mon Nov 19 00:56:23 2001
++++ LPRng-3.8.1/Makefile.in	Mon Nov 19 00:56:23 2001
+@@ -46,9 +46,7 @@
+ LOCKFILE=\"@LOCKFILE@\"
+ PSHOWALL="@PSHOWALL@"
+ FILTER_DIR=@FILTER_DIR@
+-LOCALEDIR=@LOCALEDIR@
+ INIT=@INIT@
+-USE_NLS=@USE_NLS@
+ USE_GDBM=@USE_GDBM@
+ LIBTOOL=@LIBTOOL@
+ 
+@@ -111,12 +109,6 @@
+ MAKETARGET=all
+ 
+ ###############################################################################
+-$(ALLDIRS):
+-	if [ "$@" != po -o "$(USE_NLS)" != "no" ] ; then \
+-		cd $@; $(MAKE) localedir=${DESTDIR}${LOCALEDIR} \
+-			DESTDIR=$(DESTDIR) $(MAKETARGET) ; \
+-	fi
+-
+ TAGS clean::
+ 	-$(MAKE) MAKETARGET=$@ DESTDIR=$(DESTDIR) $(DIRS)
+ 
+@@ -125,7 +117,9 @@
+ 	-rm -f *.bak ? ?.* core *.old
+ 
+ install: all
+-	$(MAKE) MAKETARGET=$@ DESTDIR=$(DESTDIR) $(INSTALLDIRS)
++	for i in $(INSTALLDIRS); do \
++		$(MAKE) install DESTDIR=$(DESTDIR) -C $$i; \
++	done
+ 
+ 	if [ "${POSTINSTALL}" != "NO" -a "${POSTINSTALL}" != "no" ] ; then \
+ 		MAKEINSTALL=YES DESTDIR=$(DESTDIR) $(SHELL) postinstall ; \

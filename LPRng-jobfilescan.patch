@@ -1,9 +1,9 @@
---- LPRng-3.8.0/src/common/checkpc.c.orig	Tue Oct 16 22:32:38 2001
-+++ LPRng-3.8.0/src/common/checkpc.c	Tue Oct 23 11:07:23 2001
+--- LPRng-3.8.1/src/common/checkpc.c.orig	Sun Nov 18 12:24:42 2001
++++ LPRng-3.8.1/src/common/checkpc.c	Sun Nov 18 12:25:17 2001
 @@ -458,7 +458,8 @@
+ 			}
  		}
  		/* we update all real files in this directory */
- 		WARNMSG( "calling Check_file for '%s', fix %d", cf_name, Fix ); 
 -		Check_file( cf_name, Fix, 0, 0 );
 +		if ( jobfile )
 +			Check_file( cf_name, Fix, 0, 0 );
