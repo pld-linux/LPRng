@@ -18,13 +18,11 @@ Source4:	http://www.mif.pg.gda.pl/homepages/ankry/man-PLD/%{name}-pl-man-pages.t
 # Source4-md5:	4771b1c3598677a8201a9e203235dff3
 Patch0:		%{name}-ac_fixes.patch
 Patch1:		%{name}-lpd-perms.patch
-#Patch2:		%{name}-no_dupl_DESDIR.patch
 Patch2:		%{name}-ngettext.patch
 Patch3:		%{name}-missing-nls.patch
 Patch4:		%{name}-pl.po.patch
 Patch5:		%{name}-types.patch
-#Patch6:		%{name}-gcc33.patch
-URL:		http://www.astart.com/lprng/LPRng.html
+URL:		http://www.lprng.com/
 BuildRequires:	autoconf
 BuildRequires:	automake
 BuildRequires:	gettext-devel
