@@ -1,8 +1,8 @@
 Summary:	A next-generation printing system for UNIX
 Summary(pl):	System drukowania nowej generacji
 Name:		LPRng
-Version:	3.7.4
-Release:	26
+Version:	3.7.5
+Release:	1
 License:	GPL
 Group:		Applications/System
 Group(de):	Applikationen/System
