@@ -1,6 +1,6 @@
-diff -Nru LPRng-3.6.12/configure.in LPRng-3.6.12.new/configure.in
---- LPRng-3.6.12/configure.in	Thu Oct 28 03:30:07 1999
-+++ LPRng-3.6.12.new/configure.in	Thu Nov 25 07:41:16 1999
+diff -Nru LPRng-3.6.13/configure.in LPRng-3.6.13.new/configure.in
+--- LPRng-3.6.13/configure.in	Mon Feb 21 21:27:27 2000
++++ LPRng-3.6.13.new/configure.in	Tue Feb 29 16:02:30 2000
 @@ -1255,7 +1255,6 @@
  
  dnl ----------------- Option for enabling GNU gettext --------------------
@@ -9,9 +9,9 @@ diff -Nru LPRng-3.6.12/configure.in LPRng-3.6.12.new/configure.in
  
  dnl ----------------- GCC Compilation ----------------------------------
  AC_OUTPUT(
-diff -Nru LPRng-3.6.12/man/Makefile.in LPRng-3.6.12.new/man/Makefile.in
---- LPRng-3.6.12/man/Makefile.in	Thu Nov 25 07:47:59 1999
-+++ LPRng-3.6.12.new/man/Makefile.in	Thu Nov 25 07:41:16 1999
+diff -Nru LPRng-3.6.13/man/Makefile.in LPRng-3.6.13.new/man/Makefile.in
+--- LPRng-3.6.13/man/Makefile.in	Mon Feb 21 21:28:15 2000
++++ LPRng-3.6.13.new/man/Makefile.in	Tue Feb 29 16:02:30 2000
 @@ -21,9 +21,9 @@
  MANEXT =	
  
@@ -61,9 +61,9 @@ diff -Nru LPRng-3.6.12/man/Makefile.in LPRng-3.6.12.new/man/Makefile.in
  	
  realclean mostlyclean distclean:: clean
  	rm -f Makefile
-diff -Nru LPRng-3.6.12/src/Makefile.in LPRng-3.6.12.new/src/Makefile.in
---- LPRng-3.6.12/src/Makefile.in	Thu Oct 28 03:30:11 1999
-+++ LPRng-3.6.12.new/src/Makefile.in	Thu Nov 25 07:44:08 1999
+diff -Nru LPRng-3.6.13/src/Makefile.in LPRng-3.6.13.new/src/Makefile.in
+--- LPRng-3.6.13/src/Makefile.in	Mon Feb 21 21:27:29 2000
++++ LPRng-3.6.13.new/src/Makefile.in	Thu Mar  2 18:01:33 2000
 @@ -57,17 +57,17 @@
  
  ### PATHS ####
@@ -88,7 +88,7 @@ diff -Nru LPRng-3.6.12/src/Makefile.in LPRng-3.6.12.new/src/Makefile.in
  # locale
  localedir = $(prefix)/@DATADIRNAME@/locale
  
-@@ -399,29 +399,29 @@
+@@ -401,29 +401,29 @@
  
  install: all
  	echo "SETUID_ROOT IS ${PERMS}, PERMS $(ROOT_PERMS)";
@@ -109,7 +109,7 @@ diff -Nru LPRng-3.6.12/src/Makefile.in LPRng-3.6.12.new/src/Makefile.in
 -	${INSTALLCMD}    -m $(NORM_PERMS) psbanner ${FILTER_DIR}
 -	${INSTALLCMD} ${STRIP} -m $(NORM_PERMS) checkpc ${sbindir}
 -	${INSTALLCMD} ${STRIP} -m $(NORM_PERMS) lpraccnt ${sbindir}
--	cd ${bindir}; rm -f lp cancel; ln ${STRIP} lpr lp; ln -s lprm cancel;
+-	cd ${bindir}; rm -f lp cancel; ln -s lpr lp; ln -s lprm cancel;
 +	${INSTALLCMD} ${STRIP} -m $(ROOT_PERMS) lpq $(DESTDIR)$(bindir)
 +	${INSTALLCMD} ${STRIP} -m $(ROOT_PERMS) lprm $(DESTDIR)$(bindir)
 +	${INSTALLCMD} ${STRIP} -m $(ROOT_PERMS) lpr $(DESTDIR)$(bindir)
@@ -122,7 +122,7 @@ diff -Nru LPRng-3.6.12/src/Makefile.in LPRng-3.6.12.new/src/Makefile.in
 +	${INSTALLCMD}    -m $(NORM_PERMS) psbanner $(DESTDIR)$(FILTER_DIR)
 +	${INSTALLCMD} ${STRIP} -m $(NORM_PERMS) checkpc $(DESTDIR)$(sbindir)
 +	${INSTALLCMD} ${STRIP} -m $(NORM_PERMS) lpraccnt $(DESTDIR)$(sbindir)
-+	cd $(DESTDIR)$(bindir); rm -f lp cancel; ln ${STRIP} lpr lp; ln -s lprm cancel;
++	cd $(DESTDIR)$(bindir); rm -f lp cancel; ln -s lpr lp; ln -s lprm cancel;
  
  uninstall:
 -	rm -f ${LPD_DIR}/lpd
