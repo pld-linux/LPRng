@@ -99,7 +99,7 @@ install %{SOURCE1} $RPM_BUILD_ROOT/etc/rc.d/init.d/lpd
 # yes, overwrite distribution lpd.conf
 install %{SOURCE2} $RPM_BUILD_ROOT%{_sysconfdir}/lpd.conf
 echo "default_printer = lp" >>$RPM_BUILD_ROOT%{_sysconfdir}/lpd.conf
-install printcap.in $RPM_BUILD_ROOT%{_sysconfdir}/printcap
+install printcap $RPM_BUILD_ROOT%{_sysconfdir}/printcap
 install lpd.perms $RPM_BUILD_ROOT%{_sysconfdir}/
 # default spool
 install -d $RPM_BUILD_ROOT%{_var}/spool/lpd/lp
@@ -132,7 +132,7 @@ fi
 
 %files -f %{name}.lang
 %defattr(644,root,root,755)
-%doc *.gz TESTSUPPORT HOWTO/LPRng-HOWTO.html
+%doc *.gz TESTSUPPORT HOWTO/LPRng-HOWTO.html HOWTO/CHANGES
 %config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/lpd.conf
 %config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/lpd.perms
 %config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/printcap
