@@ -1,0 +1,325 @@
+diff -Nru LPRng-3.6.26/configure.in LPRng-3.6.26.new/configure.in
+--- LPRng-3.6.26/configure.in	Mon Oct 16 21:11:58 2000
++++ LPRng-3.6.26.new/configure.in	Mon Oct 16 21:11:30 2000
+@@ -2,44 +2,17 @@
+ dnl
+ dnl $Id$
+ 
+-PACKAGE=LPRng
+-VERSION=3.6.26
+-
+ dnl ----------------------------------------------------------------------------
+ dnl ----------------- START OF GENERAL CONFIGURATION ---------------------------
+ AC_INIT(Makefile.in)
+-AC_CONFIG_AUX_DIR(.)
+ AC_CANONICAL_SYSTEM
+ AC_CONFIG_HEADER(config.h)
+ 
+-AC_DEFINE_UNQUOTED(PACKAGE, "$PACKAGE")
+-AC_DEFINE_UNQUOTED(VERSION, "$VERSION")
+-AC_SUBST(PACKAGE)
+-AC_SUBST(VERSION)
+-ALL_LINGUAS="fr"
+-
+-AC_PREFIX_DEFAULT(/usr/local)
+-AC_SUBST(INSTALL)
+-AC_SUBST(INSTALL_MAN)
+-AC_SUBST(SHELL)
+-AC_SUBST(CPP)
+-AC_SUBST(CFLAGS)
+-AC_SUBST(CPPFLAGS)
+-AC_SUBST(LDFLAGS)
+-AC_SUBST(LDCC)
++AM_INIT_AUTOMAKE(LPRng, 3.6.26)
+ 
+ dnl check for awk
+ AC_PROG_AWK
+-AC_SUBST(AWK)
+ AC_PATH_PROG(PERL,perl)dnl
+-AC_SUBST(PERL)dnl
+-
+-WITH_CC dnl
+-WITH_CCOPTS dnl
+-WITH_LINKER dnl
+-WITH_LDOPTS dnl
+-WITH_CPPOPTS dnl
+-
+ 
+ dnl ----------------------------------------------------------------------------
+ dnl ----------- XXXXXX START OF OPTIONS ----------------------------------------
+@@ -299,37 +272,11 @@
+ AC_MSG_RESULT($FILTER_DIR)
+ AC_SUBST(FILTER_DIR)
+ 
+-dnl default strip binaries 
+-AC_MSG_CHECKING(disable stripped binaries)
+-AC_ARG_ENABLE( strip,
+-[  --disable-strip                   disable stripping binaries by default],
+-[v=no; STRIP=""; ],
+-[v=yes;  STRIP="-s"; ]
+-)
+-AC_MSG_RESULT($v)
+-AC_SUBST(STRIP)
+-
+ dnl ----------------------------------------------------------------------------
+ dnl -----------   C compiler checks    -----------------------------------------
+ AC_PROG_CC
+ AC_PROG_CPP
+ 
+-if test "$ac_cv_prog_gcc" = yes; then
+-	cat >conftest.c <<EOF
+-#if __GNUC__ < 2 || (__GNUC__ == 2 && __GNUC_MINOR__ < 5)
+-yes
+-#endif
+-EOF
+-    if ${CC-cc} -E conftest.c | egrep yes >/dev/null 2>&1; then
+-        gcc -v
+-		echo "WARNING: gcc -O (version 2.4.5 and below) produces incorrect code"
+-		echo "  for lpd.c and other large routines. Update your GCC compiler"
+-		exit 1
+-	fi;
+-fi;
+-
+-LDCC="$CC"
+-
+ dnl ----------------------------------------------------------------------------
+ dnl ------------   OS Checks  --------------------------------------------------
+ AC_ISC_POSIX
+@@ -1280,6 +1227,7 @@
+ AC_MSG_RESULT(using $SHELL (FORCED))
+ 
+ dnl ----------------- Option for enabling GNU gettext --------------------
++ALL_LINGUAS="fr"
+ AM_GNU_GETTEXT
+ 
+ dnl ----------------------------------------------------------------------------
+@@ -1396,9 +1344,7 @@
+ dnl ----------------- START OF OUTPUT ------------------------------------------
+ 
+ AC_OUTPUT(
+-
+ Makefile
+-Makefile.bsd
+ HOWTO/Makefile
+ TESTSUPPORT/Makefile
+ DISTRIBUTIONS/Makefile
+@@ -1421,23 +1367,13 @@
+ UTILS/test_read
+ UTILS/test_read
+ intl/Makefile
+-intl/intlh.inst
+-intl/po2tbl.sed
+ lpd.perms
+ printcap
+ man/Makefile
+ po/Makefile.in
+-po/POTFILES
+ src/Makefile
+ src/pclbanner
+ src/psbanner
+-
+- ,[
+- for i in po/Makefile ; do
+-   if test -f $i; then chmod +w $i; fi;
+-   cp po/Makefile.in $i;
+- done;
+- ]
+ )
+ 
+ dnl ----------------------------------------------------------------------------
+diff -Nru LPRng-3.6.26/man/Makefile.in LPRng-3.6.26.new/man/Makefile.in
+--- LPRng-3.6.26/man/Makefile.in	Fri Oct 13 17:08:41 2000
++++ LPRng-3.6.26.new/man/Makefile.in	Mon Oct 16 21:13:21 2000
+@@ -22,8 +22,8 @@
+ 
+ ## fix up prefix to be a make variable
+ prefix = @prefix@
+-MAN =		@mandir@
+-SHELL =		@SHELL@
++mandir = @mandir@
++SHELL =	@SHELL@
+ 
+ # Install man pages in compressed form.
+ # COMPRESS     = compression utility
+@@ -61,25 +61,25 @@
+ install:
+ 	for suffix in 1 5 8 ; do \
+ 	  if [ ! -d $(INSTALL_PREFIX)$(MAN)/man$${suffix} ] ; then \
+-		  echo ${SRC}/mkinstalldirs $(INSTALL_PREFIX)$(MAN)/man$${suffix}; \
+-		  ${SRC}/mkinstalldirs $(INSTALL_PREFIX)$(MAN)/man$${suffix}; \
++		  echo ${SRC}/mkinstalldirs $(DESTDIR)$(mandir)/man$${suffix}; \
++		  ${SRC}/mkinstalldirs $(DESTDIR)$(mandir)/man$${suffix}; \
+ 	  fi; \
+ 	  for i in ${SRC}/*.$$suffix; do \
+-		echo $(INSTALL) -m 644 $$i $(INSTALL_PREFIX)$(MAN)/man$$suffix/`basename $$i`$(MANEXT); \
+-		$(INSTALL) -m 644 $$i $(INSTALL_PREFIX)$(MAN)/man$$suffix/`basename $$i`$(MANEXT); \
++		echo $(INSTALL) -m 644 $$i $(DESTDIR)$(mandir)/man$$suffix/`basename $$i`$(MANEXT); \
++		$(INSTALL) -m 644 $$i $(DESTDIR)$(mandir)/man$$suffix/`basename $$i`$(MANEXT); \
+ 	  done; \
+ 	done;
+ install.zman:
+ 	for suffix in 1 5 8 ; do \
+-	  if [ ! -d $(INSTALL_PREFIX)$(MAN)/man$${suffix} ] ; then \
+-		  echo ${SRC}/mkinstalldirs $(INSTALL_PREFIX)$(MAN)/man$${suffix}$(COMPRESS_DIR); \
+-		  ${SRC}/mkinstalldirs $(INSTALL_PREFIX)$(MAN)/man$${suffix}$(COMPRESS_DIR); \
++	  if [ ! -d $(DESTDIR)$(mandir)/man$${suffix} ] ; then \
++		  echo ${SRC}/mkinstalldirs $(DESTDIR)$(mandir)/man$${suffix}$(COMPRESS_DIR); \
++		  ${SRC}/mkinstalldirs $(DESTDIR)$(mandir)/man$${suffix}$(COMPRESS_DIR); \
+ 	  fi; \
+ 	  for i in ${SRC}/*.$$suffix; do \
+ 		 echo $(COMPRESS) $$i ; \
+ 		 $(COMPRESS) < $$i >_; \
+-		 echo $(INSTALL) -m 644 _ $(INSTALL_PREFIX)$(MAN)/man$${suffix}$(COMPRESS_DIR)/`basename $$i`$(COMPRESS_EXT) ; \
+-		 $(INSTALL) -m 644 _ $(INSTALL_PREFIX)$(MAN)/man$${suffix}$(COMPRESS_DIR)/`basename $$i`$(COMPRESS_EXT) ; \
++		 echo $(INSTALL) -m 644 _ $(DESTDIR)$(mandir)/man$${suffix}$(COMPRESS_DIR)/`basename $$i`$(COMPRESS_EXT) ; \
++		 $(INSTALL) -m 644 _ $(DESTDIR)$(mandir)/man$${suffix}$(COMPRESS_DIR)/`basename $$i`$(COMPRESS_EXT) ; \
+ 		 rm _; \
+ 	  done; \
+ 	done;
+@@ -87,15 +87,15 @@
+ uninstall:
+ 	for suffix in 1 5 8 ; do \
+ 	  for i in ${SRC}/*.$$suffix; do \
+-		echo rm $(INSTALL_PREFIX)$(MAN)/man$$suffix/`basename $$i`$(MANEXT); \
+-		rm $(INSTALL_PREFIX)$(MAN)/man$$suffix/`basename $$i`$(MANEXT); \
++		echo rm $(DESTDIR)$(mandir)/man$$suffix/`basename $$i`$(MANEXT); \
++		rm $(DESTDIR)$(mandir)/man$$suffix/`basename $$i`$(MANEXT); \
+ 	  done; \
+ 	done;
+ uninstall.zman:
+ 	for suffix in 1 5 8 ; do \
+ 	  for i in ${SRC}/*.$$suffix; do \
+-		 echo rm -f $(INSTALL_PREFIX)$(MAN)/man$${suffix}$(COMPRESS_DIR)/`basename $$i`$(COMPRESS_EXT) ; \
+-		 rm -f $(INSTALL_PREFIX)$(MAN)/man$${suffix}$(COMPRESS_DIR)/`basename $$i`$(COMPRESS_EXT) ; \
++		 echo rm -f $(DESTDIR)$(mandir)/man$${suffix}$(COMPRESS_DIR)/`basename $$i`$(COMPRESS_EXT) ; \
++		 rm -f $(DESTDIR)$(mandir)/man$${suffix}$(COMPRESS_DIR)/`basename $$i`$(COMPRESS_EXT) ; \
+ 	  done; \
+ 	done;
+ 	
+diff -Nru LPRng-3.6.26/src/Makefile.in LPRng-3.6.26.new/src/Makefile.in
+--- LPRng-3.6.26/src/Makefile.in	Mon Oct 16 21:11:58 2000
++++ LPRng-3.6.26.new/src/Makefile.in	Mon Oct 16 21:11:30 2000
+@@ -47,9 +47,6 @@
+ SHELL_PATH=@SHELL@
+ SHELL = @SHELL@
+ 
+-# loader for c programs
+-LDCC=@LDCC@
+-
+ # any libs that need to be used to get these programs to compile:
+ LIBS=@LIBS@
+ 
+@@ -98,8 +95,6 @@
+ CFLAGS:= @CPPFLAGS@ @CFLAGS@ @DEFS@ -DLOCALEDIR=\"$(localedir)\" $(CFLAGS)
+ LDFLAGS:= @LDFLAGS@
+ 
+-STRIP=@STRIP@
+-
+ #********************** End of configure modifiable settings ************
+ 
+ 
+@@ -320,38 +315,38 @@
+ 	$(RANLIB) $@
+ 
+ lpd: $(LPD_OBJS) liblpr.a
+-	$(LDCC) $(LDFLAGS) -o $@ $^ $(LIBS)
++	$(CC) $(LDFLAGS) -o $@ $^ $(LIBS)
+ lpr: $(LPR_OBJS) liblpr.a
+-	$(LDCC) $(LDFLAGS) -o $@ $^ $(LIBS)
++	$(CC) $(LDFLAGS) -o $@ $^ $(LIBS)
+ lpq: $(LPQ_OBJS) liblpr.a
+-	$(LDCC) $(LDFLAGS) -o $@ $^ $(LIBS)
++	$(CC) $(LDFLAGS) -o $@ $^ $(LIBS)
+ lpstat: $(LPSTAT_OBJS) liblpr.a
+-	$(LDCC) $(LDFLAGS) -o $@ $^ $(LIBS)
++	$(CC) $(LDFLAGS) -o $@ $^ $(LIBS)
+ lprm: $(LPRM_OBJS) liblpr.a
+-	$(LDCC) $(LDFLAGS) -o $@ $^ $(LIBS)
++	$(CC) $(LDFLAGS) -o $@ $^ $(LIBS)
+ lpc: $(LPC_OBJS) liblpr.a
+-	$(LDCC) $(LDFLAGS) -o $@ $^ $(LIBS)
++	$(CC) $(LDFLAGS) -o $@ $^ $(LIBS)
+ checkpc: $(CHECKPC_OBJS) liblpr.a
+-	$(LDCC) $(LDFLAGS) -o $@ $^ $(LIBS)
++	$(CC) $(LDFLAGS) -o $@ $^ $(LIBS)
+ lpf: $(LPF_OBJS)
+-	$(LDCC) $(LDFLAGS) -o $@ $^ $(LIBS)
++	$(CC) $(LDFLAGS) -o $@ $^ $(LIBS)
+ lpraccnt: $(LPRACCNT_OBJS) liblpr.a
+-	$(LDCC) $(LDFLAGS) -o $@ $^ $(LIBS)
++	$(CC) $(LDFLAGS) -o $@ $^ $(LIBS)
+ lpbanner: $(LPBANNER_OBJS)
+-	$(LDCC) $(LDFLAGS) -o $@ $^ $(LIBS)
++	$(CC) $(LDFLAGS) -o $@ $^ $(LIBS)
+ monitor: $(MONITOR_OBJS) liblpr.a
+-	$(LDCC) $(LDFLAGS) -o $@ $^ $(LIBS)
++	$(CC) $(LDFLAGS) -o $@ $^ $(LIBS)
+ 
+ authenticate_pgp: ${SRC}/AUTHENTICATE/authenticate_pgp.sh
+ 	rm -f $@; cp $^ $@; chmod 555 $@
+ 
+ #ptest: common/plp_snprintf.c
+-#	$(LDCC) $(CFLAGS) -DTEST -o ptest common/plp_snprintf.c
++#	$(CC) $(CFLAGS) -DTEST -o ptest common/plp_snprintf.c
+ 
+ sserver: sserver.o liblpr.a
+-	$(LDCC) $(LDFLAGS) -o $@ $^ $(LIBS)
++	$(CC) $(LDFLAGS) -o $@ $^ $(LIBS)
+ sclient: sclient.o liblpr.a
+-	$(LDCC) $(LDFLAGS) -o $@ $^ $(LIBS)
++	$(CC) $(LDFLAGS) -o $@ $^ $(LIBS)
+ 
+ sendauth.o lpd_secure.o :	user_auth.stub
+ 
+@@ -395,31 +390,31 @@
+ 
+ install: all
+ 	echo "SETUID_ROOT IS ${PERMS}, PERMS $(ROOT_PERMS)";
+-	for i in ${INSTALL_PREFIX}${bindir} ${INSTALL_PREFIX}${sbindir} \
+-		${INSTALL_PREFIX}${sysconfdir} \
+-		${INSTALL_PREFIX}${LPD_DIR} ${INSTALL_PREFIX}${FILTER_DIR}; do \
++	for i in $(DESTDIR)$(bindir) $(DESTDIR)${sbindir} \
++		$(DESTDIR)${sysconfdir} \
++		$(DESTDIR)${LPD_DIR} $(DESTDIR)${FILTER_DIR}; do \
+ 	  if [ ! -d $$i ] ; then ${SRC}/mkinstalldirs $$i ; fi; \
+ 	done;
+ 
+-	${INSTALLCMD} ${STRIP} -m $(ROOT_PERMS) lpq ${INSTALL_PREFIX}${bindir}
+-	${INSTALLCMD} ${STRIP} -m $(ROOT_PERMS) lprm ${INSTALL_PREFIX}${bindir}
+-	${INSTALLCMD} ${STRIP} -m $(ROOT_PERMS) lpr ${INSTALL_PREFIX}${bindir}
+-	${INSTALLCMD} ${STRIP} -m $(ROOT_PERMS) lpstat ${INSTALL_PREFIX}${bindir}
+-	${INSTALLCMD} ${STRIP} -m $(ROOT_PERMS) lpc ${INSTALL_PREFIX}${sbindir}
+-	${INSTALLCMD} ${STRIP} -m $(NORM_PERMS) lpd ${INSTALL_PREFIX}${LPD_DIR}
+-	${INSTALLCMD} ${STRIP} -m $(NORM_PERMS) lpf ${INSTALL_PREFIX}${FILTER_DIR}
+-	${INSTALLCMD} ${STRIP} -m $(NORM_PERMS) lpbanner ${INSTALL_PREFIX}${FILTER_DIR}
+-	${INSTALLCMD}    -m $(NORM_PERMS) pclbanner ${INSTALL_PREFIX}${FILTER_DIR}
+-	${INSTALLCMD}    -m $(NORM_PERMS) psbanner ${INSTALL_PREFIX}${FILTER_DIR}
+-	${INSTALLCMD} ${STRIP} -m $(NORM_PERMS) checkpc ${INSTALL_PREFIX}${sbindir}
+-	${INSTALLCMD} ${STRIP} -m $(NORM_PERMS) lpraccnt ${INSTALL_PREFIX}${sbindir}
+-	cd ${INSTALL_PREFIX}${bindir}; rm -f lp cancel; ln -s lpr lp; ln -s lprm cancel;
++	${INSTALLCMD} -m $(ROOT_PERMS) lpq $(DESTDIR)$(bindir)
++	${INSTALLCMD} -m $(ROOT_PERMS) lprm $(DESTDIR)$(bindir)
++	${INSTALLCMD} -m $(ROOT_PERMS) lpr $(DESTDIR)$(bindir)
++	${INSTALLCMD} -m $(ROOT_PERMS) lpstat $(DESTDIR)$(bindir)
++	${INSTALLCMD} -m $(ROOT_PERMS) lpc $(DESTDIR)${sbindir}
++	${INSTALLCMD} -m $(NORM_PERMS) lpd $(DESTDIR)${LPD_DIR}
++	${INSTALLCMD} -m $(NORM_PERMS) lpf $(DESTDIR)${FILTER_DIR}
++	${INSTALLCMD} -m $(NORM_PERMS) lpbanner $(DESTDIR)${FILTER_DIR}
++	${INSTALLCMD} -m $(NORM_PERMS) pclbanner $(DESTDIR)${FILTER_DIR}
++	${INSTALLCMD} -m $(NORM_PERMS) psbanner $(DESTDIR)${FILTER_DIR}
++	${INSTALLCMD} -m $(NORM_PERMS) checkpc $(DESTDIR)${sbindir}
++	${INSTALLCMD} -m $(NORM_PERMS) lpraccnt $(DESTDIR)${sbindir}
++	cd $(DESTDIR)$(bindir); rm -f lp cancel; ln -s lpr lp; ln -s lprm cancel;
+ 
+ uninstall:
+-	rm -f ${INSTALL_PREFIX}${LPD_DIR}/lpd
+-	cd ${INSTALL_PREFIX}${FILTER_DIR}; rm -f lpf lpbanner pclbanner psbanner
+-	cd ${INSTALL_PREFIX}${bindir}; rm -f lp lpq lpstat lpr lp cancel;
+-	cd ${INSTALL_PREFIX}${sbindir}; rm -f lpc checkpc lpraccnt;
++	rm -f $(DESTDIR)${LPD_DIR}/lpd
++	cd $(DESTDIR)${FILTER_DIR}; rm -f lpf lpbanner pclbanner psbanner
++	cd $(DESTDIR)$(bindir); rm -f lp lpq lpstat lpr lp cancel;
++	cd $(DESTDIR)${sbindir}; rm -f lpc checkpc lpraccnt;
+ 
+ 
+ ###########################################################################
