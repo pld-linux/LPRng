@@ -1,7 +1,7 @@
 Summary:	A next-generation printing system for UNIX
 Summary(pl):	System drukowania nowej generacji
 Name:		LPRng
-Version:	3.7.3
+Version:	3.7.4
 Release:	1
 License:	GPL
 Group:		Utilities/System
@@ -83,7 +83,7 @@ install -d  $RPM_BUILD_ROOT{/etc/rc.d/init.d,%{_var}/spool/lpd}
 install %{SOURCE1} $RPM_BUILD_ROOT/etc/rc.d/init.d/lpd
 # yes, overwrite distribution lpd.conf
 install %{SOURCE2} $RPM_BUILD_ROOT%{_sysconfdir}/lpd.conf
-install printcap $RPM_BUILD_ROOT%{_sysconfdir}/
+install printcap.in $RPM_BUILD_ROOT%{_sysconfdir}/printcap
 install lpd.perms $RPM_BUILD_ROOT%{_sysconfdir}/
 
 rm -fr TESTSUPPORT/{Makefile*,LPD}
