@@ -1,14 +1,7 @@
-diff -Nru LPRng-3.7.1/configure.in LPRng-3.7.1.new/configure.in
---- LPRng-3.7.1/configure.in	Wed Nov 29 08:14:08 2000
-+++ LPRng-3.7.1.new/configure.in	Wed Nov 29 07:39:43 2000
-@@ -6,54 +6,21 @@
- dnl ----------------- START OF GENERAL CONFIGURATION ---------------------------
- AC_INIT(Makefile.in)
- 
--PACKAGE=LPRng
--VERSION=3.7.1
--
--AC_CONFIG_AUX_DIR(.)
+diff -Nru LPRng-3.7.2/configure.in LPRng-3.7.2.new/configure.in
+--- LPRng-3.7.2/configure.in	Thu Dec 21 20:42:25 2000
++++ LPRng-3.7.2.new/configure.in	Thu Dec 21 20:45:20 2000
+@@ -13,46 +13,13 @@
  AC_CANONICAL_SYSTEM
  AC_CONFIG_HEADER(config.h)
  
@@ -17,8 +10,7 @@ diff -Nru LPRng-3.7.1/configure.in LPRng-3.7.1.new/configure.in
 -AC_SUBST(PACKAGE)
 -AC_SUBST(VERSION)
 -ALL_LINGUAS="fr"
-+AM_INIT_AUTOMAKE(LPRng, 3.7.1)
- 
+-
 -AC_PREFIX_DEFAULT(/usr/local)
 -AC_SUBST(INSTALL)
 -AC_SUBST(INSTALL_MAN)
@@ -28,18 +20,18 @@ diff -Nru LPRng-3.7.1/configure.in LPRng-3.7.1.new/configure.in
 -AC_SUBST(CPPFLAGS)
 -AC_SUBST(LDFLAGS)
 -AC_SUBST(LDCC)
-+ALL_LINGUAS="fr"
++AM_INIT_AUTOMAKE(LPRng, 3.7.2)
  
  dnl check for awk
  AC_PROG_AWK
 -AC_SUBST(AWK)
- AC_PATH_PROG(PERL,perl)dnl
+-AC_PATH_PROG(PERL,perl)dnl
 -AC_SUBST(PERL)dnl
- AC_PATH_PROG(CHOWN,chown)dnl
- AC_SUBST(CHOWN)dnl
- AC_PATH_PROG(CHGRP,chgrp)dnl
- AC_SUBST(CHGRP)dnl
- 
+-AC_PATH_PROG(CHOWN,chown)dnl
+-AC_SUBST(CHOWN)dnl
+-AC_PATH_PROG(CHGRP,chgrp)dnl
+-AC_SUBST(CHGRP)dnl
+-
 -
 -WITH_CC dnl
 -WITH_CCOPTS dnl
@@ -54,10 +46,12 @@ diff -Nru LPRng-3.7.1/configure.in LPRng-3.7.1.new/configure.in
 -WITH_LOCALEDIR dnl
 -
 -
--
++AC_PATH_PROG(PERL,perl)
++AC_PATH_PROG(CHOWN,chown)
++AC_PATH_PROG(CHGRP,chgrp)
+ 
  dnl ----------------------------------------------------------------------------
  dnl ----------- XXXXXX START OF OPTIONS ----------------------------------------
- 
 @@ -331,38 +298,11 @@
  AC_MSG_RESULT($FILTER_DIR)
  AC_SUBST(FILTER_DIR)
@@ -97,7 +91,7 @@ diff -Nru LPRng-3.7.1/configure.in LPRng-3.7.1.new/configure.in
  dnl ----------------------------------------------------------------------------
  dnl ------------   OS Checks  --------------------------------------------------
  AC_ISC_POSIX
-@@ -1316,38 +1256,9 @@
+@@ -1322,38 +1262,9 @@
  SHELL=/bin/sh
  AC_MSG_RESULT(using $SHELL (FORCED))
  
@@ -137,7 +131,7 @@ diff -Nru LPRng-3.7.1/configure.in LPRng-3.7.1.new/configure.in
  dnl ----------------------------------------------------------------------------
  dnl ----------------- END OF GENERAL CONFIGURATION   ---------------------------
  
-@@ -1483,7 +1394,6 @@
+@@ -1489,7 +1400,6 @@
  
  
  AC_OUTPUT(
@@ -145,7 +139,7 @@ diff -Nru LPRng-3.7.1/configure.in LPRng-3.7.1.new/configure.in
  Makefile
  HOWTO/Makefile
  TESTSUPPORT/Makefile
-@@ -1513,28 +1423,22 @@
+@@ -1519,28 +1429,22 @@
  src/psbanner
  po/Makefile.in
  intl/Makefile
@@ -190,9 +184,9 @@ diff -Nru LPRng-3.7.1/configure.in LPRng-3.7.1.new/configure.in
  )
  
  dnl ----------------------------------------------------------------------------
-diff -Nru LPRng-3.7.1/man/Makefile.in LPRng-3.7.1.new/man/Makefile.in
---- LPRng-3.7.1/man/Makefile.in	Wed Nov 29 08:14:08 2000
-+++ LPRng-3.7.1.new/man/Makefile.in	Wed Nov 29 07:29:03 2000
+diff -Nru LPRng-3.7.2/man/Makefile.in LPRng-3.7.2.new/man/Makefile.in
+--- LPRng-3.7.2/man/Makefile.in	Thu Dec 21 20:42:25 2000
++++ LPRng-3.7.2.new/man/Makefile.in	Thu Dec 21 20:41:40 2000
 @@ -22,8 +22,8 @@
  
  ## fix up prefix to be a make variable
@@ -234,9 +228,9 @@ diff -Nru LPRng-3.7.1/man/Makefile.in LPRng-3.7.1.new/man/Makefile.in
  	    done; \
  	  fi; \
  	done;
-diff -Nru LPRng-3.7.1/src/Makefile.in LPRng-3.7.1.new/src/Makefile.in
---- LPRng-3.7.1/src/Makefile.in	Wed Nov 29 08:14:08 2000
-+++ LPRng-3.7.1.new/src/Makefile.in	Wed Nov 29 08:14:29 2000
+diff -Nru LPRng-3.7.2/src/Makefile.in LPRng-3.7.2.new/src/Makefile.in
+--- LPRng-3.7.2/src/Makefile.in	Thu Dec 21 20:42:25 2000
++++ LPRng-3.7.2.new/src/Makefile.in	Thu Dec 21 20:41:40 2000
 @@ -33,7 +33,8 @@
  @SET_MAKE@
  
