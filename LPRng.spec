@@ -1,5 +1,6 @@
 Summary:	A next-generation printing system for UNIX
 Summary(pl):	System drukowania nowej generacji
+Summary(zh_CN):	LPRng--´òÓ¡³ÌÐò
 Name:		LPRng
 Version:	3.8.0
 Release:	1
@@ -26,8 +27,8 @@ Prereq:		/sbin/ldconfig
 Prereq:		/sbin/chkconfig
 Prereq:		rc-scripts >= 0.2.0
 Provides:	lpr
-Obsoletes:	lpr
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
+Obsoletes:	lpr
 
 %description
 The LPRng software is an enhanced, extended, and portable
@@ -84,24 +85,6 @@ Dla u¿ytkowników, którzy potrzebuj± bezpiecznej i autentyfikowanej
 obs³ugi drukowania LPRng wspiera Kerberos V, MIT Kerberos IV Print 
 Support oraz PGP. 
 
-%package static
-Summary:	Static LPRng libraries
-Summary(pl):	Statyczne biblioteki dla LPRng
-Group:		X11/Development/Libraries
-Group(de):      X11/Entwicklung/Libraries
-Group(es):      X11/Desarrollo/Bibliotecas
-Group(fr):      X11/Development/Librairies
-Group(pl):      X11/Programowanie/Biblioteki
-Group(pt_BR):   X11/Desenvolvimento/Bibliotecas
-Group(ru):      X11/òÁÚÒÁÂÏÔËÁ/âÉÂÌÉÏÔÅËÉ
-Group(uk):      X11/òÏÚÒÏÂËÁ/â¦ÂÌ¦ÏÔÅËÉ
-
-%description static
-Static LPRng libraries.
-
-%description -l pl static
-Biblioteki statyczne LPRng.
-
 %prep
 %setup  -q
 %patch0 -p1
@@ -128,7 +111,7 @@ autoconf
 
 %install
 rm -rf $RPM_BUILD_ROOT
-install -d  $RPM_BUILD_ROOT{/etc/rc.d/init.d,%{_var}/spool/lpd}
+install -d  $RPM_BUILD_ROOT{/etc/rc.d/init.d,%{_var}/spool/lpd/lp}
 
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT \
@@ -141,7 +124,6 @@ echo "default_printer = lp" >>$RPM_BUILD_ROOT%{_sysconfdir}/lpd.conf
 install %{SOURCE3} $RPM_BUILD_ROOT%{_sysconfdir}/printcap
 install lpd.perms $RPM_BUILD_ROOT%{_sysconfdir}/
 # default spool
-install -d $RPM_BUILD_ROOT%{_var}/spool/lpd/lp
 
 rm -fr TESTSUPPORT/{Makefile*,LPD}
 mv -f lpd.conf TESTSUPPORT/lpd.conf.distrib
@@ -181,14 +163,9 @@ fi
 %attr(754,root,root) /etc/rc.d/init.d/lpd
 %attr(755,root,root) %{_bindir}/*
 %attr(755,root,root) %{_sbindir}/*
-%attr(755,root,root) %{_libdir}/*.so*
-%attr(755,root,root) %{_libdir}/*.la
+%attr(755,root,root) %{_libdir}/lib*.so.*.*
 %dir %{_libdir}/lpfilters
 %attr(755,root,root) %{_libdir}/lpfilters/*
 %dir %attr(750,root,lp) %{_var}/spool/lpd
 %dir %attr(770,root,lp) %{_var}/spool/lpd/lp
 %{_mandir}/man[158]/*
-
-%files static
-%defattr(644,root,root,755)
-%{_libdir}/*.a
