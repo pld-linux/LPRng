@@ -63,9 +63,7 @@ autoconf
 LDFLAGS="-s"; export LDFLAGS
 %configure \
 	--enable-nls \
-	--disable-setuid \
-	--without-included-gettext \
-	--enable-nls
+	--disable-setuid
 
 %{__make}
 
@@ -85,7 +83,7 @@ rm -fr TESTSUPPORT/{Makefile*,LPD}
 gzip -9nf $RPM_BUILD_ROOT%{_mandir}/man*/* \
 	CHANGES CONTRIBUTORS README* TESTSUPPORT/*
 
-%find_lang %{name}
+#%find_lang %{name}
 
 %post
 /sbin/chkconfig --add lpd
@@ -106,7 +104,7 @@ fi
 %clean
 rm -rf $RPM_BUILD_ROOT
 
-%files -f %{name}.lang
+%files -f
 %defattr(644,root,root,755)
 %config(noreplace) %{_sysconfdir}/lpd.conf
 %config(noreplace) %{_sysconfdir}/lpd.perms
