@@ -177,7 +177,7 @@ fi
 %attr(754,root,root) /etc/rc.d/init.d/lpd
 %attr(755,root,root) %{_bindir}/*
 %attr(755,root,root) %{_sbindir}/*
-%attr(755,root,root) %{_libdir}/*.so
+%attr(755,root,root) %{_libdir}/*.so*
 %attr(755,root,root) %{_libdir}/*.la
 %dir %{_libdir}/lpfilters
 %attr(755,root,root) %{_libdir}/lpfilters/*
