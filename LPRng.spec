@@ -10,6 +10,7 @@ Group(pl):	Aplikacje/System
 Source0:	ftp://ftp.astart.com/pub/LPRng/LPRng/%{name}-%{version}.tgz
 Source1:	%{name}.init
 Source2:	%{name}.conf
+Source3:	%{name}.printcap
 Patch0:		%{name}-jobfilescan.patch
 Patch1:		%{name}-ac_fixes.patch
 Patch2:		%{name}-manpage.patch
@@ -56,8 +57,50 @@ current public distribution is available from the listed FTP and Web
 Sites.
 
 %description -l pl
-LPRng jest systemem drukowania nowej generacji zwiêkszaj±cym
-niezawodno¶æ i bezpieczeñstwo.
+LPRng jest rozszerzon±, ulepszon± i portowaln± implementacj± 
+Berkeley'owskiego LPR print spooler'a. Dostarcza ten sam interfejs
+oraz jest zgodny z wymaganiami RFC1179. Jednocze¶nie wykonanie jest
+ca³kowicie nowe i dostarcza nastêpuj±ce rzeczy: 
+- programy - "lekki" lpr (nie s± potrzebne ¿adne bazy danych), 
+  lpc, oraz lprm;
+- dynamiczna redyrekcja do kolejek;
+- automatyczne wstrzymywanie zadañ;
+- "gadatliwa" diagnostyka;
+- obs³ugê wielu drukarek na jednej kolejce;
+- programy klienckie nie musz± byæ SUID root;
+- mocno rozszerzona kontrola bezpieczeñstwa;
+- mocno rozszerzone mechanizmy bezpieczeñstwa i kontroli uprawnieñ.
+
+Oprogramowanie to kompiluje siê i dzia³a na wielu systemach UNIX'owych
+i jest kompatybilne z innymi print spoolami oraz drukarkami sieciowymi, 
+które u¿ywaj± interfejsu LPR oraz spe³niaj± wymagania RFC1179. LPRng
+dostarcza pakiety emulacyjne dla programów SVR4 lp oraz lpstat, 
+eliminuj±c w ten sposób konieczno¶æ posiadania jeszcze jednego pakietu
+print spoola. Te pakiety mog± byæ modyfikowane zgodnie z lokalnymi 
+wymaganiami. 
+
+Dla u¿ytkowników, którzy potrzebuj± bezpiecznej i autentyfikowanej
+obs³ugi drukowania LPRng wspiera Kerberos V, MIT Kerberos IV Print 
+Support oraz PGP. 
+
+%package static
+Summary:	Static LPRng libraries
+Summary(pl):	Statyczne biblioteki dla LPRng
+Group:		X11/Development/Libraries
+Group(de):      X11/Entwicklung/Libraries
+Group(es):      X11/Desarrollo/Bibliotecas
+Group(fr):      X11/Development/Librairies
+Group(pl):      X11/Programowanie/Biblioteki
+Group(pt_BR):   X11/Desenvolvimento/Bibliotecas
+Group(ru):      X11/òÁÚÒÁÂÏÔËÁ/âÉÂÌÉÏÔÅËÉ
+Group(uk):      X11/òÏÚÒÏÂËÁ/â¦ÂÌ¦ÏÔÅËÉ
+
+%description static
+Static LPRng libraries.
+
+%description -l pl static
+Biblioteki statyczne LPRng.
+
 
 %prep
 %setup  -q
@@ -94,7 +137,7 @@ install %{SOURCE1} $RPM_BUILD_ROOT/etc/rc.d/init.d/lpd
 # yes, overwrite distribution lpd.conf
 install %{SOURCE2} $RPM_BUILD_ROOT%{_sysconfdir}/lpd.conf
 echo "default_printer = lp" >>$RPM_BUILD_ROOT%{_sysconfdir}/lpd.conf
-install printcap $RPM_BUILD_ROOT%{_sysconfdir}/printcap
+install %{SOURCE3} $RPM_BUILD_ROOT%{_sysconfdir}/printcap
 install lpd.perms $RPM_BUILD_ROOT%{_sysconfdir}/
 # default spool
 install -d $RPM_BUILD_ROOT%{_var}/spool/lpd/lp
@@ -134,8 +177,13 @@ fi
 %attr(754,root,root) /etc/rc.d/init.d/lpd
 %attr(755,root,root) %{_bindir}/*
 %attr(755,root,root) %{_sbindir}/*
+%attr(755,root,root) %{_libdir}/*.so
+%attr(755,root,root) %{_libdir}/*.la
 %dir %{_libdir}/lpfilters
 %attr(755,root,root) %{_libdir}/lpfilters/*
 %dir %attr(750,root,lp) %{_var}/spool/lpd
 %dir %attr(770,root,lp) %{_var}/spool/lpd/lp
 %{_mandir}/man[158]/*
+
+%files static
+%{_libdir}/*.a
