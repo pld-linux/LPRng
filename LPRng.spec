@@ -10,10 +10,12 @@ Release:	1
 License:	GPL
 Group:		Applications/System
 Source0:	ftp://ftp.lprng.com/pub/LPRng/LPRng/%{name}-%{version}.tgz
+# Source0-md5:	396d0a49a4533ad973176efa9bf054b1
 Source1:	%{name}.init
 Source2:	%{name}.conf
 Source3:	%{name}.printcap
 Source4:	http://www.mif.pg.gda.pl/homepages/ankry/man-PLD/%{name}-pl-man-pages.tar.bz2
+# Source4-md5:	4771b1c3598677a8201a9e203235dff3
 Patch0:		%{name}-ac_fixes.patch
 Patch1:		%{name}-lpd-perms.patch
 Patch2:		%{name}-no_dupl_DESDIR.patch
