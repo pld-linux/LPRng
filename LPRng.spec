@@ -173,8 +173,6 @@ autoconf
 
 %{__make}
 
-gzip -9nf CHANGES CONTRIBUTORS README* TESTSUPPORT/*
-
 %install
 rm -rf $RPM_BUILD_ROOT
 install -d  $RPM_BUILD_ROOT{/etc/rc.d/init.d,%{_var}/spool/lpd/lp}
@@ -190,9 +188,6 @@ echo "default_printer = lp" >>$RPM_BUILD_ROOT%{_sysconfdir}/lpd.conf
 install %{SOURCE3} $RPM_BUILD_ROOT%{_sysconfdir}/printcap
 install lpd.perms $RPM_BUILD_ROOT%{_sysconfdir}
 # default spool
-
-rm -fr TESTSUPPORT/{Makefile*,LPD}
-mv -f lpd.conf TESTSUPPORT/lpd.conf.distrib
 
 bzip2 -dc %{SOURCE4} | tar xf - -C $RPM_BUILD_ROOT%{_mandir}
 
@@ -222,7 +217,7 @@ fi
 
 %files -f %{name}.lang
 %defattr(644,root,root,755)
-%doc *.gz TESTSUPPORT HOWTO/LPRng-HOWTO.html HOWTO/CHANGES
+%doc *.gz HOWTO/LPRng-HOWTO.html HOWTO/CHANGES
 %config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/lpd.conf
 %config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/lpd.perms
 %config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/printcap
