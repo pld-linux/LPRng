@@ -1,0 +1,11 @@
+--- LPRng-3.8.21/src/common/vars.c.orig	Wed Apr 16 01:37:42 2003
++++ LPRng-3.8.21/src/common/vars.c	Tue Aug  5 13:37:05 2003
+@@ -211,7 +211,7 @@
+    /*  string to send for a form feed */
+ { "ff", 0,  STRING_K,  &Form_feed_DYN,0,0,"=\\f"},
+    /*  string to send for a form feed */
+-{ "ff_separator", 0,  STRING_K,  &FF_separator_DYN,0,0,0},
++{ "ff_separator", 0,  FLAG_K,  &FF_separator_DYN,0,0,0},
+    /* enforce FIFO (first in, first out) order */
+ { "fifo", 0, STRING_K, &Fifo_DYN,0,0,0},
+    /* FIFO lock file */
