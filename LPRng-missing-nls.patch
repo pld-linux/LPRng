@@ -170,14 +170,15 @@
  		next_opt = 0;
 --- LPRng-3.8.15/po/POTFILES.in.orig	Wed Aug 22 01:19:53 2001
 +++ LPRng-3.8.15/po/POTFILES.in	Fri Dec 27 17:11:07 2002
-@@ -1,5 +1,6 @@
+@@ -1,5 +1,7 @@
  src/common/accounting.c
  src/common/controlword.c
++src/common/debug.c
 +src/common/getopt.c
  src/common/linelist.c
  src/common/lpc.c
  src/common/lpd.c
-@@ -12,6 +13,7 @@
+@@ -12,6 +14,7 @@
  src/common/lpq.c
  src/common/lpr.c
  src/common/lprm.c
@@ -196,3 +197,77 @@
  	}
  	len = safestrlen(header);
  	SNPRINTF( header+len, sizeof(header)-len) "%s@%s",
+--- LPRng-3.8.27/src/common/debug.c.orig	2004-05-03 22:24:01.000000000 +0200
++++ LPRng-3.8.27/src/common/debug.c	2004-05-16 10:08:08.829446800 +0200
+@@ -89,22 +89,22 @@
+ */
+ 
+ 	static char *guide[] = {
+-	" use on command line, or in printcap :db=... entry", 
+-	" for server:",
+-	"   print:     show queue (printing) actions, larger number, more information",
+-	"     NUMBER     same as print+NUMBER",
+-	"   lpr:       show servicing lpr actions",
+-	"   lpq:       show servicing lpq actions",
+-	"   lprm:      show servicing lprm actions",
+-	"   network:   show low level network actions",
+-	"   database:  show low level database actions",
+-	"   log:       Testing.  Don't use this unless you read the code.",
+-	"   test:      Testing.  don't use this unless you read the code.",
+-	" for clients (lpr, lpq, etc):",
+-	"   print:     show client actions, larger number, more information",
+-	"     NUMBER     same as print+NUMBER",
+-	"   network:   show low level network actions.",
+-	"   database:  show low level database actions.",
++	N_(" use on command line, or in printcap :db=... entry"), 
++	N_(" for server:"),
++	N_("   print:     show queue (printing) actions, larger number, more information"),
++	N_("     NUMBER     same as print+NUMBER"),
++	N_("   lpr:       show servicing lpr actions"),
++	N_("   lpq:       show servicing lpq actions"),
++	N_("   lprm:      show servicing lprm actions"),
++	N_("   network:   show low level network actions"),
++	N_("   database:  show low level database actions"),
++	N_("   log:       Testing.  Don't use this unless you read the code."),
++	N_("   test:      Testing.  don't use this unless you read the code."),
++	N_(" for clients (lpr, lpq, etc):"),
++	N_("   print:     show client actions, larger number, more information"),
++	N_("     NUMBER     same as print+NUMBER"),
++	N_("   network:   show low level network actions."),
++	N_("   database:  show low level database actions."),
+ 		0
+ 	};
+ void Parse_debug (char *dbgstr, int interactive )
+@@ -157,8 +157,8 @@
+ 		if(!found && interactive ){
+ 		    int i;
+ 		    int lastflag = 0;
+-		    FPRINTF (STDERR, "debug flag format: num | flag[+num] | flag=str\n");
+-		    FPRINTF (STDERR, "  flag names:");
++		    FPRINTF (STDERR, _("debug flag format: num | flag[+num] | flag=str\n"));
++		    FPRINTF (STDERR, _("  flag names:"));
+ 		    for (i = 0; list[i].keyword; i++) {
+ 				if( safestrchr( list[i].keyword, '+' ) ) continue;
+ 				if( lastflag ){
+@@ -169,10 +169,10 @@
+ 				}
+ 				switch( list[i].type ){
+ 				case INTEGER_K:
+-					FPRINTF (STDERR, "%s=num", list[i].keyword);
++					FPRINTF (STDERR, _("%s=num"), list[i].keyword);
+ 					break;
+ 				case STRING_K:
+-					FPRINTF (STDERR, "%s=str", list[i].keyword);
++					FPRINTF (STDERR, _("%s=str"), list[i].keyword);
+ 					break;
+ 				case FLAG_K:
+ 					FPRINTF (STDERR, "%s[+N]", list[i].keyword );
+@@ -184,7 +184,7 @@
+ 			}
+ 		    FPRINTF (STDERR, "\n");
+ 		    for(i = 0; guide[i]; ++i ){
+-				FPRINTF (STDERR, "%s\n", guide[i]);
++				FPRINTF (STDERR, "%s\n", _(guide[i]));
+ 		    }
+ 
+ 			Errorcode = JABORT;
