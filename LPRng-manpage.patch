@@ -1,0 +1,11 @@
+--- LPRng-3.7.4/man/lpr.1.dest	Fri Feb  2 09:03:49 2001
++++ LPRng-3.7.4/man/lpr.1	Fri Feb  2 09:04:19 2001
+@@ -261,7 +261,7 @@
+ the destination printer
+ is taken from
+ the command line
+-.I dest
++.I printer
+ value,
+ then
+ the environment variables
