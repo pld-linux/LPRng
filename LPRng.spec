@@ -64,7 +64,7 @@ niezawodno¶æ i bezpieczeñstwo.
 %prep
 %setup  -q
 %patch0 -p1
-%patch1 -p1
+#%patch1 -p1
 %patch2 -p1
 %patch3 -p1
 %patch4 -p1
@@ -77,6 +77,7 @@ rm -f missing
 gettextize --copy --force
 aclocal
 autoconf
+(cd gdbm-1.8.0 ; aclocal ; autoconf )
 %configure \
 	--disable-setuid \
 	--with-userid=lp \
