@@ -2,7 +2,7 @@ Summary:	A next-generation printing system for UNIX
 Summary(pl):	System drukowania nowej generacji
 Name:		LPRng
 Version:	3.6.13
-Release:	1
+Release:	2
 License:	GPL
 Group:		Utilities/System
 Group(pl):	Narzêdzia/System
@@ -87,16 +87,18 @@ gzip -9nf $RPM_BUILD_ROOT%{_mandir}/man*/* \
 
 %post
 /sbin/chkconfig --add lpd
-if test -r /var/run/lpd.pid; then
+if [ -f /var/lock/subsys/lpd]; then
 	/etc/rc.d/init.d/lpd restart 1>&2
 else
-	echo "Run \"/etc/rc.d/init.d/lpd start\" to start mcserv daemon."
+	echo "Run \"/etc/rc.d/init.d/lpd start\" to start LPRng lpd daemon."
 fi
 
 %preun
 if [ "$1" = "0" ]; then
+	if [ -f /var/lock/subsys/lpd]; then
+		/etc/rc.d/init.d/lpd stop 1>&2
+	fi
 	/sbin/chkconfig --del lpd
-	/etc/rc.d/init.d/lpd stop 1>&2
 fi
 
 %clean
