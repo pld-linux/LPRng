@@ -3,7 +3,7 @@ Summary(pl):	System drukowania nowej generacji
 Summary(zh_CN):	LPRng--¥Ú”°≥Ã–Ú
 Name:		LPRng
 Version:	3.8.0
-Release:	1
+Release:	2
 License:	GPL
 Group:		Applications/System
 Group(de):	Applikationen/System
@@ -12,6 +12,7 @@ Source0:	ftp://ftp.astart.com/pub/LPRng/LPRng/%{name}-%{version}.tgz
 Source1:	%{name}.init
 Source2:	%{name}.conf
 Source3:	%{name}.printcap
+Source4:	%{name}-pl-man-pages.tar.bz2
 Patch0:		%{name}-jobfilescan.patch
 Patch1:		%{name}-ac_fixes.patch
 Patch2:		%{name}-manpage.patch
@@ -128,6 +129,8 @@ install lpd.perms $RPM_BUILD_ROOT%{_sysconfdir}/
 rm -fr TESTSUPPORT/{Makefile*,LPD}
 mv -f lpd.conf TESTSUPPORT/lpd.conf.distrib
 
+bzip2 -dc %{SOURCE4} | tar xf - -C $RPM_BUILD_ROOT%{_mandir}
+
 gzip -9nf CHANGES CONTRIBUTORS README* TESTSUPPORT/*
 
 %find_lang %{name}
@@ -169,3 +172,4 @@ fi
 %dir %attr(750,root,lp) %{_var}/spool/lpd
 %dir %attr(770,root,lp) %{_var}/spool/lpd/lp
 %{_mandir}/man[158]/*
+%lang(pl) %{_mandir}/pl/man[158]/*
