@@ -5,12 +5,12 @@ Summary(ru):	Спулер печати LPRng
 Summary(uk):	Спулер друку LPRng
 Summary(zh_CN):	LPRng--╢Рс║ЁлпР
 Name:		LPRng
-Version:	3.8.24
+Version:	3.8.25
 Release:	1
 License:	GPL or Artistic
 Group:		Applications/System
 Source0:	ftp://ftp.lprng.com/pub/LPRng/LPRng/%{name}-%{version}.tgz
-# Source0-md5:	55957c6ada901a5e7de65e91aa63feb0
+# Source0-md5:	6203906ddf5e5448c1034b07f59ee9e8
 Source1:	%{name}.init
 Source2:	%{name}.conf
 Source3:	%{name}.printcap
@@ -169,7 +169,6 @@ rm -rf autom4te.cache
 %{__aclocal}
 %{__autoconf}
 cp -f /usr/share/automake/{config.*,missing} .
-#PSHOWALL="-ax"; export PSHOWALL
 # now it wants to use /etc/lpd/lpd.{conf,perms} - stick to old values?
 %configure \
 	OPENSSL=/usr/bin/openssl \
