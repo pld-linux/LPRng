@@ -21,34 +21,36 @@ BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 %define		_sysconfdir	/etc
 
 %description
-The LPRng software is an enhanced, extended, and portable implementation of
-the Berkeley LPR print spooler functionality. While providing the same
-interface and meeting RFC1179 requirements, the implementation is completely
-new and provides support for the following features: lightweight (no
-databases needed) lpr, lpc, and lprm programs; dynamic redirection of print
-queues; automatic job holding; highly verbose diagnostics; multiple printers
-serving a single queue; client programs do not need to run SUID root;
-greatly enhanced security checks; and a greatly improved permission and
+The LPRng software is an enhanced, extended, and portable
+implementation of the Berkeley LPR print spooler functionality. While
+providing the same interface and meeting RFC1179 requirements, the
+implementation is completely new and provides support for the
+following features: lightweight (no databases needed) lpr, lpc, and
+lprm programs; dynamic redirection of print queues; automatic job
+holding; highly verbose diagnostics; multiple printers serving a
+single queue; client programs do not need to run SUID root; greatly
+enhanced security checks; and a greatly improved permission and
 authorization mechanism.
 
-The source software compiles and runs on a wide variety of UNIX systems, and
-is compatible with other print spoolers and network printers that use the
-LPR interface and meet RFC1179 requirements. LPRng provides emulation
-packages for the SVR4 lp and lpstat programs, eliminating the need for
-another print spooler package. These emulation packages can be modified
-according to local requirements, in order to support vintage printing
-systems.
+The source software compiles and runs on a wide variety of UNIX
+systems, and is compatible with other print spoolers and network
+printers that use the LPR interface and meet RFC1179 requirements.
+LPRng provides emulation packages for the SVR4 lp and lpstat programs,
+eliminating the need for another print spooler package. These
+emulation packages can be modified according to local requirements, in
+order to support vintage printing systems.
 
-For users that require secure and/or authenticated printing support, LPRng
-supports Kerberos V, MIT Kerberos IV Print Support, and PGP authentication.
-LPRng is being adopted by MIT for use as their Campus Wide printing support
-system. Additional authentication support is extremely simple to add. LPRng
-is Open Source Software, and the current public distribution is available
-from the listed FTP and Web Sites.
+For users that require secure and/or authenticated printing support,
+LPRng supports Kerberos V, MIT Kerberos IV Print Support, and PGP
+authentication. LPRng is being adopted by MIT for use as their Campus
+Wide printing support system. Additional authentication support is
+extremely simple to add. LPRng is Open Source Software, and the
+current public distribution is available from the listed FTP and Web
+Sites.
 
 %description -l pl
-LPRng jest systemem drukowania nowej generacji zwiêkszaj±cym niezawodno¶æ
-i bezpieczeñstwo.
+LPRng jest systemem drukowania nowej generacji zwiêkszaj±cym
+niezawodno¶æ i bezpieczeñstwo.
 
 %prep
 %setup  -q
