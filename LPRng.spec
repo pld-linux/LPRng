@@ -5,8 +5,8 @@ Summary(ru):	Спулер печати LPRng
 Summary(uk):	Спулер друку LPRng
 Summary(zh_CN):	LPRng--╢Рс║ЁлпР
 Name:		LPRng
-Version:	3.8.12
-Release:	3
+Version:	3.8.15
+Release:	1
 License:	GPL
 Group:		Applications/System
 Source0:	ftp://ftp.lprng.com/pub/LPRng/LPRng/%{name}-%{version}.tgz
@@ -15,9 +15,8 @@ Source2:	%{name}.conf
 Source3:	%{name}.printcap
 Source4:	http://www.mif.pg.gda.pl/homepages/ankry/man-PLD/%{name}-pl-man-pages.tar.bz2
 Patch0:		%{name}-ac_fixes.patch
-Patch1:		%{name}-shutdown.patch
-Patch2:		%{name}-nproc-unlimited.patch
-Patch3:		%{name}-lpd-perms.patch
+Patch1:		%{name}-nproc-unlimited.patch
+Patch2:		%{name}-lpd-perms.patch
 URL:		http://www.astart.com/lprng/LPRng.html
 BuildRequires:	autoconf
 BuildRequires:	automake
@@ -149,14 +148,13 @@ Support та аутентикац╕ю PGP. LPRng прийнято за стандарт в MIT для
 п╕дтримка аутентикац╕╖ може бути додана без особливих зусиль.
 
 %prep
-%setup  -q
+%setup -q
 %patch0 -p1
 %patch1 -p1
 %patch2 -p1
-%patch3 -p1
 
 %build
-rm -f missing acinclude.m4
+rm -f missing
 %{__gettextize}
 %{__libtoolize}
 %{__aclocal}
@@ -220,7 +218,7 @@ fi
 
 %files -f %{name}.lang
 %defattr(644,root,root,755)
-%doc CHANGES README HOWTO/LPRng-HOWTO.html HOWTO/CHANGES
+%doc CHANGES README HOWTO/LPRng-HOWTO.html
 %config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/lpd.conf
 %config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/lpd.perms
 %config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/printcap
