@@ -159,7 +159,7 @@ Support та аутентикац╕ю PGP. LPRng прийнято за стандарт в MIT для
 rm -f missing acinclude.m4
 %{__gettextize}
 %{__libtoolize}
-aclocal
+%{__aclocal}
 %{__autoconf}
 cp -f /usr/share/automake/{config.,missing}* .
 PSHOWALL="-ax"; export PSHOWALL
