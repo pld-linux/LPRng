@@ -82,9 +82,9 @@
  		while( (n = read(fd, msg, sizeof(msg)) ) > 0 ){
  			if( write(1,msg,n) < 0 ) cleanup(0);
  		}
---- LPRng-3.7.4/src/common/krb5_auth.c.shutdown	Sun Feb 25 22:02:36 2001
-+++ LPRng-3.7.4/src/common/krb5_auth.c	Sun Feb 25 22:03:27 2001
-@@ -698,14 +698,14 @@
+--- LPRng-3.8.12/src/common/krb5_auth.c.orig	Mon May  6 18:03:44 2002
++++ LPRng-3.8.12/src/common/krb5_auth.c	Wed Jul 10 00:47:06 2002
+@@ -709,14 +709,14 @@
  	close(fd);
  	fd = -1;
  	DEBUG1( "client_krb5_auth: file copy finished %s", file );
@@ -101,7 +101,7 @@
  	fd = Checkwrite( file, &statb, O_WRONLY|O_TRUNC, 1, 0 );
  	if( fd < 0 ){
  		SNPRINTF( err, errlen)
-@@ -1146,7 +1146,7 @@
+@@ -1159,7 +1159,7 @@
  	if( status ){
  		SETSTATUS(job) "Printer %s@%s does not support krb4 authentication",
  			RemotePrinter_DYN, host);
@@ -110,7 +110,7 @@
  		return JFAIL;
  	}
  	memset(&ticket,0,sizeof(ticket));
-@@ -1158,7 +1158,7 @@
+@@ -1171,7 +1171,7 @@
  	if( status != KSUCCESS ){
  		SNPRINTF(errmsg, errlen) "krb4 authentication failed to %s@%s - %s",
  			RemotePrinter_DYN, host, krb4_err_str(status));
@@ -119,10 +119,10 @@
  		return JFAIL;
  	}
  	buffer[0] = 0;
-@@ -1171,7 +1171,7 @@
+@@ -1184,7 +1184,7 @@
  	if(status){
  		SNPRINTF(errmsg, errlen) "cannot read status from %s@%s - %s",
- 			RemotePrinter_DYN, host );
+ 			RemotePrinter_DYN, host, krb4_err_str(status));
 -		shutdown(*sock,1);
 +/*		shutdown(*sock,1);*/
  		return JFAIL;

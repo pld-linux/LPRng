@@ -1,14 +1,14 @@
---- LPRng-3.8.1/configure.in.orig	Fri Nov 16 17:01:56 2001
-+++ LPRng-3.8.1/configure.in	Sun Nov 18 13:01:43 2001
-@@ -6,53 +6,19 @@
+--- LPRng-3.8.12/configure.in.orig	Mon May  6 18:00:12 2002
++++ LPRng-3.8.12/configure.in	Wed Jul 10 00:25:05 2002
+@@ -6,54 +6,17 @@
  dnl ----------------- START OF GENERAL CONFIGURATION ---------------------------
  AC_INIT(Makefile.in)
  
 -
 -PACKAGE=LPRng
--VERSION=3.8.1
-+AM_INIT_AUTOMAKE(LPRng, 3.8.0)
- 
+-VERSION=3.8.12
+-
++AM_INIT_AUTOMAKE(LPRng, 3.8.12)
  
  AC_CONFIG_AUX_DIR(.)
 -AC_CANONICAL_SYSTEM
@@ -18,11 +18,10 @@
 -AC_DEFINE_UNQUOTED(VERSION, "$VERSION")
 -AC_SUBST(PACKAGE)
 -AC_SUBST(VERSION)
- ALL_LINGUAS="fr"
- 
+-ALL_LINGUAS="fr"
+-
 -WITH_CC dnl
 -WITH_CCOPTS dnl
--WITH_LINKER dnl
 -WITH_LDOPTS dnl
 -WITH_CPPOPTS dnl
 -if test -z "$LOCALEDIR" ; then
@@ -51,14 +50,17 @@
 -AC_SUBST(CHOWN)dnl
 -AC_PATH_PROG(CHGRP,chgrp)dnl
 -AC_SUBST(CHGRP)dnl
+-AC_PATH_PROG(PRUTIL,pr)dnl
+-AC_SUBST(PRUTIL)dnl
 -
 +AC_PATH_PROG(PERL,perl)
 +AC_PATH_PROG(CHOWN,chown)
 +AC_PATH_PROG(CHGRP,chgrp)
++AC_PATH_PROG(PRUTIL,pe)
  
  dnl ----------------------------------------------------------------------------
  dnl ----------- XXXXXX START OF OPTIONS ----------------------------------------
-@@ -333,16 +299,6 @@
+@@ -367,16 +330,6 @@
  AC_MSG_RESULT($FILTER_DIR)
  AC_SUBST(FILTER_DIR)
  
@@ -66,16 +68,16 @@
 -AC_MSG_CHECKING(disable stripped binaries)
 -AC_ARG_ENABLE( strip,
 -[  --disable-strip                   disable stripping binaries by default],
--[v=no; STRIP=""; ],
--[v=yes;  STRIP="-s"; ]
+-[v=no; STRIP_OPTION=""; ],
+-[v=yes;  STRIP_OPTION=" -s "; ]
 -)
 -AC_MSG_RESULT($v)
--AC_SUBST(STRIP)
+-AC_SUBST(STRIP_OPTION)
 -
  dnl ----------------------------------------------------------------------------
  dnl ------------   OS Checks  --------------------------------------------------
  
-@@ -350,50 +306,12 @@
+@@ -384,50 +337,12 @@
  AC_MINIX
  AC_AIX
  
@@ -126,7 +128,7 @@
  AM_PROG_LIBTOOL
  
  AC_C_CONST
-@@ -451,77 +369,6 @@
+@@ -486,77 +401,6 @@
    AC_DEFINE(HAVE_QUAD_T)
  fi
  
@@ -204,7 +206,7 @@
  dnl ----------------------------------------------------------------------------
  dnl headers:
  
-@@ -549,7 +396,6 @@
+@@ -584,7 +428,6 @@
  	dnl A/UX uses this...
  	AC_CHECK_LIB(posix, getpwent, [LIBS="$LIBS -lposix"])
  
@@ -212,7 +214,7 @@
  	AC_CHECK_LIB(socket_s, socket, [LIBS="$LIBS -lsocket_s"; have_socket=1], ,-lnsl)
  	if test -z "$have_socket"; then
  		AC_CHECK_LIB(socket, socket, [LIBS="$LIBS -lsocket"], , -lnsl)
-@@ -1007,8 +853,8 @@
+@@ -1042,8 +885,8 @@
  dnl ----------------------------------------------------------------------------
  dnl check to see if you have getpgrp(0) or getpgrp()
  dnl
@@ -223,7 +225,7 @@
  dnl                        define HAVE_GETPGRP_0 0
  
  dnl check to see if you have getpgrp(0) or getpgrp()
-@@ -1055,11 +901,11 @@
+@@ -1090,11 +933,11 @@
  
  dnl ----------------------------------------------------------------------------
  dnl just for (really) backwards compatibility
@@ -237,7 +239,7 @@
  dnl HP-UX where "union wait" is defined in both the BSD and SYS-V
  dnl environments.  Checking the usability of WIFEXITED seems to do
  dnl the trick.
-@@ -1307,41 +1153,9 @@
+@@ -1342,41 +1185,9 @@
  
  AC_PROG_MAKE_SET
  
@@ -280,7 +282,7 @@
  dnl ----------------------------------------------------------------------------
  dnl ----------------- END OF GENERAL CONFIGURATION   ---------------------------
  
-@@ -1393,12 +1207,12 @@
+@@ -1454,12 +1265,12 @@
  		found=
  		if test "$found" = "" ; then
  			LIBS=" -lcrypto -lcom_err $SAVELIBS"
@@ -295,7 +297,7 @@
  			AC_TRY_LINK_FUNC(krb5_des_string_to_key,found="yes")
  		fi;
  		if test "$found" = "" ; then
-@@ -1413,7 +1227,7 @@
+@@ -1474,7 +1285,7 @@
  		found= 
  		if test "$found" = "" ; then
  			LIBS=" -lkrb5 $SAVELIBS"
@@ -304,7 +306,7 @@
  			AC_TRY_LINK_FUNC(krb5_init_context,found="yes")
  		fi;
  		if test "$found" = "" ; then
-@@ -1427,12 +1241,12 @@
+@@ -1488,12 +1299,12 @@
  			found=;
  			if test "$found" = "" ; then
  				LIBS=" -lkrb4 -ldes425 $SAVELIBS"
@@ -319,21 +321,19 @@
  				AC_TRY_LINK_FUNC(krb5_init_context,found="yes")
  			fi;
  			if test "$found" = "" ; then
-@@ -1501,12 +1315,7 @@
+@@ -1562,11 +1373,6 @@
  dnl ----------------- START OF OUTPUT ------------------------------------------
  
  
 -if test "$ac_cv_prog_gcc" = yes; then
--	CFLAGS="$CFLAGS -Wall -Werror"
+-	CFLAGS="$CFLAGS -g -W -Wall -Werror -Wno-unused "
+-	CPPFLAGS="$CPPFLAGS -g -W -Wall -Werror -Wno-unused "
 -fi;
 -
--AC_OUTPUT(
--[
-+AC_OUTPUT([
+ AC_OUTPUT(
+ [
  Makefile
- HOWTO/Makefile
- TESTSUPPORT/Makefile
-@@ -1535,29 +1344,23 @@
+@@ -1597,29 +1403,23 @@
  src/psbanner
  po/Makefile.in
  intl/Makefile
@@ -380,8 +380,8 @@
  
  dnl ----------------------------------------------------------------------------
  dnl ----------------- END OF OUTPUT --------------------------------------------
---- LPRng-3.8.1/src/Makefile.in~	Fri Nov 16 17:01:32 2001
-+++ LPRng-3.8.1/src/Makefile.in	Sun Nov 18 23:24:17 2001
+--- LPRng-3.8.12/src/Makefile.in.orig	Mon May  6 17:26:46 2002
++++ LPRng-3.8.12/src/Makefile.in	Wed Jul 10 00:14:35 2002
 @@ -47,9 +47,6 @@
  SHELL_PATH=@SHELL@
  SHELL = @SHELL@
@@ -392,25 +392,25 @@
  # any libs that need to be used to get these programs to compile:
  LIBS= @LIBS@
  
-@@ -71,8 +71,6 @@
+@@ -74,8 +71,6 @@
  
  # install options
  
--STRIP=@STRIP@
+-STRIP=@STRIP_OPTION@
 -
  CFLAGS:= \
  	-I${top_builddir} \
  	-I${SRC}/include -I${SRC}/common \
-@@ -98,8 +96,6 @@
- FILTER_DIR = @FILTER_DIR@
- LPD_DIR    = @LPD_DIR@
- 
--STRIP      = @STRIP@
--
- #********************** End of configure modifiable settings ************
- 
- 
-@@ -187,7 +184,7 @@
+@@ -93,7 +88,7 @@
+ 	-DCLEAR=\"@CLEAR@\"  \
+ 	-DUSERID=\"@USERID@\"  \
+ 	-DGROUPID=\"@GROUPID@\"  \
+-	-DLOCALEDIR=\"@LOCALEDIR@\" \
++	-DLOCALEDIR=\"${datdadir}\locale\" \
+ 	-DDONE_JOBS=\"@DONE_JOBS@\" \
+ 	-DDONE_JOBS_MAX_AGE=\"@DONE_JOBS_MAX_AGE@\" \
+ 	-DUNIXSOCKETPATH=\"@UNIXSOCKETPATH@\" \
+@@ -190,7 +185,7 @@
  ########################################################################
  
  .SUFFIXES: .lo
@@ -419,7 +419,7 @@
  .c.lo:
  	$(LIBTOOL) --mode=compile $(CC) $(CFLAGS) -c $<
  
-@@ -310,17 +306,17 @@
+@@ -317,17 +312,17 @@
  	done;
  
  	${LIBTOOL} --mode=install $(INSTALLCMD) liblpr.la $(DESTDIR)$(libdir)/liblpr.la
@@ -448,19 +448,20 @@
  	cd ${DESTDIR}${bindir}; rm -f lp cancel; ln -s lpr lp; ln -s lprm cancel;
  
  uninstall:
---- LPRng-3.8.1/Makefile.in~	Mon Nov 19 00:56:23 2001
-+++ LPRng-3.8.1/Makefile.in	Mon Nov 19 00:56:23 2001
-@@ -46,9 +46,7 @@
+--- LPRng-3.8.12/Makefile.in.orig	Wed Apr 10 18:45:43 2002
++++ LPRng-3.8.12/Makefile.in	Tue Jul  9 23:59:48 2002
+@@ -46,10 +46,7 @@
  LOCKFILE=\"@LOCKFILE@\"
  PSHOWALL="@PSHOWALL@"
  FILTER_DIR=@FILTER_DIR@
 -LOCALEDIR=@LOCALEDIR@
  INIT=@INIT@
 -USE_NLS=@USE_NLS@
- USE_GDBM=@USE_GDBM@
- LIBTOOL=@LIBTOOL@
+-LIBTOOL=@LIBTOOL@
  
-@@ -111,12 +109,6 @@
+ #=============================================================================
+ # List the directories you want to generate:
+@@ -115,12 +112,6 @@
  MAKETARGET=all
  
  ###############################################################################
@@ -473,7 +474,7 @@
  TAGS clean::
  	-$(MAKE) MAKETARGET=$@ DESTDIR=$(DESTDIR) $(DIRS)
  
-@@ -125,7 +117,9 @@
+@@ -129,7 +120,9 @@
  	-rm -f *.bak ? ?.* core *.old
  
  install: all
