@@ -68,7 +68,6 @@ niezawodno¶æ i bezpieczeñstwo.
 rm -f missing
 gettextize --copy --force
 aclocal
-automake -c -a
 autoconf
 %configure \
 	--disable-setuid \
