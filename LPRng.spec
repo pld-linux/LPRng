@@ -26,9 +26,9 @@ BuildRequires:	automake
 BuildRequires:	gettext-devel
 BuildRequires:	libtool
 BuildRequires:	ncurses-devel >= 5.0
-Prereq:		/sbin/ldconfig
-Prereq:		/sbin/chkconfig
-Prereq:		rc-scripts >= 0.2.0
+PreReq:		rc-scripts >= 0.2.0
+Requires(post):	/sbin/ldconfig
+Requires(post,preun):	/sbin/chkconfig
 Obsoletes:	lpr
 Obsoletes:	cups
 Obsoletes:	cups-clients
