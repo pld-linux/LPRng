@@ -64,7 +64,8 @@ LDFLAGS="-s"; export LDFLAGS
 %configure \
 	--enable-nls \
 	--disable-setuid \
-	--without-included-gettext
+	--without-included-gettext \
+	--enable-nls
 
 %{__make}
 
