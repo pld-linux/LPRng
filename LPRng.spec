@@ -1,7 +1,7 @@
 Summary:	A next-generation printing system for UNIX
 Summary(pl):	System drukowania nowej generacji
 Name:		LPRng
-Version:	3.7.5
+Version:	3.8.0
 Release:	1
 License:	GPL
 Group:		Applications/System
@@ -12,16 +12,13 @@ Source1:	%{name}.init
 Source2:	%{name}.conf
 Patch0:		%{name}-jobfilescan.patch
 Patch1:		%{name}-ac_fixes.patch
-Patch2:		%{name}-inet_ntop.patch
-Patch3:		%{name}-direct.patch
-Patch4:		%{name}-manpage.patch
-Patch5:		%{name}-shutdown.patch
-Patch6:		%{name}-lockfile.patch
-Patch7:		%{name}-setgroups.patch
+Patch2:		%{name}-manpage.patch
+Patch3:		%{name}-shutdown.patch
 URL:		http://www.astart.com/lprng/LPRng.html
 BuildRequires:	autoconf
 BuildRequires:	automake
 BuildRequires:	gettext-devel
+BuildRequires:	libtool
 BuildRequires:	ncurses-devel >= 5.0
 Prereq:		/sbin/chkconfig
 Prereq:		rc-scripts >= 0.2.0
@@ -68,14 +65,11 @@ niezawodno¶æ i bezpieczeñstwo.
 %patch1 -p1
 %patch2 -p1
 %patch3 -p1
-%patch4 -p1
-%patch5 -p1
-%patch6 -p1
-%patch7 -p1
 
 %build
-rm -f missing
+rm -f missing acinclude.m4
 gettextize --copy --force
+libtoolize --copy --force
 aclocal
 autoconf
 (cd gdbm-1.8.0 ; aclocal ; autoconf )
@@ -93,7 +87,8 @@ rm -rf $RPM_BUILD_ROOT
 install -d  $RPM_BUILD_ROOT{/etc/rc.d/init.d,%{_var}/spool/lpd}
 
 %{__make} install \
-	DESTDIR=$RPM_BUILD_ROOT
+	DESTDIR=$RPM_BUILD_ROOT \
+	POSTINSTALL="NO"
 
 install %{SOURCE1} $RPM_BUILD_ROOT/etc/rc.d/init.d/lpd
 # yes, overwrite distribution lpd.conf
