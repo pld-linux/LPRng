@@ -6,7 +6,7 @@ Summary(uk):	Спулер друку LPRng
 Summary(zh_CN):	LPRng--╢Рс║ЁлпР
 Name:		LPRng
 Version:	3.8.15
-Release:	1
+Release:	2
 License:	GPL
 Group:		Applications/System
 Source0:	ftp://ftp.lprng.com/pub/LPRng/LPRng/%{name}-%{version}.tgz
@@ -17,6 +17,7 @@ Source4:	http://www.mif.pg.gda.pl/homepages/ankry/man-PLD/%{name}-pl-man-pages.t
 Patch0:		%{name}-ac_fixes.patch
 Patch1:		%{name}-nproc-unlimited.patch
 Patch2:		%{name}-lpd-perms.patch
+Patch3:		%{name}-no_dupl_DESDIR.patch
 URL:		http://www.astart.com/lprng/LPRng.html
 BuildRequires:	autoconf
 BuildRequires:	automake
@@ -152,6 +153,7 @@ Support та аутентикац╕ю PGP. LPRng прийнято за стандарт в MIT для
 %patch0 -p1
 %patch1 -p1
 %patch2 -p1
+%patch3 -p1
 
 %build
 rm -f missing
