@@ -1,9 +1,9 @@
---- LPRng-3.8.22/src/include/lp.h.orig	2003-09-05 22:07:21.000000000 +0200
-+++ LPRng-3.8.22/src/include/lp.h	2003-11-13 08:03:56.471808920 +0100
+--- LPRng-3.8.23/src/include/lp.h.orig	2003-09-05 22:07:21.000000000 +0200
++++ LPRng-3.8.23/src/include/lp.h	2003-11-13 08:03:56.471808920 +0100
 @@ -267,7 +267,7 @@
- EXTERN int Check_for_protocol_violations_DYN;	/* check for RFC1179 protocol violations */
  EXTERN char* Chooser_DYN;	/* choose the destination for a load balance queue */
  EXTERN int Chooser_interval_DYN;	/* interval between tests for load balance destination */
+ EXTERN int Chooser_scan_queue_DYN;	/* scan the queue */
 -EXTERN char* Chooser_routine_DYN;	/* choose the destination for a load balance queue */
 +EXTERN int Chooser_routine_DYN;	/* choose the destination for a load balance queue */
  EXTERN int Class_in_status_DYN;	/* Show class in status information */
