@@ -87,7 +87,7 @@ gzip -9nf $RPM_BUILD_ROOT%{_mandir}/man*/* \
 
 %post
 /sbin/chkconfig --add lpd
-if [ -f /var/lock/subsys/lpd]; then
+if [ -f /var/lock/subsys/lpd ]; then
 	/etc/rc.d/init.d/lpd restart 1>&2
 else
 	echo "Run \"/etc/rc.d/init.d/lpd start\" to start LPRng lpd daemon."
@@ -95,7 +95,7 @@ fi
 
 %preun
 if [ "$1" = "0" ]; then
-	if [ -f /var/lock/subsys/lpd]; then
+	if [ -f /var/lock/subsys/lpd ]; then
 		/etc/rc.d/init.d/lpd stop 1>&2
 	fi
 	/sbin/chkconfig --del lpd
