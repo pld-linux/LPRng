@@ -12,7 +12,7 @@ Source0:	ftp://ftp.astart.com/pub/LPRng/LPRng/%{name}-%{version}.tgz
 Source1:	%{name}.init
 Source2:	%{name}.conf
 Source3:	%{name}.printcap
-Source4:	%{name}-pl-man-pages.tar.bz2
+Source4:	http://www.mif.pg.gda.pl/homepages/ankry/man-PLD/%{name}-pl-man-pages.tar.bz2
 Patch0:		%{name}-jobfilescan.patch
 Patch1:		%{name}-ac_fixes.patch
 Patch2:		%{name}-manpage.patch
