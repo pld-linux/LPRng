@@ -237,9 +237,9 @@ fi
 %defattr(644,root,root,755)
 %doc CHANGES CONTRIBUTORS COPYRIGHT README README.SSL* TODO
 %doc DOCS/LPRng-Reference-Multipart PrintingCookbook/PrintingCookbook
-%config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/lpd.conf
-%config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/lpd.perms
-%config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/printcap
+%config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/lpd.conf
+%config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/lpd.perms
+%config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/printcap
 %dir %{_sysconfdir}/lpd
 # what perms?
 %attr(750,root,lp) %dir %{_sysconfdir}/lpd/ssl.ca
