@@ -28,12 +28,13 @@ BuildRequires:	automake
 BuildRequires:	gettext-devel
 BuildRequires:	libtool
 BuildRequires:	openssl-devel >= 0.9.7d
-PreReq:		rc-scripts >= 0.2.0
+BuildRequires:	rpmbuild(macros) >= 1.268
 Requires(post):	/sbin/ldconfig
 Requires(post,preun):	/sbin/chkconfig
-Obsoletes:	lpr
+Requires:	rc-scripts >= 0.2.0
 Obsoletes:	cups
 Obsoletes:	cups-clients
+Obsoletes:	lpr
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -217,18 +218,12 @@ rm -rf $RPM_BUILD_ROOT
 %post
 /sbin/ldconfig
 /sbin/chkconfig --add lpd
-if [ -f /var/lock/subsys/lpd ]; then
-	/etc/rc.d/init.d/lpd restart 1>&2
-else
-	echo "Run \"/etc/rc.d/init.d/lpd start\" to start LPRng lpd daemon."
-fi
+%service lpd restart "LPRng lpd daemon"
 
 %preun
 if [ "$1" = "0" ]; then
-	if [ -f /var/lock/subsys/lpd ]; then
-		/etc/rc.d/init.d/lpd stop 1>&2
-	fi
 	/sbin/chkconfig --del lpd
+	%service lpd stop
 fi
 
 %postun -p /sbin/ldconfig
