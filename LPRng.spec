@@ -6,7 +6,7 @@ Summary(uk):	Спулер друку LPRng
 Summary(zh_CN):	LPRng--╢Рс║ЁлпР
 Name:		LPRng
 Version:	3.8.28
-Release:	1
+Release:	2
 License:	GPL or Artistic
 Group:		Applications/System
 Source0:	ftp://ftp.lprng.com/pub/LPRng/LPRng/%{name}-%{version}.tgz
@@ -163,6 +163,7 @@ Support та аутентикац╕ю PGP. LPRng прийнято за стандарт в MIT для
 %patch5 -p1
 
 rm -rf autom4te.cache
+mv  PrintingCookbook/{HTML,PrintingCookbook}
 
 %build
 %{__gettextize}
@@ -184,7 +185,7 @@ cp -f /usr/share/automake/{config.*,missing} .
 	--with-lpd_perms_path=%{_sysconfdir}/lpd.perms \
 	--with-done_jobs=0
 
-%{__make}
+%{__make} -j1
 %{__make} -C man
 
 %install
@@ -201,14 +202,13 @@ install -d $RPM_BUILD_ROOT{/etc/rc.d/init.d,%{_var}/spool/lpd/lp} \
 install %{SOURCE1} $RPM_BUILD_ROOT/etc/rc.d/init.d/lpd
 # yes, overwrite distribution lpd.conf
 install %{SOURCE2} $RPM_BUILD_ROOT%{_sysconfdir}/lpd.conf
-echo "default_printer = lp" >>$RPM_BUILD_ROOT%{_sysconfdir}/lpd.conf
+echo "default_printer = lp" >> $RPM_BUILD_ROOT%{_sysconfdir}/lpd.conf
 install %{SOURCE3} $RPM_BUILD_ROOT%{_sysconfdir}/printcap
 install lpd.perms $RPM_BUILD_ROOT%{_sysconfdir}
-# default spool
 
 bzip2 -dc %{SOURCE4} | tar xf - -C $RPM_BUILD_ROOT%{_mandir}
 
-mv -f PrintingCookbook/{HTML,PrintingCookbook}
+rm -f $RPM_BUILD_ROOT%{_libdir}/liblpr.{la,a}
 
 %find_lang %{name}
 
