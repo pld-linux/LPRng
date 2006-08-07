@@ -6,7 +6,7 @@ Summary(uk):	Û–’Ã≈“ ƒ“’À’ LPRng
 Summary(zh_CN):	LPRng--¥Ú”°≥Ã–Ú
 Name:		LPRng
 Version:	3.8.28
-Release:	2
+Release:	3
 License:	GPL or Artistic
 Group:		Applications/System
 Source0:	ftp://ftp.lprng.com/pub/LPRng/LPRng/%{name}-%{version}.tgz
@@ -187,7 +187,8 @@ cp -f /usr/share/automake/{config.*,missing} .
 	--with-lockfile=%{_var}/spool/lpd/lpd \
 	--with-lpd_conf_path=%{_sysconfdir}/lpd.conf \
 	--with-lpd_perms_path=%{_sysconfdir}/lpd.perms \
-	--with-done_jobs=0
+	--with-done_jobs=0 \
+	--disable-werror
 
 %{__make} -j1
 %{__make} -C man
