@@ -38,6 +38,8 @@ Obsoletes:	cups-clients
 Obsoletes:	lpr
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
+%define		filterout_ld	-Wl,--as-needed
+
 %description
 The LPRng software is an enhanced, extended, and portable
 implementation of the Berkeley LPR print spooler functionality. While
