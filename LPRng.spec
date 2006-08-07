@@ -22,6 +22,7 @@ Patch2:		%{name}-ngettext.patch
 Patch3:		%{name}-missing-nls.patch
 Patch4:		%{name}-pl.po.patch
 Patch5:		%{name}-types.patch
+Patch6:		%{name}-shell.patch
 URL:		http://www.lprng.com/
 BuildRequires:	autoconf
 BuildRequires:	automake
@@ -161,6 +162,7 @@ Support та аутентикац╕ю PGP. LPRng прийнято за стандарт в MIT для
 %patch3 -p1
 %patch4 -p1
 %patch5 -p1
+%patch6 -p1
 
 rm -rf autom4te.cache
 mv  PrintingCookbook/{HTML,PrintingCookbook}
