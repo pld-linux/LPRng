@@ -1,9 +1,9 @@
 Summary:	A next-generation printing system for UNIX
-Summary(pl):	System drukowania nowej generacji
-Summary(pt_BR):	Gerenciador de impressЦo para UNIX e NT
-Summary(ru):	Спулер печати LPRng
-Summary(uk):	Спулер друку LPRng
-Summary(zh_CN):	LPRng--╢Рс║ЁлпР
+Summary(pl.UTF-8):   System drukowania nowej generacji
+Summary(pt_BR.UTF-8):   Gerenciador de impressцёo para UNIX e NT
+Summary(ru.UTF-8):   п║п©я┐п╩п╣я─ п©п╣я┤п╟я┌п╦ LPRng
+Summary(uk.UTF-8):   п║п©я┐п╩п╣я─ п╢я─я┐п╨я┐ LPRng
+Summary(zh_CN.UTF-8):   LPRng--Ф┴⌠Е█╟Г╗▀Е╨▐
 Name:		LPRng
 Version:	3.8.28
 Release:	3
@@ -68,93 +68,93 @@ extremely simple to add. LPRng is Open Source Software, and the
 current public distribution is available from the listed FTP and Web
 Sites.
 
-%description -l pl
-LPRng jest rozszerzon╠, ulepszon╠ i portowaln╠ implementacj╠
-Berkeleyowskiego LPR, czyli spoolera wydrukСw. Dostarcza ten sam
-interfejs oraz jest zgodny z wymaganiami RFC1179. Jednocze╤nie
-wykonanie jest caЁkowicie nowe i dostarcza nastЙpuj╠ce rzeczy:
-- programy - "lekki" lpr (nie s╠ potrzebne ©adne bazy danych), lpc,
+%description -l pl.UTF-8
+LPRng jest rozszerzonд┘, ulepszonд┘ i portowalnд┘ implementacjд┘
+Berkeleyowskiego LPR, czyli spoolera wydrukцЁw. Dostarcza ten sam
+interfejs oraz jest zgodny z wymaganiami RFC1179. Jednoczeе⌡nie
+wykonanie jest caе┌kowicie nowe i dostarcza nastд≥pujд┘ce rzeczy:
+- programy - "lekki" lpr (nie sд┘ potrzebne е╪adne bazy danych), lpc,
   oraz lprm;
 - dynamiczna redyrekcja do kolejek;
-- automatyczne wstrzymywanie zadaЯ;
+- automatyczne wstrzymywanie zadaе└;
 - "gadatliwa" diagnostyka;
-- obsЁugЙ wielu drukarek na jednej kolejce;
-- programy klienckie nie musz╠ byФ SUID root;
-- mocno rozszerzona kontrola bezpieczeЯstwa;
-- mocno rozszerzone mechanizmy bezpieczeЯstwa i kontroli uprawnieЯ.
+- obsе┌ugд≥ wielu drukarek na jednej kolejce;
+- programy klienckie nie muszд┘ byд┤ SUID root;
+- mocno rozszerzona kontrola bezpieczeе└stwa;
+- mocno rozszerzone mechanizmy bezpieczeе└stwa i kontroli uprawnieе└.
 
-Oprogramowanie to kompiluje siЙ i dziaЁa na wielu systemach uniksowych
+Oprogramowanie to kompiluje siд≥ i dziaе┌a na wielu systemach uniksowych
 i jest kompatybilne z innymi print spoolami oraz drukarkami
-sieciowymi, ktСre u©ywaj╠ interfejsu LPR oraz speЁniaj╠ wymagania
-RFC1179. LPRng dostarcza pakiety emulacyjne dla programСw SVR4 lp oraz
-lpstat, eliminuj╠c w ten sposСb konieczno╤Ф posiadania jeszcze jednego
-pakietu print spoola. Te pakiety mog╠ byФ modyfikowane zgodnie z
+sieciowymi, ktцЁre uе╪ywajд┘ interfejsu LPR oraz speе┌niajд┘ wymagania
+RFC1179. LPRng dostarcza pakiety emulacyjne dla programцЁw SVR4 lp oraz
+lpstat, eliminujд┘c w ten sposцЁb koniecznoе⌡д┤ posiadania jeszcze jednego
+pakietu print spoola. Te pakiety mogд┘ byд┤ modyfikowane zgodnie z
 lokalnymi wymaganiami.
 
-Dla u©ytkownikСw, ktСrzy potrzebuj╠ bezpiecznej i uwierzytelnianej
-obsЁugi drukowania LPRng wspiera Kerberos V, MIT Kerberos IV Print
+Dla uе╪ytkownikцЁw, ktцЁrzy potrzebujд┘ bezpiecznej i uwierzytelnianej
+obsе┌ugi drukowania LPRng wspiera Kerberos V, MIT Kerberos IV Print
 Support oraz PGP.
 
-%description -l pt_BR
-LPRng И uma versЦo melhorada, estendida e mais segura do gerenciador
-de impressЦo LPR. Entre as melhorias se destacam: redirecionamento
-dinБmico de filas de impressЦo, suspensЦo automАtica de trabalhos de
-impressЦo, diagnСstico detalhado, vАrias impressoras por fila,
-programas cliente nЦo precisam ser SUID root e um mecanismo bastante
-melhorado de permissУes e autorizaГУes.
+%description -l pt_BR.UTF-8
+LPRng ц╘ uma versцёo melhorada, estendida e mais segura do gerenciador
+de impressцёo LPR. Entre as melhorias se destacam: redirecionamento
+dinц╒mico de filas de impressцёo, suspensцёo automц║tica de trabalhos de
+impressцёo, diagnцЁstico detalhado, vц║rias impressoras por fila,
+programas cliente nцёo precisam ser SUID root e um mecanismo bastante
+melhorado de permissц╣es e autorizaц╖ц╣es.
 
-%description -l ru
-LPRng - это улучшенная, расширенная и портируемая реализация
-функциональности спулера печати Berkeley LPR. Предоставляя тот же
-интерфейс и отвечая всем требованиям RFC1179, эта реализация
-совершенно новая и предоставляет поддержку следующих возможностей:
-компактный (не требующий базы данных) lpr, программы lpc и lprm;
-динамическая переадресация очередей печати; автоматическая
-приостановка заданий; очень детальная диагностика; обслуживание одной
-очереди несколькими принтерами; клиентские программы не должны быть
-SUID root; сильно улучшенная система безопасности; сильно улучшенные
-механизмы авторизации и прав доступа.
+%description -l ru.UTF-8
+LPRng - я█я┌п╬ я┐п╩я┐я┤я┬п╣п╫п╫п╟я▐, я─п╟я│я┬п╦я─п╣п╫п╫п╟я▐ п╦ п©п╬я─я┌п╦я─я┐п╣п╪п╟я▐ я─п╣п╟п╩п╦п╥п╟я├п╦я▐
+я└я┐п╫п╨я├п╦п╬п╫п╟п╩я▄п╫п╬я│я┌п╦ я│п©я┐п╩п╣я─п╟ п©п╣я┤п╟я┌п╦ Berkeley LPR. п÷я─п╣п╢п╬я│я┌п╟п╡п╩я▐я▐ я┌п╬я┌ п╤п╣
+п╦п╫я┌п╣я─я└п╣п╧я│ п╦ п╬я┌п╡п╣я┤п╟я▐ п╡я│п╣п╪ я┌я─п╣п╠п╬п╡п╟п╫п╦я▐п╪ RFC1179, я█я┌п╟ я─п╣п╟п╩п╦п╥п╟я├п╦я▐
+я│п╬п╡п╣я─я┬п╣п╫п╫п╬ п╫п╬п╡п╟я▐ п╦ п©я─п╣п╢п╬я│я┌п╟п╡п╩я▐п╣я┌ п©п╬п╢п╢п╣я─п╤п╨я┐ я│п╩п╣п╢я┐я▌я┴п╦я┘ п╡п╬п╥п╪п╬п╤п╫п╬я│я┌п╣п╧:
+п╨п╬п╪п©п╟п╨я┌п╫я▀п╧ (п╫п╣ я┌я─п╣п╠я┐я▌я┴п╦п╧ п╠п╟п╥я▀ п╢п╟п╫п╫я▀я┘) lpr, п©я─п╬пЁя─п╟п╪п╪я▀ lpc п╦ lprm;
+п╢п╦п╫п╟п╪п╦я┤п╣я│п╨п╟я▐ п©п╣я─п╣п╟п╢я─п╣я│п╟я├п╦я▐ п╬я┤п╣я─п╣п╢п╣п╧ п©п╣я┤п╟я┌п╦; п╟п╡я┌п╬п╪п╟я┌п╦я┤п╣я│п╨п╟я▐
+п©я─п╦п╬я│я┌п╟п╫п╬п╡п╨п╟ п╥п╟п╢п╟п╫п╦п╧; п╬я┤п╣п╫я▄ п╢п╣я┌п╟п╩я▄п╫п╟я▐ п╢п╦п╟пЁп╫п╬я│я┌п╦п╨п╟; п╬п╠я│п╩я┐п╤п╦п╡п╟п╫п╦п╣ п╬п╢п╫п╬п╧
+п╬я┤п╣я─п╣п╢п╦ п╫п╣я│п╨п╬п╩я▄п╨п╦п╪п╦ п©я─п╦п╫я┌п╣я─п╟п╪п╦; п╨п╩п╦п╣п╫я┌я│п╨п╦п╣ п©я─п╬пЁя─п╟п╪п╪я▀ п╫п╣ п╢п╬п╩п╤п╫я▀ п╠я▀я┌я▄
+SUID root; я│п╦п╩я▄п╫п╬ я┐п╩я┐я┤я┬п╣п╫п╫п╟я▐ я│п╦я│я┌п╣п╪п╟ п╠п╣п╥п╬п©п╟я│п╫п╬я│я┌п╦; я│п╦п╩я▄п╫п╬ я┐п╩я┐я┤я┬п╣п╫п╫я▀п╣
+п╪п╣я┘п╟п╫п╦п╥п╪я▀ п╟п╡я┌п╬я─п╦п╥п╟я├п╦п╦ п╦ п©я─п╟п╡ п╢п╬я│я┌я┐п©п╟.
 
-Программное обеспечение компиллируется и работает на большом
-количестве UNIX-систем и совместимо с другими спулерами печати и
-сетевыми принтерами, которые используют интерфейс LPR и отвечают
-требованиям RFC1179. LPRng также предоставляет пакеты эмуляции для
-программ SVR4 lp и lpstat, исключая потребность в другом пакете
-спулера печати. Эти пакеты эмуляции могут быть модифицированы в
-соответствии с локальными требованиями для поддержки антикварных
-систем печати.
+п÷я─п╬пЁя─п╟п╪п╪п╫п╬п╣ п╬п╠п╣я│п©п╣я┤п╣п╫п╦п╣ п╨п╬п╪п©п╦п╩п╩п╦я─я┐п╣я┌я│я▐ п╦ я─п╟п╠п╬я┌п╟п╣я┌ п╫п╟ п╠п╬п╩я▄я┬п╬п╪
+п╨п╬п╩п╦я┤п╣я│я┌п╡п╣ UNIX-я│п╦я│я┌п╣п╪ п╦ я│п╬п╡п╪п╣я│я┌п╦п╪п╬ я│ п╢я─я┐пЁп╦п╪п╦ я│п©я┐п╩п╣я─п╟п╪п╦ п©п╣я┤п╟я┌п╦ п╦
+я│п╣я┌п╣п╡я▀п╪п╦ п©я─п╦п╫я┌п╣я─п╟п╪п╦, п╨п╬я┌п╬я─я▀п╣ п╦я│п©п╬п╩я▄п╥я┐я▌я┌ п╦п╫я┌п╣я─я└п╣п╧я│ LPR п╦ п╬я┌п╡п╣я┤п╟я▌я┌
+я┌я─п╣п╠п╬п╡п╟п╫п╦я▐п╪ RFC1179. LPRng я┌п╟п╨п╤п╣ п©я─п╣п╢п╬я│я┌п╟п╡п╩я▐п╣я┌ п©п╟п╨п╣я┌я▀ я█п╪я┐п╩я▐я├п╦п╦ п╢п╩я▐
+п©я─п╬пЁя─п╟п╪п╪ SVR4 lp п╦ lpstat, п╦я│п╨п╩я▌я┤п╟я▐ п©п╬я┌я─п╣п╠п╫п╬я│я┌я▄ п╡ п╢я─я┐пЁп╬п╪ п©п╟п╨п╣я┌п╣
+я│п©я┐п╩п╣я─п╟ п©п╣я┤п╟я┌п╦. п╜я┌п╦ п©п╟п╨п╣я┌я▀ я█п╪я┐п╩я▐я├п╦п╦ п╪п╬пЁя┐я┌ п╠я▀я┌я▄ п╪п╬п╢п╦я└п╦я├п╦я─п╬п╡п╟п╫я▀ п╡
+я│п╬п╬я┌п╡п╣я┌я│я┌п╡п╦п╦ я│ п╩п╬п╨п╟п╩я▄п╫я▀п╪п╦ я┌я─п╣п╠п╬п╡п╟п╫п╦я▐п╪п╦ п╢п╩я▐ п©п╬п╢п╢п╣я─п╤п╨п╦ п╟п╫я┌п╦п╨п╡п╟я─п╫я▀я┘
+я│п╦я│я┌п╣п╪ п©п╣я┤п╟я┌п╦.
 
-Для пользователей, которым нужна безопасная и/или аутентицируемая
-поддержка печати, LPRng поддерживает Kerberos V, MIT Kerberos IV Print
-Support и аутентикацию PGP. LPRng принят за стандарт в MIT для
-использования в качестве системы поддержки печати в их кампусе.
-Дополнительная поддержка аутентикации может быть добавлена без особых
-усилий.
+п■п╩я▐ п©п╬п╩я▄п╥п╬п╡п╟я┌п╣п╩п╣п╧, п╨п╬я┌п╬я─я▀п╪ п╫я┐п╤п╫п╟ п╠п╣п╥п╬п©п╟я│п╫п╟я▐ п╦/п╦п╩п╦ п╟я┐я┌п╣п╫я┌п╦я├п╦я─я┐п╣п╪п╟я▐
+п©п╬п╢п╢п╣я─п╤п╨п╟ п©п╣я┤п╟я┌п╦, LPRng п©п╬п╢п╢п╣я─п╤п╦п╡п╟п╣я┌ Kerberos V, MIT Kerberos IV Print
+Support п╦ п╟я┐я┌п╣п╫я┌п╦п╨п╟я├п╦я▌ PGP. LPRng п©я─п╦п╫я▐я┌ п╥п╟ я│я┌п╟п╫п╢п╟я─я┌ п╡ MIT п╢п╩я▐
+п╦я│п©п╬п╩я▄п╥п╬п╡п╟п╫п╦я▐ п╡ п╨п╟я┤п╣я│я┌п╡п╣ я│п╦я│я┌п╣п╪я▀ п©п╬п╢п╢п╣я─п╤п╨п╦ п©п╣я┤п╟я┌п╦ п╡ п╦я┘ п╨п╟п╪п©я┐я│п╣.
+п■п╬п©п╬п╩п╫п╦я┌п╣п╩я▄п╫п╟я▐ п©п╬п╢п╢п╣я─п╤п╨п╟ п╟я┐я┌п╣п╫я┌п╦п╨п╟я├п╦п╦ п╪п╬п╤п╣я┌ п╠я▀я┌я▄ п╢п╬п╠п╟п╡п╩п╣п╫п╟ п╠п╣п╥ п╬я│п╬п╠я▀я┘
+я┐я│п╦п╩п╦п╧.
 
-%description -l uk
-LPRng - це покращена, розширена та портована реал╕зац╕я функц╕йност╕
-спулеру друку Berkeley LPR. Надаючи той же ╕нтерфейс та в╕дпов╕даючи
-ус╕м вимогам RFC1179, ця реал╕зац╕я абсолютно нова ╕ нада╓ п╕дтримку
-таких можливостей: компактний (не вимагаючий бази даних) lpr, програми
-lpc та lprm; динам╕чна переадресац╕я черг друку; автоматичне
-призупинення завдань; дуже детальна д╕агностика; обслуговування одно╖
-черги к╕лькома пр╕нтерами; кл╕╓нтськ╕ програми не повинн╕ бути SUID
-root; сильно покращена система безпеки; сильно покращен╕ механ╕зми
-авторизац╕╖ та прав доступу.
+%description -l uk.UTF-8
+LPRng - я├п╣ п©п╬п╨я─п╟я┴п╣п╫п╟, я─п╬п╥я┬п╦я─п╣п╫п╟ я┌п╟ п©п╬я─я┌п╬п╡п╟п╫п╟ я─п╣п╟п╩я√п╥п╟я├я√я▐ я└я┐п╫п╨я├я√п╧п╫п╬я│я┌я√
+я│п©я┐п╩п╣я─я┐ п╢я─я┐п╨я┐ Berkeley LPR. п²п╟п╢п╟я▌я┤п╦ я┌п╬п╧ п╤п╣ я√п╫я┌п╣я─я└п╣п╧я│ я┌п╟ п╡я√п╢п©п╬п╡я√п╢п╟я▌я┤п╦
+я┐я│я√п╪ п╡п╦п╪п╬пЁп╟п╪ RFC1179, я├я▐ я─п╣п╟п╩я√п╥п╟я├я√я▐ п╟п╠я│п╬п╩я▌я┌п╫п╬ п╫п╬п╡п╟ я√ п╫п╟п╢п╟я■ п©я√п╢я┌я─п╦п╪п╨я┐
+я┌п╟п╨п╦я┘ п╪п╬п╤п╩п╦п╡п╬я│я┌п╣п╧: п╨п╬п╪п©п╟п╨я┌п╫п╦п╧ (п╫п╣ п╡п╦п╪п╟пЁп╟я▌я┤п╦п╧ п╠п╟п╥п╦ п╢п╟п╫п╦я┘) lpr, п©я─п╬пЁя─п╟п╪п╦
+lpc я┌п╟ lprm; п╢п╦п╫п╟п╪я√я┤п╫п╟ п©п╣я─п╣п╟п╢я─п╣я│п╟я├я√я▐ я┤п╣я─пЁ п╢я─я┐п╨я┐; п╟п╡я┌п╬п╪п╟я┌п╦я┤п╫п╣
+п©я─п╦п╥я┐п©п╦п╫п╣п╫п╫я▐ п╥п╟п╡п╢п╟п╫я▄; п╢я┐п╤п╣ п╢п╣я┌п╟п╩я▄п╫п╟ п╢я√п╟пЁп╫п╬я│я┌п╦п╨п╟; п╬п╠я│п╩я┐пЁп╬п╡я┐п╡п╟п╫п╫я▐ п╬п╢п╫п╬я≈
+я┤п╣я─пЁп╦ п╨я√п╩я▄п╨п╬п╪п╟ п©я─я√п╫я┌п╣я─п╟п╪п╦; п╨п╩я√я■п╫я┌я│я▄п╨я√ п©я─п╬пЁя─п╟п╪п╦ п╫п╣ п©п╬п╡п╦п╫п╫я√ п╠я┐я┌п╦ SUID
+root; я│п╦п╩я▄п╫п╬ п©п╬п╨я─п╟я┴п╣п╫п╟ я│п╦я│я┌п╣п╪п╟ п╠п╣п╥п©п╣п╨п╦; я│п╦п╩я▄п╫п╬ п©п╬п╨я─п╟я┴п╣п╫я√ п╪п╣я┘п╟п╫я√п╥п╪п╦
+п╟п╡я┌п╬я─п╦п╥п╟я├я√я≈ я┌п╟ п©я─п╟п╡ п╢п╬я│я┌я┐п©я┐.
 
-Програмне забезпечення комп╕лю╓ться та працю╓ на велик╕й к╕лькост╕
-UNIX-систем ╕ сум╕сне з ╕ншими спулерами друку та мережевими
-пр╕нтерами, котр╕ використовують ╕нтерфейс LPR та в╕дпов╕дають вимогам
-RFC1179. LPRng також нада╓ пакети емуляц╕╖ для програм SVR4 lp та
-lpstat, виключаючи потребу в ╕ншому пакет╕ спулера друку. Ц╕ пакети
-емуляции можуть бути модиф╕кован╕ у в╕дпов╕дност╕ з локальними
-вимогами для п╕дтримки антикварних систем друку.
+п÷я─п╬пЁя─п╟п╪п╫п╣ п╥п╟п╠п╣п╥п©п╣я┤п╣п╫п╫я▐ п╨п╬п╪п©я√п╩я▌я■я┌я▄я│я▐ я┌п╟ п©я─п╟я├я▌я■ п╫п╟ п╡п╣п╩п╦п╨я√п╧ п╨я√п╩я▄п╨п╬я│я┌я√
+UNIX-я│п╦я│я┌п╣п╪ я√ я│я┐п╪я√я│п╫п╣ п╥ я√п╫я┬п╦п╪п╦ я│п©я┐п╩п╣я─п╟п╪п╦ п╢я─я┐п╨я┐ я┌п╟ п╪п╣я─п╣п╤п╣п╡п╦п╪п╦
+п©я─я√п╫я┌п╣я─п╟п╪п╦, п╨п╬я┌я─я√ п╡п╦п╨п╬я─п╦я│я┌п╬п╡я┐я▌я┌я▄ я√п╫я┌п╣я─я└п╣п╧я│ LPR я┌п╟ п╡я√п╢п©п╬п╡я√п╢п╟я▌я┌я▄ п╡п╦п╪п╬пЁп╟п╪
+RFC1179. LPRng я┌п╟п╨п╬п╤ п╫п╟п╢п╟я■ п©п╟п╨п╣я┌п╦ п╣п╪я┐п╩я▐я├я√я≈ п╢п╩я▐ п©я─п╬пЁя─п╟п╪ SVR4 lp я┌п╟
+lpstat, п╡п╦п╨п╩я▌я┤п╟я▌я┤п╦ п©п╬я┌я─п╣п╠я┐ п╡ я√п╫я┬п╬п╪я┐ п©п╟п╨п╣я┌я√ я│п©я┐п╩п╣я─п╟ п╢я─я┐п╨я┐. п╕я√ п©п╟п╨п╣я┌п╦
+п╣п╪я┐п╩я▐я├п╦п╦ п╪п╬п╤я┐я┌я▄ п╠я┐я┌п╦ п╪п╬п╢п╦я└я√п╨п╬п╡п╟п╫я√ я┐ п╡я√п╢п©п╬п╡я√п╢п╫п╬я│я┌я√ п╥ п╩п╬п╨п╟п╩я▄п╫п╦п╪п╦
+п╡п╦п╪п╬пЁп╟п╪п╦ п╢п╩я▐ п©я√п╢я┌я─п╦п╪п╨п╦ п╟п╫я┌п╦п╨п╡п╟я─п╫п╦я┘ я│п╦я│я┌п╣п╪ п╢я─я┐п╨я┐.
 
-Для користувач╕в, яким потр╕бна безпечна та/або аутентиф╕кована
-п╕дтримка друку, LPRng п╕дтриму╓ Kerberos V, MIT Kerberos IV Print
-Support та аутентикац╕ю PGP. LPRng прийнято за стандарт в MIT для
-використання в якост╕ системи п╕дтримки друку в ╖х кампус╕. Додаткова
-п╕дтримка аутентикац╕╖ може бути додана без особливих зусиль.
+п■п╩я▐ п╨п╬я─п╦я│я┌я┐п╡п╟я┤я√п╡, я▐п╨п╦п╪ п©п╬я┌я─я√п╠п╫п╟ п╠п╣п╥п©п╣я┤п╫п╟ я┌п╟/п╟п╠п╬ п╟я┐я┌п╣п╫я┌п╦я└я√п╨п╬п╡п╟п╫п╟
+п©я√п╢я┌я─п╦п╪п╨п╟ п╢я─я┐п╨я┐, LPRng п©я√п╢я┌я─п╦п╪я┐я■ Kerberos V, MIT Kerberos IV Print
+Support я┌п╟ п╟я┐я┌п╣п╫я┌п╦п╨п╟я├я√я▌ PGP. LPRng п©я─п╦п╧п╫я▐я┌п╬ п╥п╟ я│я┌п╟п╫п╢п╟я─я┌ п╡ MIT п╢п╩я▐
+п╡п╦п╨п╬я─п╦я│я┌п╟п╫п╫я▐ п╡ я▐п╨п╬я│я┌я√ я│п╦я│я┌п╣п╪п╦ п©я√п╢я┌я─п╦п╪п╨п╦ п╢я─я┐п╨я┐ п╡ я≈я┘ п╨п╟п╪п©я┐я│я√. п■п╬п╢п╟я┌п╨п╬п╡п╟
+п©я√п╢я┌я─п╦п╪п╨п╟ п╟я┐я┌п╣п╫я┌п╦п╨п╟я├я√я≈ п╪п╬п╤п╣ п╠я┐я┌п╦ п╢п╬п╢п╟п╫п╟ п╠п╣п╥ п╬я│п╬п╠п╩п╦п╡п╦я┘ п╥я┐я│п╦п╩я▄.
 
 %prep
 %setup -q
