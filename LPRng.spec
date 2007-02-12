@@ -1,9 +1,9 @@
 Summary:	A next-generation printing system for UNIX
-Summary(pl.UTF-8):   System drukowania nowej generacji
-Summary(pt_BR.UTF-8):   Gerenciador de impressão para UNIX e NT
-Summary(ru.UTF-8):   Спулер печати LPRng
-Summary(uk.UTF-8):   Спулер друку LPRng
-Summary(zh_CN.UTF-8):   LPRng--打印程序
+Summary(pl.UTF-8):	System drukowania nowej generacji
+Summary(pt_BR.UTF-8):	Gerenciador de impressão para UNIX e NT
+Summary(ru.UTF-8):	Спулер печати LPRng
+Summary(uk.UTF-8):	Спулер друку LPRng
+Summary(zh_CN.UTF-8):	LPRng--打印程序
 Name:		LPRng
 Version:	3.8.28
 Release:	3
