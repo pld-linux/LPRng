@@ -23,6 +23,7 @@ Patch3:		%{name}-missing-nls.patch
 Patch4:		%{name}-pl.po.patch
 Patch5:		%{name}-types.patch
 Patch6:		%{name}-shell.patch
+Patch7:		%{name}-as-needed.patch
 URL:		http://www.lprng.com/
 BuildRequires:	autoconf
 BuildRequires:	automake
@@ -37,8 +38,6 @@ Obsoletes:	cups
 Obsoletes:	cups-clients
 Obsoletes:	lpr
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
-
-%define		filterout_ld	-Wl,--as-needed
 
 %description
 The LPRng software is an enhanced, extended, and portable
@@ -165,6 +164,7 @@ Support та аутентикацію PGP. LPRng прийнято за стан�
 %patch4 -p1
 %patch5 -p1
 %patch6 -p1
+%patch7 -p1
 
 rm -rf autom4te.cache
 mv  PrintingCookbook/{HTML,PrintingCookbook}
