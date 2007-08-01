@@ -6,7 +6,7 @@ Summary(uk.UTF-8):	Спулер друку LPRng
 Summary(zh_CN.UTF-8):	LPRng--打印程序
 Name:		LPRng
 Version:	3.8.28
-Release:	3
+Release:	4
 License:	GPL or Artistic
 Group:		Applications/System
 Source0:	ftp://ftp.lprng.com/pub/LPRng/LPRng/%{name}-%{version}.tgz
@@ -34,9 +34,10 @@ BuildRequires:	rpmbuild(macros) >= 1.315
 Requires(post):	/sbin/ldconfig
 Requires(post,preun):	/sbin/chkconfig
 Requires:	rc-scripts >= 0.2.0
-Obsoletes:	cups
-Obsoletes:	cups-clients
-Obsoletes:	lpr
+Obsoletes:	printingclient
+Obsoletes:	printingdaemon
+Provides:	printingclient
+Provides:	printingdaemon
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
