@@ -11,11 +11,9 @@ License:	GPL or Artistic
 Group:		Applications/System
 Source0:	ftp://ftp.lprng.com/pub/LPRng/LPRng/%{name}-%{version}.tgz
 # Source0-md5:	edbd3a381a0cc6843df7507e8f9103f1
-Source1:	%{name}.init
-Source2:	%{name}.conf
-Source3:	%{name}.printcap
-Source4:	http://www.mif.pg.gda.pl/homepages/ankry/man-PLD/%{name}-pl-man-pages.tar.bz2
-# Source4-md5:	4771b1c3598677a8201a9e203235dff3
+Source1:	http://www.mif.pg.gda.pl/homepages/ankry/man-PLD/%{name}-pl-man-pages.tar.bz2
+# Source1-md5:	4771b1c3598677a8201a9e203235dff3
+Source2:	%{name}.init
 Patch0:		%{name}-ac_fixes.patch
 Patch1:		%{name}-lpd-perms.patch
 Patch2:		%{name}-ngettext.patch
@@ -24,10 +22,13 @@ Patch4:		%{name}-pl.po.patch
 Patch5:		%{name}-types.patch
 Patch6:		%{name}-shell.patch
 Patch7:		%{name}-as-needed.patch
+Patch8:		%{name}-DESTDIR.patch
+Patch9:		%{name}-lpd.conf.patch
 URL:		http://www.lprng.com/
 BuildRequires:	autoconf
 BuildRequires:	automake
 BuildRequires:	gettext-devel
+BuildRequires:	krb5-devel
 BuildRequires:	libtool
 BuildRequires:	openssl-devel >= 0.9.7d
 BuildRequires:	rpmbuild(macros) >= 1.315
@@ -166,20 +167,17 @@ Support та аутентикацію PGP. LPRng прийнято за стан�
 %patch5 -p1
 %patch6 -p1
 %patch7 -p1
+%patch8 -p1
+%patch9 -p1
 
-rm -rf autom4te.cache
 mv  PrintingCookbook/{HTML,PrintingCookbook}
 
 %build
-%{__gettextize}
-%{__libtoolize}
-%{__aclocal}
 %{__autoconf}
-cp -f /usr/share/automake/{config.*,missing} .
 # now it wants to use /etc/lpd/lpd.{conf,perms} - stick to old values?
 %configure \
 	OPENSSL=/usr/bin/openssl \
-	PSHOWALL="-ax" \
+	PSHOWALL="ax" \
 	--disable-setuid \
 	--enable-shared \
 	--with-userid=lp \
@@ -189,10 +187,12 @@ cp -f /usr/share/automake/{config.*,missing} .
 	--with-lpd_conf_path=%{_sysconfdir}/lpd.conf \
 	--with-lpd_perms_path=%{_sysconfdir}/lpd.perms \
 	--with-done_jobs=0 \
-	--disable-werror
+	--disable-werror \
+	--enable-kerberos \
+	--enable-tcpwrappers \
+	--enable-ssl
 
-%{__make} -j1
-%{__make} -C man
+%{__make}
 
 %install
 rm -rf $RPM_BUILD_ROOT
@@ -202,19 +202,12 @@ install -d $RPM_BUILD_ROOT{/etc/rc.d/init.d,%{_var}/spool/lpd/lp} \
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT \
 	POSTINSTALL="NO"
-%{__make} install -C man \
-	DESTDIR=$RPM_BUILD_ROOT
 
-install %{SOURCE1} $RPM_BUILD_ROOT/etc/rc.d/init.d/lpd
-# yes, overwrite distribution lpd.conf
-install %{SOURCE2} $RPM_BUILD_ROOT%{_sysconfdir}/lpd.conf
-echo "default_printer = lp" >> $RPM_BUILD_ROOT%{_sysconfdir}/lpd.conf
-install %{SOURCE3} $RPM_BUILD_ROOT%{_sysconfdir}/printcap
-install lpd.perms $RPM_BUILD_ROOT%{_sysconfdir}
+install %{SOURCE2} $RPM_BUILD_ROOT/etc/rc.d/init.d/lpd
 
-bzip2 -dc %{SOURCE4} | tar xf - -C $RPM_BUILD_ROOT%{_mandir}
+bzip2 -dc %{SOURCE1} | tar xf - -C $RPM_BUILD_ROOT%{_mandir}
 
-rm -f $RPM_BUILD_ROOT%{_libdir}/liblpr.{la,a}
+rm $RPM_BUILD_ROOT%{_libdir}/liblpr.{la,a}
 
 %find_lang %{name}
 
@@ -237,7 +230,8 @@ fi
 %files -f %{name}.lang
 %defattr(644,root,root,755)
 %doc CHANGES CONTRIBUTORS COPYRIGHT README README.SSL* TODO
-%doc DOCS/LPRng-Reference-Multipart PrintingCookbook/PrintingCookbook
+%doc DOCS/LPRng-Reference.{html,pdf} DOCS/*.jpg DOCS/*.png
+%doc PrintingCookbook/PrintingCookbook PrintingCookbook/PDF/*.pdf
 %config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/lpd.conf
 %config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/lpd.perms
 %config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/printcap
