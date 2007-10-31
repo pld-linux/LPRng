@@ -1,0 +1,16 @@
+--- LPRng-3.8.32/UTILS/make_lpd_conf.in~	2003-01-15 01:48:29.000000000 +0100
++++ LPRng-3.8.32/UTILS/make_lpd_conf.in	2007-10-31 15:22:48.000000000 +0100
+@@ -11,6 +11,13 @@
+ #   To set it to OFF or 0, change this to read:
+ #     force_localhost@
+ 
++user  = lp
++group = lp
++lockfile = /var/spool/lpd/lpd
++
++max_servers_active = 30
++default_printer = lp
++
+ EOF
+ 
+ ${AWK} '
