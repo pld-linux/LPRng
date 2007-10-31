@@ -6,7 +6,7 @@ Summary(uk.UTF-8):	Спулер друку LPRng
 Summary(zh_CN.UTF-8):	LPRng--打印程序
 Name:		LPRng
 Version:	3.8.32
-Release:	0.1
+Release:	1
 License:	GPL or Artistic
 Group:		Applications/System
 Source0:	ftp://ftp.lprng.com/pub/LPRng/LPRng/%{name}-%{version}.tgz
@@ -30,6 +30,7 @@ BuildRequires:	automake
 BuildRequires:	gettext-devel
 BuildRequires:	krb5-devel
 BuildRequires:	libtool
+BuildRequires:	libwrap-devel
 BuildRequires:	openssl-devel >= 0.9.7d
 BuildRequires:	rpmbuild(macros) >= 1.315
 Requires(post):	/sbin/ldconfig
