@@ -82,12 +82,3 @@
  fi;
  
  AC_OUTPUT( po/Makefile.in 
-@@ -1799,7 +1799,7 @@
- 	CPPFLAGS="$CPPFLAGS -W -Wall $werror -Wno-unused "
- fi;
- 
--AC_OUTPUT( po/Makefile.in 
-+AC_OUTPUT(
- [
- Makefile
- DOCS/Makefile
