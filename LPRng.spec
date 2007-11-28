@@ -6,8 +6,8 @@ Summary(uk.UTF-8):	Спулер друку LPRng
 Summary(zh_CN.UTF-8):	LPRng--打印程序
 Name:		LPRng
 Version:	3.8.32
-Release:	1
-License:	GPL or Artistic
+Release:	2
+License:	GPL v2 with OpenSSL exception or Artistic
 Group:		Applications/System
 Source0:	ftp://ftp.lprng.com/pub/LPRng/LPRng/%{name}-%{version}.tgz
 # Source0-md5:	edbd3a381a0cc6843df7507e8f9103f1
@@ -171,7 +171,8 @@ Support та аутентикацію PGP. LPRng прийнято за стан�
 %patch8 -p1
 %patch9 -p1
 
-mv  PrintingCookbook/{HTML,PrintingCookbook}
+mv PrintingCookbook/{HTML,PrintingCookbook}
+rm -f po/stamp-po
 
 %build
 %{__autoconf}
