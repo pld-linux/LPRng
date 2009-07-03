@@ -5,12 +5,12 @@ Summary(ru.UTF-8):	Спулер печати LPRng
 Summary(uk.UTF-8):	Спулер друку LPRng
 Summary(zh_CN.UTF-8):	LPRng--打印程序
 Name:		LPRng
-Version:	3.8.32
-Release:	3
+Version:	3.8.33
+Release:	0.1
 License:	GPL v2 with OpenSSL exception or Artistic
 Group:		Applications/System
 Source0:	ftp://ftp.lprng.com/pub/LPRng/LPRng/%{name}-%{version}.tgz
-# Source0-md5:	edbd3a381a0cc6843df7507e8f9103f1
+# Source0-md5:	d467786ca51ade0faeb6e41430e8f208
 Source1:	http://www.mif.pg.gda.pl/homepages/ankry/man-PLD/%{name}-pl-man-pages.tar.bz2
 # Source1-md5:	4771b1c3598677a8201a9e203235dff3
 Source2:	%{name}.init
@@ -22,8 +22,7 @@ Patch4:		%{name}-pl.po.patch
 Patch5:		%{name}-types.patch
 Patch6:		%{name}-shell.patch
 Patch7:		%{name}-as-needed.patch
-Patch8:		%{name}-DESTDIR.patch
-Patch9:		%{name}-lpd.conf.patch
+Patch8:		%{name}-lpd.conf.patch
 URL:		http://www.lprng.com/
 BuildRequires:	autoconf
 BuildRequires:	automake
@@ -169,7 +168,6 @@ Support та аутентикацію PGP. LPRng прийнято за стан�
 %patch6 -p1
 %patch7 -p1
 %patch8 -p1
-%patch9 -p1
 
 mv PrintingCookbook/{HTML,PrintingCookbook}
 rm -f po/stamp-po
