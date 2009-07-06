@@ -1,3 +1,7 @@
+#
+# Conditional build:
+%bcond_with	kerberos5	# build with kerberos5 support
+#
 Summary:	A next-generation printing system for UNIX
 Summary(pl.UTF-8):	System drukowania nowej generacji
 Summary(pt_BR.UTF-8):	Gerenciador de impressão para UNIX e NT
@@ -27,7 +31,7 @@ URL:		http://www.lprng.com/
 BuildRequires:	autoconf
 BuildRequires:	automake
 BuildRequires:	gettext-devel
-BuildRequires:	heimdal-devel
+%{?with_kerberos5:BuildRequires:	heimdal-devel}
 BuildRequires:	libtool
 BuildRequires:	libwrap-devel
 BuildRequires:	openssl-devel >= 0.9.7d
@@ -188,7 +192,8 @@ rm -f po/stamp-po
 	--with-lpd_perms_path=%{_sysconfdir}/lpd.perms \
 	--with-done_jobs=0 \
 	--disable-werror \
-	--enable-kerberos \
+	%{?with_kerberos5:--enable-kerberos} \
+	%{!?with_kerberos5:--disable-kerberos} \
 	--enable-tcpwrappers \
 	--enable-ssl
 
