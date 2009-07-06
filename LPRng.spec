@@ -10,7 +10,7 @@ Summary(uk.UTF-8):	Спулер друку LPRng
 Summary(zh_CN.UTF-8):	LPRng--打印程序
 Name:		LPRng
 Version:	3.8.33
-Release:	0.1
+Release:	1
 License:	GPL v2 with OpenSSL exception or Artistic
 Group:		Applications/System
 Source0:	ftp://ftp.lprng.com/pub/LPRng/LPRng/%{name}-%{version}.tgz
