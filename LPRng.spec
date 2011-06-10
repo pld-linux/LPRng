@@ -191,6 +191,7 @@ rm -f po/stamp-po
 	--with-lpd_conf_path=%{_sysconfdir}/lpd.conf \
 	--with-lpd_perms_path=%{_sysconfdir}/lpd.perms \
 	--with-done_jobs=0 \
+	--disable-static \
 	--disable-werror \
 	%{?with_kerberos5:--enable-kerberos} \
 	%{!?with_kerberos5:--disable-kerberos} \
@@ -212,7 +213,7 @@ install %{SOURCE2} $RPM_BUILD_ROOT/etc/rc.d/init.d/lpd
 
 bzip2 -dc %{SOURCE1} | tar xf - -C $RPM_BUILD_ROOT%{_mandir}
 
-rm $RPM_BUILD_ROOT%{_libdir}/liblpr.{la,a}
+%{__rm} $RPM_BUILD_ROOT%{_libdir}/liblpr.{so,la}
 
 %find_lang %{name}
 
@@ -246,12 +247,40 @@ fi
 %attr(750,root,lp) %dir %{_sysconfdir}/lpd/ssl.crl
 %attr(750,root,lp) %dir %{_sysconfdir}/lpd/ssl.server
 %attr(754,root,root) /etc/rc.d/init.d/lpd
-%attr(755,root,root) %{_bindir}/*
-%attr(755,root,root) %{_sbindir}/*
-%attr(755,root,root) %{_libdir}/lib*.so.*.*
+%attr(755,root,root) %{_bindir}/cancel
+%attr(755,root,root) %{_bindir}/lp
+%attr(755,root,root) %{_bindir}/lpq
+%attr(755,root,root) %{_bindir}/lpr
+%attr(755,root,root) %{_bindir}/lprm
+%attr(755,root,root) %{_bindir}/lpstat
+%attr(755,root,root) %{_sbindir}/checkpc
+%attr(755,root,root) %{_sbindir}/lpc
+%attr(755,root,root) %{_sbindir}/lpd
+%attr(755,root,root) %{_sbindir}/lprng_certs
+%attr(755,root,root) %{_sbindir}/lprng_index_certs
+%attr(755,root,root) %{_libdir}/liblpr.so.*.*
+%attr(755,root,root) %ghost %{_libdir}/liblpr.so.0
 %dir %{_libdir}/lpfilters
 %attr(755,root,root) %{_libdir}/lpfilters/*
 %dir %attr(750,root,lp) %{_var}/spool/lpd
 %dir %attr(770,root,lp) %{_var}/spool/lpd/lp
-%{_mandir}/man[158]/*
+%{_mandir}/man1/cancel.1*
+%{_mandir}/man1/lp.1*
+%{_mandir}/man1/lpbanner.1*
+%{_mandir}/man1/lpf.1*
+%{_mandir}/man1/lpq.1*
+%{_mandir}/man1/lpr.1*
+%{_mandir}/man1/lprm.1*
+%{_mandir}/man1/lprng_certs.1*
+%{_mandir}/man1/lprng_index_certs.1*
+%{_mandir}/man1/lpstat.1*
+%{_mandir}/man1/monitor.1*
+%{_mandir}/man1/pclbanner.1*
+%{_mandir}/man1/psbanner.1*
+%{_mandir}/man5/lpd.conf.5*
+%{_mandir}/man5/lpd.perms.5*
+%{_mandir}/man5/printcap.5*
+%{_mandir}/man8/checkpc.8*
+%{_mandir}/man8/lpc.8*
+%{_mandir}/man8/lpd.8*
 %lang(pl) %{_mandir}/pl/man[158]/*
