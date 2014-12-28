@@ -30,7 +30,7 @@ Patch8:		%{name}-lpd.conf.patch
 URL:		http://www.lprng.com/
 BuildRequires:	autoconf
 BuildRequires:	automake
-BuildRequires:	gettext-devel
+BuildRequires:	gettext-tools
 %{?with_kerberos5:BuildRequires:	heimdal-devel}
 BuildRequires:	libtool
 BuildRequires:	libwrap-devel
