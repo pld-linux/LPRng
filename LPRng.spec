@@ -1,3 +1,4 @@
+# NOTE: a bit newer fork is hosted at lprng.sourceforge.net (latest release 3.8.C from 2012)
 #
 # Conditional build:
 %bcond_with	kerberos5	# build with kerberos5 support
@@ -10,10 +11,10 @@ Summary(uk.UTF-8):	Спулер друку LPRng
 Summary(zh_CN.UTF-8):	LPRng--打印程序
 Name:		LPRng
 Version:	3.8.35
-Release:	2
+Release:	3
 License:	GPL v2 with OpenSSL exception or Artistic
 Group:		Applications/System
-Source0:	ftp://ftp.lprng.com/pub/LPRng/LPRng/%{name}-%{version}.tgz
+Source0:	http://www.lprng.com/DISTRIB/LPRng/%{name}-%{version}.tgz
 # Source0-md5:	aaf76e4a94300352514d23bdfa66f0e7
 Source1:	http://www.mif.pg.gda.pl/homepages/ankry/man-PLD/%{name}-pl-man-pages.tar.bz2
 # Source1-md5:	4771b1c3598677a8201a9e203235dff3
@@ -27,6 +28,8 @@ Patch5:		%{name}-types.patch
 Patch6:		%{name}-shell.patch
 Patch7:		%{name}-as-needed.patch
 Patch8:		%{name}-lpd.conf.patch
+Patch9:		%{name}-format.patch
+Patch10:	%{name}-openssl1.1.patch
 URL:		http://www.lprng.com/
 BuildRequires:	autoconf
 BuildRequires:	automake
@@ -172,9 +175,11 @@ Support та аутентикацію PGP. LPRng прийнято за стан�
 %patch6 -p1
 %patch7 -p1
 %patch8 -p1
+%patch9 -p1
+%patch10 -p1
 
-mv PrintingCookbook/{HTML,PrintingCookbook}
-rm -f po/stamp-po
+%{__mv} PrintingCookbook/{HTML,PrintingCookbook}
+%{__rm} po/stamp-po
 
 %build
 %{__autoconf}
