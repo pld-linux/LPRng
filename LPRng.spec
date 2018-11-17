@@ -11,7 +11,7 @@ Summary(uk.UTF-8):	Спулер друку LPRng
 Summary(zh_CN.UTF-8):	LPRng--打印程序
 Name:		LPRng
 Version:	3.8.35
-Release:	3
+Release:	4
 License:	GPL v2 with OpenSSL exception or Artistic
 Group:		Applications/System
 Source0:	http://www.lprng.com/DISTRIB/LPRng/%{name}-%{version}.tgz
@@ -42,11 +42,13 @@ BuildRequires:	rpmbuild(macros) >= 1.315
 Requires(post):	/sbin/ldconfig
 Requires(post,preun):	/sbin/chkconfig
 Requires:	rc-scripts >= 0.2.0
-Obsoletes:	printingclient
-Obsoletes:	printingdaemon
 Provides:	printingclient
 Provides:	printingdaemon
+Obsoletes:	printingclient
+Obsoletes:	printingdaemon
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
+
+%define		lpfiltersdir	%{_libexecdir}/lpfilters
 
 %description
 The LPRng software is an enhanced, extended, and portable
@@ -191,7 +193,7 @@ Support та аутентикацію PGP. LPRng прийнято за стан�
 	--enable-shared \
 	--with-userid=lp \
 	--with-groupid=lp \
-	--with-filterdir=%{_libdir}/lpfilters \
+	--with-filterdir=%{lpfiltersdir} \
 	--with-lockfile=%{_var}/spool/lpd/lpd \
 	--with-lpd_conf_path=%{_sysconfdir}/lpd.conf \
 	--with-lpd_perms_path=%{_sysconfdir}/lpd.perms \
@@ -265,8 +267,11 @@ fi
 %attr(755,root,root) %{_sbindir}/lprng_index_certs
 %attr(755,root,root) %{_libdir}/liblpr.so.*.*
 %attr(755,root,root) %ghost %{_libdir}/liblpr.so.0
-%dir %{_libdir}/lpfilters
-%attr(755,root,root) %{_libdir}/lpfilters/*
+%dir %{lpfiltersdir}
+%attr(755,root,root) %{lpfiltersdir}/lpbanner
+%attr(755,root,root) %{lpfiltersdir}/lpf
+%attr(755,root,root) %{lpfiltersdir}/pclbanner
+%attr(755,root,root) %{lpfiltersdir}/psbanner
 %dir %attr(750,root,lp) %{_var}/spool/lpd
 %dir %attr(770,root,lp) %{_var}/spool/lpd/lp
 %{_mandir}/man1/cancel.1*
