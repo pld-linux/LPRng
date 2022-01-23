@@ -1,6 +1,143 @@
---- LPRng-3.8.26/src/common/lpstat.c.orig	2004-02-24 20:37:34.000000000 +0100
-+++ LPRng-3.8.26/src/common/lpstat.c	2004-03-07 20:15:44.259399920 +0100
-@@ -113,7 +113,7 @@
+diff -urNp -x '*.orig' LPRng-3.8.35.org/po/POTFILES.in LPRng-3.8.35/po/POTFILES.in
+--- LPRng-3.8.35.org/po/POTFILES.in	2003-09-04 22:47:02.000000000 +0200
++++ LPRng-3.8.35/po/POTFILES.in	2022-01-23 17:50:18.677027807 +0100
+@@ -1,5 +1,7 @@
+ src/common/accounting.c
+ src/common/controlword.c
++src/common/debug.c
++src/common/getopt.c
+ src/common/linelist.c
+ src/common/lpc.c
+ src/common/lpd.c
+@@ -12,6 +14,7 @@ src/common/lpd_status.c
+ src/common/lpq.c
+ src/common/lpr.c
+ src/common/lprm.c
++src/common/lpstat.c
+ src/common/sendjob.c
+ src/common/sendmail.c
+ src/common/sendreq.c
+diff -urNp -x '*.orig' LPRng-3.8.35.org/src/common/debug.c LPRng-3.8.35/src/common/debug.c
+--- LPRng-3.8.35.org/src/common/debug.c	2005-04-14 22:05:18.000000000 +0200
++++ LPRng-3.8.35/src/common/debug.c	2022-01-23 17:50:18.680361191 +0100
+@@ -89,22 +89,22 @@
+ */
+ 
+ 	static char *guide[] = {
+-	" use on command line, or in printcap :db=... entry", 
+-	" for server:",
+-	"   print:     show queue (printing) actions, larger number, more information",
+-	"     NUMBER     same as print+NUMBER",
+-	"   lpr:       show servicing lpr actions",
+-	"   lpq:       show servicing lpq actions",
+-	"   lprm:      show servicing lprm actions",
+-	"   network:   show low level network actions",
+-	"   database:  show low level database actions",
+-	"   log:       Testing.  Don't use this unless you read the code.",
+-	"   test:      Testing.  don't use this unless you read the code.",
+-	" for clients (lpr, lpq, etc):",
+-	"   print:     show client actions, larger number, more information",
+-	"     NUMBER     same as print+NUMBER",
+-	"   network:   show low level network actions.",
+-	"   database:  show low level database actions.",
++	N_(" use on command line, or in printcap :db=... entry"), 
++	N_(" for server:"),
++	N_("   print:     show queue (printing) actions, larger number, more information"),
++	N_("     NUMBER     same as print+NUMBER"),
++	N_("   lpr:       show servicing lpr actions"),
++	N_("   lpq:       show servicing lpq actions"),
++	N_("   lprm:      show servicing lprm actions"),
++	N_("   network:   show low level network actions"),
++	N_("   database:  show low level database actions"),
++	N_("   log:       Testing.  Don't use this unless you read the code."),
++	N_("   test:      Testing.  don't use this unless you read the code."),
++	N_(" for clients (lpr, lpq, etc):"),
++	N_("   print:     show client actions, larger number, more information"),
++	N_("     NUMBER     same as print+NUMBER"),
++	N_("   network:   show low level network actions."),
++	N_("   database:  show low level database actions."),
+ 		0
+ 	};
+ void Parse_debug (char *dbgstr, int interactive )
+@@ -157,8 +157,8 @@ void Parse_debug (char *dbgstr, int inte
+ 		if(!found && interactive ){
+ 		    int i;
+ 		    int lastflag = 0;
+-		    FPRINTF (STDERR, "debug flag format: num | flag[+num] | flag=str\n");
+-		    FPRINTF (STDERR, "  flag names:");
++		    FPRINTF (STDERR, _("debug flag format: num | flag[+num] | flag=str\n"));
++		    FPRINTF (STDERR, _("  flag names:"));
+ 		    for (i = 0; list[i].keyword; i++) {
+ 				if( safestrchr( list[i].keyword, '+' ) ) continue;
+ 				if( lastflag ){
+@@ -169,10 +169,10 @@ void Parse_debug (char *dbgstr, int inte
+ 				}
+ 				switch( list[i].type ){
+ 				case INTEGER_K:
+-					FPRINTF (STDERR, "%s=num", list[i].keyword);
++					FPRINTF (STDERR, _("%s=num"), list[i].keyword);
+ 					break;
+ 				case STRING_K:
+-					FPRINTF (STDERR, "%s=str", list[i].keyword);
++					FPRINTF (STDERR, _("%s=str"), list[i].keyword);
+ 					break;
+ 				case FLAG_K:
+ 					FPRINTF (STDERR, "%s[+N]", list[i].keyword );
+@@ -184,7 +184,7 @@ void Parse_debug (char *dbgstr, int inte
+ 			}
+ 		    FPRINTF (STDERR, "\n");
+ 		    for(i = 0; guide[i]; ++i ){
+-				FPRINTF (STDERR, "%s\n", guide[i]);
++				FPRINTF (STDERR, "%s\n", _(guide[i]));
+ 		    }
+ 
+ 			Errorcode = JABORT;
+diff -urNp -x '*.orig' LPRng-3.8.35.org/src/common/getopt.c LPRng-3.8.35/src/common/getopt.c
+--- LPRng-3.8.35.org/src/common/getopt.c	2005-04-14 22:05:18.000000000 +0200
++++ LPRng-3.8.35/src/common/getopt.c	2022-01-23 17:50:18.677027807 +0100
+@@ -89,7 +89,7 @@ int Getopt (int argc, char *argv[], char
+ 	if (option == '-') {
+ 		if( *next_opt ){
+ 			if( Opterr ){
+-				(void) FPRINTF (STDERR, "--X option form illegal\n" );
++				(void) FPRINTF (STDERR, _("--X option form illegal\n") );
+ 				return('?');
+ 			}
+ 		}
+@@ -100,7 +100,7 @@ int Getopt (int argc, char *argv[], char
+ 	 */
+ 	if ((match = (char *) safestrchr (optstring, option)) == 0 ){
+ 		if( Opterr ){
+-		    (void) FPRINTF (STDERR, "%s: Illegal option '%c'\n", Name, option);
++		    (void) FPRINTF (STDERR, _("%s: Illegal option '%c'\n"), Name, option);
+ 		}
+ 		return( '?' );
+ 	}
+@@ -122,7 +122,7 @@ int Getopt (int argc, char *argv[], char
+ 		}
+ 		if( Optarg == 0 && Opterr ) {
+ 			(void) FPRINTF (STDERR,
+-				"%s: missing argument for '%c'\n", Name, option);
++				_("%s: missing argument for '%c'\n"), Name, option);
+ 			option = '?';
+ 		}
+ 		next_opt = 0;
+diff -urNp -x '*.orig' LPRng-3.8.35.org/src/common/lpd_status.c LPRng-3.8.35/src/common/lpd_status.c
+--- LPRng-3.8.35.org/src/common/lpd_status.c	2022-01-23 17:50:18.410357100 +0100
++++ LPRng-3.8.35/src/common/lpd_status.c	2022-01-23 17:50:18.680361191 +0100
+@@ -467,7 +467,7 @@ void Get_queue_status( struct line_list
+ 	end_of_name = 0;
+ 	if( displayformat != REQ_DSHORT ){
+ 		SNPRINTF( header, sizeof(header)) "%s: ",
+-			Server_queue_name_DYN?"Server Printer":"Printer" );
++			Server_queue_name_DYN?_("Server Printer"):_("Printer") );
+ 	}
+ 	len = safestrlen(header);
+ 	SNPRINTF( header+len, sizeof(header)-len) "%s@%s",
+diff -urNp -x '*.orig' LPRng-3.8.35.org/src/common/lpstat.c LPRng-3.8.35/src/common/lpstat.c
+--- LPRng-3.8.35.org/src/common/lpstat.c	2005-04-14 22:05:19.000000000 +0200
++++ LPRng-3.8.35/src/common/lpstat.c	2022-01-23 17:50:18.677027807 +0100
+@@ -114,7 +114,7 @@ int main(int argc, char *argv[], char *e
  	Setup_configuration();
  	Get_parms(argc, argv );      /* scan input args */
  	if( A_flag && !getenv( "AUTH" ) ){
@@ -9,7 +146,7 @@
  		usage();
  	}
  
-@@ -161,14 +161,14 @@
+@@ -162,14 +162,14 @@ int main(int argc, char *argv[], char *e
  	if(DEBUGL1)Dump_line_list("lpstat - options", &options);
  
  	if( r_flag ){
@@ -27,7 +164,7 @@
  			Write_fd_str(1,msg);
  		}
  	}
-@@ -176,7 +176,7 @@
+@@ -177,7 +177,7 @@ int main(int argc, char *argv[], char *e
  		for( i = 0; i < request_list.count; ++i ){
  			Set_DYN(&Printer_DYN,request_list.list[i] );
  			Fix_Rm_Rp_info(0,0);
@@ -36,7 +173,7 @@
  			Write_fd_str(1,msg);
  		}
  	}
-@@ -220,7 +220,7 @@
+@@ -221,7 +221,7 @@ void Show_status(char **argv, int displa
  
  	if( Check_for_rg_group( Logname_DYN ) ){
  		SNPRINTF( msg, sizeof(msg))
@@ -45,7 +182,7 @@
  		if(  Write_fd_str( 1, msg ) < 0 ) cleanup(0);
  		return;
  	}
-@@ -358,25 +358,25 @@
+@@ -359,25 +359,25 @@ int Read_status_info( char *host, int so
  					if( a_flag ){
  						if( !nospool ){
  							SNPRINTF(msg,sizeof(msg))
@@ -75,7 +212,7 @@
  									RemotePrinter_DYN, RemoteHost_DYN ); 
  						if( Write_fd_str( output, msg ) < 0 ) return(1);
  					}
-@@ -584,30 +584,30 @@
+@@ -585,30 +585,30 @@ void Get_parms(int argc, char *argv[] )
  }
  
   static char *lpstat_msg[] = {
@@ -130,144 +267,12 @@
  	0 };
  
  
-@@ -615,7 +615,7 @@
+@@ -616,7 +616,7 @@ void usage(void)
  {
  	char **sptr, *s;
  	for( sptr= lpstat_msg; (s = *sptr); ++sptr ){
 -			FPRINTF( STDERR, s, Name );
 +			FPRINTF( STDERR, _(s), Name );
  	}
- 	Parse_debug("=",-1);
- 	FPRINTF( STDOUT, "%s\n", Version );
---- LPRng-3.8.15/src/common/getopt.c.orig	Mon Aug 12 02:01:44 2002
-+++ LPRng-3.8.15/src/common/getopt.c	Fri Dec 27 17:02:40 2002
-@@ -89,7 +89,7 @@
- 	if (option == '-') {
- 		if( *next_opt ){
- 			if( Opterr ){
--				(void) FPRINTF (STDERR, "--X option form illegal\n" );
-+				(void) FPRINTF (STDERR, _("--X option form illegal\n") );
- 				return('?');
- 			}
- 		}
-@@ -100,7 +100,7 @@
- 	 */
- 	if ((match = (char *) safestrchr (optstring, option)) == 0 ){
- 		if( Opterr ){
--		    (void) FPRINTF (STDERR, "%s: Illegal option '%c'\n", Name, option);
-+		    (void) FPRINTF (STDERR, _("%s: Illegal option '%c'\n"), Name, option);
- 		}
- 		return( '?' );
- 	}
-@@ -122,7 +122,7 @@
- 		}
- 		if( Optarg == 0 && Opterr ) {
- 			(void) FPRINTF (STDERR,
--				"%s: missing argument for '%c'\n", Name, option);
-+				_("%s: missing argument for '%c'\n"), Name, option);
- 			option = '?';
- 		}
- 		next_opt = 0;
---- LPRng-3.8.15/po/POTFILES.in.orig	Wed Aug 22 01:19:53 2001
-+++ LPRng-3.8.15/po/POTFILES.in	Fri Dec 27 17:11:07 2002
-@@ -1,5 +1,7 @@
- src/common/accounting.c
- src/common/controlword.c
-+src/common/debug.c
-+src/common/getopt.c
- src/common/linelist.c
- src/common/lpc.c
- src/common/lpd.c
-@@ -12,6 +14,7 @@
- src/common/lpq.c
- src/common/lpr.c
- src/common/lprm.c
-+src/common/lpstat.c
- src/common/sendjob.c
- src/common/sendmail.c
- src/common/sendreq.c
---- LPRng-3.8.22/src/common/lpd_status.c.orig	2003-11-13 21:32:25.000000000 +0100
-+++ LPRng-3.8.22/src/common/lpd_status.c	2003-11-13 21:41:55.840610760 +0100
-@@ -467,7 +467,7 @@
- 	end_of_name = 0;
- 	if( displayformat != REQ_DSHORT ){
- 		SNPRINTF( header, sizeof(header)) "%s: ",
--			Server_queue_name_DYN?"Server Printer":"Printer" );
-+			Server_queue_name_DYN?_("Server Printer"):_("Printer") );
- 	}
- 	len = safestrlen(header);
- 	SNPRINTF( header+len, sizeof(header)-len) "%s@%s",
---- LPRng-3.8.27/src/common/debug.c.orig	2004-05-03 22:24:01.000000000 +0200
-+++ LPRng-3.8.27/src/common/debug.c	2004-05-16 10:08:08.829446800 +0200
-@@ -89,22 +89,22 @@
- */
- 
- 	static char *guide[] = {
--	" use on command line, or in printcap :db=... entry", 
--	" for server:",
--	"   print:     show queue (printing) actions, larger number, more information",
--	"     NUMBER     same as print+NUMBER",
--	"   lpr:       show servicing lpr actions",
--	"   lpq:       show servicing lpq actions",
--	"   lprm:      show servicing lprm actions",
--	"   network:   show low level network actions",
--	"   database:  show low level database actions",
--	"   log:       Testing.  Don't use this unless you read the code.",
--	"   test:      Testing.  don't use this unless you read the code.",
--	" for clients (lpr, lpq, etc):",
--	"   print:     show client actions, larger number, more information",
--	"     NUMBER     same as print+NUMBER",
--	"   network:   show low level network actions.",
--	"   database:  show low level database actions.",
-+	N_(" use on command line, or in printcap :db=... entry"), 
-+	N_(" for server:"),
-+	N_("   print:     show queue (printing) actions, larger number, more information"),
-+	N_("     NUMBER     same as print+NUMBER"),
-+	N_("   lpr:       show servicing lpr actions"),
-+	N_("   lpq:       show servicing lpq actions"),
-+	N_("   lprm:      show servicing lprm actions"),
-+	N_("   network:   show low level network actions"),
-+	N_("   database:  show low level database actions"),
-+	N_("   log:       Testing.  Don't use this unless you read the code."),
-+	N_("   test:      Testing.  don't use this unless you read the code."),
-+	N_(" for clients (lpr, lpq, etc):"),
-+	N_("   print:     show client actions, larger number, more information"),
-+	N_("     NUMBER     same as print+NUMBER"),
-+	N_("   network:   show low level network actions."),
-+	N_("   database:  show low level database actions."),
- 		0
- 	};
- void Parse_debug (char *dbgstr, int interactive )
-@@ -157,8 +157,8 @@
- 		if(!found && interactive ){
- 		    int i;
- 		    int lastflag = 0;
--		    FPRINTF (STDERR, "debug flag format: num | flag[+num] | flag=str\n");
--		    FPRINTF (STDERR, "  flag names:");
-+		    FPRINTF (STDERR, _("debug flag format: num | flag[+num] | flag=str\n"));
-+		    FPRINTF (STDERR, _("  flag names:"));
- 		    for (i = 0; list[i].keyword; i++) {
- 				if( safestrchr( list[i].keyword, '+' ) ) continue;
- 				if( lastflag ){
-@@ -169,10 +169,10 @@
- 				}
- 				switch( list[i].type ){
- 				case INTEGER_K:
--					FPRINTF (STDERR, "%s=num", list[i].keyword);
-+					FPRINTF (STDERR, _("%s=num"), list[i].keyword);
- 					break;
- 				case STRING_K:
--					FPRINTF (STDERR, "%s=str", list[i].keyword);
-+					FPRINTF (STDERR, _("%s=str"), list[i].keyword);
- 					break;
- 				case FLAG_K:
- 					FPRINTF (STDERR, "%s[+N]", list[i].keyword );
-@@ -184,7 +184,7 @@
- 			}
- 		    FPRINTF (STDERR, "\n");
- 		    for(i = 0; guide[i]; ++i ){
--				FPRINTF (STDERR, "%s\n", guide[i]);
-+				FPRINTF (STDERR, "%s\n", _(guide[i]));
- 		    }
- 
- 			Errorcode = JABORT;
+ 	{
+ 	char buffer[128];

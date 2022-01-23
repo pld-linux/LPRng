@@ -1,8 +1,9 @@
---- LPRng-3.8.22/configure.in.orig	2003-09-05 22:07:14.000000000 +0200
-+++ LPRng-3.8.22/configure.in	2003-11-13 08:01:15.384297944 +0100
-@@ -27,38 +27,18 @@
- WITH_LOCALEDIR dnl
- export LOCALEDIR
+diff -urNp -x '*.orig' LPRng-3.8.35.org/configure.in LPRng-3.8.35/configure.in
+--- LPRng-3.8.35.org/configure.in	2010-11-27 00:49:13.000000000 +0100
++++ LPRng-3.8.35/configure.in	2022-01-23 17:50:16.847000094 +0100
+@@ -27,38 +27,18 @@ dnl fi;
+ dnl WITH_LOCALEDIR
+ dnl export LOCALEDIR
  
 -WITH_CCOPTS dnl
 -WITH_CPPOPTS dnl
@@ -46,7 +47,7 @@
  AC_DEFINE_UNQUOTED(PGP_PATH, "$PGP_PATH",[pgp path])
  
  
-@@ -448,22 +428,8 @@
+@@ -499,22 +479,8 @@ fi
  )
  AC_MSG_RESULT($v)
  
@@ -71,7 +72,7 @@
  AC_SUBST(STRIP_OPTION)
  
  dnl ----------------------------------------------------------------------------
-@@ -1829,8 +1795,8 @@
+@@ -1908,8 +1874,8 @@ dnl ----------------- START OF OUTPUT --
  
  
  if test "$ac_cv_prog_gcc" = yes; then
