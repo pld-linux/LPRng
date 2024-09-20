@@ -1,4 +1,3 @@
-# NOTE: a bit newer fork is hosted at lprng.sourceforge.net (latest release 3.8.C from 2012)
 #
 # Conditional build:
 %bcond_with	kerberos5	# build with kerberos5 support
@@ -10,27 +9,27 @@ Summary(ru.UTF-8):	Спулер печати LPRng
 Summary(uk.UTF-8):	Спулер друку LPRng
 Summary(zh_CN.UTF-8):	LPRng--打印程序
 Name:		LPRng
-Version:	3.8.35
-Release:	5
+Version:	3.9.0
+Release:	1
 License:	GPL v2 with OpenSSL exception or Artistic
 Group:		Applications/System
-Source0:	http://www.lprng.com/DISTRIB/LPRng/%{name}-%{version}.tgz
-# Source0-md5:	aaf76e4a94300352514d23bdfa66f0e7
+# lprng.com seems dead now (2024)
+#Source0:	http://www.lprng.com/DISTRIB/LPRng/%{name}-%{version}.tgz
+Source0:	https://downloads.sourceforge.net/lprng/lprng-%{version}.tar.gz
+# Source0-md5:	10f4ec823df0e021404284037138aa8a
 Source1:	http://www.mif.pg.gda.pl/homepages/ankry/man-PLD/%{name}-pl-man-pages.tar.bz2
 # Source1-md5:	4771b1c3598677a8201a9e203235dff3
 Source2:	%{name}.init
 Patch0:		%{name}-ac_fixes.patch
 Patch1:		%{name}-lpd-perms.patch
-Patch2:		%{name}-ngettext.patch
+Patch2:		%{name}-libwrap.patch
 Patch3:		%{name}-missing-nls.patch
 Patch4:		%{name}-pl.po.patch
 Patch5:		%{name}-types.patch
-Patch6:		%{name}-shell.patch
-Patch7:		%{name}-as-needed.patch
 Patch8:		%{name}-lpd.conf.patch
-Patch9:		%{name}-format.patch
 Patch10:	%{name}-openssl1.1.patch
-URL:		http://www.lprng.com/
+#URL:		http://www.lprng.com/
+URL:		https://lprng.sourceforge.net/
 BuildRequires:	autoconf
 BuildRequires:	automake
 BuildRequires:	gettext-tools
@@ -167,20 +166,16 @@ Support та аутентикацію PGP. LPRng прийнято за стан�
 підтримка аутентикації може бути додана без особливих зусиль.
 
 %prep
-%setup -q
+%setup -q -n lprng-%{version}
 %patch0 -p1
 %patch1 -p1
 %patch2 -p1
 %patch3 -p1
 %patch4 -p1
 %patch5 -p1
-%patch6 -p1
-%patch7 -p1
 %patch8 -p1
-%patch9 -p1
 %patch10 -p1
 
-%{__mv} PrintingCookbook/{HTML,PrintingCookbook}
 %{__rm} po/stamp-po
 
 %build
@@ -189,21 +184,19 @@ Support та аутентикацію PGP. LPRng прийнято за стан�
 %configure \
 	OPENSSL=/usr/bin/openssl \
 	PSHOWALL="ax" \
-	--disable-setuid \
-	--enable-shared \
+	--enable-kerberos%{!?with_kerberos5:=no} \
+	--enable-nls \
+	--enable-ssl \
+	--disable-static \
+	--enable-tcpwrappers \
+	--disable-werror \
 	--with-userid=lp \
 	--with-groupid=lp \
 	--with-filterdir=%{lpfiltersdir} \
 	--with-lockfile=%{_var}/spool/lpd/lpd \
 	--with-lpd_conf_path=%{_sysconfdir}/lpd.conf \
 	--with-lpd_perms_path=%{_sysconfdir}/lpd.perms \
-	--with-done_jobs=0 \
-	--disable-static \
-	--disable-werror \
-	%{?with_kerberos5:--enable-kerberos} \
-	%{!?with_kerberos5:--disable-kerberos} \
-	--enable-tcpwrappers \
-	--enable-ssl
+	--with-done_jobs=0
 
 %{__make} -j1
 
@@ -214,13 +207,13 @@ install -d $RPM_BUILD_ROOT{/etc/rc.d/init.d,%{_var}/spool/lpd/lp} \
 
 %{__make} -j1 install \
 	DESTDIR=$RPM_BUILD_ROOT \
-	POSTINSTALL="NO"
+	POSTINSTALL="NO" \
+	SAMPLESUFFIX=
 
 install %{SOURCE2} $RPM_BUILD_ROOT/etc/rc.d/init.d/lpd
 
 bzip2 -dc %{SOURCE1} | tar xf - -C $RPM_BUILD_ROOT%{_mandir}
-
-%{__rm} $RPM_BUILD_ROOT%{_libdir}/liblpr.{so,la}
+%{__rm} $RPM_BUILD_ROOT%{_mandir}/pl/man1/monitor.1
 
 %find_lang %{name}
 
@@ -242,9 +235,7 @@ fi
 
 %files -f %{name}.lang
 %defattr(644,root,root,755)
-%doc CHANGES CONTRIBUTORS COPYRIGHT README README.SSL* TODO
-%doc DOCS/LPRng-Reference.{html,pdf} DOCS/*.jpg DOCS/*.png
-%doc PrintingCookbook/PrintingCookbook PrintingCookbook/PDF/*.pdf
+%doc CHANGES CONTRIBUTORS COPYRIGHT ChangeLog LICENSE NEWS README README.SSL.SECURITY TODO
 %config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/lpd.conf
 %config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/lpd.perms
 %config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/printcap
@@ -265,8 +256,6 @@ fi
 %attr(755,root,root) %{_sbindir}/lpd
 %attr(755,root,root) %{_sbindir}/lprng_certs
 %attr(755,root,root) %{_sbindir}/lprng_index_certs
-%attr(755,root,root) %{_libdir}/liblpr.so.*.*
-%attr(755,root,root) %ghost %{_libdir}/liblpr.so.0
 %dir %{lpfiltersdir}
 %attr(755,root,root) %{lpfiltersdir}/lpbanner
 %attr(755,root,root) %{lpfiltersdir}/lpf
@@ -284,7 +273,6 @@ fi
 %{_mandir}/man1/lprng_certs.1*
 %{_mandir}/man1/lprng_index_certs.1*
 %{_mandir}/man1/lpstat.1*
-%{_mandir}/man1/monitor.1*
 %{_mandir}/man1/pclbanner.1*
 %{_mandir}/man1/psbanner.1*
 %{_mandir}/man5/lpd.conf.5*
@@ -293,4 +281,13 @@ fi
 %{_mandir}/man8/checkpc.8*
 %{_mandir}/man8/lpc.8*
 %{_mandir}/man8/lpd.8*
-%lang(pl) %{_mandir}/pl/man[158]/*
+%lang(pl) %{_mandir}/pl/man1/cancel.1*
+%lang(pl) %{_mandir}/pl/man1/lp.1*
+%lang(pl) %{_mandir}/pl/man1/lpbanner.1*
+%lang(pl) %{_mandir}/pl/man1/lpf.1*
+%lang(pl) %{_mandir}/pl/man1/lpq.1*
+%lang(pl) %{_mandir}/pl/man1/lpr.1*
+%lang(pl) %{_mandir}/pl/man1/lprm.1*
+%lang(pl) %{_mandir}/pl/man1/lpstat.1*
+%lang(pl) %{_mandir}/pl/man1/pclbanner.1*
+%lang(pl) %{_mandir}/pl/man1/psbanner.1*

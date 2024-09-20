@@ -1,11 +1,11 @@
---- a/configure.in.orig	2018-11-14 20:57:29.911047886 +0100
-+++ b/configure.in	2018-11-14 21:11:48.224371420 +0100
-@@ -1589,7 +1589,7 @@
- 		save_LDFLAGS=$LDFLAGS
- 		LIBS="-lssl -lcrypto $LIBS"
- 		LDFLAGS="$LDFLAGS -L$dir "
--		AC_TRY_LINK_FUNC(SSL_load_error_strings,ac_linked_libssl="true",
-+		AC_TRY_LINK_FUNC(OPENSSL_init_ssl,ac_linked_libssl="true",
- 			ac_linked_libssl="false");
- 		AC_TRY_LINK_FUNC(RC4_set_key,ac_linked_libcrypto="true",
- 			ac_linked_libcrypto="false");
+--- lprng-3.9.0/configure.ac.orig	2024-09-20 19:35:58.371780348 +0200
++++ lprng-3.9.0/configure.ac	2024-09-20 19:36:00.945099740 +0200
+@@ -948,7 +948,7 @@ if test "$SSL_ENABLE" != ""; then
+ 	AC_CHECK_LIB([crypto], [RC4_set_key], [true], [SSL_ENABLE=""])
+ fi
+ if test "$SSL_ENABLE" != ""; then
+-	AC_CHECK_LIB([ssl], [SSL_load_error_strings], [true], [SSL_ENABLE=""], [-lcrypto])
++	AC_CHECK_LIB([ssl], [OPENSSL_init_ssl], [true], [SSL_ENABLE=""], [-lcrypto])
+ fi
+ if test "$SSL_ENABLE" != ""; then
+ 	SSL_LDADD="-lssl -lcrypto"

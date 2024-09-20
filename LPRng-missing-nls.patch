@@ -1,29 +1,20 @@
-diff -urNp -x '*.orig' LPRng-3.8.35.org/po/POTFILES.in LPRng-3.8.35/po/POTFILES.in
---- LPRng-3.8.35.org/po/POTFILES.in	2003-09-04 22:47:02.000000000 +0200
-+++ LPRng-3.8.35/po/POTFILES.in	2022-01-23 17:50:18.677027807 +0100
-@@ -1,5 +1,7 @@
- src/common/accounting.c
- src/common/controlword.c
-+src/common/debug.c
-+src/common/getopt.c
- src/common/linelist.c
- src/common/lpc.c
- src/common/lpd.c
-@@ -12,6 +14,7 @@ src/common/lpd_status.c
- src/common/lpq.c
- src/common/lpr.c
- src/common/lprm.c
-+src/common/lpstat.c
- src/common/sendjob.c
- src/common/sendmail.c
- src/common/sendreq.c
-diff -urNp -x '*.orig' LPRng-3.8.35.org/src/common/debug.c LPRng-3.8.35/src/common/debug.c
---- LPRng-3.8.35.org/src/common/debug.c	2005-04-14 22:05:18.000000000 +0200
-+++ LPRng-3.8.35/src/common/debug.c	2022-01-23 17:50:18.680361191 +0100
-@@ -89,22 +89,22 @@
+--- lprng-3.9.0/po/Makefile.am.orig	2023-03-17 22:26:01.000000000 +0100
++++ lprng-3.9.0/po/Makefile.am	2024-09-20 19:01:18.979712048 +0200
+@@ -17,6 +17,8 @@ LINGUAS = de fr pl vi
+ POTFILES.in = \
+ 	src/common/accounting.c\
+ 	src/common/controlword.c\
++	src/common/debug.c
++	src/common/getopt.c
+ 	src/common/linelist.c\
+ 	src/common/lpc.c\
+ 	src/common/lpd.c\
+--- lprng-3.9.0/src/common/debug.c.orig	2023-03-17 22:26:01.000000000 +0100
++++ lprng-3.9.0/src/common/debug.c	2024-09-20 19:00:11.820075883 +0200
+@@ -85,22 +85,22 @@
  */
  
- 	static char *guide[] = {
+ 	static const char *guide[] = {
 -	" use on command line, or in printcap :db=... entry", 
 -	" for server:",
 -	"   print:     show queue (printing) actions, larger number, more information",
@@ -58,8 +49,8 @@ diff -urNp -x '*.orig' LPRng-3.8.35.org/src/common/debug.c LPRng-3.8.35/src/comm
 +	N_("   database:  show low level database actions."),
  		0
  	};
- void Parse_debug (char *dbgstr, int interactive )
-@@ -157,8 +157,8 @@ void Parse_debug (char *dbgstr, int inte
+ void Parse_debug (const char *dbgstr, int interactive )
+@@ -154,8 +154,8 @@ void Parse_debug (const char *dbgstr, in
  		if(!found && interactive ){
  		    int i;
  		    int lastflag = 0;
@@ -70,7 +61,7 @@ diff -urNp -x '*.orig' LPRng-3.8.35.org/src/common/debug.c LPRng-3.8.35/src/comm
  		    for (i = 0; list[i].keyword; i++) {
  				if( safestrchr( list[i].keyword, '+' ) ) continue;
  				if( lastflag ){
-@@ -169,10 +169,10 @@ void Parse_debug (char *dbgstr, int inte
+@@ -166,10 +166,10 @@ void Parse_debug (const char *dbgstr, in
  				}
  				switch( list[i].type ){
  				case INTEGER_K:
@@ -83,7 +74,7 @@ diff -urNp -x '*.orig' LPRng-3.8.35.org/src/common/debug.c LPRng-3.8.35/src/comm
  					break;
  				case FLAG_K:
  					FPRINTF (STDERR, "%s[+N]", list[i].keyword );
-@@ -184,7 +184,7 @@ void Parse_debug (char *dbgstr, int inte
+@@ -181,7 +181,7 @@ void Parse_debug (const char *dbgstr, in
  			}
  		    FPRINTF (STDERR, "\n");
  		    for(i = 0; guide[i]; ++i ){
@@ -92,187 +83,39 @@ diff -urNp -x '*.orig' LPRng-3.8.35.org/src/common/debug.c LPRng-3.8.35/src/comm
  		    }
  
  			Errorcode = JABORT;
-diff -urNp -x '*.orig' LPRng-3.8.35.org/src/common/getopt.c LPRng-3.8.35/src/common/getopt.c
---- LPRng-3.8.35.org/src/common/getopt.c	2005-04-14 22:05:18.000000000 +0200
-+++ LPRng-3.8.35/src/common/getopt.c	2022-01-23 17:50:18.677027807 +0100
-@@ -89,7 +89,7 @@ int Getopt (int argc, char *argv[], char
- 	if (option == '-') {
- 		if( *next_opt ){
- 			if( Opterr ){
--				(void) FPRINTF (STDERR, "--X option form illegal\n" );
-+				(void) FPRINTF (STDERR, _("--X option form illegal\n") );
- 				return('?');
- 			}
- 		}
-@@ -100,7 +100,7 @@ int Getopt (int argc, char *argv[], char
- 	 */
- 	if ((match = (char *) safestrchr (optstring, option)) == 0 ){
- 		if( Opterr ){
--		    (void) FPRINTF (STDERR, "%s: Illegal option '%c'\n", Name, option);
-+		    (void) FPRINTF (STDERR, _("%s: Illegal option '%c'\n"), Name, option);
- 		}
- 		return( '?' );
- 	}
-@@ -122,7 +122,7 @@ int Getopt (int argc, char *argv[], char
- 		}
- 		if( Optarg == 0 && Opterr ) {
- 			(void) FPRINTF (STDERR,
--				"%s: missing argument for '%c'\n", Name, option);
-+				_("%s: missing argument for '%c'\n"), Name, option);
- 			option = '?';
- 		}
- 		next_opt = 0;
-diff -urNp -x '*.orig' LPRng-3.8.35.org/src/common/lpd_status.c LPRng-3.8.35/src/common/lpd_status.c
---- LPRng-3.8.35.org/src/common/lpd_status.c	2022-01-23 17:50:18.410357100 +0100
-+++ LPRng-3.8.35/src/common/lpd_status.c	2022-01-23 17:50:18.680361191 +0100
-@@ -467,7 +467,7 @@ void Get_queue_status( struct line_list
+--- lprng-3.9.0/src/common/lpd_status.c.orig	2024-09-20 18:57:43.264214013 +0200
++++ lprng-3.9.0/src/common/lpd_status.c	2024-09-20 19:03:12.309098090 +0200
+@@ -466,7 +466,7 @@ void Get_queue_status( struct line_list
  	end_of_name = 0;
  	if( displayformat != REQ_DSHORT ){
- 		SNPRINTF( header, sizeof(header)) "%s: ",
+ 		plp_snprintf( header, sizeof(header), "%s: ",
 -			Server_queue_name_DYN?"Server Printer":"Printer" );
 +			Server_queue_name_DYN?_("Server Printer"):_("Printer") );
  	}
- 	len = safestrlen(header);
- 	SNPRINTF( header+len, sizeof(header)-len) "%s@%s",
-diff -urNp -x '*.orig' LPRng-3.8.35.org/src/common/lpstat.c LPRng-3.8.35/src/common/lpstat.c
---- LPRng-3.8.35.org/src/common/lpstat.c	2005-04-14 22:05:19.000000000 +0200
-+++ LPRng-3.8.35/src/common/lpstat.c	2022-01-23 17:50:18.677027807 +0100
-@@ -114,7 +114,7 @@ int main(int argc, char *argv[], char *e
- 	Setup_configuration();
- 	Get_parms(argc, argv );      /* scan input args */
- 	if( A_flag && !getenv( "AUTH" ) ){
--		FPRINTF(STDERR,"lpstat: requested authenticated transfer (-A) and AUTH environment variable not set");
-+		FPRINTF(STDERR,_("lpstat: requested authenticated transfer (-A) and AUTH environment variable not set"));
- 		usage();
- 	}
- 
-@@ -162,14 +162,14 @@ int main(int argc, char *argv[], char *e
- 	if(DEBUGL1)Dump_line_list("lpstat - options", &options);
- 
- 	if( r_flag ){
--		Write_fd_str(1,"scheduler is running\n");
-+		Write_fd_str(1,_("scheduler is running\n"));
- 	}
- 	if( d_flag ){
- 		if( Printer_DYN == 0 ){
--			Write_fd_str(1,"no system default destination\n");
-+			Write_fd_str(1,_("no system default destination\n"));
- 		} else {
- 			SNPRINTF(msg,sizeof(msg))
--				"system default destination: %s\n", Printer_DYN);
-+				_("system default destination: %s\n"), Printer_DYN);
- 			Write_fd_str(1,msg);
- 		}
- 	}
-@@ -177,7 +177,7 @@ int main(int argc, char *argv[], char *e
- 		for( i = 0; i < request_list.count; ++i ){
- 			Set_DYN(&Printer_DYN,request_list.list[i] );
- 			Fix_Rm_Rp_info(0,0);
--			SNPRINTF(msg,sizeof(msg)) "system for %s: %s\n", Printer_DYN, RemoteHost_DYN);
-+			SNPRINTF(msg,sizeof(msg)) _("system for %s: %s\n"), Printer_DYN, RemoteHost_DYN);
- 			Write_fd_str(1,msg);
- 		}
- 	}
-@@ -221,7 +221,7 @@ void Show_status(char **argv, int displa
- 
- 	if( Check_for_rg_group( Logname_DYN ) ){
- 		SNPRINTF( msg, sizeof(msg))
--			"  Printer: %s - cannot use printer, not in privileged group\n", Printer_DYN );
-+			_("  Printer: %s - cannot use printer, not in privileged group\n"), Printer_DYN );
- 		if(  Write_fd_str( 1, msg ) < 0 ) cleanup(0);
- 		return;
- 	}
-@@ -359,25 +359,25 @@ int Read_status_info( char *host, int so
- 					if( a_flag ){
- 						if( !nospool ){
- 							SNPRINTF(msg,sizeof(msg))
--							"%s accepting requests since %s\n",
-+							_("%s accepting requests since %s\n"),
- 							Printer_DYN, Time_str(0,0) );
- 						} else {
- 							SNPRINTF(msg,sizeof(msg))
--							"%s not accepting requests since %s -\n\tunknown reason\n",
-+							_("%s not accepting requests since %s -\n\tunknown reason\n"),
- 							Printer_DYN, Time_str(0,0) );
- 						}
- 						if( Write_fd_str( output, msg ) < 0 ) return(1);
- 					}
- 					if( p_flag ){
- 						SNPRINTF(msg,sizeof(msg))
--						"printer %s unknown state. %s since %s. available\n",
-+						_("printer %s unknown state. %s since %s. available\n"),
- 						Printer_DYN, noprint?"disabled":"enabled",
- 						Pretty_time(0));
- 						if( Write_fd_str( output, msg ) < 0 ) return(1);
- 					}
- 					if( p_flag && D_flag ){
- 						SNPRINTF(msg,sizeof(msg))
--							"\tDescription: %s@%s\n",
-+							_("\tDescription: %s@%s\n"),
- 									RemotePrinter_DYN, RemoteHost_DYN ); 
- 						if( Write_fd_str( output, msg ) < 0 ) return(1);
- 					}
-@@ -585,30 +585,30 @@ void Get_parms(int argc, char *argv[] )
- }
- 
-  static char *lpstat_msg[] = {
--	"usage: %s [-A] [-d] [-l] [-r] [-R] [-s] [-t] [-a [list]]\n",
--	"  [-c [list]] [-f [list]] [-o [list]]\n",
--	"  [-p [list]] [-P] [-S [list]] [list]\n",
--	"  [-u [login-ID-list]] [-v [list]] [-V] [-n] [-Tdbgflags]\n",
--	" list is a list of print queues\n",
--	" -A        use authentication specified by AUTH environment variable\n",
--	" -a [list] destination status *\n",
--	" -c [list] class status *\n",
--	" -d        print default destination\n",
--	" -f [list] forms status *\n",
--	" -o [list] job or printer status *\n",
--	" -n        each -n increases number of status lines (default 1) *\n",
--	" -N        maximum number of status lines *\n",
--	" -p [list] printer status *\n",
--	" -P        paper types - ignored\n",
--	" -r        scheduler status\n",
--	" -s        summary status information - short format\n",
--	" -S [list] character set - ignored\n",
--	" -t        all status information - long format\n",
--	" -u [joblist] job status information\n",
--	" -v [list] printer mapping *\n",
--	" -V        verbose mode \n",
--	" -Tdbgflags debug flags\n",
--	"    * - long status format produced\n",
-+	N_("usage: %s [-A] [-d] [-l] [-r] [-R] [-s] [-t] [-a [list]]\n"),
-+	N_("  [-c [list]] [-f [list]] [-o [list]]\n"),
-+	N_("  [-p [list]] [-P] [-S [list]] [list]\n"),
-+	N_("  [-u [login-ID-list]] [-v [list]] [-V] [-n] [-Tdbgflags]\n"),
-+	N_(" list is a list of print queues\n"),
-+	N_(" -A        use authentication specified by AUTH environment variable\n"),
-+	N_(" -a [list] destination status *\n"),
-+	N_(" -c [list] class status *\n"),
-+	N_(" -d        print default destination\n"),
-+	N_(" -f [list] forms status *\n"),
-+	N_(" -o [list] job or printer status *\n"),
-+	N_(" -n        each -n increases number of status lines (default 1) *\n"),
-+	N_(" -N        maximum number of status lines *\n"),
-+	N_(" -p [list] printer status *\n"),
-+	N_(" -P        paper types - ignored\n"),
-+	N_(" -r        scheduler status\n"),
-+	N_(" -s        summary status information - short format\n"),
-+	N_(" -S [list] character set - ignored\n"),
-+	N_(" -t        all status information - long format\n"),
-+	N_(" -u [joblist] job status information\n"),
-+	N_(" -v [list] printer mapping *\n"),
-+	N_(" -V        verbose mode \n"),
-+	N_(" -Tdbgflags debug flags\n"),
-+	N_("    * - long status format produced\n"),
- 	0 };
- 
- 
-@@ -616,7 +616,7 @@ void usage(void)
+ 	len = strlen(header);
+ 	plp_snprintf( header+len, sizeof(header)-len, "%s@%s",
+--- lprng-3.9.0/src/common/lpstat.c.orig	2024-09-20 18:57:43.264214013 +0200
++++ lprng-3.9.0/src/common/lpstat.c	2024-09-20 19:20:38.723429177 +0200
+@@ -69,7 +69,7 @@ int Rawformat;
+ static void usage(void)
  {
- 	char **sptr, *s;
- 	for( sptr= lpstat_msg; (s = *sptr); ++sptr ){
--			FPRINTF( STDERR, s, Name );
-+			FPRINTF( STDERR, _(s), Name );
- 	}
+ 	FPRINTF( STDERR,
+-"usage: %s [-A] [-d] [-l] [-r] [-R] [-s] [-t] [-a [list]]\n"
++_("usage: %s [-A] [-d] [-l] [-r] [-R] [-s] [-t] [-a [list]]\n"
+ "  [-c [list]] [-f [list]] [-o [list]]\n"
+ "  [-p [list]] [-P] [-S [list]] [list]\n"
+ "  [-u [login-ID-list]] [-v [list]] [-V] [-n] [-Tdbgflags]\n"
+@@ -92,11 +92,11 @@ static void usage(void)
+ " -v [list] printer mapping *\n"
+ " -V        verbose mode \n"
+ " -Tdbgflags debug flags\n"
+-"    * - long status format produced\n", Name);
++"    * - long status format produced\n"), Name);
+ 
  	{
  	char buffer[128];
+-	FPRINTF( STDERR, "Security Supported: %s\n", ShowSecuritySupported(buffer,sizeof(buffer)) );
++	FPRINTF( STDERR, _("Security Supported: %s\n"), ShowSecuritySupported(buffer,sizeof(buffer)) );
+ 	}
+ 	Parse_debug("=",-1);
+ 	FPRINTF( STDOUT, "%s\n", Version );

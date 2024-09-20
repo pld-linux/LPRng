@@ -1,8 +1,8 @@
---- LPRng-3.8.32/UTILS/make_lpd_conf.in~	2003-01-15 01:48:29.000000000 +0100
-+++ LPRng-3.8.32/UTILS/make_lpd_conf.in	2007-10-31 15:22:48.000000000 +0100
-@@ -11,6 +11,13 @@
- #   To set it to OFF or 0, change this to read:
- #     force_localhost@
+--- lprng-3.9.0/UTILS/make_lpd_conf.in.orig	2024-09-20 19:29:14.303969371 +0200
++++ lprng-3.9.0/UTILS/make_lpd_conf.in	2024-09-20 19:30:31.853549249 +0200
+@@ -15,6 +15,13 @@ cat <<EOF
+ # You can either modify this file, or an included one:
+ @INCLUDELPDCONFLOCAL@include $2
  
 +user  = lp
 +group = lp

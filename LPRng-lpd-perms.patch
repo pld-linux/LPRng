@@ -1,5 +1,5 @@
---- LPRng-3.7.4/lpd.perms.in.lpd-perms	2002-05-16 12:20:19.000000000 +0100
-+++ LPRng-3.7.4/lpd.perms.in	2002-05-16 12:22:32.000000000 +0100
+--- lprng-3.9.0/conf/lpd.perms.in.lpd-perms	2002-05-16 12:20:19.000000000 +0100
++++ lprng-3.9.0/conf/lpd.perms.in	2002-05-16 12:22:32.000000000 +0100
 @@ -219,5 +219,7 @@
  # allow root on server to remove a job
  ACCEPT SERVICE=M SERVER REMOTEUSER=root

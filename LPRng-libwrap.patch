@@ -1,0 +1,43 @@
+Restore Accept_connection unix_socket argument, used by libwrap code
+--- lprng-3.9.0/src/common/lpd.c.orig	2023-03-17 22:26:01.000000000 +0100
++++ lprng-3.9.0/src/common/lpd.c	2024-09-20 20:58:03.191766974 +0200
+@@ -692,16 +692,16 @@ int main(int argc, char *argv[], char *e
+ 		}
+ 		if( sock > 0 && FD_ISSET( sock, &readfds ) ){
+ 			DEBUG1("lpd: accept on LPD socket");
+-			Accept_connection( sock );
++			Accept_connection( sock, 0 );
+ 		}
+ 		if( unix_sock > 0 && FD_ISSET( unix_sock, &readfds ) ){
+ 			DEBUG1("lpd: accept on UNIX socket");
+-			Accept_connection( unix_sock );
++			Accept_connection( unix_sock, 1 );
+ 		}
+ #ifdef IPP_STUBS
+ 		if( ipp_sock > 0 && FD_ISSET( ipp_sock, &readfds ) ){
+ 			DEBUG1("lpd: accept on IPP socket");
+-			Accept_connection( ipp_sock );
++			Accept_connection( ipp_sock, 0 );
+ 		}
+ #endif /* not IPP_STUBS */
+ 		if( FD_ISSET( request_pipe[0], &readfds ) 
+@@ -961,7 +961,7 @@ static void Get_parms(int argc, char *ar
+  * Accept_connection
+  *   - accept the connection and fork the child to handle it
+  */
+-static void Accept_connection( int sock )
++static void Accept_connection( int sock, int unix_socket )
+ { 
+ 	struct line_list args;
+ 	struct sockaddr sinaddr;
+--- lprng-3.9.0/src/include/lpd.h.orig	2023-03-17 22:26:01.000000000 +0100
++++ lprng-3.9.0/src/include/lpd.h	2024-09-20 20:58:27.351636089 +0200
+@@ -48,7 +48,7 @@ static int Lock_lpd_pid(void);
+ static int Read_server_status( int fd );
+ static void usage(void);
+ static void Get_parms(int argc, char *argv[] );
+-static void Accept_connection( int sock );
++static void Accept_connection( int sock, int unix_socket );
+ static int Start_all( int first_scan, int *start_fd );
+ plp_signal_t sigchld_handler (int signo);
+ static void Setup_waitpid (void);
